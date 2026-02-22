@@ -1,0 +1,4335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Control</title>
+
+  <!-- jQuery (bundled with Live FX HTTP server) -->
+  <script src="jquery-1.12.4.min.js"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230d0d0d'/><rect x='6' y='6' width='20' height='20' rx='2' fill='%23f47920'/></svg>">
+
+  <style>
+    /* ── Design Tokens ─────────────────────────────────────────── */
+    :root {
+      --bg-base: #0d0d0d;
+      --bg-panel: #1a1a1a;
+      --bg-input: #111111;
+      --bg-hover: #222222;
+
+      --border: #2a2a2a;
+      --border-light: #333333;
+
+      --text-primary: #e8e8e8;
+      --text-secondary: #999999;
+      --text-muted: #666666;
+      --text-dim: #444444;
+
+      --accent: #f47920;
+      --accent-hover: #e06810;
+      --accent-dim: rgba(244, 121, 32, 0.15);
+      --accent-blue: #3b82f6;
+
+      --status-green: #22c55e;
+      --status-amber: #f59e0b;
+      --status-red: #ef4444;
+
+      --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+      --fs-xs: 10px;
+      --fs-sm: 11px;
+      --fs-md: 13px;
+      --fs-lg: 15px;
+      --fs-xl: 18px;
+      --fs-xxl: 22px;
+
+      --gap-xs: 4px;
+      --gap-sm: 8px;
+      --gap-md: 12px;
+      --gap-lg: 16px;
+      --gap-xl: 20px;
+
+      --radius-sm: 3px;
+      --radius-md: 6px;
+
+      --glass-bg: rgba(26, 26, 26, 0.7);
+      --glass-bg-dark: rgba(10, 10, 10, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.04);
+      --glow-orange: 0 0 20px rgba(244, 121, 32, 0.25);
+    }
+
+    /* ── Reset ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: var(--fs-md);
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::selection { background: var(--accent-dim); color: var(--text-primary); }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── App Layout ─────────────────────────────────────────────── */
+    #app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* ── Header ─────────────────────────────────────────────────── */
+    #header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--gap-sm) var(--gap-xl);
+      background: var(--glass-bg-dark);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .hdr-left { display: flex; align-items: center; gap: var(--gap-md); }
+
+    .hdr-brand {
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      text-transform: uppercase;
+      text-shadow: var(--glow-orange);
+    }
+
+    .hdr-version {
+      font-size: var(--fs-md);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      padding: 2px 8px;
+      background: rgba(244, 121, 32, 0.08);
+      border: 1px solid rgba(244, 121, 32, 0.15);
+      border-radius: var(--radius-sm);
+    }
+
+    .hdr-right { display: flex; align-items: center; gap: var(--gap-md); }
+
+    .hdr-status-group { display: flex; align-items: center; gap: var(--gap-sm); }
+
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      transition: background 300ms ease, box-shadow 300ms ease;
+    }
+
+    .status-dot.ok {
+      background: var(--status-green);
+      box-shadow: 0 0 6px var(--status-green);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    .status-dot.degraded { background: var(--status-amber); box-shadow: 0 0 6px var(--status-amber); }
+    .status-dot.error { background: var(--status-red); box-shadow: 0 0 6px var(--status-red); }
+
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+    .hdr-status-text {
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .hdr-divider { width: 1px; height: 16px; background: var(--border); }
+
+    .hdr-clock {
+      font-size: var(--fs-md);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      min-width: 70px;
+      text-align: right;
+    }
+
+    /* ── Panel Grid ─────────────────────────────────────────────── */
+    #panels {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1px;
+      background: #000;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    /* Vitals spans left two-thirds of row 1 */
+    #vitals-panel { grid-column: 1 / 2; }
+
+    .panel {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: var(--gap-lg);
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--gap-md);
+      flex-shrink: 0;
+    }
+
+    .panel-title {
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+    }
+
+    .panel-body {
+      flex: 1;
+      overflow-y: auto;
+      min-height: 0;
+    }
+
+    /* ── System Vitals ──────────────────────────────────────────── */
+    .vitals-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-lg);
+      height: 100%;
+    }
+
+    .vitals-section-title {
+      font-size: var(--fs-xs);
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--gap-sm);
+      padding-bottom: var(--gap-xs);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .vitals-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-md);
+    }
+
+    .vital-row {
+      display: flex;
+      align-items: baseline;
+      gap: var(--gap-sm);
+    }
+
+    .vital-label {
+      font-size: var(--fs-sm);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      min-width: 60px;
+      flex-shrink: 0;
+    }
+
+    .vital-value {
+      font-size: var(--fs-md);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .vital-value.path {
+      font-size: var(--fs-xs);
+      color: var(--text-dim);
+    }
+
+    /* Metric bars */
+    .metric {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .metric-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .metric-label {
+      font-size: var(--fs-sm);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .metric-value {
+      font-size: var(--fs-sm);
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+    }
+
+    .metric-track {
+      height: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .metric-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 800ms ease, background 400ms ease;
+      background: var(--status-green);
+    }
+
+    .metric-fill.warn { background: var(--status-amber); }
+    .metric-fill.crit { background: var(--status-red); }
+
+    .uptime-value {
+      font-size: var(--fs-lg);
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+    }
+
+    .net-stats {
+      display: flex;
+      gap: var(--gap-md);
+      font-size: var(--fs-sm);
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+    }
+
+    /* ── API Health ─────────────────────────────────────────────── */
+    .health-overall {
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    .health-overall.ok { color: var(--status-green); background: rgba(34, 197, 94, 0.1); }
+    .health-overall.degraded { color: var(--status-amber); background: rgba(245, 158, 11, 0.1); }
+    .health-overall.offline { color: var(--status-red); background: rgba(239, 68, 68, 0.1); }
+
+    .health-grid { display: flex; flex-direction: column; gap: var(--gap-sm); }
+
+    .health-row {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-md);
+      padding: var(--gap-sm) var(--gap-md);
+      background: rgba(20, 20, 20, 0.5);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+    }
+
+    .health-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: var(--text-dim);
+      transition: all 300ms ease;
+    }
+
+    .health-dot.ok { background: var(--status-green); box-shadow: 0 0 4px var(--status-green); }
+    .health-dot.error { background: var(--status-red); box-shadow: 0 0 4px var(--status-red); }
+
+    .health-name { font-size: var(--fs-md); color: var(--text-primary); flex: 1; }
+
+    .health-ms {
+      font-size: var(--fs-sm);
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      min-width: 45px;
+      text-align: right;
+    }
+
+    .health-time {
+      font-size: var(--fs-xs);
+      color: var(--text-dim);
+      min-width: 55px;
+      text-align: right;
+    }
+
+    /* ── Active Project ─────────────────────────────────────────── */
+    .project-empty, .render-empty, .cron-empty {
+      color: var(--text-dim);
+      font-style: italic;
+      font-size: var(--fs-md);
+      padding: var(--gap-xl) 0;
+      text-align: center;
+    }
+
+    .cron-empty { font-style: normal; }
+
+    .templates-intro {
+      font-size: var(--fs-sm);
+      color: var(--text-muted);
+      margin-bottom: var(--gap-lg);
+    }
+
+    .templates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: var(--gap-md);
+      text-align: left;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .template-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--gap-md);
+      cursor: pointer;
+      transition: all 200ms ease;
+      background: rgba(255,255,255,0.01);
+    }
+
+    .template-card:hover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .template-card-title {
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: var(--gap-xs);
+    }
+
+    .template-card-desc {
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: var(--gap-sm);
+    }
+
+    .template-card-meta {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-dim);
+      display: flex;
+      gap: var(--gap-sm);
+    }
+
+    .template-card-meta span {
+      background: rgba(255,255,255,0.04);
+      padding: 2px 6px;
+      border-radius: 2px;
+    }
+
+    .project-name {
+      font-size: var(--fs-xxl);
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: var(--gap-md);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-shadow: var(--glow-orange);
+    }
+
+    .project-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-sm) var(--gap-xl);
+    }
+
+    .project-stat { display: flex; flex-direction: column; gap: 2px; }
+
+    .project-stat-label {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .project-stat-value {
+      font-size: var(--fs-lg);
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+    }
+
+    /* ── Render Manager ─────────────────────────────────────────── */
+    .render-summary {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .render-list { display: flex; flex-direction: column; gap: var(--gap-sm); }
+
+    .render-item {
+      padding: var(--gap-sm) var(--gap-md);
+      background: rgba(20, 20, 20, 0.5);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+    }
+
+    .render-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--gap-xs);
+    }
+
+    .render-item-name {
+      font-size: var(--fs-md);
+      color: var(--text-primary);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
+    }
+
+    .render-item-eta {
+      font-size: var(--fs-xs);
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      margin-left: var(--gap-sm);
+    }
+
+    .render-progress-track {
+      height: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: var(--gap-xs);
+    }
+
+    .render-progress-bar {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 500ms ease;
+      background: var(--accent-blue);
+    }
+
+    .render-progress-bar.rendering {
+      background: var(--status-green);
+      animation: progress-pulse 1.5s ease-in-out infinite;
+    }
+
+    .render-progress-bar.error { background: var(--status-red); }
+    .render-progress-bar.queued { background: var(--text-muted); }
+
+    @keyframes progress-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+    .render-item-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .render-item-status {
+      font-size: var(--fs-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+
+    .render-item-status.rendering { color: var(--status-green); }
+    .render-item-status.error { color: var(--status-red); }
+    .render-item-status.queued { color: var(--text-muted); }
+
+    .render-item-pct {
+      font-size: var(--fs-xs);
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    /* ── Cron Panel ─────────────────────────────────────────────── */
+    .btn-add {
+      background: rgba(244, 121, 32, 0.1);
+      border: 1px solid rgba(244, 121, 32, 0.2);
+      color: var(--accent);
+      width: 24px; height: 24px;
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-lg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 200ms ease;
+      line-height: 1;
+    }
+
+    .btn-add:hover { background: rgba(244, 121, 32, 0.2); border-color: var(--accent); }
+
+    .cron-list { display: flex; flex-direction: column; gap: var(--gap-sm); }
+
+    .cron-job {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-md);
+      padding: var(--gap-sm) var(--gap-md);
+      background: rgba(20, 20, 20, 0.5);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: border-color 200ms ease;
+    }
+
+    .cron-job:hover { border-color: var(--border-light); }
+
+    .cron-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .cron-dot.active { background: var(--status-green); box-shadow: 0 0 4px var(--status-green); }
+    .cron-dot.paused { background: var(--text-dim); }
+    .cron-dot.success { background: var(--status-green); }
+    .cron-dot.fail { background: var(--status-red); box-shadow: 0 0 4px var(--status-red); }
+
+    .cron-info { flex: 1; min-width: 0; }
+
+    .cron-name {
+      font-size: var(--fs-md);
+      color: var(--text-primary);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .cron-schedule { font-size: var(--fs-xs); color: var(--text-muted); }
+
+    .cron-meta { text-align: right; flex-shrink: 0; }
+
+    .cron-action { font-size: var(--fs-xs); font-family: var(--font-mono); color: var(--text-dim); }
+
+    .cron-next { font-size: var(--fs-xs); color: var(--text-muted); }
+
+    .cron-target-tag {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 1px 5px;
+      border-radius: 2px;
+      margin-left: var(--gap-xs);
+    }
+
+    .cron-target-tag.api { color: var(--accent); background: rgba(244, 121, 32, 0.1); }
+    .cron-target-tag.webhook { color: var(--accent-blue); background: rgba(59, 130, 246, 0.1); }
+
+    /* Modal target toggle */
+    .target-toggle {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .target-toggle button {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      padding: var(--gap-sm) var(--gap-md);
+      cursor: pointer;
+      transition: all 200ms ease;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .target-toggle button.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .target-toggle button:hover:not(.active) {
+      background: var(--bg-hover);
+      color: var(--text-secondary);
+    }
+
+    .field-group { display: flex; flex-direction: column; gap: var(--gap-md); }
+    .field-group.hidden { display: none; }
+
+    /* ── Action Picker ─────────────────────────────────────────── */
+    .action-picker {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 14px 8px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 200ms ease;
+    }
+
+    .action-btn:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--text-primary);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .action-btn.selected {
+      background: rgba(244, 121, 32, 0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .action-icon {
+      font-size: 20px;
+    }
+
+    .action-label {
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Schedule Picker ───────────────────────────────────────── */
+    .schedule-picker {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-md);
+    }
+
+    .schedule-picker select {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: var(--fs-md);
+      padding: var(--gap-sm) var(--gap-md);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .schedule-picker select:focus { border-color: var(--accent); }
+
+    .schedule-options {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-sm);
+    }
+
+    .schedule-row {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-md);
+    }
+
+    .schedule-row.hidden { display: none; }
+
+    .schedule-row label {
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+      min-width: 40px;
+      margin-bottom: 0;
+    }
+
+    .schedule-row input[type="time"],
+    .schedule-row input[type="number"] {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: var(--fs-md);
+      padding: var(--gap-sm) var(--gap-md);
+      outline: none;
+    }
+
+    .schedule-row input:focus { border-color: var(--accent); }
+
+    .schedule-row select {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: var(--fs-md);
+      padding: var(--gap-sm) var(--gap-md);
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    #footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--gap-sm) var(--gap-xl);
+      background: var(--glass-bg-dark);
+      border-top: 1px solid var(--border);
+      font-size: var(--fs-sm);
+      color: var(--text-dim);
+      flex-shrink: 0;
+    }
+
+    #footer a { font-weight: 500; }
+    .footer-right { font-family: var(--font-mono); letter-spacing: 0.03em; }
+
+    /* ── Modal ──────────────────────────────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      width: 440px;
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--gap-lg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-title { font-size: var(--fs-lg); font-weight: 600; }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: var(--fs-xl);
+      cursor: pointer;
+      padding: 0 4px;
+      line-height: 1;
+    }
+
+    .modal-close:hover { color: var(--text-primary); }
+
+    .modal-body {
+      padding: var(--gap-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-md);
+    }
+
+    .modal-body label {
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .modal-body input,
+    .modal-body select,
+    .modal-body textarea {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: var(--fs-md);
+      padding: var(--gap-sm) var(--gap-md);
+      outline: none;
+      transition: border-color 200ms ease;
+    }
+
+    .modal-body input:focus,
+    .modal-body select:focus,
+    .modal-body textarea:focus { border-color: var(--accent); }
+
+    .modal-body textarea { min-height: 60px; resize: vertical; }
+    .modal-body select { cursor: pointer; }
+
+    .cron-preview { font-size: var(--fs-xs); color: var(--accent); min-height: 14px; }
+
+    .modal-toggle { display: flex; align-items: center; justify-content: space-between; }
+
+    .modal-toggle input[type="checkbox"] {
+      width: 16px; height: 16px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--gap-md) var(--gap-lg);
+      border-top: 1px solid var(--border);
+    }
+
+    .modal-actions { display: flex; gap: var(--gap-sm); margin-left: auto; }
+
+    .btn-cancel, .btn-save, .btn-delete {
+      padding: var(--gap-sm) var(--gap-lg);
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid;
+      transition: all 200ms ease;
+    }
+
+    .btn-cancel { background: transparent; border-color: var(--border); color: var(--text-secondary); }
+    .btn-cancel:hover { border-color: var(--text-muted); color: var(--text-primary); }
+    .btn-save { background: var(--accent); border-color: var(--accent); color: #000; }
+    .btn-save:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+    .btn-delete { background: transparent; border-color: var(--status-red); color: var(--status-red); }
+    .btn-delete:hover { background: rgba(239, 68, 68, 0.1); }
+
+    /* ── Navigation ─────────────────────────────────────────────── */
+    .hdr-nav {
+      display: flex;
+      gap: 2px;
+      margin-left: var(--gap-lg);
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 8px 14px;
+      border-radius: 0;
+      cursor: pointer;
+      transition: color 200ms ease, border-color 200ms ease;
+    }
+
+    .nav-btn:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .nav-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── Views ──────────────────────────────────────────────────── */
+    .view {
+      display: none;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .view.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Tasks / Calendar ───────────────────────────────────────── */
+    .tasks-main {
+      flex: 1;
+      background: var(--bg-panel);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .tasks-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--gap-md) var(--gap-lg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tasks-toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+    }
+
+    .tasks-content {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .tasks-list {
+      flex: 1;
+      padding: var(--gap-md) var(--gap-lg);
+      overflow-y: auto;
+    }
+
+    .tasks-calendar {
+      width: 50%;
+      min-width: 500px;
+      border-left: 1px solid var(--border);
+      padding: var(--gap-lg);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .tasks-calendar.hidden { display: none; }
+
+    .cal-header {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-md);
+      margin-bottom: var(--gap-lg);
+    }
+
+    .cal-title {
+      font-family: var(--font-sans);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+      min-width: 200px;
+    }
+
+    .cal-nav {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 200ms ease;
+    }
+
+    .cal-nav:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--text-primary);
+    }
+
+    .cal-today {
+      width: auto;
+      padding: 0 12px;
+      font-size: var(--fs-sm);
+      font-family: var(--font-sans);
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      flex: 1;
+    }
+
+    .cal-dow {
+      text-align: center;
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding: 8px 0;
+    }
+
+    #cal-cells {
+      display: contents;
+    }
+
+    .cal-cell {
+      background: rgba(255,255,255,0.02);
+      border-radius: var(--radius-sm);
+      min-height: 64px;
+      padding: 6px;
+      cursor: pointer;
+      transition: background 200ms ease;
+      position: relative;
+    }
+
+    .cal-cell:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .cal-cell.other-month {
+      opacity: 0.3;
+    }
+
+    .cal-cell.today {
+      outline: 1px solid var(--accent);
+      outline-offset: -1px;
+    }
+
+    .cal-cell.selected {
+      background: rgba(244, 121, 32, 0.1);
+    }
+
+    .cal-date {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .cal-cell.today .cal-date {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .cal-events {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .cal-event {
+      font-size: 10px;
+      font-family: var(--font-sans);
+      padding: 2px 4px;
+      border-radius: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cal-event.active { background: rgba(46,204,113,0.2); color: var(--status-green); }
+    .cal-event.paused { background: rgba(255,255,255,0.05); color: var(--text-muted); }
+    .cal-event.error  { background: rgba(231,76,60,0.2); color: var(--status-red); }
+
+    .cal-event-more {
+      font-size: 9px;
+      color: var(--text-muted);
+      padding: 1px 4px;
+    }
+
+    .day-event {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .day-event:last-child { border-bottom: none; }
+
+    .day-event-time {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--accent);
+      min-width: 50px;
+    }
+
+    .day-event-name {
+      font-size: var(--fs-sm);
+      color: var(--text-primary);
+    }
+
+    .day-event-desc {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    /* ── Logs ───────────────────────────────────────────────────── */
+    .logs-layout {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-panel);
+      overflow: hidden;
+    }
+
+    .logs-toolbar {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-md);
+      padding: var(--gap-sm) var(--gap-lg);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .logs-toolbar select {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      padding: 4px 8px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .logs-filters {
+      display: flex;
+      gap: 2px;
+    }
+
+    .log-level-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 200ms ease;
+    }
+
+    .log-level-btn:hover { color: var(--text-primary); }
+    .log-level-btn.active { background: rgba(255,255,255,0.08); color: var(--text-primary); border-color: rgba(255,255,255,0.2); }
+    .log-level-btn[data-level="ERROR"].active { color: var(--status-red); border-color: var(--status-red); }
+    .log-level-btn[data-level="WARN"].active { color: var(--status-amber); border-color: var(--status-amber); }
+
+    .logs-toolbar-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: var(--gap-md);
+    }
+
+    .log-auto-label {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .log-auto-label input { accent-color: var(--accent); cursor: pointer; }
+
+    .log-status {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+    }
+
+    .logs-viewer {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--gap-sm) var(--gap-lg);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.6;
+      background: #0a0a0a;
+    }
+
+    .log-empty {
+      color: var(--text-muted);
+      padding: var(--gap-lg);
+      text-align: center;
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
+    }
+
+    .log-line {
+      white-space: pre-wrap;
+      word-break: break-all;
+      padding: 1px 0;
+    }
+
+    .log-line .log-ts { color: var(--text-muted); }
+    .log-line .log-lvl-info { color: var(--status-green); }
+    .log-line .log-lvl-error { color: var(--status-red); font-weight: 600; }
+    .log-line .log-lvl-warn { color: var(--status-amber); }
+    .log-line .log-msg { color: var(--text-secondary); }
+    .log-line.error { background: rgba(231,76,60,0.06); }
+
+    .view-placeholder {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      gap: var(--gap-md);
+    }
+
+    .placeholder-icon {
+      font-size: 48px;
+      opacity: 0.3;
+    }
+
+    .view-placeholder h2 {
+      font-family: var(--font-sans);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .view-placeholder p {
+      font-family: var(--font-sans);
+      font-size: var(--fs-md);
+      margin: 0;
+    }
+
+    /* ── Console ───────────────────────────────────────────────── */
+    .console-layout {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-panel);
+      overflow: hidden;
+    }
+
+    .console-toolbar {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-md);
+      padding: var(--gap-sm) var(--gap-lg);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .console-method {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      padding: 6px 10px;
+      cursor: pointer;
+      outline: none;
+      min-width: 80px;
+    }
+
+    .console-url {
+      flex: 1;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      padding: 6px 10px;
+      outline: none;
+    }
+
+    .console-url:focus { border-color: var(--accent); }
+
+    .console-send {
+      background: var(--accent);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: #000;
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      padding: 6px 16px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .console-send:hover { opacity: 0.9; }
+
+    .console-content {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .console-sidebar {
+      width: 260px;
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      padding: var(--gap-sm) 0;
+      flex-shrink: 0;
+    }
+
+    .console-group-title {
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      padding: var(--gap-sm) var(--gap-md);
+      margin-top: var(--gap-sm);
+    }
+
+    .console-endpoint {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px var(--gap-md);
+      cursor: pointer;
+      transition: background 150ms ease;
+      font-size: var(--fs-xs);
+    }
+
+    .console-endpoint:hover { background: rgba(255,255,255,0.03); }
+
+    .console-ep-method {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 9px;
+      min-width: 36px;
+      text-align: center;
+    }
+
+    .console-ep-method.get { color: var(--status-green); }
+    .console-ep-method.post { color: var(--accent); }
+    .console-ep-method.put { color: #3498db; }
+    .console-ep-method.delete { color: var(--status-red); }
+    .console-ep-method.patch { color: #9b59b6; }
+
+    .console-ep-path {
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .console-body-input {
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .console-body-input textarea {
+      width: 100%;
+      background: var(--bg-input);
+      border: none;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: var(--gap-sm) var(--gap-lg);
+      resize: none;
+      outline: none;
+      min-height: 60px;
+    }
+
+    .console-body-label {
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: var(--gap-sm) var(--gap-lg) 0;
+    }
+
+    .console-response {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .console-response-header {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-md);
+      padding: var(--gap-sm) var(--gap-lg);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .console-response-status {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      font-weight: 700;
+    }
+
+    .console-response-status.ok { color: var(--status-green); }
+    .console-response-status.err { color: var(--status-red); }
+
+    .console-response-time {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+    }
+
+    .console-response-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--gap-sm) var(--gap-lg);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      background: #0a0a0a;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* ── Settings ──────────────────────────────────────────────── */
+    .settings-layout {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-panel);
+      overflow-y: auto;
+      padding: var(--gap-lg);
+      gap: var(--gap-lg);
+      max-width: 700px;
+    }
+
+    .settings-section {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .settings-section-title {
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      padding: var(--gap-md) var(--gap-lg);
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .settings-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--gap-md) var(--gap-lg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .settings-row:last-child { border-bottom: none; }
+
+    .settings-label {
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
+      color: var(--text-primary);
+    }
+
+    .settings-label small {
+      display: block;
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .settings-input {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      padding: 4px 8px;
+      width: 80px;
+      text-align: right;
+      outline: none;
+    }
+
+    .settings-input:focus { border-color: var(--accent); }
+
+    .settings-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs);
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all 200ms ease;
+    }
+
+    .settings-btn:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
+
+    .settings-btn.danger { color: var(--status-red); border-color: rgba(231,76,60,0.3); }
+    .settings-btn.danger:hover { background: rgba(231,76,60,0.1); }
+
+    .settings-version {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      text-align: center;
+      padding: var(--gap-md);
+    }
+
+    /* ── Render Manager (full view) ────────────────────────────── */
+    .render-layout {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-panel);
+      overflow: hidden;
+    }
+
+    .render-nodes-bar {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.01);
+      flex-shrink: 0;
+      overflow-x: auto;
+    }
+
+    .rn-tabs {
+      display: flex;
+      gap: 0;
+    }
+
+    .rn-tab {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+      padding: var(--gap-sm) var(--gap-lg);
+      border-right: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 150ms ease;
+      white-space: nowrap;
+      font-size: var(--fs-xs);
+    }
+
+    .rn-tab:hover { background: rgba(255,255,255,0.03); }
+    .rn-tab.active { background: rgba(244,121,32,0.08); border-bottom: 2px solid var(--accent); }
+
+    .rn-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-dim);
+      flex-shrink: 0;
+    }
+
+    .rn-dot.online { background: var(--status-green); }
+    .rn-dot.rendering { background: var(--accent); animation: pulse 1.5s ease-in-out infinite; }
+    .rn-dot.offline { background: var(--status-red); }
+
+    .rn-name {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .rn-addr {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-muted);
+    }
+
+    .rn-status-text {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-muted);
+    }
+
+    .settings-hint {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      padding: var(--gap-sm) var(--gap-lg);
+      line-height: 1.4;
+    }
+
+    .node-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--gap-sm) var(--gap-lg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .node-row-info {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+    }
+
+    .node-row-name {
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .node-row-addr {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+    }
+
+    .node-remove {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: var(--fs-md);
+      padding: 2px 6px;
+    }
+
+    .node-remove:hover { color: var(--status-red); }
+
+    .render-toolbar {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-md);
+      padding: var(--gap-sm) var(--gap-lg);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .render-toolbar-status {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      color: var(--text-muted);
+    }
+
+    .render-toolbar-right {
+      margin-left: auto;
+      display: flex;
+      gap: var(--gap-sm);
+    }
+
+    .render-action-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: all 200ms ease;
+    }
+
+    .render-action-btn:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
+    .render-action-btn.start { color: var(--status-green); border-color: rgba(46,204,113,0.3); }
+    .render-action-btn.start:hover { background: rgba(46,204,113,0.1); }
+    .render-action-btn.stop { color: var(--status-red); border-color: rgba(231,76,60,0.3); }
+    .render-action-btn.stop:hover { background: rgba(231,76,60,0.1); }
+
+    .render-queue {
+      flex: 1;
+      overflow: auto;
+      padding: 0;
+    }
+
+    .render-queue-summary {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      margin-right: var(--gap-sm);
+    }
+
+    /* ── Render Queue Table ─────────────────────────────────── */
+    .rq-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--fs-sm);
+    }
+
+    .rq-th {
+      text-align: left;
+      font-family: var(--font-sans);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      padding: var(--gap-sm) var(--gap-md);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .rq-td {
+      padding: var(--gap-sm) var(--gap-md);
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 280px;
+    }
+
+    .rq-tr { transition: background 150ms ease; }
+    .rq-tr:hover { background: rgba(255,255,255,0.02); }
+    .rq-tr.active { background: rgba(244,121,32,0.06); }
+
+    .rq-name {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .rq-status { font-weight: 700; text-transform: uppercase; font-size: 10px; }
+    .rq-status.rendering { color: var(--accent); }
+    .rq-status.queued { color: var(--text-muted); }
+    .rq-status.finished { color: var(--status-green); }
+    .rq-status.error { color: var(--status-red); }
+    .rq-status.idle { color: var(--text-dim); }
+
+    .rq-progress {
+      display: inline-block;
+      width: 60px;
+      height: 3px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 2px;
+      overflow: hidden;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    .rq-progress-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 300ms ease;
+    }
+
+    .rq-progress-fill.rendering { background: var(--accent); }
+    .rq-progress-fill.finished { background: var(--status-green); }
+    .rq-progress-fill.error { background: var(--status-red); }
+    .rq-progress-fill.queued { background: var(--text-muted); }
+    .rq-progress-fill.idle { background: var(--text-dim); }
+
+    .rq-empty {
+      color: var(--text-dim);
+      font-family: var(--font-sans);
+      font-style: italic;
+      font-size: var(--fs-sm);
+      text-align: center;
+      padding: var(--gap-xl);
+    }
+
+    .rq-path {
+      color: var(--text-muted);
+      max-width: 300px;
+    }
+
+    .render-empty-full {
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: var(--fs-sm);
+      text-align: center;
+      padding: var(--gap-xl);
+    }
+
+    /* ── Responsive ─────────────────────────────────────────────── */
+    @media (max-width: 1200px) {
+      #panels {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      #vitals-panel { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 768px) {
+      #panels { grid-template-columns: 1fr; overflow-y: auto; }
+      #vitals-panel { grid-column: auto; }
+      .panel { min-height: 180px; }
+      .vitals-layout { grid-template-columns: 1fr; }
+      #header { flex-wrap: wrap; gap: var(--gap-sm); }
+      .hdr-nav { margin-left: 0; order: 3; width: 100%; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ── Header ──────────────────────────────────────────────── -->
+  <header id="header">
+    <div class="hdr-left">
+      <span class="hdr-brand">Mission Control</span>
+      <span class="hdr-version" id="hdr-version" style="display:none"></span>
+      <nav class="hdr-nav">
+        <button class="nav-btn active" data-view="mission-control">Home</button>
+        <button class="nav-btn" data-view="tasks">Automation</button>
+        <button class="nav-btn" data-view="render">Render Manager</button>
+        <button class="nav-btn" data-view="logs">Logs</button>
+        <!-- <button class="nav-btn" data-view="console">Console</button> -->
+        <button class="nav-btn" data-view="settings">Settings</button>
+      </nav>
+    </div>
+    <div class="hdr-right">
+      <div class="hdr-status-group">
+        <span class="status-dot" id="status-dot"></span>
+        <span class="hdr-status-text" id="hdr-status">CONNECTING</span>
+      </div>
+      <span class="hdr-divider"></span>
+      <span class="hdr-clock" id="hdr-clock">--:--:--</span>
+    </div>
+  </header>
+
+  <!-- ── Views ──────────────────────────────────────────────── -->
+  <div id="view-mission-control" class="view active">
+  <main id="panels">
+
+    <!-- System Vitals -->
+    <section class="panel" id="vitals-panel">
+      <div class="panel-header">
+        <span class="panel-title">System Vitals</span>
+      </div>
+      <div class="panel-body">
+        <div class="vitals-layout">
+          <div class="vitals-col">
+            <div class="vitals-section-title">Identity</div>
+            <div class="vital-row"><span class="vital-label">System</span><span class="vital-value" id="v-system">--</span></div>
+            <div class="vital-row"><span class="vital-label">User</span><span class="vital-value" id="v-user">--</span></div>
+            <div class="vital-row"><span class="vital-label">Server</span><span class="vital-value" id="v-server">--</span></div>
+            <div style="margin-top: var(--gap-sm)"></div>
+            <div class="vitals-section-title">Storage Paths</div>
+            <div class="vital-row"><span class="vital-label">Projects</span><span class="vital-value path" id="v-projects">--</span></div>
+            <div class="vital-row"><span class="vital-label">Shared</span><span class="vital-value path" id="v-shared">--</span></div>
+          </div>
+          <div class="vitals-col">
+            <div class="vitals-section-title">Performance</div>
+            <div class="metric">
+              <div class="metric-top">
+                <span class="metric-label">Uptime</span>
+                <span class="uptime-value" id="m-uptime">--</span>
+              </div>
+            </div>
+            <div class="metric" id="m-cpu-wrap">
+              <div class="metric-top">
+                <span class="metric-label">CPU</span>
+                <span class="metric-value" id="m-cpu-val">--</span>
+              </div>
+              <div class="metric-track"><div class="metric-fill" id="m-cpu-bar" style="width:0%"></div></div>
+            </div>
+            <div class="metric" id="m-mem-wrap">
+              <div class="metric-top">
+                <span class="metric-label">Memory</span>
+                <span class="metric-value" id="m-mem-val">--</span>
+              </div>
+              <div class="metric-track"><div class="metric-fill" id="m-mem-bar" style="width:0%"></div></div>
+            </div>
+            <div class="metric" id="m-gpu-wrap">
+              <div class="metric-top">
+                <span class="metric-label">GPU</span>
+                <span class="metric-value" id="m-gpu-val">--</span>
+              </div>
+              <div class="metric-track"><div class="metric-fill" id="m-gpu-bar" style="width:0%"></div></div>
+            </div>
+            <div class="metric" id="m-disk-wrap">
+              <div class="metric-top">
+                <span class="metric-label">Disk</span>
+                <span class="metric-value" id="m-disk-val">--</span>
+              </div>
+              <div class="metric-track"><div class="metric-fill" id="m-disk-bar" style="width:0%"></div></div>
+            </div>
+            <div class="metric">
+              <div class="metric-top">
+                <span class="metric-label">Network</span>
+                <span class="metric-value" id="m-net-val">--</span>
+              </div>
+              <div class="net-stats">
+                <span id="m-net-latency">Latency: --</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- API Health Monitor -->
+    <section class="panel" id="health-panel">
+      <div class="panel-header">
+        <span class="panel-title">API Health</span>
+        <span class="health-overall" id="health-overall">--</span>
+      </div>
+      <div class="panel-body">
+        <div class="health-grid" id="health-grid"></div>
+      </div>
+    </section>
+
+    <!-- Active Project -->
+    <section class="panel" id="project-panel">
+      <div class="panel-header">
+        <span class="panel-title">Active Project</span>
+      </div>
+      <div class="panel-body" id="project-body">
+        <div class="project-empty">No project loaded</div>
+      </div>
+    </section>
+
+    <!-- Render Manager -->
+    <section class="panel" id="render-panel">
+      <div class="panel-header">
+        <span class="panel-title">Render Manager</span>
+        <span class="render-summary" id="render-summary"></span>
+      </div>
+      <div class="panel-body" id="render-body">
+        <div class="render-empty">Render queue empty</div>
+      </div>
+    </section>
+
+    <!-- Tasks Summary -->
+    <section class="panel" id="tasks-summary-panel">
+      <div class="panel-header">
+        <span class="panel-title">Tasks</span>
+        <span class="tasks-summary-count" id="tasks-summary-count"></span>
+      </div>
+      <div class="panel-body" id="tasks-summary-body">
+        <div class="cron-empty">No scheduled tasks</div>
+      </div>
+    </section>
+
+    <!-- Logs Summary -->
+    <section class="panel" id="logs-summary-panel">
+      <div class="panel-header">
+        <span class="panel-title">Logs</span>
+      </div>
+      <div class="panel-body" id="logs-summary-body">
+        <div class="logs-empty" style="color: var(--text-muted); font-size: var(--fs-sm);">No recent events</div>
+      </div>
+    </section>
+
+  </main>
+  </div><!-- /view-mission-control -->
+
+  <!-- Other views (v1 placeholders) -->
+  <div id="view-render" class="view">
+    <div class="render-layout">
+      <div class="render-toolbar">
+        <span class="panel-title">Render Manager</span>
+        <span class="render-toolbar-status" id="render-full-status">Idle</span>
+        <div class="render-toolbar-right">
+          <span class="render-queue-summary" id="render-queue-summary"></span>
+          <button class="render-action-btn start" id="render-start-btn">Start</button>
+          <button class="render-action-btn stop" id="render-stop-btn">Stop</button>
+        </div>
+      </div>
+      <div class="render-nodes-bar" id="render-nodes-bar">
+        <div class="rn-tabs" id="rn-tabs"></div>
+      </div>
+      <div class="render-queue" id="render-full-queue">
+        <table class="rq-table">
+          <thead>
+            <tr>
+              <th class="rq-th">Name</th>
+              <th class="rq-th">Format</th>
+              <th class="rq-th">Range</th>
+              <th class="rq-th">Status</th>
+              <th class="rq-th">Processed</th>
+              <th class="rq-th">Path</th>
+            </tr>
+          </thead>
+          <tbody id="rq-tbody">
+            <tr><td colspan="6" class="rq-empty">No render nodes configured. Add nodes in Settings.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div id="view-tasks" class="view">
+    <div class="tasks-main">
+      <div class="tasks-toolbar">
+        <span class="panel-title">Scheduled Tasks</span>
+        <div class="tasks-toolbar-right">
+          <button class="cal-nav cal-today" id="cal-toggle" title="Toggle calendar">CAL</button>
+          <button class="btn-add" id="cron-add-btn" title="Add task">+</button>
+        </div>
+      </div>
+      <div class="tasks-content">
+        <div class="tasks-list" id="cron-body">
+          <div class="cron-empty">
+            <div class="templates-intro">No scheduled tasks. Get started with a workflow template:</div>
+            <div class="templates-grid" id="templates-grid"></div>
+          </div>
+        </div>
+        <div class="tasks-calendar hidden" id="tasks-calendar-panel">
+          <div class="cal-header">
+            <button class="cal-nav" id="cal-prev">&lsaquo;</button>
+            <span class="cal-title" id="cal-title">February 2026</span>
+            <button class="cal-nav" id="cal-next">&rsaquo;</button>
+            <button class="cal-nav cal-today" id="cal-today">Today</button>
+          </div>
+          <div class="cal-grid">
+            <div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div>
+            <div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div>
+            <div id="cal-cells"></div>
+          </div>
+          <div class="tasks-day-detail" id="tasks-day-detail" style="display:none;">
+            <div class="panel-header" style="padding: var(--gap-sm) 0; border-bottom: 1px solid var(--border);">
+              <span class="panel-title" id="day-detail-title">--</span>
+            </div>
+            <div id="day-detail-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="view-logs" class="view">
+    <div class="logs-layout">
+      <div class="logs-toolbar">
+        <select id="log-file-select">
+          <option value="Assimilator.log">Assimilator.log</option>
+          <option value="bgprocess.log">bgprocess.log</option>
+          <option value="CrashLog.log">CrashLog.log</option>
+        </select>
+        <div class="logs-filters">
+          <button class="log-level-btn active" data-level="all">All</button>
+          <button class="log-level-btn" data-level="INFO">Info</button>
+          <button class="log-level-btn" data-level="ERROR">Error</button>
+          <button class="log-level-btn" data-level="WARN">Warn</button>
+        </div>
+        <div class="logs-toolbar-right">
+          <label class="log-auto-label"><input type="checkbox" id="log-auto-scroll" checked> Auto-scroll</label>
+          <button class="cal-nav cal-today" id="log-refresh">Refresh</button>
+          <span class="log-status" id="log-status">--</span>
+        </div>
+      </div>
+      <div class="logs-viewer" id="logs-viewer">
+        <div class="log-empty">Select a log file and press Refresh to load.</div>
+      </div>
+    </div>
+  </div>
+  <div id="view-console" class="view">
+    <div class="console-layout">
+      <div class="console-toolbar">
+        <select class="console-method" id="console-method">
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="DELETE">DELETE</option>
+          <option value="PATCH">PATCH</option>
+        </select>
+        <input class="console-url" id="console-url" type="text" placeholder="/system" value="/system">
+        <button class="console-send" id="console-send">Send</button>
+      </div>
+      <div class="console-content">
+        <div class="console-sidebar" id="console-sidebar"></div>
+        <div class="console-response">
+          <div class="console-body-input">
+            <div class="console-body-label">Request Body</div>
+            <textarea id="console-body" placeholder="JSON body (for POST/PUT)"></textarea>
+          </div>
+          <div class="console-response-header">
+            <span class="console-response-status" id="console-resp-status">--</span>
+            <span class="console-response-time" id="console-resp-time"></span>
+          </div>
+          <div class="console-response-body" id="console-resp-body">Send a request to see the response.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="view-settings" class="view">
+    <div class="settings-layout">
+      <div class="settings-section">
+        <div class="settings-section-title">Polling Intervals</div>
+        <div class="settings-row">
+          <span class="settings-label">System Vitals<small>How often to refresh system data</small></span>
+          <input class="settings-input" id="set-poll-system" type="number" value="30" min="5" max="300"> s
+        </div>
+        <div class="settings-row">
+          <span class="settings-label">API Health<small>How often to check endpoint status</small></span>
+          <input class="settings-input" id="set-poll-health" type="number" value="30" min="5" max="300"> s
+        </div>
+        <div class="settings-row">
+          <span class="settings-label">Active Project<small>How often to refresh project data</small></span>
+          <input class="settings-input" id="set-poll-project" type="number" value="10" min="5" max="120"> s
+        </div>
+        <div class="settings-row">
+          <span class="settings-label">Render Queue<small>Polling interval for render status</small></span>
+          <input class="settings-input" id="set-poll-render" type="number" value="1" min="1" max="30"> s
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">Data Management</div>
+        <div class="settings-row">
+          <span class="settings-label">Scheduled Tasks<small>Clear all automation tasks from localStorage</small></span>
+          <button class="settings-btn danger" id="set-clear-cron">Clear All Tasks</button>
+        </div>
+        <div class="settings-row">
+          <span class="settings-label">Console History<small>Clear saved console request history</small></span>
+          <button class="settings-btn danger" id="set-clear-console">Clear History</button>
+        </div>
+        <div class="settings-row">
+          <span class="settings-label">Reset Everything<small>Clear all Mission Control data and reload</small></span>
+          <button class="settings-btn danger" id="set-reset-all">Reset</button>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">Render Nodes</div>
+        <div class="settings-hint">Add SCRATCH/Live FX instances on your network to monitor their render queues. The local instance is always included.</div>
+        <div id="set-nodes-list"></div>
+        <div class="settings-row" style="gap: var(--gap-sm);">
+          <input class="settings-input" id="set-node-name" type="text" placeholder="Name" style="width:120px; text-align:left;">
+          <input class="settings-input" id="set-node-addr" type="text" placeholder="192.168.1.100:8080" style="width:200px; text-align:left;">
+          <button class="settings-btn" id="set-node-add">Add Node</button>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">Connection</div>
+        <div class="settings-row">
+          <span class="settings-label">API Base URL</span>
+          <span style="font-family:var(--font-mono); font-size:var(--fs-sm); color:var(--text-secondary);" id="set-api-base">/APIV2</span>
+        </div>
+        <div class="settings-row">
+          <span class="settings-label">Server</span>
+          <span style="font-family:var(--font-mono); font-size:var(--fs-sm); color:var(--text-secondary);" id="set-server-addr">--</span>
+        </div>
+      </div>
+      <div class="settings-version">Mission Control v1.0</div>
+    </div>
+  </div>
+
+  <!-- ── Footer ──────────────────────────────────────────────── -->
+  <footer id="footer">
+    <a href="assimilate_rest_api.html">REST API: APIV2</a>
+    <span class="footer-right">Powered by Assimilate</span>
+  </footer>
+
+</div>
+
+<!-- ── Task Modal ──────────────────────────────────────────── -->
+<div class="modal-overlay" id="cron-modal">
+  <div class="modal" style="max-width: 520px;">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-title">New Automation</span>
+      <button class="modal-close" id="modal-close">&times;</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- Step 1: Name -->
+      <label for="cron-f-name">Task Name</label>
+      <input type="text" id="cron-f-name" placeholder="e.g. Nightly Render, Daily Backup">
+
+      <!-- Step 2: What to do (action picker) -->
+      <label>What should this task do?</label>
+      <div class="action-picker" id="action-picker">
+        <button type="button" class="action-btn" data-action="render-start">
+          <span class="action-icon">&gt;</span>
+          <span class="action-label">Start Render</span>
+        </button>
+        <button type="button" class="action-btn" data-action="render-stop">
+          <span class="action-icon">||</span>
+          <span class="action-label">Stop Render</span>
+        </button>
+        <button type="button" class="action-btn" data-action="project-exit">
+          <span class="action-icon">x</span>
+          <span class="action-label">Exit Project</span>
+        </button>
+        <button type="button" class="action-btn" data-action="health-check">
+          <span class="action-icon">~</span>
+          <span class="action-label">Health Check</span>
+        </button>
+        <button type="button" class="action-btn" data-action="webhook">
+          <span class="action-icon">&amp;</span>
+          <span class="action-label">Webhook</span>
+        </button>
+        <button type="button" class="action-btn" data-action="custom">
+          <span class="action-icon">*</span>
+          <span class="action-label">Custom API</span>
+        </button>
+      </div>
+
+      <!-- Step 3: When (friendly scheduler) -->
+      <label>When should it run?</label>
+      <div class="schedule-picker">
+        <select id="cron-f-frequency">
+          <option value="daily">Every day</option>
+          <option value="weekdays">Weekdays (Mon-Fri)</option>
+          <option value="weekly">Once a week</option>
+          <option value="hourly">Every hour</option>
+          <option value="minutes">Every X minutes</option>
+          <option value="custom">Custom (cron)</option>
+        </select>
+        <div class="schedule-options" id="schedule-opts">
+          <div class="schedule-row" id="sched-time-row">
+            <label>At</label>
+            <input type="time" id="cron-f-time" value="02:00">
+          </div>
+          <div class="schedule-row hidden" id="sched-day-row">
+            <label>On</label>
+            <select id="cron-f-day">
+              <option value="1">Monday</option>
+              <option value="2">Tuesday</option>
+              <option value="3">Wednesday</option>
+              <option value="4">Thursday</option>
+              <option value="5">Friday</option>
+              <option value="6">Saturday</option>
+              <option value="0">Sunday</option>
+            </select>
+          </div>
+          <div class="schedule-row hidden" id="sched-interval-row">
+            <label>Every</label>
+            <input type="number" id="cron-f-interval" value="30" min="1" max="59" style="width:60px">
+            <span style="color:var(--text-muted); font-size:var(--fs-sm)">minutes</span>
+          </div>
+          <div class="schedule-row hidden" id="sched-cron-row">
+            <label>Cron Expression</label>
+            <input type="text" id="cron-f-schedule" placeholder="0 2 * * *">
+          </div>
+        </div>
+        <span class="cron-preview" id="cron-f-preview"></span>
+      </div>
+
+      <!-- Advanced: shown for webhook/custom -->
+      <div id="advanced-fields" style="display:none;">
+        <label>Target</label>
+        <div class="target-toggle" id="cron-f-target-toggle">
+          <button type="button" class="active" data-target="api">API</button>
+          <button type="button" data-target="webhook">Webhook</button>
+        </div>
+        <input type="hidden" id="cron-f-target" value="api">
+
+        <label for="cron-f-method">Method</label>
+        <select id="cron-f-method">
+          <option value="GET">GET</option>
+          <option value="POST" selected>POST</option>
+          <option value="PUT">PUT</option>
+          <option value="DELETE">DELETE</option>
+        </select>
+
+        <div class="field-group" id="cron-fields-api">
+          <label for="cron-f-endpoint">API Endpoint</label>
+          <input type="text" id="cron-f-endpoint" placeholder="/APPLICATION/RENDER/START">
+        </div>
+
+        <div class="field-group hidden" id="cron-fields-webhook">
+          <label for="cron-f-url">Webhook URL</label>
+          <input type="text" id="cron-f-url" placeholder="http://localhost:5000/render-pipeline">
+          <label for="cron-f-headers">Headers (JSON)</label>
+          <textarea id="cron-f-headers" placeholder='{"Authorization": "Bearer token"}'></textarea>
+        </div>
+
+        <label for="cron-f-body">Request Body (JSON)</label>
+        <textarea id="cron-f-body" placeholder='{"key": "value"}'></textarea>
+      </div>
+
+      <div class="modal-toggle">
+        <label>Active</label>
+        <input type="checkbox" id="cron-f-active" checked>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-delete" id="modal-delete" style="display:none">Delete</button>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="modal-cancel">Cancel</button>
+        <button class="btn-save" id="modal-save">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ══════════════════════════════════════════════════════════════
+  //  Configuration
+  // ══════════════════════════════════════════════════════════════
+  var API_BASE = '/APIV2';
+  var POLL_SYSTEM  = 30000;
+  var POLL_HEALTH  = 30000;
+  var POLL_PROJECT = 10000;
+  var POLL_RENDER  = 1000;
+  var CRON_TICK    = 1000;
+  var STORAGE_KEY  = 'assimilate_cron_jobs';
+
+  // ══════════════════════════════════════════════════════════════
+  //  Navigation
+  // ══════════════════════════════════════════════════════════════
+  var navBtns = document.querySelectorAll('.nav-btn');
+  for (var i = 0; i < navBtns.length; i++) {
+    navBtns[i].addEventListener('click', function () {
+      var view = this.getAttribute('data-view');
+      // Update buttons
+      var btns = document.querySelectorAll('.nav-btn');
+      for (var j = 0; j < btns.length; j++) {
+        btns[j].className = 'nav-btn' + (btns[j].getAttribute('data-view') === view ? ' active' : '');
+      }
+      // Update views
+      var views = document.querySelectorAll('.view');
+      for (var k = 0; k < views.length; k++) {
+        views[k].className = 'view' + (views[k].id === 'view-' + view ? ' active' : '');
+      }
+    });
+  }
+
+  var HEALTH_ENDPOINTS = [
+    { name: 'System',   path: '/SYSTEM' },
+    { name: 'Projects', path: '/PROJECTS' },
+    { name: 'Player',   path: '/APPLICATION/PLAYER/PLAYMODE' },
+    { name: 'Render',   path: '/APPLICATION/RENDER' }
+  ];
+
+  // ══════════════════════════════════════════════════════════════
+  //  State
+  // ══════════════════════════════════════════════════════════════
+  var connected     = false;
+  var connectedAt   = null;       // timestamp of first successful connect
+  var systemData    = null;
+  var projectData   = null;
+  var renderItems   = [];
+  var isRendering   = false;
+  var healthResults = {};
+  var latencyHistory = [];        // last N response times for avg
+  var cronJobs      = [];
+  var editingJobId  = null;
+
+  // ══════════════════════════════════════════════════════════════
+  //  Utilities
+  // ══════════════════════════════════════════════════════════════
+  function gel(id) { return document.getElementById(id); }
+
+  function esc(str) {
+    var el = document.createElement('span');
+    el.textContent = str;
+    return el.innerHTML;
+  }
+
+  function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function timeAgo(ts) {
+    if (!ts) return '--';
+    var s = Math.floor((Date.now() - ts) / 1000);
+    if (s < 5) return 'just now';
+    if (s < 60) return s + 's ago';
+    if (s < 3600) return Math.floor(s / 60) + 'm ago';
+    return Math.floor(s / 3600) + 'h ago';
+  }
+
+  function formatETA(seconds) {
+    if (!seconds || seconds <= 0) return '--';
+    var m = Math.floor(seconds / 60);
+    var s = Math.floor(seconds % 60);
+    return m + ':' + pad2(s);
+  }
+
+  function formatUptime(ms) {
+    if (!ms || ms < 0) return '--';
+    var totalSec = Math.floor(ms / 1000);
+    var d = Math.floor(totalSec / 86400);
+    var h = Math.floor((totalSec % 86400) / 3600);
+    var m = Math.floor((totalSec % 3600) / 60);
+    var s = totalSec % 60;
+    if (d > 0) return d + 'd ' + pad2(h) + 'h ' + pad2(m) + 'm';
+    return pad2(h) + ':' + pad2(m) + ':' + pad2(s);
+  }
+
+  function formatBytes(bytes) {
+    if (bytes == null || isNaN(bytes)) return '--';
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+    if (bytes < 1073741824) return (bytes / 1048576).toFixed(1) + ' MB';
+    return (bytes / 1073741824).toFixed(1) + ' GB';
+  }
+
+  function metricBarClass(pct) {
+    if (pct >= 90) return 'crit';
+    if (pct >= 70) return 'warn';
+    return '';
+  }
+
+  function setMetric(barId, valId, pct, label) {
+    var bar = gel(barId);
+    var val = gel(valId);
+    if (bar) {
+      bar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+      bar.className = 'metric-fill' + (metricBarClass(pct) ? ' ' + metricBarClass(pct) : '');
+    }
+    if (val && label != null) val.textContent = label;
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  API Layer
+  // ══════════════════════════════════════════════════════════════
+  function apiGet(path, cb) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', API_BASE + path);
+    xhr.timeout = 10000;
+    xhr.onload = function () {
+      if (xhr.status >= 200 && xhr.status < 400) {
+        try { cb(null, JSON.parse(xhr.responseText)); }
+        catch (e) { cb(e); }
+      } else {
+        cb(new Error('HTTP ' + xhr.status));
+      }
+    };
+    xhr.onerror = function () { cb(new Error('Network error')); };
+    xhr.ontimeout = function () { cb(new Error('Timeout')); };
+    xhr.send();
+  }
+
+  function apiCall(method, path, body, cb) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, API_BASE + path);
+    xhr.timeout = 30000;
+    if (body) xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function () { cb(null, xhr.status, xhr.responseText); };
+    xhr.onerror = function () { cb(new Error('Network error')); };
+    xhr.ontimeout = function () { cb(new Error('Timeout')); };
+    xhr.send(body || null);
+  }
+
+  function timedGet(path, cb) {
+    var start = Date.now();
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', API_BASE + path);
+    xhr.timeout = 10000;
+    xhr.onload = function () {
+      var ms = Date.now() - start;
+      cb(xhr.status >= 200 && xhr.status < 400 ? 'ok' : 'error', ms);
+    };
+    xhr.onerror = function () { cb('error', 0); };
+    xhr.ontimeout = function () { cb('error', 10000); };
+    xhr.send();
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Clock & Uptime
+  // ══════════════════════════════════════════════════════════════
+  function updateClock() {
+    var now = new Date();
+    gel('hdr-clock').textContent =
+      pad2(now.getHours()) + ':' + pad2(now.getMinutes()) + ':' + pad2(now.getSeconds());
+  }
+
+  function updateUptime() {
+    if (!connectedAt) {
+      gel('m-uptime').textContent = '--';
+      return;
+    }
+    gel('m-uptime').textContent = formatUptime(Date.now() - connectedAt);
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Connection Status
+  // ══════════════════════════════════════════════════════════════
+  function setConnected(val) {
+    if (val && !connected) {
+      connectedAt = connectedAt || Date.now();
+    }
+    if (!val) {
+      connectedAt = null;
+    }
+    connected = val;
+    var dot = gel('status-dot');
+    var txt = gel('hdr-status');
+    if (val) {
+      dot.className = 'status-dot ok';
+      txt.textContent = 'ONLINE';
+    } else {
+      dot.className = 'status-dot error';
+      txt.textContent = 'OFFLINE';
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  System Vitals
+  // ══════════════════════════════════════════════════════════════
+  function pollSystem() {
+    apiGet('/SYSTEM', function (err, data) {
+      if (err) {
+        setConnected(false);
+        return;
+      }
+      setConnected(true);
+      systemData = data;
+      renderVitals();
+    });
+  }
+
+  function renderVitals() {
+    var d = systemData;
+    if (!d) return;
+
+    // Header version
+    var ver = 'v' + (d.version || '?');
+    if (d.build_number) ver += ' b' + d.build_number;
+    var verEl = gel('hdr-version');
+    verEl.textContent = ver;
+    verEl.style.display = '';
+
+    // Identity
+    gel('v-system').textContent = d.system_name || '--';
+    gel('v-user').textContent = d.user || '--';
+    gel('v-server').textContent =
+      (d.ip || window.location.hostname) + ':' + (d.port || window.location.port || '8080');
+    gel('v-projects').textContent = d.project_folder || '--';
+    gel('v-shared').textContent = d.shared_folder || '--';
+
+    // CPU — use API data if present
+    if (d.cpu_usage != null) {
+      var cpu = Math.round(d.cpu_usage);
+      setMetric('m-cpu-bar', 'm-cpu-val', cpu, cpu + '%');
+    }
+
+    // Memory — use API data if present
+    if (d.memory_used != null && d.memory_total != null) {
+      var memPct = Math.round(d.memory_used / d.memory_total * 100);
+      var memLabel = formatBytes(d.memory_used) + ' / ' + formatBytes(d.memory_total);
+      setMetric('m-mem-bar', 'm-mem-val', memPct, memLabel);
+    } else if (d.memory_usage != null) {
+      var mu = Math.round(d.memory_usage);
+      setMetric('m-mem-bar', 'm-mem-val', mu, mu + '%');
+    }
+
+    // GPU — use API data if present
+    if (d.gpu_usage != null) {
+      var gpu = Math.round(d.gpu_usage);
+      setMetric('m-gpu-bar', 'm-gpu-val', gpu, gpu + '%');
+    } else if (d.gpu_name) {
+      gel('m-gpu-val').textContent = d.gpu_name;
+    }
+
+    // Disk — use API data if present
+    if (d.disk_used != null && d.disk_total != null) {
+      var diskPct = Math.round(d.disk_used / d.disk_total * 100);
+      var diskLabel = formatBytes(d.disk_used) + ' / ' + formatBytes(d.disk_total);
+      setMetric('m-disk-bar', 'm-disk-val', diskPct, diskLabel);
+    } else if (d.disk_usage != null) {
+      var du = Math.round(d.disk_usage);
+      setMetric('m-disk-bar', 'm-disk-val', du, du + '%');
+    }
+
+    // Network speed from API
+    if (d.network_speed) {
+      gel('m-net-val').textContent = d.network_speed;
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  API Health Monitor
+  // ══════════════════════════════════════════════════════════════
+  function pollHealth() {
+    HEALTH_ENDPOINTS.forEach(function (ep) {
+      timedGet(ep.path, function (status, ms) {
+        healthResults[ep.name] = { status: status, ms: ms, time: Date.now() };
+
+        // Track latency for network metric
+        if (status === 'ok') {
+          latencyHistory.push(ms);
+          if (latencyHistory.length > 20) latencyHistory.shift();
+        }
+        updateNetworkMetric();
+        renderHealth();
+      });
+    });
+  }
+
+  function updateNetworkMetric() {
+    if (!latencyHistory.length) return;
+    var sum = 0;
+    for (var i = 0; i < latencyHistory.length; i++) sum += latencyHistory[i];
+    var avg = Math.round(sum / latencyHistory.length);
+    gel('m-net-val').textContent = avg + 'ms avg';
+    gel('m-net-latency').textContent = 'Latency: ' + avg + 'ms';
+  }
+
+  function renderHealth() {
+    var grid = gel('health-grid');
+    var html = '';
+    var okCount = 0;
+    var total = HEALTH_ENDPOINTS.length;
+    var hasData = false;
+
+    HEALTH_ENDPOINTS.forEach(function (ep) {
+      var r = healthResults[ep.name];
+      var dotClass = '';
+      var msText = '--';
+      var timeText = '--';
+
+      if (r) {
+        hasData = true;
+        dotClass = r.status;
+        msText = r.status === 'ok' ? r.ms + 'ms' : 'ERR';
+        timeText = timeAgo(r.time);
+        if (r.status === 'ok') okCount++;
+      }
+
+      html += '<div class="health-row">' +
+        '<span class="health-dot ' + dotClass + '"></span>' +
+        '<span class="health-name">' + esc(ep.name) + '</span>' +
+        '<span class="health-ms">' + msText + '</span>' +
+        '<span class="health-time">' + timeText + '</span>' +
+        '</div>';
+    });
+
+    grid.innerHTML = html;
+
+    var overall = gel('health-overall');
+    if (!hasData) {
+      overall.textContent = '--';
+      overall.className = 'health-overall';
+    } else if (okCount === total) {
+      overall.textContent = 'ALL SYSTEMS OK';
+      overall.className = 'health-overall ok';
+    } else if (okCount > 0) {
+      overall.textContent = 'DEGRADED';
+      overall.className = 'health-overall degraded';
+    } else {
+      overall.textContent = 'OFFLINE';
+      overall.className = 'health-overall offline';
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Active Project
+  // ══════════════════════════════════════════════════════════════
+  function pollProject() {
+    apiGet('/PROJECTS/CURRENT', function (err, data) {
+      if (err || !data) { projectData = null; renderProject(); return; }
+      projectData = data;
+      renderProject();
+    });
+  }
+
+  function renderProject() {
+    var body = gel('project-body');
+    var d = projectData;
+
+    if (!d || !d.name) {
+      body.innerHTML = '<div class="project-empty">No project loaded</div>';
+      return;
+    }
+
+    var w = d.width || d.resolution_x || '';
+    var h = d.height || d.resolution_y || '';
+    var res = (w && h) ? w + ' x ' + h : '--';
+    var fps = d.fps || d.frame_rate || '--';
+    var cs = d.color_space || '--';
+    var eotf = d.eotf || d.gamma || '--';
+
+    body.innerHTML =
+      '<div class="project-name">' + esc(d.name) + '</div>' +
+      '<div class="project-meta">' +
+        '<div class="project-stat">' +
+          '<span class="project-stat-label">Resolution</span>' +
+          '<span class="project-stat-value">' + esc(String(res)) + '</span>' +
+        '</div>' +
+        '<div class="project-stat">' +
+          '<span class="project-stat-label">Frame Rate</span>' +
+          '<span class="project-stat-value">' + esc(String(fps)) + (fps !== '--' ? ' fps' : '') + '</span>' +
+        '</div>' +
+        '<div class="project-stat">' +
+          '<span class="project-stat-label">Color Space</span>' +
+          '<span class="project-stat-value">' + esc(String(cs)) + '</span>' +
+        '</div>' +
+        '<div class="project-stat">' +
+          '<span class="project-stat-label">EOTF</span>' +
+          '<span class="project-stat-value">' + esc(String(eotf)) + '</span>' +
+        '</div>' +
+      '</div>';
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Render Manager
+  // ══════════════════════════════════════════════════════════════
+  function pollRender() {
+    apiGet('/APPLICATION/RENDER', function (err, data) {
+      if (err || !data) { renderItems = []; isRendering = false; renderRenderPanel(); return; }
+      renderItems = Array.isArray(data) ? data : (data.items || []);
+      isRendering = renderItems.some(function (it) {
+        return it.status === 'rendering' || it.status === 'processing';
+      });
+      renderRenderPanel();
+    });
+  }
+
+  function calcProgress(item) {
+    if (item.frames_total && item.frames_total > 0)
+      return Math.round((item.frames_done || 0) / item.frames_total * 100);
+    if (item.time_total && item.time_total > 0)
+      return Math.round((item.time_processed || 0) / item.time_total * 100);
+    if (item.status === 'done' || item.status === 'completed' || item.status === 'finished') return 100;
+    return 0;
+  }
+
+  function getStatusClass(status) {
+    if (status === 'processing' || status === 'rendering') return 'rendering';
+    if (status === 'error' || status === 'failed') return 'error';
+    if (status === 'done' || status === 'completed' || status === 'finished') return '';
+    if (status === 'waiting') return 'queued';
+    return 'queued';
+  }
+
+  function getStatusLabel(status) {
+    if (status === 'processing' || status === 'rendering') return 'RENDERING';
+    if (status === 'error' || status === 'failed') return 'ERROR';
+    if (status === 'done' || status === 'completed' || status === 'finished') return 'DONE';
+    return 'QUEUED';
+  }
+
+  function renderRenderPanel() {
+    var body = gel('render-body');
+    var summary = gel('render-summary');
+
+    if (!renderItems.length) {
+      body.innerHTML = '<div class="render-empty">Render queue empty</div>';
+      summary.textContent = '';
+      return;
+    }
+
+    var activeCount = 0, doneCount = 0;
+    renderItems.forEach(function (it) {
+      var sc = getStatusClass(it.status);
+      if (sc === 'rendering') activeCount++;
+      if (it.status === 'done' || it.status === 'completed' || it.status === 'finished') doneCount++;
+    });
+
+    var parts = [];
+    if (activeCount) parts.push(activeCount + ' active');
+    if (doneCount) parts.push(doneCount + ' done');
+    parts.push(renderItems.length + ' total');
+    summary.textContent = parts.join(' / ');
+
+    var html = '<div class="render-list">';
+    renderItems.forEach(function (item) {
+      var pct = calcProgress(item);
+      var sc = getStatusClass(item.status);
+      var label = getStatusLabel(item.status);
+      var eta = formatETA(item.time_left);
+
+      html += '<div class="render-item">' +
+        '<div class="render-item-top">' +
+          '<span class="render-item-name" title="' + esc(item.path || '') + '">' + esc(item.name || 'Unnamed') + '</span>' +
+          '<span class="render-item-eta">' + (eta !== '--' ? 'ETA ' + eta : '') + '</span>' +
+        '</div>' +
+        '<div class="render-progress-track">' +
+          '<div class="render-progress-bar ' + sc + '" style="width:' + pct + '%"></div>' +
+        '</div>' +
+        '<div class="render-item-bottom">' +
+          '<span class="render-item-status ' + sc + '">' + label + '</span>' +
+          '<span class="render-item-pct">' + pct + '%</span>' +
+        '</div>' +
+      '</div>';
+    });
+    html += '</div>';
+    body.innerHTML = html;
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Cron Engine
+  // ══════════════════════════════════════════════════════════════
+  function loadCronJobs() {
+    try { var raw = localStorage.getItem(STORAGE_KEY); cronJobs = raw ? JSON.parse(raw) : []; }
+    catch (e) { cronJobs = []; }
+  }
+
+  function saveCronJobs() { localStorage.setItem(STORAGE_KEY, JSON.stringify(cronJobs)); }
+
+  function generateId() { return 'cron_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5); }
+
+  function parseCronField(field, min, max) {
+    if (field === '*') return null;
+    var values = [];
+    var parts = field.split(',');
+    for (var i = 0; i < parts.length; i++) {
+      var part = parts[i].trim();
+      if (part.indexOf('/') !== -1) {
+        var sp = part.split('/');
+        var step = parseInt(sp[1], 10);
+        var rStart = min, rEnd = max;
+        if (sp[0] !== '*') {
+          if (sp[0].indexOf('-') !== -1) {
+            var rp = sp[0].split('-');
+            rStart = parseInt(rp[0], 10);
+            rEnd = parseInt(rp[1], 10);
+          } else { rStart = parseInt(sp[0], 10); }
+        }
+        for (var v = rStart; v <= rEnd; v += step) values.push(v);
+      } else if (part.indexOf('-') !== -1) {
+        var range = part.split('-');
+        for (var v2 = parseInt(range[0], 10); v2 <= parseInt(range[1], 10); v2++) values.push(v2);
+      } else { values.push(parseInt(part, 10)); }
+    }
+    return values;
+  }
+
+  function cronMatches(expr, date) {
+    var f = expr.trim().split(/\s+/);
+    if (f.length !== 5) return false;
+    var minute = parseCronField(f[0], 0, 59);
+    var hour   = parseCronField(f[1], 0, 23);
+    var dom    = parseCronField(f[2], 1, 31);
+    var month  = parseCronField(f[3], 1, 12);
+    var dow    = parseCronField(f[4], 0, 6);
+    if (minute && minute.indexOf(date.getMinutes()) === -1) return false;
+    if (hour   && hour.indexOf(date.getHours()) === -1) return false;
+    if (dom    && dom.indexOf(date.getDate()) === -1) return false;
+    if (month  && month.indexOf(date.getMonth() + 1) === -1) return false;
+    if (dow    && dow.indexOf(date.getDay()) === -1) return false;
+    return true;
+  }
+
+  function cronDescribe(expr) {
+    var f = expr.trim().split(/\s+/);
+    if (f.length !== 5) return expr;
+    var mn = f[0], hr = f[1], dm = f[2], mo = f[3], dw = f[4];
+
+    function fmtTime(h, m) {
+      var hi = parseInt(h, 10); var ampm = hi >= 12 ? 'PM' : 'AM';
+      hi = hi % 12 || 12;
+      return hi + ':' + pad2(parseInt(m, 10)) + ' ' + ampm;
+    }
+    var dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+    if (mn === '*' && hr === '*' && dm === '*' && mo === '*' && dw === '*') return 'Every minute';
+    if (mn.indexOf('*/') === 0 && hr === '*' && dm === '*' && mo === '*' && dw === '*')
+      return 'Every ' + mn.split('/')[1] + ' min';
+    if (mn !== '*' && hr === '*' && dm === '*' && mo === '*' && dw === '*')
+      return 'Hourly at :' + pad2(mn);
+    if (mn !== '*' && hr !== '*' && dm === '*' && mo === '*' && dw === '*')
+      return 'Daily at ' + fmtTime(hr, mn);
+    if (mn !== '*' && hr !== '*' && dm === '*' && mo === '*' && dw === '1-5')
+      return 'Weekdays at ' + fmtTime(hr, mn);
+    if (mn !== '*' && hr !== '*' && dm === '*' && mo === '*' && dw !== '*') {
+      var di = parseInt(dw, 10);
+      if (!isNaN(di) && di >= 0 && di <= 6) return dayNames[di] + ' at ' + fmtTime(hr, mn);
+      return 'Weekly at ' + fmtTime(hr, mn);
+    }
+    if (mn !== '*' && hr !== '*' && dm !== '*' && mo === '*' && dw === '*') {
+      var d = parseInt(dm, 10);
+      var suf = d === 1 ? 'st' : d === 2 ? 'nd' : d === 3 ? 'rd' : 'th';
+      return d + suf + ' of month at ' + fmtTime(hr, mn);
+    }
+    return expr;
+  }
+
+  function cronNextRun(expr) {
+    var now = new Date(); now.setSeconds(0, 0);
+    var check = new Date(now.getTime() + 60000);
+    for (var i = 0; i < 525600; i++) {
+      if (cronMatches(expr, check)) return check;
+      check = new Date(check.getTime() + 60000);
+    }
+    return null;
+  }
+
+  function formatNextRun(date) {
+    if (!date) return '--';
+    var diff = date.getTime() - Date.now();
+    var mins = Math.floor(diff / 60000);
+    if (mins < 1) return 'now';
+    if (mins < 60) return 'in ' + mins + 'm';
+    if (mins < 1440) return 'in ' + Math.floor(mins / 60) + 'h ' + (mins % 60) + 'm';
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return months[date.getMonth()] + ' ' + date.getDate() + ' ' + pad2(date.getHours()) + ':' + pad2(date.getMinutes());
+  }
+
+  var lastTickMinute = -1;
+  function cronTick() {
+    var now = new Date();
+    var currentMinute = now.getHours() * 60 + now.getMinutes();
+    if (currentMinute === lastTickMinute) return;
+    lastTickMinute = currentMinute;
+
+    cronJobs.forEach(function (job) {
+      if (!job.active) return;
+      if (!cronMatches(job.schedule, now)) return;
+      if (job.lastRun) {
+        var last = new Date(job.lastRun);
+        if (last.getHours() === now.getHours() && last.getMinutes() === now.getMinutes() && last.getDate() === now.getDate()) return;
+      }
+      executeCronJob(job);
+    });
+  }
+
+  function executeCronJob(job) {
+    var start = Date.now();
+    job.lastRun = new Date().toISOString();
+
+    var onResult = function (err, status) {
+      var duration = Date.now() - start;
+      var success = !err && status >= 200 && status < 400;
+      job.lastResult = success ? 'success' : 'error';
+      job.lastError = err ? err.message : (success ? '' : 'HTTP ' + status);
+      if (!job.history) job.history = [];
+      job.history.unshift({ time: job.lastRun, result: job.lastResult, status: status || 0, duration: duration });
+      if (job.history.length > 10) job.history = job.history.slice(0, 10);
+      saveCronJobs();
+      renderCronList();
+    };
+
+    if (job.target === 'webhook' && job.url) {
+      webhookCall(job.method, job.url, job.body || null, job.headers || null, onResult);
+    } else {
+      apiCall(job.method, job.endpoint, job.body || null, onResult);
+    }
+
+    saveCronJobs();
+    renderCronList();
+  }
+
+  function webhookCall(method, url, body, headers, cb) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    xhr.timeout = 30000;
+    if (body) xhr.setRequestHeader('Content-Type', 'application/json');
+    if (headers) {
+      try {
+        var h = typeof headers === 'string' ? JSON.parse(headers) : headers;
+        for (var key in h) {
+          if (h.hasOwnProperty(key)) xhr.setRequestHeader(key, h[key]);
+        }
+      } catch (e) { /* ignore bad headers */ }
+    }
+    xhr.onload = function () { cb(null, xhr.status, xhr.responseText); };
+    xhr.onerror = function () { cb(new Error('Network error')); };
+    xhr.ontimeout = function () { cb(new Error('Timeout')); };
+    xhr.send(body || null);
+  }
+
+  function renderTasksSummary() {
+    var body = gel('tasks-summary-body');
+    var count = gel('tasks-summary-count');
+    if (!body) return;
+    var active = cronJobs.filter(function (j) { return j.active; });
+    count.textContent = active.length ? active.length + ' active' : '';
+    if (!cronJobs.length) {
+      body.innerHTML = '<div class="cron-empty">No scheduled tasks</div>';
+      return;
+    }
+    var html = '';
+    cronJobs.slice(0, 3).forEach(function (job) {
+      var dotClass = 'paused';
+      if (job.active) {
+        dotClass = job.lastResult === 'error' ? 'fail' :
+                   job.lastResult === 'success' ? 'success' : 'active';
+      }
+      html += '<div style="display:flex; align-items:center; gap:8px; padding:4px 0;">' +
+        '<span class="cron-dot ' + dotClass + '"></span>' +
+        '<span style="font-size:var(--fs-sm); color:var(--text-primary);">' + esc(job.name) + '</span>' +
+        '<span style="margin-left:auto; font-size:var(--fs-xs); color:var(--text-muted);">' + esc(cronDescribe(job.schedule)) + '</span>' +
+      '</div>';
+    });
+    if (cronJobs.length > 3) {
+      html += '<div style="font-size:var(--fs-xs); color:var(--text-muted); padding-top:4px;">+ ' + (cronJobs.length - 3) + ' more</div>';
+    }
+    body.innerHTML = html;
+  }
+
+  function renderCronList() {
+    var body = gel('cron-body');
+    if (!cronJobs.length) {
+      body.innerHTML = '<div class="cron-empty">' +
+        '<div class="templates-intro">No scheduled tasks. Get started with a workflow template:</div>' +
+        '<div class="templates-grid" id="templates-grid"></div>' +
+      '</div>';
+      renderTemplatesGrid();
+      return;
+    }
+
+    var html = '<div class="cron-list">';
+    cronJobs.forEach(function (job) {
+      var dotClass = 'paused';
+      if (job.active) {
+        dotClass = job.lastResult === 'error' ? 'fail' :
+                   job.lastResult === 'success' ? 'success' : 'active';
+      }
+      var next = job.active ? cronNextRun(job.schedule) : null;
+
+      var isWebhook = job.target === 'webhook';
+      var targetLabel = isWebhook ? 'webhook' : 'api';
+      var actionText = isWebhook
+        ? esc(job.method) + ' ' + esc(job.url || '')
+        : esc(job.method) + ' ' + esc(job.endpoint || '');
+
+      html += '<div class="cron-job" data-id="' + job.id + '">' +
+        '<span class="cron-dot ' + dotClass + '"></span>' +
+        '<div class="cron-info">' +
+          '<div class="cron-name">' + esc(job.name) +
+            '<span class="cron-target-tag ' + targetLabel + '">' + targetLabel + '</span>' +
+          '</div>' +
+          '<div class="cron-schedule">' + esc(cronDescribe(job.schedule)) + '</div>' +
+        '</div>' +
+        '<div class="cron-meta">' +
+          '<div class="cron-action">' + actionText + '</div>' +
+          '<div class="cron-next">' + (job.active ? 'Next: ' + formatNextRun(next) : 'Paused') + '</div>' +
+        '</div>' +
+      '</div>';
+    });
+    html += '</div>';
+    body.innerHTML = html;
+
+    var items = body.querySelectorAll('.cron-job');
+    for (var i = 0; i < items.length; i++) {
+      items[i].addEventListener('click', (function (id) {
+        return function () { openCronModal(id); };
+      })(items[i].getAttribute('data-id')));
+    }
+    renderTasksSummary();
+    if (typeof renderCalendar === 'function') renderCalendar();
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Action Presets
+  // ══════════════════════════════════════════════════════════════
+  var ACTION_PRESETS = {
+    'render-start': { name: 'Start Render',  target: 'api', method: 'POST', endpoint: '/APPLICATION/RENDER/START' },
+    'render-stop':  { name: 'Stop Render',   target: 'api', method: 'POST', endpoint: '/APPLICATION/RENDER/STOP' },
+    'health-check': { name: 'Health Check',  target: 'api', method: 'GET',  endpoint: '/SYSTEM' },
+    'project-exit': { name: 'Exit Project',  target: 'api', method: 'POST', endpoint: '/APPLICATION/PROJECT/EXIT' },
+    'webhook':      { name: '',              target: 'webhook', method: 'POST', endpoint: '' },
+    'custom':       { name: '',              target: 'api', method: 'GET', endpoint: '' }
+  };
+
+  var WORKFLOW_TEMPLATES = [
+    {
+      title: 'Nightly Render',
+      desc: 'Start the render queue every night. Ideal for overnight processing of dailies or final outputs.',
+      action: 'render-start',
+      schedule: '0 2 * * *',
+      freq: 'daily',
+      time: '02:00'
+    },
+    {
+      title: 'Weekday Morning Render',
+      desc: 'Kick off renders every weekday morning before the team arrives.',
+      action: 'render-start',
+      schedule: '0 6 * * 1-5',
+      freq: 'weekdays',
+      time: '06:00'
+    },
+    {
+      title: 'Hourly Health Check',
+      desc: 'Ping the system every hour to verify SCRATCH is responding. Pair with a webhook to get alerts on failure.',
+      action: 'health-check',
+      schedule: '0 * * * *',
+      freq: 'hourly',
+      time: '00:00'
+    },
+    {
+      title: 'Post-Render Webhook',
+      desc: 'Send a notification to Slack, Teams, or a custom URL after renders complete. Use with a webhook target.',
+      action: 'webhook',
+      schedule: '30 7 * * *',
+      freq: 'daily',
+      time: '07:30'
+    },
+    {
+      title: 'Weekend Batch Render',
+      desc: 'Start all queued renders on Saturday morning for weekend processing.',
+      action: 'render-start',
+      schedule: '0 1 * * 6',
+      freq: 'weekly',
+      time: '01:00',
+      day: '6'
+    },
+    {
+      title: 'Status Monitor (5 min)',
+      desc: 'Poll system status every 5 minutes. Good for monitoring remote render stations.',
+      action: 'health-check',
+      schedule: '*/5 * * * *',
+      freq: 'minutes',
+      interval: '5'
+    }
+  ];
+
+  function renderTemplatesGrid() {
+    var grid = gel('templates-grid');
+    if (!grid) return;
+    var html = '';
+    WORKFLOW_TEMPLATES.forEach(function (tpl, idx) {
+      var preset = ACTION_PRESETS[tpl.action];
+      var method = preset ? preset.method : 'GET';
+      var target = preset ? (preset.target === 'webhook' ? 'WEBHOOK' : preset.endpoint) : '--';
+      html += '<div class="template-card" data-tpl="' + idx + '">' +
+        '<div class="template-card-title">' + esc(tpl.title) + '</div>' +
+        '<div class="template-card-desc">' + esc(tpl.desc) + '</div>' +
+        '<div class="template-card-meta">' +
+          '<span>' + method + '</span>' +
+          '<span>' + esc(tpl.freq) + '</span>' +
+        '</div>' +
+      '</div>';
+    });
+    grid.innerHTML = html;
+
+    // Click handler
+    var cards = grid.querySelectorAll('.template-card');
+    for (var i = 0; i < cards.length; i++) {
+      cards[i].addEventListener('click', function () {
+        var tpl = WORKFLOW_TEMPLATES[parseInt(this.getAttribute('data-tpl'))];
+        applyTemplate(tpl);
+      });
+    }
+  }
+
+  function applyTemplate(tpl) {
+    openCronModal();
+    gel('cron-f-name').value = tpl.title;
+    selectAction(tpl.action);
+    gel('cron-f-frequency').value = tpl.freq;
+    if (tpl.time) gel('cron-f-time').value = tpl.time;
+    if (tpl.day) gel('cron-f-day').value = tpl.day;
+    if (tpl.interval) gel('cron-f-interval').value = tpl.interval;
+    if (tpl.freq === 'custom') gel('cron-f-schedule').value = tpl.schedule;
+    updateScheduleUI();
+    updateCronPreview();
+  }
+
+  var selectedAction = null;
+
+  function selectAction(action) {
+    selectedAction = action;
+    var btns = gel('action-picker').querySelectorAll('.action-btn');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].classList.toggle('selected', btns[i].getAttribute('data-action') === action);
+    }
+    var preset = ACTION_PRESETS[action];
+    var adv = gel('advanced-fields');
+    if (action === 'webhook' || action === 'custom') {
+      adv.style.display = '';
+      setTargetMode(preset.target);
+      gel('cron-f-method').value = preset.method;
+    } else {
+      adv.style.display = 'none';
+      setTargetMode(preset.target);
+      gel('cron-f-method').value = preset.method;
+      gel('cron-f-endpoint').value = preset.endpoint;
+      if (preset.body) gel('cron-f-body').value = preset.body;
+    }
+    if (preset.name && !gel('cron-f-name').value) {
+      gel('cron-f-name').value = preset.name;
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Schedule Builder
+  // ══════════════════════════════════════════════════════════════
+  function buildCronFromUI() {
+    var freq = gel('cron-f-frequency').value;
+    var time = gel('cron-f-time').value || '02:00';
+    var parts = time.split(':');
+    var hr = parseInt(parts[0], 10);
+    var mn = parseInt(parts[1], 10);
+
+    switch (freq) {
+      case 'daily':    return mn + ' ' + hr + ' * * *';
+      case 'weekdays': return mn + ' ' + hr + ' * * 1-5';
+      case 'weekly':
+        var day = gel('cron-f-day').value;
+        return mn + ' ' + hr + ' * * ' + day;
+      case 'hourly':   return mn + ' * * * *';
+      case 'minutes':
+        var interval = gel('cron-f-interval').value || '30';
+        return '*/' + interval + ' * * * *';
+      case 'custom':   return gel('cron-f-schedule').value.trim();
+      default:         return mn + ' ' + hr + ' * * *';
+    }
+  }
+
+  function updateScheduleUI() {
+    var freq = gel('cron-f-frequency').value;
+    gel('sched-time-row').classList.toggle('hidden', freq === 'minutes' || freq === 'custom');
+    gel('sched-day-row').classList.toggle('hidden', freq !== 'weekly');
+    gel('sched-interval-row').classList.toggle('hidden', freq !== 'minutes');
+    gel('sched-cron-row').classList.toggle('hidden', freq !== 'custom');
+    updateCronPreview();
+  }
+
+  function frequencyFromCron(expr) {
+    var p = expr.split(/\s+/);
+    if (p.length !== 5) return { freq: 'custom' };
+    if (p[0].indexOf('/') > -1) return { freq: 'minutes', interval: p[0].replace('*/', '') };
+    if (p[1] === '*') return { freq: 'hourly', time: '00:' + (p[0].length < 2 ? '0' : '') + p[0] };
+    var hr = p[1], mn = p[0];
+    var time = (hr.length < 2 ? '0' : '') + hr + ':' + (mn.length < 2 ? '0' : '') + mn;
+    if (p[4] === '1-5') return { freq: 'weekdays', time: time };
+    if (p[4] !== '*' && p[2] === '*') return { freq: 'weekly', time: time, day: p[4] };
+    if (p[2] === '*' && p[3] === '*' && p[4] === '*') return { freq: 'daily', time: time };
+    return { freq: 'custom' };
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Task Modal
+  // ══════════════════════════════════════════════════════════════
+  function openCronModal(jobId) {
+    var modal = gel('cron-modal');
+    var title = gel('modal-title');
+    var delBtn = gel('modal-delete');
+
+    if (jobId) {
+      var job = null;
+      for (var i = 0; i < cronJobs.length; i++) { if (cronJobs[i].id === jobId) { job = cronJobs[i]; break; } }
+      if (!job) return;
+      editingJobId = jobId;
+      title.textContent = 'Edit Task';
+      delBtn.style.display = '';
+      gel('cron-f-name').value = job.name;
+      gel('cron-f-method').value = job.method;
+      gel('cron-f-endpoint').value = job.endpoint || '';
+      gel('cron-f-url').value = job.url || '';
+      gel('cron-f-headers').value = job.headers || '';
+      gel('cron-f-body').value = job.body || '';
+      gel('cron-f-active').checked = job.active;
+      setTargetMode(job.target || 'api');
+
+      // Detect action from endpoint
+      var detected = null;
+      for (var key in ACTION_PRESETS) {
+        if (ACTION_PRESETS[key].endpoint === job.endpoint && ACTION_PRESETS[key].target === job.target) {
+          detected = key; break;
+        }
+      }
+      if (job.target === 'webhook') detected = 'webhook';
+      selectAction(detected || 'custom');
+      if (detected === 'webhook' || detected === 'custom' || !detected) {
+        gel('advanced-fields').style.display = '';
+      }
+
+      // Set schedule UI
+      var sched = frequencyFromCron(job.schedule);
+      gel('cron-f-frequency').value = sched.freq;
+      if (sched.time) gel('cron-f-time').value = sched.time;
+      if (sched.day) gel('cron-f-day').value = sched.day;
+      if (sched.interval) gel('cron-f-interval').value = sched.interval;
+      if (sched.freq === 'custom') gel('cron-f-schedule').value = job.schedule;
+      updateScheduleUI();
+    } else {
+      editingJobId = null;
+      title.textContent = 'New Automation';
+      delBtn.style.display = 'none';
+      gel('cron-f-name').value = '';
+      gel('cron-f-frequency').value = 'daily';
+      gel('cron-f-time').value = '02:00';
+      gel('cron-f-schedule').value = '';
+      gel('cron-f-method').value = 'POST';
+      gel('cron-f-endpoint').value = '';
+      gel('cron-f-url').value = '';
+      gel('cron-f-headers').value = '';
+      gel('cron-f-body').value = '';
+      gel('cron-f-active').checked = true;
+      gel('cron-f-preview').textContent = '';
+      gel('advanced-fields').style.display = 'none';
+      setTargetMode('api');
+      selectedAction = null;
+      var btns = gel('action-picker').querySelectorAll('.action-btn');
+      for (var i = 0; i < btns.length; i++) btns[i].classList.remove('selected');
+      updateScheduleUI();
+    }
+    modal.classList.add('open');
+  }
+
+  function setTargetMode(mode) {
+    gel('cron-f-target').value = mode;
+    var btns = gel('cron-f-target-toggle').querySelectorAll('button');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].classList.toggle('active', btns[i].getAttribute('data-target') === mode);
+    }
+    gel('cron-fields-api').classList.toggle('hidden', mode !== 'api');
+    gel('cron-fields-webhook').classList.toggle('hidden', mode !== 'webhook');
+  }
+
+  function closeCronModal() { gel('cron-modal').classList.remove('open'); editingJobId = null; selectedAction = null; }
+
+  function saveCronFromModal() {
+    var name = gel('cron-f-name').value.trim();
+    if (!name) return;
+    if (!selectedAction) return;
+
+    var schedule = buildCronFromUI();
+    if (!schedule || schedule.split(/\s+/).length !== 5) return;
+
+    var target = gel('cron-f-target').value;
+    var method = gel('cron-f-method').value;
+    var endpoint = gel('cron-f-endpoint').value.trim();
+    var url = gel('cron-f-url').value.trim();
+    var headers = gel('cron-f-headers').value.trim();
+    var body = gel('cron-f-body').value.trim();
+    var active = gel('cron-f-active').checked;
+
+    if (target === 'api' && !endpoint) return;
+    if (target === 'webhook' && !url) return;
+
+    if (editingJobId) {
+      for (var i = 0; i < cronJobs.length; i++) {
+        if (cronJobs[i].id === editingJobId) {
+          cronJobs[i].name = name;
+          cronJobs[i].schedule = schedule;
+          cronJobs[i].target = target;
+          cronJobs[i].method = method;
+          cronJobs[i].endpoint = endpoint;
+          cronJobs[i].url = url;
+          cronJobs[i].headers = headers;
+          cronJobs[i].body = body;
+          cronJobs[i].active = active;
+          break;
+        }
+      }
+    } else {
+      cronJobs.push({
+        id: generateId(), name: name, schedule: schedule, target: target, method: method,
+        endpoint: endpoint, url: url, headers: headers, body: body, active: active,
+        lastRun: null, lastResult: null, lastError: '', history: []
+      });
+    }
+    saveCronJobs();
+    renderCronList();
+    closeCronModal();
+  }
+
+  function deleteCronJob() {
+    if (!editingJobId) return;
+    cronJobs = cronJobs.filter(function (j) { return j.id !== editingJobId; });
+    saveCronJobs();
+    renderCronList();
+    closeCronModal();
+  }
+
+  function updateCronPreview() {
+    var schedule = buildCronFromUI();
+    var preview = gel('cron-f-preview');
+    if (schedule && schedule.split(/\s+/).length === 5) { preview.textContent = cronDescribe(schedule); }
+    else { preview.textContent = ''; }
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Polling Manager
+  // ══════════════════════════════════════════════════════════════
+  function startPolling() {
+    pollSystem();
+    pollHealth();
+    pollProject();
+
+    setInterval(pollSystem, POLL_SYSTEM);
+    setInterval(pollHealth, POLL_HEALTH);
+    setInterval(pollProject, POLL_PROJECT);
+
+    // Render polling is handled by initRenderManager (multi-node)
+
+    // Clock + uptime tick every second
+    updateClock();
+    setInterval(function () { updateClock(); updateUptime(); }, 1000);
+
+    // Cron tick
+    setInterval(cronTick, CRON_TICK);
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Calendar
+  // ══════════════════════════════════════════════════════════════
+  var calYear, calMonth, calSelectedDate;
+  var MONTH_NAMES = ['January','February','March','April','May','June',
+                     'July','August','September','October','November','December'];
+
+  function initCalendar() {
+    var now = new Date();
+    calYear = now.getFullYear();
+    calMonth = now.getMonth();
+    calSelectedDate = null;
+    renderCalendar();
+
+    gel('cal-prev').addEventListener('click', function () {
+      calMonth--;
+      if (calMonth < 0) { calMonth = 11; calYear--; }
+      renderCalendar();
+    });
+    gel('cal-next').addEventListener('click', function () {
+      calMonth++;
+      if (calMonth > 11) { calMonth = 0; calYear++; }
+      renderCalendar();
+    });
+    gel('cal-today').addEventListener('click', function () {
+      var now = new Date();
+      calYear = now.getFullYear();
+      calMonth = now.getMonth();
+      calSelectedDate = null;
+      renderCalendar();
+    });
+  }
+
+  function getJobsForDate(date) {
+    var jobs = [];
+    cronJobs.forEach(function (job) {
+      if (!job.active) return;
+      // Check if cron matches any minute of this day
+      var d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      // Quick check: does cron fire on this day-of-month, month, day-of-week?
+      var parts = job.schedule.split(/\s+/);
+      if (parts.length < 5) return;
+      try {
+        var domSet = parseCronField(parts[2], 1, 31);
+        var monSet = parseCronField(parts[3], 1, 12);
+        var dowSet = parseCronField(parts[4], 0, 6);
+        if (monSet && monSet.indexOf(d.getMonth() + 1) === -1) return;
+        if (domSet && domSet.indexOf(d.getDate()) === -1 && dowSet && dowSet.indexOf(d.getDay()) === -1) return;
+        // Cron fires on this day — get the times
+        var hourSet = parseCronField(parts[1], 0, 23);
+        var minSet = parseCronField(parts[0], 0, 59);
+        var times = [];
+        for (var h = 0; h < 24; h++) {
+          if (hourSet && hourSet.indexOf(h) === -1) continue;
+          for (var m = 0; m < 60; m++) {
+            if (minSet && minSet.indexOf(m) === -1) continue;
+            times.push((h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m);
+          }
+        }
+        jobs.push({ job: job, times: times });
+      } catch (e) { /* skip invalid */ }
+    });
+    return jobs;
+  }
+
+  function renderCalendar() {
+    gel('cal-title').textContent = MONTH_NAMES[calMonth] + ' ' + calYear;
+    var cells = gel('cal-cells');
+    var firstDay = new Date(calYear, calMonth, 1).getDay();
+    var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    var daysInPrev = new Date(calYear, calMonth, 0).getDate();
+    var today = new Date();
+
+    var html = '';
+    // Previous month trailing days
+    for (var p = firstDay - 1; p >= 0; p--) {
+      var pd = daysInPrev - p;
+      html += '<div class="cal-cell other-month"><div class="cal-date">' + pd + '</div></div>';
+    }
+    // Current month
+    for (var d = 1; d <= daysInMonth; d++) {
+      var date = new Date(calYear, calMonth, d);
+      var isToday = date.toDateString() === today.toDateString();
+      var isSelected = calSelectedDate && date.toDateString() === calSelectedDate.toDateString();
+      var classes = 'cal-cell' + (isToday ? ' today' : '') + (isSelected ? ' selected' : '');
+
+      var dayJobs = getJobsForDate(date);
+      var eventsHtml = '<div class="cal-events">';
+      var maxShow = 3;
+      for (var j = 0; j < Math.min(dayJobs.length, maxShow); j++) {
+        var statusClass = dayJobs[j].job.lastResult === 'error' ? 'error' :
+                          dayJobs[j].job.active ? 'active' : 'paused';
+        eventsHtml += '<div class="cal-event ' + statusClass + '">' + esc(dayJobs[j].job.name) + '</div>';
+      }
+      if (dayJobs.length > maxShow) {
+        eventsHtml += '<div class="cal-event-more">+' + (dayJobs.length - maxShow) + ' more</div>';
+      }
+      eventsHtml += '</div>';
+
+      html += '<div class="' + classes + '" data-date="' + calYear + '-' + (calMonth+1) + '-' + d + '">' +
+        '<div class="cal-date">' + d + '</div>' + eventsHtml + '</div>';
+    }
+    // Next month leading days
+    var totalCells = firstDay + daysInMonth;
+    var remaining = (7 - (totalCells % 7)) % 7;
+    for (var n = 1; n <= remaining; n++) {
+      html += '<div class="cal-cell other-month"><div class="cal-date">' + n + '</div></div>';
+    }
+
+    cells.innerHTML = html;
+
+    // Click handlers
+    var allCells = cells.querySelectorAll('.cal-cell:not(.other-month)');
+    for (var i = 0; i < allCells.length; i++) {
+      allCells[i].addEventListener('click', function () {
+        var parts = this.getAttribute('data-date').split('-');
+        calSelectedDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+        renderCalendar();
+        renderDayDetail(calSelectedDate);
+      });
+    }
+  }
+
+  function renderDayDetail(date) {
+    var detail = gel('tasks-day-detail');
+    var title = gel('day-detail-title');
+    var body = gel('day-detail-body');
+    var dayJobs = getJobsForDate(date);
+
+    var dayStr = MONTH_NAMES[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+    title.textContent = dayStr;
+
+    if (!dayJobs.length) {
+      body.innerHTML = '<div style="color:var(--text-muted); font-size:var(--fs-sm);">No tasks scheduled</div>';
+    } else {
+      var html = '';
+      dayJobs.forEach(function (entry) {
+        entry.times.slice(0, 5).forEach(function (time) {
+          html += '<div class="day-event">' +
+            '<span class="day-event-time">' + time + '</span>' +
+            '<span class="day-event-name">' + esc(entry.job.name) + '</span>' +
+            '<span class="day-event-desc">' + esc(entry.job.method) + ' ' +
+              esc(entry.job.target === 'webhook' ? (entry.job.url || '') : (entry.job.endpoint || '')) +
+            '</span>' +
+          '</div>';
+        });
+        if (entry.times.length > 5) {
+          html += '<div style="font-size:var(--fs-xs); color:var(--text-muted); padding:4px 0;">+ ' +
+            (entry.times.length - 5) + ' more runs</div>';
+        }
+      });
+      body.innerHTML = html;
+    }
+    detail.style.display = 'flex';
+    detail.style.flexDirection = 'column';
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Event Bindings
+  // ══════════════════════════════════════════════════════════════
+  // ══════════════════════════════════════════════════════════════
+  //  Log Viewer
+  // ══════════════════════════════════════════════════════════════
+  var logLines = [];
+  var logFilter = 'all';
+  var logPollTimer = null;
+
+  function fetchLogs() {
+    var file = gel('log-file-select').value;
+    var tail = 500;
+    var url = '/SYSTEM/LOGS/' + encodeURIComponent(file) + '?tail=' + tail;
+    if (logFilter !== 'all') url += '&level=' + logFilter;
+
+    gel('log-status').textContent = 'Loading...';
+    apiGet(url, function (err, data) {
+      if (err || !data) {
+        gel('log-status').textContent = 'Endpoint not available';
+        // Show a helpful message
+        var viewer = gel('logs-viewer');
+        viewer.innerHTML = '<div class="log-empty">' +
+          'GET /SYSTEM/LOGS is a proposed API endpoint.<br>' +
+          'Log files are stored at:<br><br>' +
+          '<span style="color:var(--accent);">/Library/Application Support/Assimilator/Settings/logs/</span><br><br>' +
+          'Files: Assimilator.log, bgprocess.log, CrashLog.log (+ .1 through .10 rotations)<br><br>' +
+          'This viewer will work once the endpoint is implemented in the Assimilate Product Suite.' +
+          '</div>';
+        return;
+      }
+      logLines = data.lines || [];
+      gel('log-status').textContent = (data.returned_lines || logLines.length) + ' lines';
+      renderLogs();
+    });
+  }
+
+  function renderLogs() {
+    var viewer = gel('logs-viewer');
+    if (!logLines.length) {
+      viewer.innerHTML = '<div class="log-empty">No log entries</div>';
+      return;
+    }
+    var html = '';
+    logLines.forEach(function (entry) {
+      var lvl = (entry.level || '').toUpperCase();
+      var lvlClass = lvl === 'ERROR' ? 'log-lvl-error' : lvl === 'WARN' ? 'log-lvl-warn' : 'log-lvl-info';
+      var lineClass = lvl === 'ERROR' ? ' error' : '';
+      html += '<div class="log-line' + lineClass + '">' +
+        '<span class="log-ts">' + esc(entry.timestamp || '') + '</span> ' +
+        '<span class="' + lvlClass + '">' + esc(lvl || '---') + '</span> ' +
+        '<span class="log-msg">' + esc(entry.message || '') + '</span>' +
+        '</div>';
+    });
+    viewer.innerHTML = html;
+
+    if (gel('log-auto-scroll').checked) {
+      viewer.scrollTop = viewer.scrollHeight;
+    }
+  }
+
+  function startLogPolling() {
+    if (logPollTimer) clearInterval(logPollTimer);
+    fetchLogs();
+    logPollTimer = setInterval(fetchLogs, 5000);
+  }
+
+  function stopLogPolling() {
+    if (logPollTimer) { clearInterval(logPollTimer); logPollTimer = null; }
+  }
+
+  function bindEvents() {
+    gel('cron-add-btn').addEventListener('click', function () { openCronModal(null); });
+    gel('cal-toggle').addEventListener('click', function () {
+      var panel = gel('tasks-calendar-panel');
+      panel.classList.toggle('hidden');
+      if (!panel.classList.contains('hidden')) renderCalendar();
+    });
+    gel('modal-close').addEventListener('click', closeCronModal);
+    gel('modal-cancel').addEventListener('click', closeCronModal);
+    gel('modal-save').addEventListener('click', saveCronFromModal);
+    gel('modal-delete').addEventListener('click', deleteCronJob);
+    gel('cron-f-schedule').addEventListener('input', updateCronPreview);
+
+    // Action picker buttons
+    var actionBtns = gel('action-picker').querySelectorAll('.action-btn');
+    for (var i = 0; i < actionBtns.length; i++) {
+      actionBtns[i].addEventListener('click', function () {
+        selectAction(this.getAttribute('data-action'));
+      });
+    }
+
+    // Schedule frequency change
+    gel('cron-f-frequency').addEventListener('change', updateScheduleUI);
+    gel('cron-f-time').addEventListener('change', updateCronPreview);
+    gel('cron-f-day').addEventListener('change', updateCronPreview);
+    gel('cron-f-interval').addEventListener('input', updateCronPreview);
+
+    // Target toggle (API / Webhook)
+    var toggleBtns = gel('cron-f-target-toggle').querySelectorAll('button');
+    for (var i = 0; i < toggleBtns.length; i++) {
+      toggleBtns[i].addEventListener('click', function () {
+        setTargetMode(this.getAttribute('data-target'));
+      });
+    }
+
+    gel('cron-modal').addEventListener('click', function (e) { if (e.target === this) closeCronModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeCronModal(); });
+
+    // Log viewer
+    gel('log-refresh').addEventListener('click', fetchLogs);
+    gel('log-file-select').addEventListener('change', fetchLogs);
+    var levelBtns = document.querySelectorAll('.log-level-btn');
+    for (var l = 0; l < levelBtns.length; l++) {
+      levelBtns[l].addEventListener('click', function () {
+        for (var m = 0; m < levelBtns.length; m++) levelBtns[m].classList.remove('active');
+        this.classList.add('active');
+        logFilter = this.getAttribute('data-level');
+        fetchLogs();
+      });
+    }
+
+    // Start/stop log polling when switching views
+    var allNavBtns = document.querySelectorAll('.nav-btn');
+    for (var n = 0; n < allNavBtns.length; n++) {
+      allNavBtns[n].addEventListener('click', function () {
+        var view = this.getAttribute('data-view');
+        if (view === 'logs') { startLogPolling(); }
+        else { stopLogPolling(); }
+      });
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Console (API Terminal)
+  // ══════════════════════════════════════════════════════════════
+  var ENDPOINT_CATALOG = [
+    { group: 'System', endpoints: [
+      { method: 'GET',  path: '/SYSTEM' },
+      { method: 'PUT',  path: '/SYSTEM' },
+      { method: 'GET',  path: '/SYSTEM/USERS' },
+      { method: 'GET',  path: '/SYSTEM/USERS/CURRENT' },
+      { method: 'PUT',  path: '/SYSTEM/USERS/CURRENT' }
+    ]},
+    { group: 'Projects', endpoints: [
+      { method: 'GET',  path: '/PROJECTS' },
+      { method: 'GET',  path: '/PROJECTS/CURRENT' },
+      { method: 'POST', path: '/PROJECTS/NEW' }
+    ]},
+    { group: 'Application', endpoints: [
+      { method: 'POST', path: '/APPLICATION/RESTART' },
+      { method: 'POST', path: '/APPLICATION/SHUTDOWN' },
+      { method: 'GET',  path: '/APPLICATION/PLAYER/PLAYMODE' },
+      { method: 'PUT',  path: '/APPLICATION/PLAYER/PLAYMODE' }
+    ]},
+    { group: 'Render', endpoints: [
+      { method: 'GET',  path: '/APPLICATION/RENDER' },
+      { method: 'POST', path: '/APPLICATION/RENDER/START' },
+      { method: 'POST', path: '/APPLICATION/RENDER/STOP' }
+    ]},
+    { group: 'Structure', endpoints: [
+      { method: 'GET',  path: '/GROUPS' },
+      { method: 'GET',  path: '/CONSTRUCTS' }
+    ]}
+  ];
+
+  var consoleHistory = [];
+  var CONSOLE_STORAGE = 'assimilate_console_history';
+
+  function loadConsoleHistory() {
+    try { var raw = localStorage.getItem(CONSOLE_STORAGE); consoleHistory = raw ? JSON.parse(raw) : []; }
+    catch (e) { consoleHistory = []; }
+  }
+
+  function saveConsoleHistory() {
+    localStorage.setItem(CONSOLE_STORAGE, JSON.stringify(consoleHistory.slice(-50)));
+  }
+
+  function initConsole() {
+    var sidebar = gel('console-sidebar');
+    var html = '';
+
+    ENDPOINT_CATALOG.forEach(function (group) {
+      html += '<div class="console-group-title">' + esc(group.group) + '</div>';
+      group.endpoints.forEach(function (ep) {
+        html += '<div class="console-endpoint" data-method="' + ep.method + '" data-path="' + esc(ep.path) + '">' +
+          '<span class="console-ep-method ' + ep.method.toLowerCase() + '">' + ep.method + '</span>' +
+          '<span class="console-ep-path">' + esc(ep.path) + '</span>' +
+        '</div>';
+      });
+    });
+
+    sidebar.innerHTML = html;
+
+    // Click sidebar endpoint
+    var eps = sidebar.querySelectorAll('.console-endpoint');
+    for (var i = 0; i < eps.length; i++) {
+      eps[i].addEventListener('click', function () {
+        gel('console-method').value = this.getAttribute('data-method');
+        gel('console-url').value = this.getAttribute('data-path');
+        gel('console-body').value = '';
+        // Highlight active
+        var all = sidebar.querySelectorAll('.console-endpoint');
+        for (var j = 0; j < all.length; j++) all[j].style.background = '';
+        this.style.background = 'rgba(244,121,32,0.08)';
+      });
+    }
+
+    // Send button
+    gel('console-send').addEventListener('click', consoleSend);
+
+    // Enter key in URL
+    gel('console-url').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') consoleSend();
+    });
+
+    loadConsoleHistory();
+  }
+
+  function consoleSend() {
+    var method = gel('console-method').value;
+    var path = gel('console-url').value.trim();
+    var body = gel('console-body').value.trim() || null;
+
+    if (!path) return;
+
+    // Ensure path starts with /
+    if (path.charAt(0) !== '/') path = '/' + path;
+
+    gel('console-resp-status').textContent = 'Sending...';
+    gel('console-resp-status').className = 'console-response-status';
+    gel('console-resp-time').textContent = '';
+    gel('console-resp-body').textContent = '';
+
+    var start = Date.now();
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, API_BASE + path);
+    xhr.timeout = 30000;
+    if (body) xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onload = function () {
+      var ms = Date.now() - start;
+      var ok = xhr.status >= 200 && xhr.status < 400;
+      gel('console-resp-status').textContent = xhr.status + ' ' + (xhr.statusText || '');
+      gel('console-resp-status').className = 'console-response-status ' + (ok ? 'ok' : 'err');
+      gel('console-resp-time').textContent = ms + 'ms';
+
+      var respText = xhr.responseText;
+      try {
+        var parsed = JSON.parse(respText);
+        respText = JSON.stringify(parsed, null, 2);
+      } catch (e) { /* keep raw */ }
+
+      gel('console-resp-body').textContent = respText;
+
+      // Save to history
+      consoleHistory.push({
+        method: method,
+        path: path,
+        status: xhr.status,
+        time: Date.now()
+      });
+      saveConsoleHistory();
+    };
+
+    xhr.onerror = function () {
+      gel('console-resp-status').textContent = 'Network Error';
+      gel('console-resp-status').className = 'console-response-status err';
+      gel('console-resp-time').textContent = (Date.now() - start) + 'ms';
+      gel('console-resp-body').textContent = 'Failed to connect to server.';
+    };
+
+    xhr.ontimeout = function () {
+      gel('console-resp-status').textContent = 'Timeout';
+      gel('console-resp-status').className = 'console-response-status err';
+      gel('console-resp-time').textContent = '30000ms';
+      gel('console-resp-body').textContent = 'Request timed out after 30 seconds.';
+    };
+
+    xhr.send(body);
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Settings
+  // ══════════════════════════════════════════════════════════════
+  var SETTINGS_STORAGE = 'assimilate_mc_settings';
+
+  function loadSettings() {
+    try {
+      var raw = localStorage.getItem(SETTINGS_STORAGE);
+      if (raw) {
+        var s = JSON.parse(raw);
+        if (s.pollSystem) { POLL_SYSTEM = s.pollSystem * 1000; gel('set-poll-system').value = s.pollSystem; }
+        if (s.pollHealth) { POLL_HEALTH = s.pollHealth * 1000; gel('set-poll-health').value = s.pollHealth; }
+        if (s.pollProject) { POLL_PROJECT = s.pollProject * 1000; gel('set-poll-project').value = s.pollProject; }
+        if (s.pollRender) { POLL_RENDER = s.pollRender * 1000; gel('set-poll-render').value = s.pollRender; }
+      }
+    } catch (e) { /* use defaults */ }
+  }
+
+  function saveSettings() {
+    var s = {
+      pollSystem: parseInt(gel('set-poll-system').value) || 30,
+      pollHealth: parseInt(gel('set-poll-health').value) || 30,
+      pollProject: parseInt(gel('set-poll-project').value) || 10,
+      pollRender: parseInt(gel('set-poll-render').value) || 1
+    };
+    localStorage.setItem(SETTINGS_STORAGE, JSON.stringify(s));
+  }
+
+  function initSettings() {
+    loadSettings();
+
+    // Show connection info
+    gel('set-api-base').textContent = API_BASE;
+    gel('set-server-addr').textContent = window.location.host || '--';
+
+    // Save on change
+    var inputs = document.querySelectorAll('#view-settings .settings-input');
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].addEventListener('change', function () {
+        saveSettings();
+        // Note: polling intervals update takes effect on next page load
+      });
+    }
+
+    // Clear tasks
+    gel('set-clear-cron').addEventListener('click', function () {
+      if (confirm('Clear all scheduled automation tasks?')) {
+        cronJobs = [];
+        saveCronJobs();
+        renderCronList();
+        renderTasksSummary();
+        renderCalendar();
+      }
+    });
+
+    // Clear console history
+    gel('set-clear-console').addEventListener('click', function () {
+      if (confirm('Clear console request history?')) {
+        consoleHistory = [];
+        localStorage.removeItem(CONSOLE_STORAGE);
+      }
+    });
+
+    // Reset all
+    gel('set-reset-all').addEventListener('click', function () {
+      if (confirm('Reset all Mission Control data? This will clear tasks, console history, and settings.')) {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(CONSOLE_STORAGE);
+        localStorage.removeItem(SETTINGS_STORAGE);
+        window.location.reload();
+      }
+    });
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Render Manager (full view)
+  // ══════════════════════════════════════════════════════════════
+  // ══════════════════════════════════════════════════════════════
+  //  Render Nodes (multi-system)
+  // ══════════════════════════════════════════════════════════════
+  var NODES_STORAGE = 'assimilate_render_nodes';
+  var renderNodes = [];       // { id, name, addr, online, rendering, items }
+  var selectedNodeId = 'local';
+
+  function loadNodes() {
+    // Local node is always present
+    var local = {
+      id: 'local',
+      name: 'Local',
+      addr: window.location.host,
+      baseUrl: API_BASE,
+      online: false,
+      rendering: false,
+      items: []
+    };
+    renderNodes = [local];
+
+    try {
+      var raw = localStorage.getItem(NODES_STORAGE);
+      if (raw) {
+        var saved = JSON.parse(raw);
+        saved.forEach(function (n) {
+          renderNodes.push({
+            id: n.id || ('node-' + Date.now() + Math.random()),
+            name: n.name,
+            addr: n.addr,
+            baseUrl: 'http://' + n.addr + '/APIV2',
+            online: false,
+            rendering: false,
+            items: []
+          });
+        });
+      }
+    } catch (e) { /* use defaults */ }
+  }
+
+  function saveNodes() {
+    var toSave = [];
+    renderNodes.forEach(function (n) {
+      if (n.id === 'local') return;
+      toSave.push({ id: n.id, name: n.name, addr: n.addr });
+    });
+    localStorage.setItem(NODES_STORAGE, JSON.stringify(toSave));
+  }
+
+  function addNode(name, addr) {
+    var node = {
+      id: 'node-' + Date.now(),
+      name: name,
+      addr: addr,
+      baseUrl: 'http://' + addr + '/APIV2',
+      online: false,
+      rendering: false,
+      items: []
+    };
+    renderNodes.push(node);
+    saveNodes();
+    renderNodeTabs();
+    renderSettingsNodes();
+    pollNode(node);
+  }
+
+  function removeNode(nodeId) {
+    renderNodes = renderNodes.filter(function (n) { return n.id !== nodeId; });
+    saveNodes();
+    if (selectedNodeId === nodeId) selectedNodeId = 'local';
+    renderNodeTabs();
+    renderSettingsNodes();
+    renderFullQueue();
+  }
+
+  function getNode(nodeId) {
+    for (var i = 0; i < renderNodes.length; i++) {
+      if (renderNodes[i].id === nodeId) return renderNodes[i];
+    }
+    return null;
+  }
+
+  function getSelectedNode() { return getNode(selectedNodeId) || renderNodes[0]; }
+
+  function pollNode(node) {
+    var url = node.baseUrl + '/APPLICATION/RENDER';
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.timeout = 5000;
+    xhr.onload = function () {
+      if (xhr.status >= 200 && xhr.status < 400) {
+        try {
+          var data = JSON.parse(xhr.responseText);
+          node.items = Array.isArray(data) ? data : (data.items || []);
+          node.online = true;
+          node.rendering = node.items.some(function (it) {
+            var s = it.status ? it.status.toLowerCase() : '';
+            return s === 'processing' || s === 'rendering';
+          });
+        } catch (e) {
+          node.online = true;
+          node.items = [];
+          node.rendering = false;
+        }
+      } else {
+        node.online = false;
+        node.items = [];
+        node.rendering = false;
+      }
+      renderNodeTabs();
+      if (node.id === selectedNodeId) renderFullQueue();
+      // Also update home panel from local node
+      if (node.id === 'local') {
+        renderItems = node.items;
+        isRendering = node.rendering;
+        renderRenderPanel();
+      }
+    };
+    xhr.onerror = function () {
+      node.online = false; node.items = []; node.rendering = false;
+      renderNodeTabs();
+      if (node.id === selectedNodeId) renderFullQueue();
+    };
+    xhr.ontimeout = xhr.onerror;
+    xhr.send();
+  }
+
+  function pollAllNodes() {
+    renderNodes.forEach(function (node) { pollNode(node); });
+  }
+
+  function nodeApiCall(node, method, path, body, cb) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, node.baseUrl + path);
+    xhr.timeout = 10000;
+    if (body) xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function () { cb(null, xhr.status, xhr.responseText); };
+    xhr.onerror = function () { cb(new Error('Network error')); };
+    xhr.ontimeout = function () { cb(new Error('Timeout')); };
+    xhr.send(body || null);
+  }
+
+  function renderNodeTabs() {
+    var tabs = gel('rn-tabs');
+    var html = '';
+    renderNodes.forEach(function (node) {
+      var dotClass = 'offline';
+      if (node.online && node.rendering) dotClass = 'rendering';
+      else if (node.online) dotClass = 'online';
+
+      var statusText = '';
+      if (!node.online) statusText = 'Offline';
+      else if (node.rendering) {
+        var active = node.items.filter(function (it) {
+          var s = it.status ? it.status.toLowerCase() : '';
+          return s === 'processing' || s === 'rendering';
+        }).length;
+        statusText = active + ' rendering';
+      } else if (node.items.length) {
+        statusText = node.items.length + ' items';
+      } else {
+        statusText = 'Idle';
+      }
+
+      html += '<div class="rn-tab' + (node.id === selectedNodeId ? ' active' : '') + '" data-node="' + node.id + '">' +
+        '<span class="rn-dot ' + dotClass + '"></span>' +
+        '<span class="rn-name">' + esc(node.name) + '</span>' +
+        '<span class="rn-addr">' + esc(node.addr) + '</span>' +
+        '<span class="rn-status-text">' + statusText + '</span>' +
+      '</div>';
+    });
+    tabs.innerHTML = html;
+
+    // Bind tab clicks
+    var tabEls = tabs.querySelectorAll('.rn-tab');
+    for (var i = 0; i < tabEls.length; i++) {
+      tabEls[i].addEventListener('click', function () {
+        selectedNodeId = this.getAttribute('data-node');
+        renderNodeTabs();
+        renderFullQueue();
+      });
+    }
+  }
+
+  function renderFullQueue() {
+    var node = getSelectedNode();
+    var items = node ? node.items : [];
+    var tbody = gel('rq-tbody');
+    var statusEl = gel('render-full-status');
+    var summaryEl = gel('render-queue-summary');
+
+    if (!items.length) {
+      var emptyMsg = !node || !node.online
+        ? 'Node offline or unreachable.'
+        : 'Render queue empty.';
+      tbody.innerHTML = '<tr><td colspan="6" class="rq-empty">' + emptyMsg + '</td></tr>';
+      statusEl.textContent = node && node.online ? 'Idle' : 'Offline';
+      statusEl.style.color = node && node.online ? 'var(--text-muted)' : 'var(--status-red)';
+      if (summaryEl) summaryEl.textContent = '';
+      return;
+    }
+
+    // Overall status
+    var activeCount = 0, doneCount = 0, errorCount = 0, queuedCount = 0;
+    items.forEach(function (it) {
+      var s = it.status ? it.status.toLowerCase() : '';
+      if (s === 'processing' || s === 'rendering') activeCount++;
+      else if (s === 'finished' || s === 'done' || s === 'completed') doneCount++;
+      else if (s === 'error' || s === 'failed') errorCount++;
+      else queuedCount++;
+    });
+
+    if (activeCount > 0) {
+      statusEl.textContent = 'Rendering (' + activeCount + ' active)';
+      statusEl.style.color = 'var(--accent)';
+    } else if (errorCount > 0) {
+      statusEl.textContent = errorCount + ' Error' + (errorCount > 1 ? 's' : '');
+      statusEl.style.color = 'var(--status-red)';
+    } else if (doneCount === items.length) {
+      statusEl.textContent = 'Complete';
+      statusEl.style.color = 'var(--status-green)';
+    } else {
+      statusEl.textContent = queuedCount + ' Queued';
+      statusEl.style.color = 'var(--text-muted)';
+    }
+
+    // Summary
+    var parts = [];
+    if (activeCount) parts.push(activeCount + ' active');
+    if (doneCount) parts.push(doneCount + ' done');
+    if (errorCount) parts.push(errorCount + ' error');
+    if (queuedCount) parts.push(queuedCount + ' queued');
+    parts.push(items.length + ' total');
+    if (summaryEl) summaryEl.textContent = parts.join(' / ');
+
+    // Table rows — show ALL items including finished
+    var html = '';
+    items.forEach(function (item) {
+      var s = item.status ? item.status.toLowerCase() : 'idle';
+      var pct = calcProgress(item);
+      var isActive = (s === 'processing' || s === 'rendering');
+
+      var sc = 'idle';
+      if (s === 'processing' || s === 'rendering') sc = 'rendering';
+      else if (s === 'finished' || s === 'done' || s === 'completed') sc = 'finished';
+      else if (s === 'error' || s === 'failed') sc = 'error';
+      else if (s === 'waiting') sc = 'queued';
+
+      var statusText = s.charAt(0).toUpperCase() + s.slice(1);
+      if (isActive && item.frames_total) {
+        statusText = (item.frames_done || 0) + ' - ' + formatETA(item.time_processed) + ' - ' +
+          (item.frames_total > 0 ? ((item.frames_done || 0) / (item.time_processed || 1)).toFixed(2) + ' fps' : '');
+      }
+
+      var processed = '--';
+      if (item.date) processed = item.date;
+      else if (s === 'finished' || s === 'done' || s === 'completed') processed = 'Done';
+
+      html += '<tr class="rq-tr' + (isActive ? ' active' : '') + '">' +
+        '<td class="rq-td rq-name">' + esc(item.name || 'Unnamed') + '</td>' +
+        '<td class="rq-td">' + esc(item.format || '--') + '</td>' +
+        '<td class="rq-td">' + esc(item.range || '--') + '</td>' +
+        '<td class="rq-td"><span class="rq-status ' + sc + '">' + statusText + '</span></td>' +
+        '<td class="rq-td">' +
+          '<span class="rq-progress"><span class="rq-progress-fill ' + sc + '" style="width:' + pct + '%"></span></span>' +
+          pct + '%' +
+        '</td>' +
+        '<td class="rq-td rq-path" title="' + esc(item.path || '') + '">' + esc(item.path || '--') + '</td>' +
+      '</tr>';
+    });
+
+    tbody.innerHTML = html;
+  }
+
+  function renderSettingsNodes() {
+    var list = gel('set-nodes-list');
+    if (!list) return;
+    var html = '';
+    renderNodes.forEach(function (n) {
+      if (n.id === 'local') return; // local is always present, not removable
+      html += '<div class="node-row">' +
+        '<div class="node-row-info">' +
+          '<span class="rn-dot ' + (n.online ? 'online' : 'offline') + '"></span>' +
+          '<span class="node-row-name">' + esc(n.name) + '</span>' +
+          '<span class="node-row-addr">' + esc(n.addr) + '</span>' +
+        '</div>' +
+        '<button class="node-remove" data-node="' + n.id + '" title="Remove node">x</button>' +
+      '</div>';
+    });
+    if (!html) {
+      html = '<div class="settings-row"><span class="settings-label" style="color:var(--text-muted); font-size:var(--fs-xs);">No remote nodes added</span></div>';
+    }
+    list.innerHTML = html;
+
+    // Bind remove buttons
+    var btns = list.querySelectorAll('.node-remove');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () {
+        if (confirm('Remove this render node?')) {
+          removeNode(this.getAttribute('data-node'));
+        }
+      });
+    }
+  }
+
+  function initRenderManager() {
+    loadNodes();
+    renderNodeTabs();
+    renderSettingsNodes();
+
+    // Start/stop for selected node
+    gel('render-start-btn').addEventListener('click', function () {
+      var node = getSelectedNode();
+      if (!node) return;
+      nodeApiCall(node, 'POST', '/APPLICATION/RENDER/START', null, function () {
+        pollNode(node);
+      });
+    });
+
+    gel('render-stop-btn').addEventListener('click', function () {
+      var node = getSelectedNode();
+      if (!node) return;
+      nodeApiCall(node, 'POST', '/APPLICATION/RENDER/STOP', null, function () {
+        pollNode(node);
+      });
+    });
+
+    // Add node from settings
+    gel('set-node-add').addEventListener('click', function () {
+      var name = gel('set-node-name').value.trim();
+      var addr = gel('set-node-addr').value.trim();
+      if (!name || !addr) return;
+      addNode(name, addr);
+      gel('set-node-name').value = '';
+      gel('set-node-addr').value = '';
+    });
+
+    // Poll all nodes on render interval
+    pollAllNodes();
+    (function nodesPollLoop() {
+      var interval = renderNodes.some(function (n) { return n.rendering; }) ? 500 : POLL_RENDER;
+      setTimeout(function () { pollAllNodes(); nodesPollLoop(); }, interval);
+    })();
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  //  Initialize
+  // ══════════════════════════════════════════════════════════════
+  function init() {
+    loadCronJobs();
+    renderCronList();
+    initCalendar();
+    initConsole();
+    initSettings();
+    initRenderManager();
+    bindEvents();
+    startPolling();
+  }
+
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
+  else { init(); }
+
+})();
+</script>
+
+</body>
+</html>

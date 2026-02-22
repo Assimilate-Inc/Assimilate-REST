@@ -672,7 +672,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: do-application-render-stop
-  '/application/render/stop{output_UUID}':
+  '/application/render/stop/{output_UUID}':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
@@ -1644,7 +1644,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: move-shot
-  '/constructs/current/versions/{slot_IDX}/versions':
+  '/constructs/current/slots/{slot_IDX}/versions':
     parameters:
       - name: slot_IDX
         in: path

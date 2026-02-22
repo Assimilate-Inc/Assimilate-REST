@@ -181,6 +181,76 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: add-system-users
+  /system/logs:
+    get:
+      summary: System Logs List
+      description: |
+        Return a list of available log files from the application log directory.
+        Log files include application logs, background process logs, and crash logs.
+        Files are returned sorted by last modified date (newest first).
+      tags:
+        - System
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/log_file_list'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-system-logs
+  /system/logs/{filename}:
+    get:
+      summary: System Log File
+      description: |
+        Return the contents of a specific log file. Use the `tail` parameter to
+        return only the last N lines (default 200). Use the `level` parameter to
+        filter by log level (INFO, ERROR, WARN).
+      tags:
+        - System
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          description: Name of the log file (e.g. Assimilator.log, bgprocess.log, CrashLog.log)
+          schema:
+            type: string
+        - name: tail
+          in: query
+          required: false
+          description: Number of lines to return from the end of the file (default 200)
+          schema:
+            type: integer
+            default: 200
+        - name: level
+          in: query
+          required: false
+          description: Filter log entries by level (INFO, ERROR, WARN)
+          schema:
+            type: string
+            enum:
+              - INFO
+              - ERROR
+              - WARN
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/log_file_content'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-system-log-file
   /projects:
     get:
       summary: Project List
@@ -2752,6 +2822,69 @@ components:
                 description: Last modified date
                 x-stoplight:
                   id: 3bbci8wrfks2u
+    log_file_list:
+      type: object
+      title: log_file_list
+      description: List of available log files
+      properties:
+        log_path:
+          type: string
+          description: Absolute path to the log directory
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              filename:
+                type: string
+                description: Name of the log file
+              size:
+                type: integer
+                description: File size in bytes
+              modified:
+                type: string
+                description: Last modified timestamp (ISO 8601)
+              type:
+                type: string
+                description: Log type category
+                enum:
+                  - application
+                  - background
+                  - crash
+    log_file_content:
+      type: object
+      title: log_file_content
+      description: Contents of a log file
+      properties:
+        filename:
+          type: string
+          description: Name of the log file
+        total_lines:
+          type: integer
+          description: Total number of lines in the file
+        returned_lines:
+          type: integer
+          description: Number of lines returned
+        lines:
+          type: array
+          items:
+            type: object
+            properties:
+              line_number:
+                type: integer
+              timestamp:
+                type: string
+                description: Parsed timestamp from log entry
+              level:
+                type: string
+                description: Log level (INFO, ERROR, WARN)
+                enum:
+                  - INFO
+                  - ERROR
+                  - WARN
+              message:
+                type: string
+                description: Log message content
     error_message:
       type: object
       title: error_message

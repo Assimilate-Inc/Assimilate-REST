@@ -181,6 +181,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: add-system-users
+  /system/output-templates:
+    get:
+      summary: Output Templates List
+      description: |
+        Return a list of available output templates. Output templates define
+        render output configurations (format, codec, resolution, color space, etc.)
+        that can be applied to Constructs. Templates are managed in the SCRATCH/Live FX
+        application and stored in the user's configuration.
+      tags:
+        - System
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/output_template_list'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-system-output-templates
+  '/system/output-templates/{template_name}':
+    parameters:
+      - name: template_name
+        in: path
+        required: true
+        description: Name of the output template
+        schema:
+          type: string
+    get:
+      summary: Output Template Details
+      description: |
+        Return the full configuration of a specific output template, including
+        format, codec, resolution, frame rate, color space, EOTF, and output path settings.
+      tags:
+        - System
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/output_template'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-system-output-template
   /projects:
     get:
       summary: Project List
@@ -2752,6 +2805,75 @@ components:
                 description: Last modified date
                 x-stoplight:
                   id: 3bbci8wrfks2u
+    output_template_list:
+      type: object
+      title: output_template_list
+      description: List of available output templates
+      properties:
+        templates:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Template name (e.g. "ATHA-Dailies", "ProRes 4444 XQ")
+              format:
+                type: string
+                description: Output format summary (e.g. "4K UHD-1 ProRes")
+              resolution:
+                type: string
+                description: Resolution (e.g. "3840x2160")
+    output_template:
+      type: object
+      title: output_template
+      description: Full output template configuration
+      properties:
+        name:
+          type: string
+          description: Template name
+        format:
+          type: string
+          description: Container format (e.g. "QuickTime", "MXF", "DPX")
+        codec:
+          type: string
+          description: Codec (e.g. "ProRes 4444 XQ", "DNxHR HQX")
+        width:
+          type: integer
+          description: Output width in pixels
+        height:
+          type: integer
+          description: Output height in pixels
+        frame_rate:
+          type: number
+          description: Frame rate (fps)
+        bit_depth:
+          type: integer
+          description: Bit depth (e.g. 8, 10, 16)
+        channels:
+          type: string
+          description: Channel layout (e.g. "RGB", "RGBA")
+        color_space:
+          type: string
+          description: Color space (e.g. "Rec709", "ACES", "P3-D65")
+        eotf:
+          type: string
+          description: EOTF / gamma (e.g. "Gamma 2.4", "PQ", "Linear")
+        scale:
+          type: number
+          description: Output scale factor (1.0 = full resolution)
+        filter:
+          type: string
+          description: Resize filter (e.g. "Lanczos", "Mitchell")
+        scan_mode:
+          type: string
+          description: Scan mode
+          enum:
+            - Progressive
+            - Interlaced
+        output_path:
+          type: string
+          description: Default output path template
     error_message:
       type: object
       title: error_message

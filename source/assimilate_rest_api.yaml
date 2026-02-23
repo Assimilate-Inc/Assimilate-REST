@@ -718,6 +718,166 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: do-application-render-delete-media-item
+  /application/watchfolders:
+    get:
+      summary: Watchfolder List
+      description: Return the list of configured watchfolders with their current status.
+      tags:
+        - Application
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/watchfolder_list'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-application-watchfolders
+    post:
+      summary: Watchfolder Create
+      description: Create a new watchfolder with the specified configuration.
+      tags:
+        - Application
+      requestBody:
+        description: Watchfolder configuration
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/watchfolder_config'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/watchfolder_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: create-application-watchfolder
+  '/application/watchfolders/{watchfolder_id}':
+    parameters:
+      - schema:
+          type: string
+        name: watchfolder_id
+        in: path
+        required: true
+        description: Watchfolder identifier
+    get:
+      summary: Watchfolder Get
+      description: Return the configuration and status of a specific watchfolder.
+      tags:
+        - Application
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/watchfolder_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-application-watchfolder-item
+    put:
+      summary: Watchfolder Update
+      description: Update the configuration of an existing watchfolder.
+      tags:
+        - Application
+      requestBody:
+        description: Updated watchfolder configuration
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/watchfolder_config'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/watchfolder_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: update-application-watchfolder-item
+    delete:
+      summary: Watchfolder Delete
+      description: Remove a watchfolder configuration.
+      tags:
+        - Application
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: delete-application-watchfolder-item
+  '/application/watchfolders/{watchfolder_id}/pause':
+    parameters:
+      - schema:
+          type: string
+        name: watchfolder_id
+        in: path
+        required: true
+        description: Watchfolder identifier
+    post:
+      summary: Watchfolder Pause
+      description: Pause a running watchfolder. The watchfolder will stop scanning for new files until resumed.
+      tags:
+        - Application
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: do-application-watchfolder-pause
+  '/application/watchfolders/{watchfolder_id}/resume':
+    parameters:
+      - schema:
+          type: string
+        name: watchfolder_id
+        in: path
+        required: true
+        description: Watchfolder identifier
+    post:
+      summary: Watchfolder Resume
+      description: Resume a paused watchfolder.
+      tags:
+        - Application
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: do-application-watchfolder-resume
   /application/tools/image:
     post:
       summary: Render Snapshot
@@ -4129,9 +4289,121 @@ components:
           description: x value
           type: number
           x-stoplight:
-            id: kbseuhub1egc5 
+            id: kbseuhub1egc5
         'y':
           description: y value
           type: number
           x-stoplight:
             id: kbseuhub1egc6
+    watchfolder_list:
+      type: object
+      description: List of configured watchfolders
+      properties:
+        watchfolders:
+          type: array
+          items:
+            $ref: '#/components/schemas/watchfolder_data'
+    watchfolder_data:
+      type: object
+      description: Watchfolder configuration and status
+      properties:
+        id:
+          type: string
+          description: Unique watchfolder identifier
+        name:
+          type: string
+          description: User-defined label for this watchfolder
+        watch_path:
+          type: string
+          description: Directory path to monitor for new files
+        file_filter:
+          type: string
+          description: 'File pattern filter (e.g. "*.exr", "*.dpx", "*.mxf"). Empty string matches all files.'
+        action:
+          type: string
+          description: Action to perform when new files are detected
+          enum:
+            - ingest
+            - render
+            - export
+            - custom
+        action_config:
+          type: object
+          description: 'Action-specific configuration. For ingest: project template, color space. For render: output template. For custom: API method and endpoint.'
+          properties:
+            project_template:
+              type: string
+              description: Project template to use for ingest action
+            output_template:
+              type: string
+              description: Output template to use for render action
+            colorspace:
+              $ref: '#/components/schemas/colorspace'
+            api_method:
+              type: string
+              description: HTTP method for custom action
+              enum:
+                - GET
+                - POST
+                - PUT
+                - DELETE
+            api_endpoint:
+              type: string
+              description: API endpoint path for custom action
+            api_body:
+              type: object
+              description: Request body for custom action
+        scan_interval:
+          type: integer
+          description: How often to scan the directory in seconds
+          default: 10
+        status:
+          type: string
+          description: Current watchfolder status
+          enum:
+            - active
+            - paused
+            - error
+        last_scan:
+          type: string
+          format: date-time
+          description: Timestamp of the last directory scan
+        files_processed:
+          type: integer
+          description: Total number of files processed since creation
+        last_error:
+          type: string
+          description: Last error message if status is error
+    watchfolder_config:
+      type: object
+      description: Configuration for creating or updating a watchfolder
+      required:
+        - name
+        - watch_path
+        - action
+      properties:
+        name:
+          type: string
+          description: User-defined label for this watchfolder
+        watch_path:
+          type: string
+          description: Directory path to monitor for new files
+        file_filter:
+          type: string
+          description: 'File pattern filter (e.g. "*.exr", "*.dpx", "*.mxf"). Empty string matches all files.'
+          default: ''
+        action:
+          type: string
+          description: Action to perform when new files are detected
+          enum:
+            - ingest
+            - render
+            - export
+            - custom
+        action_config:
+          type: object
+          description: Action-specific configuration
+        scan_interval:
+          type: integer
+          description: How often to scan the directory in seconds
+          default: 10

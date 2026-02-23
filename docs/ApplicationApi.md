@@ -4,6 +4,11 @@ All URIs are relative to *https://virtserver.swaggerhub.com/AssimilateInc/AMSRES
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**add_application_command**](ApplicationApi.md#add_application_command) | **POST** /application/commands | Custom Command Add
+[**delete_application_command**](ApplicationApi.md#delete_application_command) | **DELETE** /application/commands/{command_id} | Custom Command Delete
+[**get_application_commands**](ApplicationApi.md#get_application_commands) | **GET** /application/commands | Custom Commands List
+[**get_application_command**](ApplicationApi.md#get_application_command) | **GET** /application/commands/{command_id} | Custom Command Get
+[**set_application_command**](ApplicationApi.md#set_application_command) | **PUT** /application/commands/{command_id} | Custom Command Update
 [**add_application_render_queue_item**](ApplicationApi.md#add_application_render_queue_item) | **PUT** /application/render/{output_UUID} | Render Queue Item Add
 [**add_application_render_queue_item_start**](ApplicationApi.md#add_application_render_queue_item_start) | **POST** /application/render/{output_UUID} | Render Queue Item Add Start
 [**delete_application_render_queue_item**](ApplicationApi.md#delete_application_render_queue_item) | **DELETE** /application/render/{output_UUID} | Render Queue Item Delete
@@ -1020,7 +1025,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**PlaymodeData**](PlaymodeData.md)| json with playmode data | 
+ **body** | [**PlaymodeData**](PlaymodeData.md)| json with playmode data |
 
 ### Return type
 
@@ -1033,6 +1038,185 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_application_commands**
+> CustomCommandsList get_application_commands()
+
+Custom Commands List
+
+Get the list of registered Custom Commands including their type, executable path, arguments, and behavioral settings.
+
+### Example
+```python
+from __future__ import print_function
+import assimilate_client
+from assimilate_client.rest import ApiException
+
+api_instance = assimilate_client.ApplicationApi()
+
+try:
+    api_response = api_instance.get_application_commands()
+    for cmd in api_response.commands:
+        print("  %s -> %s" % (cmd.name, cmd.file))
+except ApiException as e:
+    print("Exception: %s" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**CustomCommandsList**](CustomCommandsList.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **add_application_command**
+> CustomCommandData add_application_command(body)
+
+Custom Command Add
+
+Register a new Custom Command. The command will appear in the context menu and can be invoked on selected shots or as a post-render action.
+
+### Example
+```python
+from __future__ import print_function
+import assimilate_client
+from assimilate_client.rest import ApiException
+
+api_instance = assimilate_client.ApplicationApi()
+body = assimilate_client.CustomCommandData(
+    name="S2ROTO",
+    type="application",
+    file="/Library/Application Support/RogueLabs/S2ROTO/s2roto.py",
+    interpreter="python3",
+    arguments='"$ARG1" "$ARG2"',
+    wait_till_finished=True,
+    xml_export="selection",
+    require_selection=True
+)
+
+try:
+    api_response = api_instance.add_application_command(body)
+    print("Registered: %s" % api_response.name)
+except ApiException as e:
+    print("Exception: %s" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**CustomCommandData**](CustomCommandData.md)| Custom command definition |
+
+### Return type
+
+[**CustomCommandData**](CustomCommandData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_application_command**
+> CustomCommandData get_application_command(command_id)
+
+Custom Command Get
+
+Get the properties of a specific Custom Command by name or index.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **command_id** | **str**| Command name or index |
+
+### Return type
+
+[**CustomCommandData**](CustomCommandData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_application_command**
+> CustomCommandData set_application_command(command_id, body)
+
+Custom Command Update
+
+Update the properties of an existing Custom Command.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **command_id** | **str**| Command name or index |
+ **body** | [**CustomCommandData**](CustomCommandData.md)| Updated command properties |
+
+### Return type
+
+[**CustomCommandData**](CustomCommandData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_application_command**
+> delete_application_command(command_id)
+
+Custom Command Delete
+
+Remove a Custom Command by name or index.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **command_id** | **str**| Command name or index |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

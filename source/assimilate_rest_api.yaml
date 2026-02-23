@@ -746,6 +746,127 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: do-application-render-snapshot
+  /application/commands:
+    get:
+      summary: Custom Commands List
+      description: |
+        Get the list of registered Custom Commands. Returns all custom commands currently
+        configured in the application, including their type, executable path, arguments,
+        and behavioral settings.
+      tags:
+        - Application
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/custom_commands_list'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-application-commands
+    post:
+      summary: Custom Command Add
+      description: |
+        Register a new Custom Command. The command will appear in the application's
+        right-click context menu and can be invoked on selected shots or as a post-render
+        action. The command name must be unique. Returns the created command including
+        its assigned ID.
+      tags:
+        - Application
+      requestBody:
+        description: JSON with the custom command definition to register
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/custom_command_data'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/custom_command_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: add-application-command
+  '/application/commands/{command_id}':
+    parameters:
+      - schema:
+          type: string
+        name: command_id
+        in: path
+        required: true
+        description: Custom command identifier (name or index)
+    get:
+      summary: Custom Command Get
+      description: Get the properties of a specific Custom Command by name or index.
+      tags:
+        - Application
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/custom_command_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-application-command
+    put:
+      summary: Custom Command Update
+      description: Update the properties of an existing Custom Command.
+      tags:
+        - Application
+      requestBody:
+        description: JSON with updated custom command properties
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/custom_command_data'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/custom_command_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: set-application-command
+    delete:
+      summary: Custom Command Delete
+      description: Remove a Custom Command by name or index. Returns an error if the command is not found.
+      tags:
+        - Application
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: delete-application-command
   /groups:
     parameters:
       - schema:
@@ -4100,6 +4221,94 @@ components:
             - Circular
             - Horizontal
             - Vertical
+    custom_command_data:
+      type: object
+      description: |
+        Definition of a Custom Command. Custom Commands extend the application with
+        external tools that can be invoked on shots via the context menu or triggered
+        automatically after rendering.
+      required:
+        - name
+        - file
+      properties:
+        name:
+          type: string
+          description: Display name of the command (appears in menus). Must be unique.
+          example: S2ROTO
+        type:
+          type: string
+          description: |
+            Command type. "application" commands are invoked from the right-click
+            context menu and receive input/output XML paths as arguments.
+            "postrender" commands are triggered after an output node completes
+            rendering and receive the render info XML as a single argument.
+          enum:
+            - application
+            - postrender
+          default: application
+        file:
+          type: string
+          description: |
+            Absolute path to the executable or script. On macOS this is typically
+            a Python script or shell script. The application will invoke this path
+            directly, so it must have execute permissions or be prefixed with an
+            interpreter (e.g. python3).
+          example: /Library/Application Support/RogueLabs/S2ROTO/s2roto.py
+        arguments:
+          type: string
+          description: |
+            Argument template string passed to the command. Use $ARG1 for the input
+            XML path and $ARG2 for the output XML path. For postrender commands,
+            only $ARG1 is provided (render info XML).
+          default: '"$ARG1" "$ARG2"'
+          example: '"$ARG1" "$ARG2"'
+        interpreter:
+          type: string
+          description: |
+            Optional interpreter to use when invoking the command. If not specified,
+            the file is invoked directly. Common values are "python3" or "/bin/bash".
+          example: python3
+        wait_till_finished:
+          type: boolean
+          description: |
+            When true, the application blocks until the command completes before
+            processing the output XML. This is required for commands that write
+            results back to SCRATCH (e.g. adding mattes, notes, or versions).
+            When false, the command runs in the background.
+          default: true
+        xml_export:
+          type: string
+          description: |
+            Controls what data is exported in the input XML passed to the command.
+            "selection" exports only the currently selected shots. "all" exports
+            the entire timeline. "none" sends no XML (command receives empty path).
+          enum:
+            - selection
+            - all
+            - none
+          default: selection
+        require_selection:
+          type: boolean
+          description: |
+            When true, the command is only available in the context menu when one
+            or more shots are selected. Prevents accidental invocation with no data.
+          default: true
+        enabled:
+          type: boolean
+          description: Whether the command is active and visible in menus.
+          default: true
+    custom_commands_list:
+      type: object
+      description: List of registered Custom Commands
+      properties:
+        commands:
+          type: array
+          description: Array of custom command definitions
+          items:
+            $ref: '#/components/schemas/custom_command_data'
+        count:
+          type: integer
+          description: Total number of registered commands
     image_snapshot:
       type: object
       description: Settings for creating a snapshot image of a Shot

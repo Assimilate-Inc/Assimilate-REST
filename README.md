@@ -49,6 +49,30 @@ YAML file, available on this Git. This file can be used to create API
 wrappers for other environments / languages, like e.g. C#, or to create
 alternative formatted documentation.
 
+**MCP (Model Context Protocol)**
+
+An MCP server is available that provides complete coverage of the
+Assimilate REST API — 85 tools across 14 categories (system, projects,
+groups, constructs, slots, versions, shots, inputs, color grading,
+player, render, outputs, snapshots, and files).
+
+[MCP](https://modelcontextprotocol.io) is an open standard that allows
+applications to interact with external tools and services through a
+unified protocol. The Assimilate MCP server translates MCP tool calls
+into REST API requests against a running Live FX or SCRATCH instance,
+enabling natural language control of the full production pipeline —
+dailies, color grading, compositing, rendering, and media management.
+
+The MCP server is available as an npm package and can be installed with
+a single command:
+
+```
+npx assimilate-mcp
+```
+
+Full documentation, setup instructions, and source code:
+[AssimilateMCP](https://github.com/amac-roguelabs/assimilate-mcp)
+
 **API**
 
 The REST API is buildup of 3 modules:

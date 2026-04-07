@@ -1642,7 +1642,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: add-shot
-  '/shot/{shot_id}':
+  /shot/{shot_id}:
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
@@ -1652,7 +1652,7 @@ paths:
         description: Shot UUID
     get:
       summary: Shot Get Properties
-      description: Get teh properties of the Shot with UUID
+      description: Get the properties of the Shot with UUID
       tags:
         - Projects
       parameters:
@@ -1750,6 +1750,647 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: move-shot
+  /shot/{shot_id}/color:
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: shot_id
+        in: path
+        required: true
+        description: Shot UUID
+    get:
+      summary: Shot Get Color Properties
+      description: Get the color properties of the Shot with UUID
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/colorgrade_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-shot-color
+    put:
+      summary: Shot Set Color Properties
+      description: Update the color properties of the Shot with UUID
+      tags:
+        - Projects
+      requestBody:
+        description: json with shot data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/colorgrade_data'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/colorgrade_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: set-shot-color
+    delete:
+      summary: Shot Reset Color Properties 
+      description: Reset the color properties of the Shot with UUID.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: delete-shot-color 
+  /shot/{shot_id}/layers:
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: shot_id
+        in: path
+        required: true
+        description: Shot UUID
+    get:
+      summary: Shot Get Layers Properties
+      description: Get the layers properties of the Shot with UUID
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/layers_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-shot-layers
+  /shot/{shot_id}/layers/new:
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: shot_id
+        in: path
+        required: true
+        description: Shot UUID
+    post:
+      summary: Shot Create Layer
+      description: Create a new layer for the Shot with UUID. The new layer is added at the end of the layer list.
+      tags:
+        - Projects
+      requestBody:
+        description: json with shot data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/layer_data'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/layer_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: add-shot-layer
+  /shot/{shot_id}/layers/{layer_idx}:
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: shot_id
+        in: path
+        required: true
+        description: Shot UUID
+      - name: layer_idx
+        in: path
+        required: true
+        description: Layer Index
+        schema:
+          type: integer
+    get:
+      summary: Shot Get Layer Properties
+      description: Get the properties of the layer at the specified index for the Shot with UUID
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/layer_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-shot-layer
+    put:
+      summary: Shot Set Layer Properties
+      description: Update the properties of the layer at the specified index for the Shot with UUID
+      tags:
+        - Projects
+      requestBody:
+        description: json with shot data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/layer_data'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/layer_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: set-shot-layer
+    delete:
+      summary: Shot Delete Layer 
+      description: Delete the layer at the specified index for the Shot with UUID.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: delete-shot-layer
+    patch:
+      summary: Layer Move
+      description: Move the layer to a specified position at the layer sta for the Shot with UUID.
+      tags:
+        - Projects
+      requestBody:
+        description: json with move data for the layer
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/move_layer_data'
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: move-layer
+  /shot/{shot_id}/layers/group:
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: shot_id
+        in: path
+        required: true
+        description: Shot UUID
+    post:
+      summary: Shot Create Layer Group
+      description: Create a new group for the Shot with UUID. The new group is added at the end of the layer list.  
+      tags:
+        - Projects
+      requestBody:
+        description: json with shot data
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/layer_data'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: add-shot-layer-group
+  /shot/{shot_id}/layers/{layer_idx}/color:
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: shot_id
+        in: path
+        required: true
+        description: Shot UUID
+      - name: layer_idx
+        in: path
+        required: true
+        description: Layer Index
+        schema:
+          type: integer
+    get:
+      summary: Shot Layer Get Color Properties
+      description: Get the color properties of the Shot with UUID at the specified layer index.
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/colorgrade_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-shot-layer-color
+    put:
+      summary: Shot Layer Set  Color Properties
+      description: Update the color properties of the Shot with UUID at the specified layer index.
+      tags:
+        - Projects
+      requestBody:
+        description: json with shot data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/colorgrade_data'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/colorgrade_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: set-shot-layer-color
+    delete:
+      summary: Shot Layer Reset Color Properties 
+      description: Reset the color properties of the Shot with UUID at the specified layer index.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: reset-shot-layer-color
+  /shot/{shot_id}/layers/{layer_idx}/canvas:
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: shot_id
+        in: path
+        required: true
+        description: Shot UUID
+      - name: layer_idx
+        in: path
+        required: true
+        description: Layer Index
+        schema:
+          type: integer
+    get:
+      summary: Shot Layer Get Canvas Properties
+      description: Get the canvas properties of the Shot with UUID at the specified layer index.
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/canvas_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-shot-layer-canvas
+    put:
+      summary: Shot Layer Set  Canvas Properties
+      description: Update the canvas properties of the Shot with UUID at the specified layer index.
+      tags:
+        - Projects
+      requestBody:
+        description: json with shot data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/canvas_data'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/canvas_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: set-shot-layer-canvas
+    delete:
+      summary: Shot Layer Reset Canvas Properties 
+      description: Reset the canvas properties of the Shot with UUID at the specified layer index.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: reset-shot-layer-canvas 
+  /shot/{shot_id}/layers/{layer_idx}/fill:
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: shot_id
+        in: path
+        required: true
+        description: Shot UUID
+      - name: layer_idx
+        in: path
+        required: true
+        description: Layer Index
+        schema:
+          type: integer
+    get:
+      summary: Shot Layer Get Fill Properties
+      description: Get the fill properties of the Shot with UUID at the specified layer index.
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fill_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-shot-layer-fill
+    put:
+      summary: Shot Layer Set  Fill Properties
+      description: Update the fill properties of the Shot with UUID at the specified layer index.
+      tags:
+        - Projects
+      requestBody:
+        description: json with Fill data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/fill_data'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fill_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: set-shot-layer-fill
+    delete:
+      summary: Shot Layer Reset Fill Properties 
+      description: Reset the fill properties of the Shot with UUID at the specified layer index.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: reset-shot-layer-fill
+  /shot/{shot_id}/layers/{layer_idx}/matte:
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: shot_id
+        in: path
+        required: true
+        description: Shot UUID
+      - name: layer_idx
+        in: path
+        required: true
+        description: Layer Index
+        schema:
+          type: integer
+    get:
+      summary: Shot Layer Get Matte Properties
+      description: Get the matte properties of the Shot with UUID at the specified layer index.
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/matte_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-shot-layer-matte
+    put:
+      summary: Shot Layer Set  Matte Properties
+      description: Update the matte properties of the Shot with UUID at the specified layer index.
+      tags:
+        - Projects
+      requestBody:
+        description: json with Matte data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/matte_data'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/matte_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: set-shot-layer-matte
+    delete:
+      summary: Shot Layer Reset Matte Properties 
+      description: Reset the matte properties of the Shot with UUID at the specified layer index.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: reset-shot-layer-matte
   '/constructs/current/slots/{slot_IDX}/versions':
     parameters:
       - name: slot_IDX
@@ -1782,7 +2423,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error_message'
-      operationId: get-construct-current-slot-shots
+      operationId: get-construct-current-slot-versions
   '/constructs/current/slots/{slot_IDX}/versions/{version_IDX}':
     parameters:
       - name: slot_IDX
@@ -1890,7 +2531,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error_message'
-      operationId: move-construct-current-slot-shversionot
+      operationId: move-construct-current-slot-version
   /constructs/current/sel_shots:
     get:
       summary: Shot Selection (CC)
@@ -2000,7 +2641,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error_message'
-      operationId: get-construct-slot-shot
+      operationId: get-construct-slot-version
     put:
       summary: Shot Set Properties (VRS)
       description: Update the properties of the n-th Shot in Slot with Index in Construct with UUID.
@@ -2032,7 +2673,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error_message'
-      operationId: set-construct-slot-shot
+      operationId: set-construct-slot-version
     delete:
       summary: Shot Delete (VRS)
       description:  Delete the n-th Shot in Slot with Index in Construct with UUI.
@@ -2047,7 +2688,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error_message'
-      operationId: delete-construct-slot-shot
+      operationId: delete-construct-slot-version
     patch:
       summary: Shot Move (VRS)
       description: Move the n-th Shot in Slot with Index in Construct with UUI to a different location.
@@ -2069,7 +2710,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error_message'
-      operationId: move-construct-slot-shot
+      operationId: move-construct-slot-version
   /constructs/current/outputs:
     get:
       summary: Output List (CC)
@@ -2860,9 +3501,9 @@ components:
       x-examples:
         Example 1:
           - projects:
-            - modified: '11/07/2025 14:32'
+            - modified: '2025-09-23T08:38:27'
               name: Project 1
-            - modified: '25/08/2025 16:48'
+            - modified: '2025-08-25T16:48:00'
               name: Project 2
       properties:
         projects:
@@ -3920,6 +4561,318 @@ components:
           description: LUT applied to the colorgrade
           x-stoplight:
             id: 3i9hsacqyfk7r
+    layers_data:
+      type: object
+      title: layers_data
+      description: List of Layers
+      properties:
+        layers:
+          type: array
+          description: List of Layers
+          items:
+            $ref: '#/components/schemas/layer_data'
+    layer_data:
+      type: object
+      title: layer_data
+      description: A layer has its own color grade, shape, softness, color qualifier, animation, fill, matte etc
+      properties:
+        name: 
+          description: Name of the layer
+          type: string
+          x-stoplight:
+            id: 16q7exczt4nx1
+        active:
+          type: boolean
+          description: Is the layer active
+          x-stoplight:
+            id: uwkvnsf1yuul0
+        recursive:
+          type: boolean
+          description: Whether the layer settings are applied recursively to all layers below in the stack
+          x-stoplight:
+            id: 9s5y1h2o7c4d7
+        group:
+          type: boolean
+          description: Whether the layer is a group layer containing sub-layers
+          x-stoplight:
+            id: n4tyxl7oifqib
+        parent:
+          type: integer
+          description: Index of the parent layer.
+        colorgrade:
+          $ref: '#/components/schemas/colorgrade_data'
+        canvas:
+          $ref: '#/components/schemas/canvas_data'
+        fill:
+          $ref: '#/components/schemas/fill_data'
+        matte:
+           $ref: '#/components/schemas/matte_data'
+    canvas_data:
+      type: object
+      title: canvas_data
+      description: A Canvas represents the ouline and position, rotation and scale of a layer
+      properties:
+        alpha: 
+          type: number
+          description: Opacity of the canvas
+          x-stoplight:
+            id: uwkvnsf1yuul1
+        softness:
+          type: number
+          description: The Softness parameter determines how far away from the Canvas shape the softness effect will extend
+          x-stoplight:
+            id: uwkvnsf1yuul2
+        xform:
+          type: object
+          description: Transform properties of the canvas
+          x-stoplight:
+            id: uwkvnsf1yuul3
+          properties:
+            pivot:
+              $ref: '#/components/schemas/vector3'        
+            rotate:
+              $ref: '#/components/schemas/vector3'
+            scale:
+              $ref: '#/components/schemas/vector3'
+            translate:
+              $ref: '#/components/schemas/vector3'
+    fill_data:
+      type: object
+      title: fill_data
+      description: A Fill represents the image part of a layer
+      properties:
+        shot_uuid:
+          $ref: '#/components/schemas/uuid'
+        blend_mode:
+          type: string
+          description: Blend mode of the fill
+          enum:
+            - Normal
+            - Over
+            - Add
+            - Subtract
+            - Multiply
+            - Screen
+            - Overlay
+            - Dodge
+            - Burn
+            - Lighten
+            - Darken
+            - Negate
+            - Soft Light
+            - Hard Light
+            - Difference
+            - Exclusion
+            - Color
+            - Luminosity
+        blur:
+          type: number
+          description: Amount of blur to apply to the fill
+          x-stoplight:
+            id: uwkvnsf1yuul3
+        blur_angle:
+          type: number
+          description: Angle of the blur to apply to the fill
+          x-stoplight:
+            id: uwkvnsf1yuul4
+        blur_dir_active:
+          type: boolean
+          description: Whether the blur direction is active for the fill
+          x-stoplight:
+            id: uwkvnsf1yuul5
+        channel_mask:
+          type: object
+          description: Channel mask for the fill
+          x-stoplight:
+            id: uwkvnsf1yuul6 
+          properties:
+            R:
+              type: boolean
+              description: Red channel mask
+              x-stoplight:
+                id: uwkvnsf1yuul6a
+            G:
+              type: boolean
+              description: Green channel mask
+              x-stoplight:
+                id: uwkvnsf1yuul6b
+            B:
+              type: boolean
+              description: Blue channel mask
+              x-stoplight:
+                id: uwkvnsf1yuul6c
+            A:
+              type: boolean
+              description: Alpha channel mask
+              x-stoplight:
+                id: uwkvnsf1yuul6d
+        map:
+          type: string
+          description: Map file path for the fill 
+          enum:
+            - Projected
+            - On Canvas
+            - Pinned
+        orientation:
+          type: object
+          description: Fill orientation
+          x-stoplight:
+            id: uwkvnsf1yuul7
+          properties:
+            rot:
+              type: number
+              description: Rotation angle of the fill in degrees  
+              x-stoplight:
+                id: uwkvnsf1yuul7a
+            sx:
+              type: number
+              description: Horizontal scale of the fill
+              x-stoplight:
+                id: uwkvnsf1yuul7b
+            sy:
+              type: number
+              description: Vertical scale of the fill
+              x-stoplight:
+                id: uwkvnsf1yuul7c 
+            tx:
+              type: number
+              description: Horizontal translation of the fill
+              x-stoplight:
+                id: uwkvnsf1yuul7d
+            ty:
+              type: number  
+              description: Vertical translation of the fill
+              x-stoplight:
+                id: uwkvnsf1yuul7e
+        warp:
+          type: string
+          description: Warp type of the fill
+          enum:
+            - None
+            - Equi360
+            - Equi180
+        warp_blur_filter:
+          type: number
+          description: Warp blur filter
+          x-stoplight:
+            id: uwkvnsf1yuul8
+        warp_equi_dist:
+          type: number
+          description: Warp equi distance
+          x-stoplight:
+            id: uwkvnsf1yuul9 
+    matte_data:
+      type: object
+      title: matte_data
+      description: A Matte represents the image part of a layer
+      properties:
+        shot_uuid:
+          $ref: '#/components/schemas/uuid'
+        blend_mode:
+          type: string
+          description: Blend mode of the matte
+          enum:
+            - None
+            - Over
+            - Add
+            - Subtract
+            - Copy
+        blur:
+          type: number
+          description: Amount of blur to apply to the matte
+          x-stoplight:
+            id: uwkvnsf1yuul3
+        blur_angle:
+          type: number
+          description: Angle of the blur to apply to the matte
+          x-stoplight:
+            id: uwkvnsf1yuul4
+        blur_dir_active:
+          type: boolean
+          description: Whether the blur direction is active for the matte
+          x-stoplight:
+            id: uwkvnsf1yuul5
+        channel_mask:
+          type: object
+          description: Channel mask for the matte
+          x-stoplight:
+            id: uwkvnsf1yuul6 
+          properties:
+            R:
+              type: boolean
+              description: Red channel matte
+              x-stoplight:
+                id: uwkvnsf1yuul6a
+            G:
+              type: boolean
+              description: Green channel mask
+              x-stoplight:
+                id: uwkvnsf1yuul6b
+            B:
+              type: boolean
+              description: Blue channel mask
+              x-stoplight:
+                id: uwkvnsf1yuul6c
+            A:
+              type: boolean
+              description: Alpha channel mask
+              x-stoplight:
+                id: uwkvnsf1yuul6d
+        map:
+          type: string
+          description: Map file path for the matte 
+          enum:
+            - Projected
+            - On Canvas
+            - Pinned
+        orientation:
+          type: object
+          description: Matte orientation
+          x-stoplight:
+            id: uwkvnsf1yuul7
+          properties:
+            rot:
+              type: number
+              description: Rotation angle of the matte in degrees  
+              x-stoplight:
+                id: uwkvnsf1yuul7a
+            sx:
+              type: number
+              description: Horizontal scale of the matte
+              x-stoplight:
+                id: uwkvnsf1yuul7b
+            sy:
+              type: number
+              description: Vertical scale of the matte
+              x-stoplight:
+                id: uwkvnsf1yuul7c 
+            tx:
+              type: number
+              description: Horizontal translation of the matte
+              x-stoplight:
+                id: uwkvnsf1yuul7d
+            ty:
+              type: number  
+              description: Vertical translation of the matte
+              x-stoplight:
+                id: uwkvnsf1yuul7e
+        warp:
+          type: string
+          description: Warp type of the matte
+          enum:
+            - None
+            - Equi360
+            - Equi180
+        warp_blur_filter:
+          type: number
+          description: Warp blur filter
+          x-stoplight:
+            id: uwkvnsf1yuul8
+        warp_equi_dist:
+          type: number
+          description: Warp equi distance
+          x-stoplight:
+            id: uwkvnsf1yuul9 
     render_queue_list:
       title: render_queue_list
       type: array
@@ -4069,6 +5022,20 @@ components:
           description: Position index in the tray
           x-stoplight:
             id: kbseuhub1egc0
+    move_layer_data:
+      type: object
+      description: Move the Layer to a different location in the layer stack
+      properties:
+        group_index:
+          type: integer
+          description: Move current layer into a exist group with group_index in the layer stack. Group 0 is the root of the layer stack
+          x-stoplight:
+            id: kbseuhub1egc1 
+        position_index:
+          type: integer
+          description: Move the current layer to position_index at the specified group level.
+          x-stoplight:
+            id: kbseuhub1egc2
     animation_data:
       type: object
       properties:
@@ -4313,3 +5280,22 @@ components:
           type: number
           x-stoplight:
             id: kbseuhub1egc6
+    vector3:
+      type: object
+      description: 3D Vector
+      properties:
+        x:
+          description: x value
+          type: number
+          x-stoplight:
+            id: kbseuhub1egc5 
+        'y':
+          description: y value
+          type: number
+          x-stoplight:
+            id: kbseuhub1egc6
+        z:
+          description: z value
+          type: number
+          x-stoplight:
+            id: kbseuhub1egc7

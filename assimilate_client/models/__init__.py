@@ -80,6 +80,7 @@ from assimilate_client.models.project_data_hdr_metadata_primaries import Project
 from assimilate_client.models.project_data_project_paths import ProjectDataProjectPaths
 from assimilate_client.models.project_list import ProjectList
 from assimilate_client.models.project_list_projects import ProjectListProjects
+from assimilate_client.models.reference_shot_data import ReferenceShotData
 from assimilate_client.models.render_queue_item import RenderQueueItem
 from assimilate_client.models.render_queue_list import RenderQueueList
 from assimilate_client.models.selected_shots_data import SelectedShotsData

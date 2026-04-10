@@ -32,7 +32,8 @@ class ShotData(object):
         'type_uuid': 'Uuid',
         'file': 'str',
         'name': 'str',
-        'preset_file': 'str',
+        'node_preset_file': 'str',
+        'color_settings_file': 'str',
         'reel_id': 'str',
         'scene': 'str',
         'take': 'str',
@@ -67,7 +68,8 @@ class ShotData(object):
         'type_uuid': 'type_uuid',
         'file': 'file',
         'name': 'name',
-        'preset_file': 'preset_file',
+        'node_preset_file': 'node_preset_file',
+        'color_settings_file': 'color_settings_file',
         'reel_id': 'reel_id',
         'scene': 'scene',
         'take': 'take',
@@ -97,13 +99,14 @@ class ShotData(object):
         'inputs': 'inputs'
     }
 
-    def __init__(self, uuid=None, type_uuid=None, file=None, name=None, preset_file=None, reel_id=None, scene=None, take=None, circled=None, fps=None, fps_multiplier=None, fps_offset=None, fps_mode=None, frame_tc=None, timecode=None, length=None, handles=None, size=None, aspect=None, output=None, framing=None, view=None, orientation=None, color_format=None, colorgrade=None, camera=None, mos=None, audio=None, metadata=None, notes=None, staging=None, inputs=None):  # noqa: E501
+    def __init__(self, uuid=None, type_uuid=None, file=None, name=None, node_preset_file=None, color_settings_file=None, reel_id=None, scene=None, take=None, circled=None, fps=None, fps_multiplier=None, fps_offset=None, fps_mode=None, frame_tc=None, timecode=None, length=None, handles=None, size=None, aspect=None, output=None, framing=None, view=None, orientation=None, color_format=None, colorgrade=None, camera=None, mos=None, audio=None, metadata=None, notes=None, staging=None, inputs=None):  # noqa: E501
         """ShotData - a model defined in Swagger"""  # noqa: E501
         self._uuid = None
         self._type_uuid = None
         self._file = None
         self._name = None
-        self._preset_file = None
+        self._node_preset_file = None
+        self._color_settings_file = None
         self._reel_id = None
         self._scene = None
         self._take = None
@@ -140,8 +143,10 @@ class ShotData(object):
             self.file = file
         if name is not None:
             self.name = name
-        if preset_file is not None:
-            self.preset_file = preset_file
+        if node_preset_file is not None:
+            self.node_preset_file = node_preset_file
+        if color_settings_file is not None:
+            self.color_settings_file = color_settings_file
         if reel_id is not None:
             self.reel_id = reel_id
         if scene is not None:
@@ -286,27 +291,50 @@ class ShotData(object):
         self._name = name
 
     @property
-    def preset_file(self):
-        """Gets the preset_file of this ShotData.  # noqa: E501
+    def node_preset_file(self):
+        """Gets the node_preset_file of this ShotData.  # noqa: E501
 
-        File path to the preset file (input only).  # noqa: E501
+        File path to the .pls (plugin preset) file. Input only.  # noqa: E501
 
-        :return: The preset_file of this ShotData.  # noqa: E501
+        :return: The node_preset_file of this ShotData.  # noqa: E501
         :rtype: str
         """
-        return self._preset_file
+        return self._node_preset_file
 
-    @preset_file.setter
-    def preset_file(self, preset_file):
-        """Sets the preset_file of this ShotData.
+    @node_preset_file.setter
+    def node_preset_file(self, node_preset_file):
+        """Sets the node_preset_file of this ShotData.
 
-        File path to the preset file (input only).  # noqa: E501
+        File path to the .pls (plugin preset) file. Input only.  # noqa: E501
 
-        :param preset_file: The preset_file of this ShotData.  # noqa: E501
+        :param node_preset_file: The node_preset_file of this ShotData.  # noqa: E501
         :type: str
         """
 
-        self._preset_file = preset_file
+        self._node_preset_file = node_preset_file
+
+    @property
+    def color_settings_file(self):
+        """Gets the color_settings_file of this ShotData.  # noqa: E501
+
+        File path to the .ccr (color settings) file. Input only  # noqa: E501
+
+        :return: The color_settings_file of this ShotData.  # noqa: E501
+        :rtype: str
+        """
+        return self._color_settings_file
+
+    @color_settings_file.setter
+    def color_settings_file(self, color_settings_file):
+        """Sets the color_settings_file of this ShotData.
+
+        File path to the .ccr (color settings) file. Input only  # noqa: E501
+
+        :param color_settings_file: The color_settings_file of this ShotData.  # noqa: E501
+        :type: str
+        """
+
+        self._color_settings_file = color_settings_file
 
     @property
     def reel_id(self):

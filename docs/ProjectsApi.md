@@ -22,6 +22,8 @@ Method | HTTP request | Description
 [**delete_construct_slot**](ProjectsApi.md#delete_construct_slot) | **DELETE** /constructs/{construct_UUID}/slots/{slot_IDX} | Slot Delete (CID)
 [**delete_construct_slot_version**](ProjectsApi.md#delete_construct_slot_version) | **DELETE** /constructs/{construct_UUID}/slots/{slot_IDX}/versions/{version_IDX} | Shot Delete (VRS)
 [**delete_constructs_current**](ProjectsApi.md#delete_constructs_current) | **DELETE** /constructs/current | Construct Current Delete
+[**delete_constructs_current_reference**](ProjectsApi.md#delete_constructs_current_reference) | **DELETE** /constructs/current/ref_shot | Construct Current Reference shot Delete
+[**delete_constructs_reference**](ProjectsApi.md#delete_constructs_reference) | **DELETE** /constructs/{construct_UUID}/ref_shot | Construct Current Reference shot Delete
 [**delete_group**](ProjectsApi.md#delete_group) | **DELETE** /groups/{group_UUID} | Group Delete
 [**delete_group_current**](ProjectsApi.md#delete_group_current) | **DELETE** /groups/current | Group Current Delete
 [**delete_shot**](ProjectsApi.md#delete_shot) | **DELETE** /shot/{shot_id} | Shot Delete
@@ -44,6 +46,8 @@ Method | HTTP request | Description
 [**get_construct_slots**](ProjectsApi.md#get_construct_slots) | **GET** /constructs/{construct_UUID}/slots | Slot List (CID)
 [**get_constructs**](ProjectsApi.md#get_constructs) | **GET** /constructs | Construct List
 [**get_constructs_current**](ProjectsApi.md#get_constructs_current) | **GET** /constructs/current | Construct Current Get
+[**get_constructs_current_reference**](ProjectsApi.md#get_constructs_current_reference) | **GET** /constructs/current/ref_shot | Construct Current Get Reference shot
+[**get_constructs_reference**](ProjectsApi.md#get_constructs_reference) | **GET** /constructs/{construct_UUID}/ref_shot | Construct Get Reference shot
 [**get_group**](ProjectsApi.md#get_group) | **GET** /groups/{group_UUID} | Group Get Properties
 [**get_group_current**](ProjectsApi.md#get_group_current) | **GET** /groups/current | Group Current Get
 [**get_groups**](ProjectsApi.md#get_groups) | **GET** /groups | Group List
@@ -82,6 +86,8 @@ Method | HTTP request | Description
 [**set_construct_slot**](ProjectsApi.md#set_construct_slot) | **PUT** /constructs/{construct_UUID}/slots/{slot_IDX} | Slot Set Properties (CID)
 [**set_construct_slot_version**](ProjectsApi.md#set_construct_slot_version) | **PUT** /constructs/{construct_UUID}/slots/{slot_IDX}/versions/{version_IDX} | Shot Set Properties (VRS)
 [**set_constructs_current**](ProjectsApi.md#set_constructs_current) | **PUT** /constructs/current | Construct Current Set Properties
+[**set_constructs_current_reference**](ProjectsApi.md#set_constructs_current_reference) | **PUT** /constructs/current/ref_shot | Construct Current Set reference shot
+[**set_constructs_reference**](ProjectsApi.md#set_constructs_reference) | **PUT** /constructs/{construct_UUID}/ref_shot | Construct Current Set reference shot
 [**set_group**](ProjectsApi.md#set_group) | **PUT** /groups/{group_UUID} | Group Set Properties
 [**set_projects_item**](ProjectsApi.md#set_projects_item) | **PUT** /projects/item/{projectID} | Project Set Properties
 [**set_shot**](ProjectsApi.md#set_shot) | **PUT** /shot/{shot_id} | Shot Set Properties
@@ -950,6 +956,96 @@ except ApiException as e:
 
 ### Parameters
 This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_constructs_current_reference**
+> delete_constructs_current_reference()
+
+Construct Current Reference shot Delete
+
+Delete the reference shot of the current Construct.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+
+try:
+    # Construct Current Reference shot Delete
+    api_instance.delete_constructs_current_reference()
+except ApiException as e:
+    print("Exception when calling ProjectsApi->delete_constructs_current_reference: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_constructs_reference**
+> delete_constructs_reference(construct_uuid)
+
+Construct Current Reference shot Delete
+
+Delete the reference shot of a construct with the specified UUID.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+construct_uuid = 'construct_uuid_example' # str | Construct UUID
+
+try:
+    # Construct Current Reference shot Delete
+    api_instance.delete_constructs_reference(construct_uuid)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->delete_constructs_reference: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **construct_uuid** | **str**| Construct UUID | 
 
 ### Return type
 
@@ -2038,6 +2134,98 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ConstructData**](ConstructData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_constructs_current_reference**
+> ReferenceShotData get_constructs_current_reference()
+
+Construct Current Get Reference shot
+
+Get the reference shot of the current Construct.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+
+try:
+    # Construct Current Get Reference shot
+    api_response = api_instance.get_constructs_current_reference()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->get_constructs_current_reference: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ReferenceShotData**](ReferenceShotData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_constructs_reference**
+> ReferenceShotData get_constructs_reference(construct_uuid)
+
+Construct Get Reference shot
+
+Get the reference shot of a construct with the specified UUID.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+construct_uuid = 'construct_uuid_example' # str | Construct UUID
+
+try:
+    # Construct Get Reference shot
+    api_response = api_instance.get_constructs_reference(construct_uuid)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->get_constructs_reference: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **construct_uuid** | **str**| Construct UUID | 
+
+### Return type
+
+[**ReferenceShotData**](ReferenceShotData.md)
 
 ### Authorization
 
@@ -3944,6 +4132,104 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ConstructData**](ConstructData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_constructs_current_reference**
+> ReferenceShotData set_constructs_current_reference(body)
+
+Construct Current Set reference shot
+
+Set the reference shot of the current Construct.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+body = assimilate_client.ReferenceShotData() # ReferenceShotData | json with reference shot data
+
+try:
+    # Construct Current Set reference shot
+    api_response = api_instance.set_constructs_current_reference(body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->set_constructs_current_reference: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**ReferenceShotData**](ReferenceShotData.md)| json with reference shot data | 
+
+### Return type
+
+[**ReferenceShotData**](ReferenceShotData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_constructs_reference**
+> ReferenceShotData set_constructs_reference(body, construct_uuid)
+
+Construct Current Set reference shot
+
+Set the reference shot of a construct with the specified UUID.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+body = assimilate_client.ReferenceShotData() # ReferenceShotData | json with reference shot data
+construct_uuid = 'construct_uuid_example' # str | Construct UUID
+
+try:
+    # Construct Current Set reference shot
+    api_response = api_instance.set_constructs_reference(body, construct_uuid)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->set_constructs_reference: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**ReferenceShotData**](ReferenceShotData.md)| json with reference shot data | 
+ **construct_uuid** | **str**| Construct UUID | 
+
+### Return type
+
+[**ReferenceShotData**](ReferenceShotData.md)
 
 ### Authorization
 

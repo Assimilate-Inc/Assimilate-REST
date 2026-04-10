@@ -1834,6 +1834,188 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def delete_constructs_current_reference(self, **kwargs):  # noqa: E501
+        """Construct Current Reference shot Delete  # noqa: E501
+
+        Delete the reference shot of the current Construct.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_constructs_current_reference(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.delete_constructs_current_reference_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.delete_constructs_current_reference_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def delete_constructs_current_reference_with_http_info(self, **kwargs):  # noqa: E501
+        """Construct Current Reference shot Delete  # noqa: E501
+
+        Delete the reference shot of the current Construct.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_constructs_current_reference_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = []  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_constructs_current_reference" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/constructs/current/ref_shot', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def delete_constructs_reference(self, construct_uuid, **kwargs):  # noqa: E501
+        """Construct Current Reference shot Delete  # noqa: E501
+
+        Delete the reference shot of a construct with the specified UUID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_constructs_reference(construct_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str construct_uuid: Construct UUID (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.delete_constructs_reference_with_http_info(construct_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.delete_constructs_reference_with_http_info(construct_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def delete_constructs_reference_with_http_info(self, construct_uuid, **kwargs):  # noqa: E501
+        """Construct Current Reference shot Delete  # noqa: E501
+
+        Delete the reference shot of a construct with the specified UUID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_constructs_reference_with_http_info(construct_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str construct_uuid: Construct UUID (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['construct_uuid']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_constructs_reference" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'construct_uuid' is set
+        if ('construct_uuid' not in params or
+                params['construct_uuid'] is None):
+            raise ValueError("Missing the required parameter `construct_uuid` when calling `delete_constructs_reference`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'construct_uuid' in params:
+            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/constructs/{construct_UUID}/ref_shot', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def delete_group(self, group_uuid, **kwargs):  # noqa: E501
         """Group Delete  # noqa: E501
 
@@ -3997,6 +4179,188 @@ class ProjectsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='ConstructData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_constructs_current_reference(self, **kwargs):  # noqa: E501
+        """Construct Current Get Reference shot  # noqa: E501
+
+        Get the reference shot of the current Construct.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_constructs_current_reference(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: ReferenceShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_constructs_current_reference_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.get_constructs_current_reference_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def get_constructs_current_reference_with_http_info(self, **kwargs):  # noqa: E501
+        """Construct Current Get Reference shot  # noqa: E501
+
+        Get the reference shot of the current Construct.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_constructs_current_reference_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :return: ReferenceShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = []  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_constructs_current_reference" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/constructs/current/ref_shot', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ReferenceShotData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_constructs_reference(self, construct_uuid, **kwargs):  # noqa: E501
+        """Construct Get Reference shot  # noqa: E501
+
+        Get the reference shot of a construct with the specified UUID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_constructs_reference(construct_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str construct_uuid: Construct UUID (required)
+        :return: ReferenceShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_constructs_reference_with_http_info(construct_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.get_constructs_reference_with_http_info(construct_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def get_constructs_reference_with_http_info(self, construct_uuid, **kwargs):  # noqa: E501
+        """Construct Get Reference shot  # noqa: E501
+
+        Get the reference shot of a construct with the specified UUID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_constructs_reference_with_http_info(construct_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str construct_uuid: Construct UUID (required)
+        :return: ReferenceShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['construct_uuid']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_constructs_reference" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'construct_uuid' is set
+        if ('construct_uuid' not in params or
+                params['construct_uuid'] is None):
+            raise ValueError("Missing the required parameter `construct_uuid` when calling `get_constructs_reference`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'construct_uuid' in params:
+            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/constructs/{construct_UUID}/ref_shot', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ReferenceShotData',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -7979,6 +8343,212 @@ class ProjectsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='ConstructData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def set_constructs_current_reference(self, body, **kwargs):  # noqa: E501
+        """Construct Current Set reference shot  # noqa: E501
+
+        Set the reference shot of the current Construct.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.set_constructs_current_reference(body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param ReferenceShotData body: json with reference shot data (required)
+        :return: ReferenceShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.set_constructs_current_reference_with_http_info(body, **kwargs)  # noqa: E501
+        else:
+            (data) = self.set_constructs_current_reference_with_http_info(body, **kwargs)  # noqa: E501
+            return data
+
+    def set_constructs_current_reference_with_http_info(self, body, **kwargs):  # noqa: E501
+        """Construct Current Set reference shot  # noqa: E501
+
+        Set the reference shot of the current Construct.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.set_constructs_current_reference_with_http_info(body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param ReferenceShotData body: json with reference shot data (required)
+        :return: ReferenceShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method set_constructs_current_reference" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `set_constructs_current_reference`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/constructs/current/ref_shot', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ReferenceShotData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def set_constructs_reference(self, body, construct_uuid, **kwargs):  # noqa: E501
+        """Construct Current Set reference shot  # noqa: E501
+
+        Set the reference shot of a construct with the specified UUID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.set_constructs_reference(body, construct_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param ReferenceShotData body: json with reference shot data (required)
+        :param str construct_uuid: Construct UUID (required)
+        :return: ReferenceShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.set_constructs_reference_with_http_info(body, construct_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.set_constructs_reference_with_http_info(body, construct_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def set_constructs_reference_with_http_info(self, body, construct_uuid, **kwargs):  # noqa: E501
+        """Construct Current Set reference shot  # noqa: E501
+
+        Set the reference shot of a construct with the specified UUID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.set_constructs_reference_with_http_info(body, construct_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param ReferenceShotData body: json with reference shot data (required)
+        :param str construct_uuid: Construct UUID (required)
+        :return: ReferenceShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body', 'construct_uuid']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method set_constructs_reference" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `set_constructs_reference`")  # noqa: E501
+        # verify the required parameter 'construct_uuid' is set
+        if ('construct_uuid' not in params or
+                params['construct_uuid'] is None):
+            raise ValueError("Missing the required parameter `construct_uuid` when calling `set_constructs_reference`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'construct_uuid' in params:
+            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/constructs/{construct_UUID}/ref_shot', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ReferenceShotData',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),

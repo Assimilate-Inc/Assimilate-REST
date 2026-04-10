@@ -1457,6 +1457,67 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: add-construct-current-slot
+  /constructs/current/ref_shot:
+    get:
+      summary: Construct Current Get Reference shot
+      description: Get the reference shot of the current Construct.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reference_shot_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-constructs-current-reference
+    put:
+      summary: Construct Current Set reference shot
+      description: Set the reference shot of the current Construct.
+      tags:
+        - Projects
+      requestBody:
+        description: json with reference shot data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/reference_shot_data'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reference_shot_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: set-constructs-current-reference
+    delete:
+      summary: Construct Current Reference shot Delete
+      description: Delete the reference shot of the current Construct.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: delete-constructs-current-reference
   /constructs/{construct_UUID}/slots:
     parameters:
       - schema:
@@ -1615,6 +1676,74 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: add-construct-slot
+  /constructs/{construct_UUID}/ref_shot:
+    parameters:
+      - name: construct_UUID
+        in: path
+        required: true
+        description: Construct UUID
+        schema:
+          type: string
+    get:
+      summary: Construct Get Reference shot
+      description: Get the reference shot of a construct with the specified UUID.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reference_shot_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-constructs-reference
+    put:
+      summary: Construct Current Set reference shot
+      description: Set the reference shot of a construct with the specified UUID.
+      tags:
+        - Projects
+      requestBody:
+        description: json with reference shot data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/reference_shot_data'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reference_shot_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: set-constructs-reference
+    delete:
+      summary: Construct Current Reference shot Delete
+      description: Delete the reference shot of a construct with the specified UUID.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: delete-constructs-reference
   /shot/new:
     post:
       summary: Shot Add
@@ -3646,11 +3775,16 @@ components:
           type: string
           x-stoplight:
             id: rghv2brykzk8s
-        preset_file:
-          description: File path to the preset file (input only).
+        node_preset_file:
+          description: File path to the .pls (plugin preset) file. Input only.
           type: string
           x-stoplight:
             id: 9h8y7n6m5l4k3
+        color_settings_file:
+          description: File path to the .ccr (color settings) file. Input only
+          type: string
+          x-stoplight:
+            id: 2h1g9f8e7d6c5
         reel_id:
           type: string
           description: Reel identifier
@@ -4122,6 +4256,17 @@ components:
               type: boolean
               x-stoplight:
                 id: r6q9zooqfe6m8
+    reference_shot_data:
+          type: object
+          description: Reference Shot.
+          x-stoplight:
+            id: 7h8y9n0m1l2k3
+          properties:
+            uuid:
+              $ref: '#/components/schemas/uuid'
+            slip:
+              type: number
+              description: Slip in frames of the reference shot to the timeline
     metadata:
       type: array
       title: Metadata

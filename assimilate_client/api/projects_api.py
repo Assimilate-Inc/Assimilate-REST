@@ -284,7 +284,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
 
         query_params = []
 
@@ -302,7 +302,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/current/slots/new/{slot_IDX}', 'POST',
+            '/constructs/current/slots/new/{slot_idx}', 'POST',
             path_params,
             query_params,
             header_params,
@@ -387,7 +387,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -413,7 +413,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/outputs/new', 'POST',
+            '/constructs/{construct_uuid}/outputs/new', 'POST',
             path_params,
             query_params,
             header_params,
@@ -496,9 +496,9 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
 
         query_params = []
 
@@ -516,7 +516,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/slots/new/{slot_IDX}', 'POST',
+            '/constructs/{construct_uuid}/slots/new/{slot_idx}', 'POST',
             path_params,
             query_params,
             header_params,
@@ -816,18 +816,18 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def add_shot_layer(self, body, shot_id, **kwargs):  # noqa: E501
+    def add_shot_layer(self, body, shot_uuid, **kwargs):  # noqa: E501
         """Shot Create Layer  # noqa: E501
 
         Create a new layer for the Shot with UUID. The new layer is added at the end of the layer list.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.add_shot_layer(body, shot_id, async_req=True)
+        >>> thread = api.add_shot_layer(body, shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param LayerData body: json with shot data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: LayerData
                  If the method is called asynchronously,
@@ -835,30 +835,30 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.add_shot_layer_with_http_info(body, shot_id, **kwargs)  # noqa: E501
+            return self.add_shot_layer_with_http_info(body, shot_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.add_shot_layer_with_http_info(body, shot_id, **kwargs)  # noqa: E501
+            (data) = self.add_shot_layer_with_http_info(body, shot_uuid, **kwargs)  # noqa: E501
             return data
 
-    def add_shot_layer_with_http_info(self, body, shot_id, **kwargs):  # noqa: E501
+    def add_shot_layer_with_http_info(self, body, shot_uuid, **kwargs):  # noqa: E501
         """Shot Create Layer  # noqa: E501
 
         Create a new layer for the Shot with UUID. The new layer is added at the end of the layer list.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.add_shot_layer_with_http_info(body, shot_id, async_req=True)
+        >>> thread = api.add_shot_layer_with_http_info(body, shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param LayerData body: json with shot data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: LayerData
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'shot_id', 'level']  # noqa: E501
+        all_params = ['body', 'shot_uuid', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -877,16 +877,16 @@ class ProjectsApi(object):
         if ('body' not in params or
                 params['body'] is None):
             raise ValueError("Missing the required parameter `body` when calling `add_shot_layer`")  # noqa: E501
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `add_shot_layer`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `add_shot_layer`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -912,7 +912,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/new', 'POST',
+            '/shot/{shot_uuid}/layers/new', 'POST',
             path_params,
             query_params,
             header_params,
@@ -927,17 +927,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def add_shot_layer_group(self, shot_id, **kwargs):  # noqa: E501
+    def add_shot_layer_group(self, shot_uuid, **kwargs):  # noqa: E501
         """Shot Create Layer Group  # noqa: E501
 
         Create a new group for the Shot with UUID. The new group is added at the end of the layer list.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.add_shot_layer_group(shot_id, async_req=True)
+        >>> thread = api.add_shot_layer_group(shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param LayerData body: json with shot data
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: None
@@ -946,22 +946,22 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.add_shot_layer_group_with_http_info(shot_id, **kwargs)  # noqa: E501
+            return self.add_shot_layer_group_with_http_info(shot_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.add_shot_layer_group_with_http_info(shot_id, **kwargs)  # noqa: E501
+            (data) = self.add_shot_layer_group_with_http_info(shot_uuid, **kwargs)  # noqa: E501
             return data
 
-    def add_shot_layer_group_with_http_info(self, shot_id, **kwargs):  # noqa: E501
+    def add_shot_layer_group_with_http_info(self, shot_uuid, **kwargs):  # noqa: E501
         """Shot Create Layer Group  # noqa: E501
 
         Create a new group for the Shot with UUID. The new group is added at the end of the layer list.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.add_shot_layer_group_with_http_info(shot_id, async_req=True)
+        >>> thread = api.add_shot_layer_group_with_http_info(shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param LayerData body: json with shot data
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: None
@@ -969,7 +969,7 @@ class ProjectsApi(object):
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'body', 'level']  # noqa: E501
+        all_params = ['shot_uuid', 'body', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -984,16 +984,16 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `add_shot_layer_group`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `add_shot_layer_group`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -1019,7 +1019,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/group', 'POST',
+            '/shot/{shot_uuid}/layers/group', 'POST',
             path_params,
             query_params,
             header_params,
@@ -1096,7 +1096,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
 
         query_params = []
 
@@ -1114,7 +1114,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}', 'DELETE',
+            '/constructs/{construct_uuid}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -1129,45 +1129,45 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def delete_construct_current_output(self, output_id, **kwargs):  # noqa: E501
+    def delete_construct_current_output(self, output_uuid, **kwargs):  # noqa: E501
         """Output Delete (CC)  # noqa: E501
 
         Delete the Output with UUID in the current Construct (CC).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_construct_current_output(output_id, async_req=True)
+        >>> thread = api.delete_construct_current_output(output_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid output_id: Output Node UUID (required)
+        :param Uuid output_uuid: Output Node UUID (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.delete_construct_current_output_with_http_info(output_id, **kwargs)  # noqa: E501
+            return self.delete_construct_current_output_with_http_info(output_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.delete_construct_current_output_with_http_info(output_id, **kwargs)  # noqa: E501
+            (data) = self.delete_construct_current_output_with_http_info(output_uuid, **kwargs)  # noqa: E501
             return data
 
-    def delete_construct_current_output_with_http_info(self, output_id, **kwargs):  # noqa: E501
+    def delete_construct_current_output_with_http_info(self, output_uuid, **kwargs):  # noqa: E501
         """Output Delete (CC)  # noqa: E501
 
         Delete the Output with UUID in the current Construct (CC).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_construct_current_output_with_http_info(output_id, async_req=True)
+        >>> thread = api.delete_construct_current_output_with_http_info(output_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid output_id: Output Node UUID (required)
+        :param Uuid output_uuid: Output Node UUID (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['output_id']  # noqa: E501
+        all_params = ['output_uuid']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1182,16 +1182,16 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'output_id' is set
-        if ('output_id' not in params or
-                params['output_id'] is None):
-            raise ValueError("Missing the required parameter `output_id` when calling `delete_construct_current_output`")  # noqa: E501
+        # verify the required parameter 'output_uuid' is set
+        if ('output_uuid' not in params or
+                params['output_uuid'] is None):
+            raise ValueError("Missing the required parameter `output_uuid` when calling `delete_construct_current_output`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'output_id' in params:
-            path_params['output_id'] = params['output_id']  # noqa: E501
+        if 'output_uuid' in params:
+            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
 
         query_params = []
 
@@ -1209,7 +1209,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/current/outputs/{output_id}', 'DELETE',
+            '/constructs/current/outputs/{output_uuid}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -1288,7 +1288,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -1308,7 +1308,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/current/slots/{slot_IDX}', 'DELETE',
+            '/constructs/current/slots/{slot_idx}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -1391,9 +1391,9 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
         if 'version_idx' in params:
-            path_params['version_IDX'] = params['version_idx']  # noqa: E501
+            path_params['version_idx'] = params['version_idx']  # noqa: E501
 
         query_params = []
 
@@ -1411,7 +1411,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/current/slots/{slot_IDX}/versions/{version_IDX}', 'DELETE',
+            '/constructs/current/slots/{slot_idx}/versions/{version_idx}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -1426,47 +1426,47 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def delete_construct_output(self, construct_uuid, output_id, **kwargs):  # noqa: E501
+    def delete_construct_output(self, construct_uuid, output_uuid, **kwargs):  # noqa: E501
         """Output Delete (CID)  # noqa: E501
 
         Delete Output with UUI in the Construct with UUID (CID).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_construct_output(construct_uuid, output_id, async_req=True)
+        >>> thread = api.delete_construct_output(construct_uuid, output_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param Uuid construct_uuid: Construct UUID (required)
-        :param Uuid output_id: Output Node UUID (required)
+        :param Uuid output_uuid: Output Node UUID (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.delete_construct_output_with_http_info(construct_uuid, output_id, **kwargs)  # noqa: E501
+            return self.delete_construct_output_with_http_info(construct_uuid, output_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.delete_construct_output_with_http_info(construct_uuid, output_id, **kwargs)  # noqa: E501
+            (data) = self.delete_construct_output_with_http_info(construct_uuid, output_uuid, **kwargs)  # noqa: E501
             return data
 
-    def delete_construct_output_with_http_info(self, construct_uuid, output_id, **kwargs):  # noqa: E501
+    def delete_construct_output_with_http_info(self, construct_uuid, output_uuid, **kwargs):  # noqa: E501
         """Output Delete (CID)  # noqa: E501
 
         Delete Output with UUI in the Construct with UUID (CID).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_construct_output_with_http_info(construct_uuid, output_id, async_req=True)
+        >>> thread = api.delete_construct_output_with_http_info(construct_uuid, output_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param Uuid construct_uuid: Construct UUID (required)
-        :param Uuid output_id: Output Node UUID (required)
+        :param Uuid output_uuid: Output Node UUID (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['construct_uuid', 'output_id']  # noqa: E501
+        all_params = ['construct_uuid', 'output_uuid']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1485,18 +1485,18 @@ class ProjectsApi(object):
         if ('construct_uuid' not in params or
                 params['construct_uuid'] is None):
             raise ValueError("Missing the required parameter `construct_uuid` when calling `delete_construct_output`")  # noqa: E501
-        # verify the required parameter 'output_id' is set
-        if ('output_id' not in params or
-                params['output_id'] is None):
-            raise ValueError("Missing the required parameter `output_id` when calling `delete_construct_output`")  # noqa: E501
+        # verify the required parameter 'output_uuid' is set
+        if ('output_uuid' not in params or
+                params['output_uuid'] is None):
+            raise ValueError("Missing the required parameter `output_uuid` when calling `delete_construct_output`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
-        if 'output_id' in params:
-            path_params['output_id'] = params['output_id']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
+        if 'output_uuid' in params:
+            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
 
         query_params = []
 
@@ -1514,7 +1514,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/outputs/{output_id}', 'DELETE',
+            '/constructs/{construct_uuid}/outputs/{output_uuid}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -1599,9 +1599,9 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -1621,7 +1621,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/slots/{slot_IDX}', 'DELETE',
+            '/constructs/{construct_uuid}/slots/{slot_idx}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -1710,11 +1710,11 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
         if 'version_idx' in params:
-            path_params['version_IDX'] = params['version_idx']  # noqa: E501
+            path_params['version_idx'] = params['version_idx']  # noqa: E501
 
         query_params = []
 
@@ -1732,7 +1732,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/slots/{slot_IDX}/versions/{version_IDX}', 'DELETE',
+            '/constructs/{construct_uuid}/slots/{slot_idx}/versions/{version_idx}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -1983,7 +1983,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
 
         query_params = []
 
@@ -2001,7 +2001,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/ref_shot', 'DELETE',
+            '/constructs/{construct_uuid}/ref_shot', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -2078,7 +2078,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'group_uuid' in params:
-            path_params['group_UUID'] = params['group_uuid']  # noqa: E501
+            path_params['group_uuid'] = params['group_uuid']  # noqa: E501
 
         query_params = []
 
@@ -2096,7 +2096,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/groups/{group_UUID}', 'DELETE',
+            '/groups/{group_uuid}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -2198,45 +2198,45 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def delete_shot(self, shot_id, **kwargs):  # noqa: E501
+    def delete_shot(self, shot_uuid, **kwargs):  # noqa: E501
         """Shot Delete  # noqa: E501
 
         Delete the Shot with UUID. The Shot is removed from all locations it is used and any Input Shot of the Shot composition are also deleted.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_shot(shot_id, async_req=True)
+        >>> thread = api.delete_shot(shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.delete_shot_with_http_info(shot_id, **kwargs)  # noqa: E501
+            return self.delete_shot_with_http_info(shot_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.delete_shot_with_http_info(shot_id, **kwargs)  # noqa: E501
+            (data) = self.delete_shot_with_http_info(shot_uuid, **kwargs)  # noqa: E501
             return data
 
-    def delete_shot_with_http_info(self, shot_id, **kwargs):  # noqa: E501
+    def delete_shot_with_http_info(self, shot_uuid, **kwargs):  # noqa: E501
         """Shot Delete  # noqa: E501
 
         Delete the Shot with UUID. The Shot is removed from all locations it is used and any Input Shot of the Shot composition are also deleted.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_shot_with_http_info(shot_id, async_req=True)
+        >>> thread = api.delete_shot_with_http_info(shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['shot_id']  # noqa: E501
+        all_params = ['shot_uuid']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2251,16 +2251,16 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `delete_shot`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `delete_shot`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
 
         query_params = []
 
@@ -2278,7 +2278,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}', 'DELETE',
+            '/shot/{shot_uuid}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -2293,112 +2293,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def delete_shot_color(self, shot_id, **kwargs):  # noqa: E501
-        """Shot Reset Color Properties  # noqa: E501
-
-        Reset the color properties of the Shot with UUID.  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_shot_color(shot_id, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('async_req'):
-            return self.delete_shot_color_with_http_info(shot_id, **kwargs)  # noqa: E501
-        else:
-            (data) = self.delete_shot_color_with_http_info(shot_id, **kwargs)  # noqa: E501
-            return data
-
-    def delete_shot_color_with_http_info(self, shot_id, **kwargs):  # noqa: E501
-        """Shot Reset Color Properties  # noqa: E501
-
-        Reset the color properties of the Shot with UUID.  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_shot_color_with_http_info(shot_id, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['shot_id']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in six.iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_shot_color" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `delete_shot_color`")  # noqa: E501
-
-        collection_formats = {}
-
-        path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
-
-        query_params = []
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = []  # noqa: E501
-
-        return self.api_client.call_api(
-            '/shot/{shot_id}/color', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type=None,  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=params.get('async_req'),
-            _return_http_data_only=params.get('_return_http_data_only'),
-            _preload_content=params.get('_preload_content', True),
-            _request_timeout=params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_shot_input(self, shot_id, input_idx, **kwargs):  # noqa: E501
+    def delete_shot_input(self, shot_uuid, input_idx, **kwargs):  # noqa: E501
         """Input Delete  # noqa: E501
 
         Remove the n-th Input of Shot with UUID. The Input of the shot is cleard. The Input Shot itself is not deleted and is maintained when used elsewhere.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_shot_input(shot_id, input_idx, async_req=True)
+        >>> thread = api.delete_shot_input(shot_uuid, input_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int input_idx: index of the nth input (required)
         :return: None
                  If the method is called asynchronously,
@@ -2406,29 +2311,29 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.delete_shot_input_with_http_info(shot_id, input_idx, **kwargs)  # noqa: E501
+            return self.delete_shot_input_with_http_info(shot_uuid, input_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.delete_shot_input_with_http_info(shot_id, input_idx, **kwargs)  # noqa: E501
+            (data) = self.delete_shot_input_with_http_info(shot_uuid, input_idx, **kwargs)  # noqa: E501
             return data
 
-    def delete_shot_input_with_http_info(self, shot_id, input_idx, **kwargs):  # noqa: E501
+    def delete_shot_input_with_http_info(self, shot_uuid, input_idx, **kwargs):  # noqa: E501
         """Input Delete  # noqa: E501
 
         Remove the n-th Input of Shot with UUID. The Input of the shot is cleard. The Input Shot itself is not deleted and is maintained when used elsewhere.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_shot_input_with_http_info(shot_id, input_idx, async_req=True)
+        >>> thread = api.delete_shot_input_with_http_info(shot_uuid, input_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int input_idx: index of the nth input (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'input_idx']  # noqa: E501
+        all_params = ['shot_uuid', 'input_idx']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2443,10 +2348,10 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `delete_shot_input`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `delete_shot_input`")  # noqa: E501
         # verify the required parameter 'input_idx' is set
         if ('input_idx' not in params or
                 params['input_idx'] is None):
@@ -2455,8 +2360,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'input_idx' in params:
             path_params['input_idx'] = params['input_idx']  # noqa: E501
 
@@ -2476,7 +2381,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/inputs/{input_idx}', 'DELETE',
+            '/shot/{shot_uuid}/inputs/{input_idx}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -2491,17 +2396,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def delete_shot_layer(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def delete_shot_layer(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Delete Layer  # noqa: E501
 
         Delete the layer at the specified index for the Shot with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_shot_layer(shot_id, layer_idx, async_req=True)
+        >>> thread = api.delete_shot_layer(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :return: None
                  If the method is called asynchronously,
@@ -2509,29 +2414,29 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.delete_shot_layer_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.delete_shot_layer_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.delete_shot_layer_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.delete_shot_layer_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def delete_shot_layer_with_http_info(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def delete_shot_layer_with_http_info(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Delete Layer  # noqa: E501
 
         Delete the layer at the specified index for the Shot with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_shot_layer_with_http_info(shot_id, layer_idx, async_req=True)
+        >>> thread = api.delete_shot_layer_with_http_info(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'layer_idx']  # noqa: E501
+        all_params = ['shot_uuid', 'layer_idx']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2546,10 +2451,10 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `delete_shot_layer`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `delete_shot_layer`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -2558,8 +2463,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -2579,7 +2484,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}', 'DELETE',
+            '/shot/{shot_uuid}/layers/{layer_idx}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -2658,7 +2563,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -2678,7 +2583,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}', 'GET',
+            '/constructs/{construct_uuid}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -2693,17 +2598,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_construct_current_output(self, output_id, **kwargs):  # noqa: E501
+    def get_construct_current_output(self, output_uuid, **kwargs):  # noqa: E501
         """Output Get Properties (CC)  # noqa: E501
 
         Get the properties of Output with UUID in the current Construct (CC).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_construct_current_output(output_id, async_req=True)
+        >>> thread = api.get_construct_current_output(output_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid output_id: Output Node UUID (required)
+        :param Uuid output_uuid: Output Node UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ShotData
                  If the method is called asynchronously,
@@ -2711,29 +2616,29 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_construct_current_output_with_http_info(output_id, **kwargs)  # noqa: E501
+            return self.get_construct_current_output_with_http_info(output_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_construct_current_output_with_http_info(output_id, **kwargs)  # noqa: E501
+            (data) = self.get_construct_current_output_with_http_info(output_uuid, **kwargs)  # noqa: E501
             return data
 
-    def get_construct_current_output_with_http_info(self, output_id, **kwargs):  # noqa: E501
+    def get_construct_current_output_with_http_info(self, output_uuid, **kwargs):  # noqa: E501
         """Output Get Properties (CC)  # noqa: E501
 
         Get the properties of Output with UUID in the current Construct (CC).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_construct_current_output_with_http_info(output_id, async_req=True)
+        >>> thread = api.get_construct_current_output_with_http_info(output_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid output_id: Output Node UUID (required)
+        :param Uuid output_uuid: Output Node UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ShotData
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['output_id', 'level']  # noqa: E501
+        all_params = ['output_uuid', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2748,16 +2653,16 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'output_id' is set
-        if ('output_id' not in params or
-                params['output_id'] is None):
-            raise ValueError("Missing the required parameter `output_id` when calling `get_construct_current_output`")  # noqa: E501
+        # verify the required parameter 'output_uuid' is set
+        if ('output_uuid' not in params or
+                params['output_uuid'] is None):
+            raise ValueError("Missing the required parameter `output_uuid` when calling `get_construct_current_output`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'output_id' in params:
-            path_params['output_id'] = params['output_id']  # noqa: E501
+        if 'output_uuid' in params:
+            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -2777,7 +2682,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/current/outputs/{output_id}', 'GET',
+            '/constructs/current/outputs/{output_uuid}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -3038,7 +2943,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -3058,7 +2963,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/current/slots/{slot_IDX}', 'GET',
+            '/constructs/current/slots/{slot_idx}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -3143,9 +3048,9 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
         if 'version_idx' in params:
-            path_params['version_IDX'] = params['version_idx']  # noqa: E501
+            path_params['version_idx'] = params['version_idx']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -3165,7 +3070,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/current/slots/{slot_IDX}/versions/{version_IDX}', 'GET',
+            '/constructs/current/slots/{slot_idx}/versions/{version_idx}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -3244,7 +3149,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -3264,7 +3169,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/current/slots/{slot_IDX}/versions', 'GET',
+            '/constructs/current/slots/{slot_idx}/versions', 'GET',
             path_params,
             query_params,
             header_params,
@@ -3370,18 +3275,18 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_construct_output(self, construct_uuid, output_id, **kwargs):  # noqa: E501
+    def get_construct_output(self, construct_uuid, output_uuid, **kwargs):  # noqa: E501
         """Output Get Properties (CID)  # noqa: E501
 
         Get the properties of Output with UUID in the Constuct with UUID (CID).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_construct_output(construct_uuid, output_id, async_req=True)
+        >>> thread = api.get_construct_output(construct_uuid, output_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param Uuid construct_uuid: Construct UUID (required)
-        :param Uuid output_id: Output Node UUID (required)
+        :param Uuid output_uuid: Output Node UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ShotData
                  If the method is called asynchronously,
@@ -3389,30 +3294,30 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_construct_output_with_http_info(construct_uuid, output_id, **kwargs)  # noqa: E501
+            return self.get_construct_output_with_http_info(construct_uuid, output_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_construct_output_with_http_info(construct_uuid, output_id, **kwargs)  # noqa: E501
+            (data) = self.get_construct_output_with_http_info(construct_uuid, output_uuid, **kwargs)  # noqa: E501
             return data
 
-    def get_construct_output_with_http_info(self, construct_uuid, output_id, **kwargs):  # noqa: E501
+    def get_construct_output_with_http_info(self, construct_uuid, output_uuid, **kwargs):  # noqa: E501
         """Output Get Properties (CID)  # noqa: E501
 
         Get the properties of Output with UUID in the Constuct with UUID (CID).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_construct_output_with_http_info(construct_uuid, output_id, async_req=True)
+        >>> thread = api.get_construct_output_with_http_info(construct_uuid, output_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param Uuid construct_uuid: Construct UUID (required)
-        :param Uuid output_id: Output Node UUID (required)
+        :param Uuid output_uuid: Output Node UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ShotData
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['construct_uuid', 'output_id', 'level']  # noqa: E501
+        all_params = ['construct_uuid', 'output_uuid', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -3431,18 +3336,18 @@ class ProjectsApi(object):
         if ('construct_uuid' not in params or
                 params['construct_uuid'] is None):
             raise ValueError("Missing the required parameter `construct_uuid` when calling `get_construct_output`")  # noqa: E501
-        # verify the required parameter 'output_id' is set
-        if ('output_id' not in params or
-                params['output_id'] is None):
-            raise ValueError("Missing the required parameter `output_id` when calling `get_construct_output`")  # noqa: E501
+        # verify the required parameter 'output_uuid' is set
+        if ('output_uuid' not in params or
+                params['output_uuid'] is None):
+            raise ValueError("Missing the required parameter `output_uuid` when calling `get_construct_output`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
-        if 'output_id' in params:
-            path_params['output_id'] = params['output_id']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
+        if 'output_uuid' in params:
+            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -3462,7 +3367,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/outputs/{output_id}', 'GET',
+            '/constructs/{construct_uuid}/outputs/{output_uuid}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -3541,7 +3446,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -3561,7 +3466,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/outputs', 'GET',
+            '/constructs/{construct_uuid}/outputs', 'GET',
             path_params,
             query_params,
             header_params,
@@ -3646,9 +3551,9 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -3668,7 +3573,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/slots/{slot_IDX}', 'GET',
+            '/constructs/{construct_uuid}/slots/{slot_idx}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -3759,11 +3664,11 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
         if 'version_idx' in params:
-            path_params['version_IDX'] = params['version_idx']  # noqa: E501
+            path_params['version_idx'] = params['version_idx']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -3783,7 +3688,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/slots/{slot_IDX}/versions/{version_IDX}', 'GET',
+            '/constructs/{construct_uuid}/slots/{slot_idx}/versions/{version_idx}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -3868,9 +3773,9 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -3890,7 +3795,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/slots/{slot_IDX}/versions', 'GET',
+            '/constructs/{construct_uuid}/slots/{slot_idx}/versions', 'GET',
             path_params,
             query_params,
             header_params,
@@ -3969,7 +3874,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -3989,7 +3894,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/slots', 'GET',
+            '/constructs/{construct_uuid}/slots', 'GET',
             path_params,
             query_params,
             header_params,
@@ -4335,7 +4240,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
 
         query_params = []
 
@@ -4353,7 +4258,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/ref_shot', 'GET',
+            '/constructs/{construct_uuid}/ref_shot', 'GET',
             path_params,
             query_params,
             header_params,
@@ -4432,7 +4337,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'group_uuid' in params:
-            path_params['group_UUID'] = params['group_uuid']  # noqa: E501
+            path_params['group_uuid'] = params['group_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -4452,7 +4357,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/groups/{group_UUID}', 'GET',
+            '/groups/{group_uuid}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -4918,17 +4823,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_shot(self, shot_id, **kwargs):  # noqa: E501
+    def get_shot(self, shot_uuid, **kwargs):  # noqa: E501
         """Shot Get Properties  # noqa: E501
 
         Get the properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot(shot_id, async_req=True)
+        >>> thread = api.get_shot(shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ShotData
                  If the method is called asynchronously,
@@ -4936,29 +4841,29 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_shot_with_http_info(shot_id, **kwargs)  # noqa: E501
+            return self.get_shot_with_http_info(shot_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_shot_with_http_info(shot_id, **kwargs)  # noqa: E501
+            (data) = self.get_shot_with_http_info(shot_uuid, **kwargs)  # noqa: E501
             return data
 
-    def get_shot_with_http_info(self, shot_id, **kwargs):  # noqa: E501
+    def get_shot_with_http_info(self, shot_uuid, **kwargs):  # noqa: E501
         """Shot Get Properties  # noqa: E501
 
         Get the properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_with_http_info(shot_id, async_req=True)
+        >>> thread = api.get_shot_with_http_info(shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ShotData
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'level']  # noqa: E501
+        all_params = ['shot_uuid', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -4973,16 +4878,16 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `get_shot`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `get_shot`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -5002,7 +4907,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}', 'GET',
+            '/shot/{shot_uuid}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -5017,17 +4922,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_shot_color(self, shot_id, **kwargs):  # noqa: E501
+    def get_shot_color(self, shot_uuid, **kwargs):  # noqa: E501
         """Shot Get Color Properties  # noqa: E501
 
         Get the color properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_color(shot_id, async_req=True)
+        >>> thread = api.get_shot_color(shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ColorgradeData
                  If the method is called asynchronously,
@@ -5035,29 +4940,29 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_shot_color_with_http_info(shot_id, **kwargs)  # noqa: E501
+            return self.get_shot_color_with_http_info(shot_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_shot_color_with_http_info(shot_id, **kwargs)  # noqa: E501
+            (data) = self.get_shot_color_with_http_info(shot_uuid, **kwargs)  # noqa: E501
             return data
 
-    def get_shot_color_with_http_info(self, shot_id, **kwargs):  # noqa: E501
+    def get_shot_color_with_http_info(self, shot_uuid, **kwargs):  # noqa: E501
         """Shot Get Color Properties  # noqa: E501
 
         Get the color properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_color_with_http_info(shot_id, async_req=True)
+        >>> thread = api.get_shot_color_with_http_info(shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ColorgradeData
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'level']  # noqa: E501
+        all_params = ['shot_uuid', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -5072,16 +4977,16 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `get_shot_color`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `get_shot_color`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -5101,7 +5006,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/color', 'GET',
+            '/shot/{shot_uuid}/color', 'GET',
             path_params,
             query_params,
             header_params,
@@ -5116,17 +5021,116 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_shot_input(self, shot_id, input_idx, **kwargs):  # noqa: E501
+    def get_shot_controls(self, shot_uuid, **kwargs):  # noqa: E501
+        """Shot Get Controls Properties  # noqa: E501
+
+        Get the controls properties of the Shot with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_shot_controls(shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid shot_uuid: Shot UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: ControlsData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_shot_controls_with_http_info(shot_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.get_shot_controls_with_http_info(shot_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def get_shot_controls_with_http_info(self, shot_uuid, **kwargs):  # noqa: E501
+        """Shot Get Controls Properties  # noqa: E501
+
+        Get the controls properties of the Shot with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_shot_controls_with_http_info(shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid shot_uuid: Shot UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: ControlsData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['shot_uuid', 'level']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_shot_controls" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `get_shot_controls`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
+
+        query_params = []
+        if 'level' in params:
+            query_params.append(('Level', params['level']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/shot/{shot_uuid}/controls', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ControlsData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_shot_input(self, shot_uuid, input_idx, **kwargs):  # noqa: E501
         """Input Get Properties  # noqa: E501
 
         Get the properties of the n-th Input of the Shot with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_input(shot_id, input_idx, async_req=True)
+        >>> thread = api.get_shot_input(shot_uuid, input_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int input_idx: index of the nth input (required)
         :return: InputData
                  If the method is called asynchronously,
@@ -5134,29 +5138,29 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_shot_input_with_http_info(shot_id, input_idx, **kwargs)  # noqa: E501
+            return self.get_shot_input_with_http_info(shot_uuid, input_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_shot_input_with_http_info(shot_id, input_idx, **kwargs)  # noqa: E501
+            (data) = self.get_shot_input_with_http_info(shot_uuid, input_idx, **kwargs)  # noqa: E501
             return data
 
-    def get_shot_input_with_http_info(self, shot_id, input_idx, **kwargs):  # noqa: E501
+    def get_shot_input_with_http_info(self, shot_uuid, input_idx, **kwargs):  # noqa: E501
         """Input Get Properties  # noqa: E501
 
         Get the properties of the n-th Input of the Shot with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_input_with_http_info(shot_id, input_idx, async_req=True)
+        >>> thread = api.get_shot_input_with_http_info(shot_uuid, input_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int input_idx: index of the nth input (required)
         :return: InputData
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'input_idx']  # noqa: E501
+        all_params = ['shot_uuid', 'input_idx']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -5171,10 +5175,10 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `get_shot_input`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `get_shot_input`")  # noqa: E501
         # verify the required parameter 'input_idx' is set
         if ('input_idx' not in params or
                 params['input_idx'] is None):
@@ -5183,8 +5187,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'input_idx' in params:
             path_params['input_idx'] = params['input_idx']  # noqa: E501
 
@@ -5204,7 +5208,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/inputs/{input_idx}', 'GET',
+            '/shot/{shot_uuid}/inputs/{input_idx}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -5219,45 +5223,45 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_shot_inputs(self, shot_id, **kwargs):  # noqa: E501
+    def get_shot_inputs(self, shot_uuid, **kwargs):  # noqa: E501
         """Inputs List  # noqa: E501
 
         Get the list of input SDhots of the Shot with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_inputs(shot_id, async_req=True)
+        >>> thread = api.get_shot_inputs(shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :return: InputsData
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_shot_inputs_with_http_info(shot_id, **kwargs)  # noqa: E501
+            return self.get_shot_inputs_with_http_info(shot_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_shot_inputs_with_http_info(shot_id, **kwargs)  # noqa: E501
+            (data) = self.get_shot_inputs_with_http_info(shot_uuid, **kwargs)  # noqa: E501
             return data
 
-    def get_shot_inputs_with_http_info(self, shot_id, **kwargs):  # noqa: E501
+    def get_shot_inputs_with_http_info(self, shot_uuid, **kwargs):  # noqa: E501
         """Inputs List  # noqa: E501
 
         Get the list of input SDhots of the Shot with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_inputs_with_http_info(shot_id, async_req=True)
+        >>> thread = api.get_shot_inputs_with_http_info(shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :return: InputsData
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['shot_id']  # noqa: E501
+        all_params = ['shot_uuid']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -5272,16 +5276,16 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `get_shot_inputs`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `get_shot_inputs`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
 
         query_params = []
 
@@ -5299,7 +5303,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/inputs', 'GET',
+            '/shot/{shot_uuid}/inputs', 'GET',
             path_params,
             query_params,
             header_params,
@@ -5314,17 +5318,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_shot_layer(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def get_shot_layer(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Get Layer Properties  # noqa: E501
 
         Get the properties of the layer at the specified index for the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_layer(shot_id, layer_idx, async_req=True)
+        >>> thread = api.get_shot_layer(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: LayerData
@@ -5333,22 +5337,22 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_shot_layer_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.get_shot_layer_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_shot_layer_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.get_shot_layer_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def get_shot_layer_with_http_info(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def get_shot_layer_with_http_info(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Get Layer Properties  # noqa: E501
 
         Get the properties of the layer at the specified index for the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_layer_with_http_info(shot_id, layer_idx, async_req=True)
+        >>> thread = api.get_shot_layer_with_http_info(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: LayerData
@@ -5356,7 +5360,7 @@ class ProjectsApi(object):
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'layer_idx', 'level']  # noqa: E501
+        all_params = ['shot_uuid', 'layer_idx', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -5371,10 +5375,10 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `get_shot_layer`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `get_shot_layer`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -5383,8 +5387,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -5406,7 +5410,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}', 'GET',
+            '/shot/{shot_uuid}/layers/{layer_idx}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -5421,17 +5425,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_shot_layer_canvas(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def get_shot_layer_canvas(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Get Canvas Properties  # noqa: E501
 
         Get the canvas properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_layer_canvas(shot_id, layer_idx, async_req=True)
+        >>> thread = api.get_shot_layer_canvas(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: CanvasData
@@ -5440,22 +5444,22 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_shot_layer_canvas_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.get_shot_layer_canvas_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_shot_layer_canvas_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.get_shot_layer_canvas_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def get_shot_layer_canvas_with_http_info(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def get_shot_layer_canvas_with_http_info(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Get Canvas Properties  # noqa: E501
 
         Get the canvas properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_layer_canvas_with_http_info(shot_id, layer_idx, async_req=True)
+        >>> thread = api.get_shot_layer_canvas_with_http_info(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: CanvasData
@@ -5463,7 +5467,7 @@ class ProjectsApi(object):
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'layer_idx', 'level']  # noqa: E501
+        all_params = ['shot_uuid', 'layer_idx', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -5478,10 +5482,10 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `get_shot_layer_canvas`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `get_shot_layer_canvas`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -5490,8 +5494,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -5513,7 +5517,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}/canvas', 'GET',
+            '/shot/{shot_uuid}/layers/{layer_idx}/canvas', 'GET',
             path_params,
             query_params,
             header_params,
@@ -5528,17 +5532,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_shot_layer_color(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def get_shot_layer_color(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Get Color Properties  # noqa: E501
 
         Get the color properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_layer_color(shot_id, layer_idx, async_req=True)
+        >>> thread = api.get_shot_layer_color(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ColorgradeData
@@ -5547,22 +5551,22 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_shot_layer_color_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.get_shot_layer_color_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_shot_layer_color_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.get_shot_layer_color_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def get_shot_layer_color_with_http_info(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def get_shot_layer_color_with_http_info(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Get Color Properties  # noqa: E501
 
         Get the color properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_layer_color_with_http_info(shot_id, layer_idx, async_req=True)
+        >>> thread = api.get_shot_layer_color_with_http_info(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ColorgradeData
@@ -5570,7 +5574,7 @@ class ProjectsApi(object):
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'layer_idx', 'level']  # noqa: E501
+        all_params = ['shot_uuid', 'layer_idx', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -5585,10 +5589,10 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `get_shot_layer_color`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `get_shot_layer_color`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -5597,8 +5601,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -5620,7 +5624,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}/color', 'GET',
+            '/shot/{shot_uuid}/layers/{layer_idx}/color', 'GET',
             path_params,
             query_params,
             header_params,
@@ -5635,17 +5639,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_shot_layer_fill(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def get_shot_layer_fill(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Get Fill Properties  # noqa: E501
 
         Get the fill properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_layer_fill(shot_id, layer_idx, async_req=True)
+        >>> thread = api.get_shot_layer_fill(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: FillData
@@ -5654,22 +5658,22 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_shot_layer_fill_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.get_shot_layer_fill_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_shot_layer_fill_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.get_shot_layer_fill_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def get_shot_layer_fill_with_http_info(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def get_shot_layer_fill_with_http_info(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Get Fill Properties  # noqa: E501
 
         Get the fill properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_layer_fill_with_http_info(shot_id, layer_idx, async_req=True)
+        >>> thread = api.get_shot_layer_fill_with_http_info(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: FillData
@@ -5677,7 +5681,7 @@ class ProjectsApi(object):
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'layer_idx', 'level']  # noqa: E501
+        all_params = ['shot_uuid', 'layer_idx', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -5692,10 +5696,10 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `get_shot_layer_fill`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `get_shot_layer_fill`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -5704,8 +5708,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -5727,7 +5731,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}/fill', 'GET',
+            '/shot/{shot_uuid}/layers/{layer_idx}/fill', 'GET',
             path_params,
             query_params,
             header_params,
@@ -5742,17 +5746,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_shot_layer_matte(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def get_shot_layer_matte(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Get Matte Properties  # noqa: E501
 
         Get the matte properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_layer_matte(shot_id, layer_idx, async_req=True)
+        >>> thread = api.get_shot_layer_matte(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: MatteData
@@ -5761,22 +5765,22 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_shot_layer_matte_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.get_shot_layer_matte_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_shot_layer_matte_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.get_shot_layer_matte_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def get_shot_layer_matte_with_http_info(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def get_shot_layer_matte_with_http_info(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Get Matte Properties  # noqa: E501
 
         Get the matte properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_layer_matte_with_http_info(shot_id, layer_idx, async_req=True)
+        >>> thread = api.get_shot_layer_matte_with_http_info(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: MatteData
@@ -5784,7 +5788,7 @@ class ProjectsApi(object):
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'layer_idx', 'level']  # noqa: E501
+        all_params = ['shot_uuid', 'layer_idx', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -5799,10 +5803,10 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `get_shot_layer_matte`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `get_shot_layer_matte`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -5811,8 +5815,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -5834,7 +5838,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}/matte', 'GET',
+            '/shot/{shot_uuid}/layers/{layer_idx}/matte', 'GET',
             path_params,
             query_params,
             header_params,
@@ -5849,17 +5853,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_shot_layers(self, shot_id, **kwargs):  # noqa: E501
+    def get_shot_layers(self, shot_uuid, **kwargs):  # noqa: E501
         """Shot Get Layers Properties  # noqa: E501
 
         Get the layers properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_layers(shot_id, async_req=True)
+        >>> thread = api.get_shot_layers(shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: LayersData
                  If the method is called asynchronously,
@@ -5867,29 +5871,29 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_shot_layers_with_http_info(shot_id, **kwargs)  # noqa: E501
+            return self.get_shot_layers_with_http_info(shot_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_shot_layers_with_http_info(shot_id, **kwargs)  # noqa: E501
+            (data) = self.get_shot_layers_with_http_info(shot_uuid, **kwargs)  # noqa: E501
             return data
 
-    def get_shot_layers_with_http_info(self, shot_id, **kwargs):  # noqa: E501
+    def get_shot_layers_with_http_info(self, shot_uuid, **kwargs):  # noqa: E501
         """Shot Get Layers Properties  # noqa: E501
 
         Get the layers properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_shot_layers_with_http_info(shot_id, async_req=True)
+        >>> thread = api.get_shot_layers_with_http_info(shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: LayersData
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'level']  # noqa: E501
+        all_params = ['shot_uuid', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -5904,16 +5908,16 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `get_shot_layers`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `get_shot_layers`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -5933,7 +5937,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers', 'GET',
+            '/shot/{shot_uuid}/layers', 'GET',
             path_params,
             query_params,
             header_params,
@@ -6016,7 +6020,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
 
         query_params = []
 
@@ -6040,7 +6044,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}', 'PATCH',
+            '/constructs/{construct_uuid}', 'PATCH',
             path_params,
             query_params,
             header_params,
@@ -6129,9 +6133,9 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
         if 'version_idx' in params:
-            path_params['version_IDX'] = params['version_idx']  # noqa: E501
+            path_params['version_idx'] = params['version_idx']  # noqa: E501
 
         query_params = []
 
@@ -6155,7 +6159,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/current/slots/{slot_IDX}/versions/{version_IDX}', 'PATCH',
+            '/constructs/current/slots/{slot_idx}/versions/{version_idx}', 'PATCH',
             path_params,
             query_params,
             header_params,
@@ -6250,11 +6254,11 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
         if 'version_idx' in params:
-            path_params['version_IDX'] = params['version_idx']  # noqa: E501
+            path_params['version_idx'] = params['version_idx']  # noqa: E501
 
         query_params = []
 
@@ -6278,7 +6282,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/slots/{slot_IDX}/versions/{version_IDX}', 'PATCH',
+            '/constructs/{construct_uuid}/slots/{slot_idx}/versions/{version_idx}', 'PATCH',
             path_params,
             query_params,
             header_params,
@@ -6460,7 +6464,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'group_uuid' in params:
-            path_params['group_UUID'] = params['group_uuid']  # noqa: E501
+            path_params['group_uuid'] = params['group_uuid']  # noqa: E501
 
         query_params = []
 
@@ -6484,7 +6488,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/groups/{group_UUID}', 'PATCH',
+            '/groups/{group_uuid}', 'PATCH',
             path_params,
             query_params,
             header_params,
@@ -6598,18 +6602,18 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def move_layer(self, body, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def move_layer(self, body, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Layer Move  # noqa: E501
 
         Move the layer to a specified position at the layer sta for the Shot with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.move_layer(body, shot_id, layer_idx, async_req=True)
+        >>> thread = api.move_layer(body, shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param MoveLayerData body: json with move data for the layer (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :return: None
                  If the method is called asynchronously,
@@ -6617,30 +6621,30 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.move_layer_with_http_info(body, shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.move_layer_with_http_info(body, shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.move_layer_with_http_info(body, shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.move_layer_with_http_info(body, shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def move_layer_with_http_info(self, body, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def move_layer_with_http_info(self, body, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Layer Move  # noqa: E501
 
         Move the layer to a specified position at the layer sta for the Shot with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.move_layer_with_http_info(body, shot_id, layer_idx, async_req=True)
+        >>> thread = api.move_layer_with_http_info(body, shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param MoveLayerData body: json with move data for the layer (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'shot_id', 'layer_idx']  # noqa: E501
+        all_params = ['body', 'shot_uuid', 'layer_idx']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -6659,10 +6663,10 @@ class ProjectsApi(object):
         if ('body' not in params or
                 params['body'] is None):
             raise ValueError("Missing the required parameter `body` when calling `move_layer`")  # noqa: E501
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `move_layer`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `move_layer`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -6671,8 +6675,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -6698,7 +6702,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}', 'PATCH',
+            '/shot/{shot_uuid}/layers/{layer_idx}', 'PATCH',
             path_params,
             query_params,
             header_params,
@@ -6713,18 +6717,18 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def move_shot(self, body, shot_id, **kwargs):  # noqa: E501
+    def move_shot(self, body, shot_uuid, **kwargs):  # noqa: E501
         """Shot Move  # noqa: E501
 
         Mover the Shot with UUID to a specific location. Depending on the current location of the Shot it might be necessary to make a copy of the Shot when moving it.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.move_shot(body, shot_id, async_req=True)
+        >>> thread = api.move_shot(body, shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param MoveShotData body: json with shot move data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: None
                  If the method is called asynchronously,
@@ -6732,30 +6736,30 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.move_shot_with_http_info(body, shot_id, **kwargs)  # noqa: E501
+            return self.move_shot_with_http_info(body, shot_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.move_shot_with_http_info(body, shot_id, **kwargs)  # noqa: E501
+            (data) = self.move_shot_with_http_info(body, shot_uuid, **kwargs)  # noqa: E501
             return data
 
-    def move_shot_with_http_info(self, body, shot_id, **kwargs):  # noqa: E501
+    def move_shot_with_http_info(self, body, shot_uuid, **kwargs):  # noqa: E501
         """Shot Move  # noqa: E501
 
         Mover the Shot with UUID to a specific location. Depending on the current location of the Shot it might be necessary to make a copy of the Shot when moving it.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.move_shot_with_http_info(body, shot_id, async_req=True)
+        >>> thread = api.move_shot_with_http_info(body, shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param MoveShotData body: json with shot move data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'shot_id', 'level']  # noqa: E501
+        all_params = ['body', 'shot_uuid', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -6774,16 +6778,16 @@ class ProjectsApi(object):
         if ('body' not in params or
                 params['body'] is None):
             raise ValueError("Missing the required parameter `body` when calling `move_shot`")  # noqa: E501
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `move_shot`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `move_shot`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -6809,7 +6813,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}', 'PATCH',
+            '/shot/{shot_uuid}', 'PATCH',
             path_params,
             query_params,
             header_params,
@@ -6824,17 +6828,211 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def reset_shot_layer_canvas(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def reset_shot_color(self, shot_uuid, **kwargs):  # noqa: E501
+        """Shot Reset Color Properties  # noqa: E501
+
+        Reset the color properties of the Shot with UUID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.reset_shot_color(shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid shot_uuid: Shot UUID (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.reset_shot_color_with_http_info(shot_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.reset_shot_color_with_http_info(shot_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def reset_shot_color_with_http_info(self, shot_uuid, **kwargs):  # noqa: E501
+        """Shot Reset Color Properties  # noqa: E501
+
+        Reset the color properties of the Shot with UUID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.reset_shot_color_with_http_info(shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid shot_uuid: Shot UUID (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['shot_uuid']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method reset_shot_color" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `reset_shot_color`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/shot/{shot_uuid}/color', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def reset_shot_controls(self, shot_uuid, **kwargs):  # noqa: E501
+        """Shot Reset Controls Properties  # noqa: E501
+
+        Reset the controls properties of the Shot with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.reset_shot_controls(shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid shot_uuid: Shot UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: ControlsData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.reset_shot_controls_with_http_info(shot_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.reset_shot_controls_with_http_info(shot_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def reset_shot_controls_with_http_info(self, shot_uuid, **kwargs):  # noqa: E501
+        """Shot Reset Controls Properties  # noqa: E501
+
+        Reset the controls properties of the Shot with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.reset_shot_controls_with_http_info(shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid shot_uuid: Shot UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: ControlsData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['shot_uuid', 'level']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method reset_shot_controls" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `reset_shot_controls`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
+
+        query_params = []
+        if 'level' in params:
+            query_params.append(('Level', params['level']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/shot/{shot_uuid}/controls', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ControlsData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def reset_shot_layer_canvas(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Reset Canvas Properties  # noqa: E501
 
         Reset the canvas properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.reset_shot_layer_canvas(shot_id, layer_idx, async_req=True)
+        >>> thread = api.reset_shot_layer_canvas(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :return: None
                  If the method is called asynchronously,
@@ -6842,29 +7040,29 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.reset_shot_layer_canvas_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.reset_shot_layer_canvas_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.reset_shot_layer_canvas_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.reset_shot_layer_canvas_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def reset_shot_layer_canvas_with_http_info(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def reset_shot_layer_canvas_with_http_info(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Reset Canvas Properties  # noqa: E501
 
         Reset the canvas properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.reset_shot_layer_canvas_with_http_info(shot_id, layer_idx, async_req=True)
+        >>> thread = api.reset_shot_layer_canvas_with_http_info(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'layer_idx']  # noqa: E501
+        all_params = ['shot_uuid', 'layer_idx']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -6879,10 +7077,10 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `reset_shot_layer_canvas`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `reset_shot_layer_canvas`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -6891,8 +7089,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -6912,7 +7110,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}/canvas', 'DELETE',
+            '/shot/{shot_uuid}/layers/{layer_idx}/canvas', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -6927,17 +7125,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def reset_shot_layer_color(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def reset_shot_layer_color(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Reset Color Properties  # noqa: E501
 
         Reset the color properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.reset_shot_layer_color(shot_id, layer_idx, async_req=True)
+        >>> thread = api.reset_shot_layer_color(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :return: None
                  If the method is called asynchronously,
@@ -6945,29 +7143,29 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.reset_shot_layer_color_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.reset_shot_layer_color_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.reset_shot_layer_color_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.reset_shot_layer_color_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def reset_shot_layer_color_with_http_info(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def reset_shot_layer_color_with_http_info(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Reset Color Properties  # noqa: E501
 
         Reset the color properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.reset_shot_layer_color_with_http_info(shot_id, layer_idx, async_req=True)
+        >>> thread = api.reset_shot_layer_color_with_http_info(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'layer_idx']  # noqa: E501
+        all_params = ['shot_uuid', 'layer_idx']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -6982,10 +7180,10 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `reset_shot_layer_color`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `reset_shot_layer_color`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -6994,8 +7192,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -7015,7 +7213,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}/color', 'DELETE',
+            '/shot/{shot_uuid}/layers/{layer_idx}/color', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -7030,17 +7228,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def reset_shot_layer_fill(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def reset_shot_layer_fill(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Reset Fill Properties  # noqa: E501
 
         Reset the fill properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.reset_shot_layer_fill(shot_id, layer_idx, async_req=True)
+        >>> thread = api.reset_shot_layer_fill(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :return: None
                  If the method is called asynchronously,
@@ -7048,29 +7246,29 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.reset_shot_layer_fill_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.reset_shot_layer_fill_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.reset_shot_layer_fill_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.reset_shot_layer_fill_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def reset_shot_layer_fill_with_http_info(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def reset_shot_layer_fill_with_http_info(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Reset Fill Properties  # noqa: E501
 
         Reset the fill properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.reset_shot_layer_fill_with_http_info(shot_id, layer_idx, async_req=True)
+        >>> thread = api.reset_shot_layer_fill_with_http_info(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'layer_idx']  # noqa: E501
+        all_params = ['shot_uuid', 'layer_idx']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -7085,10 +7283,10 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `reset_shot_layer_fill`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `reset_shot_layer_fill`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -7097,8 +7295,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -7118,7 +7316,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}/fill', 'DELETE',
+            '/shot/{shot_uuid}/layers/{layer_idx}/fill', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -7133,17 +7331,17 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def reset_shot_layer_matte(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def reset_shot_layer_matte(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Reset Matte Properties  # noqa: E501
 
         Reset the matte properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.reset_shot_layer_matte(shot_id, layer_idx, async_req=True)
+        >>> thread = api.reset_shot_layer_matte(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :return: None
                  If the method is called asynchronously,
@@ -7151,29 +7349,29 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.reset_shot_layer_matte_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.reset_shot_layer_matte_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.reset_shot_layer_matte_with_http_info(shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.reset_shot_layer_matte_with_http_info(shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def reset_shot_layer_matte_with_http_info(self, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def reset_shot_layer_matte_with_http_info(self, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Reset Matte Properties  # noqa: E501
 
         Reset the matte properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.reset_shot_layer_matte_with_http_info(shot_id, layer_idx, async_req=True)
+        >>> thread = api.reset_shot_layer_matte_with_http_info(shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'layer_idx']  # noqa: E501
+        all_params = ['shot_uuid', 'layer_idx']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -7188,10 +7386,10 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `reset_shot_layer_matte`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `reset_shot_layer_matte`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -7200,8 +7398,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -7221,7 +7419,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}/matte', 'DELETE',
+            '/shot/{shot_uuid}/layers/{layer_idx}/matte', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -7298,7 +7496,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
 
         query_params = []
 
@@ -7316,7 +7514,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}', 'POST',
+            '/constructs/{construct_uuid}', 'POST',
             path_params,
             query_params,
             header_params,
@@ -7395,7 +7593,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'group_uuid' in params:
-            path_params['group_UUID'] = params['group_uuid']  # noqa: E501
+            path_params['group_uuid'] = params['group_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -7415,7 +7613,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/groups/{group_UUID}', 'POST',
+            '/groups/{group_uuid}', 'POST',
             path_params,
             query_params,
             header_params,
@@ -7500,7 +7698,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -7526,7 +7724,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}', 'PUT',
+            '/constructs/{construct_uuid}', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -7541,18 +7739,18 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def set_construct_current_output(self, body, output_id, **kwargs):  # noqa: E501
+    def set_construct_current_output(self, body, output_uuid, **kwargs):  # noqa: E501
         """Output Set Properties (CC)  # noqa: E501
 
         Update the properties of Output with UUID in the current Construct (CC).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_construct_current_output(body, output_id, async_req=True)
+        >>> thread = api.set_construct_current_output(body, output_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param ShotData body: json output node data (required)
-        :param Uuid output_id: Output Node UUID (required)
+        :param Uuid output_uuid: Output Node UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ShotData
                  If the method is called asynchronously,
@@ -7560,30 +7758,30 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.set_construct_current_output_with_http_info(body, output_id, **kwargs)  # noqa: E501
+            return self.set_construct_current_output_with_http_info(body, output_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.set_construct_current_output_with_http_info(body, output_id, **kwargs)  # noqa: E501
+            (data) = self.set_construct_current_output_with_http_info(body, output_uuid, **kwargs)  # noqa: E501
             return data
 
-    def set_construct_current_output_with_http_info(self, body, output_id, **kwargs):  # noqa: E501
+    def set_construct_current_output_with_http_info(self, body, output_uuid, **kwargs):  # noqa: E501
         """Output Set Properties (CC)  # noqa: E501
 
         Update the properties of Output with UUID in the current Construct (CC).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_construct_current_output_with_http_info(body, output_id, async_req=True)
+        >>> thread = api.set_construct_current_output_with_http_info(body, output_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param ShotData body: json output node data (required)
-        :param Uuid output_id: Output Node UUID (required)
+        :param Uuid output_uuid: Output Node UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ShotData
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'output_id', 'level']  # noqa: E501
+        all_params = ['body', 'output_uuid', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -7602,16 +7800,16 @@ class ProjectsApi(object):
         if ('body' not in params or
                 params['body'] is None):
             raise ValueError("Missing the required parameter `body` when calling `set_construct_current_output`")  # noqa: E501
-        # verify the required parameter 'output_id' is set
-        if ('output_id' not in params or
-                params['output_id'] is None):
-            raise ValueError("Missing the required parameter `output_id` when calling `set_construct_current_output`")  # noqa: E501
+        # verify the required parameter 'output_uuid' is set
+        if ('output_uuid' not in params or
+                params['output_uuid'] is None):
+            raise ValueError("Missing the required parameter `output_uuid` when calling `set_construct_current_output`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'output_id' in params:
-            path_params['output_id'] = params['output_id']  # noqa: E501
+        if 'output_uuid' in params:
+            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -7637,7 +7835,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/current/outputs/{output_id}', 'PUT',
+            '/constructs/current/outputs/{output_uuid}', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -7722,7 +7920,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -7748,7 +7946,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/current/slots/{slot_IDX}', 'PUT',
+            '/constructs/current/slots/{slot_idx}', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -7839,9 +8037,9 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
         if 'version_idx' in params:
-            path_params['version_IDX'] = params['version_idx']  # noqa: E501
+            path_params['version_idx'] = params['version_idx']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -7867,7 +8065,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/current/slots/{slot_IDX}/versions/{version_IDX}', 'PUT',
+            '/constructs/current/slots/{slot_idx}/versions/{version_idx}', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -7882,19 +8080,19 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def set_construct_output(self, body, construct_uuid, output_id, **kwargs):  # noqa: E501
+    def set_construct_output(self, body, construct_uuid, output_uuid, **kwargs):  # noqa: E501
         """Output Set Properties (CID)  # noqa: E501
 
         Update the properties of Output with UUID in the Constuct with UUID (CID).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_construct_output(body, construct_uuid, output_id, async_req=True)
+        >>> thread = api.set_construct_output(body, construct_uuid, output_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param ShotData body: json output node data (required)
         :param Uuid construct_uuid: Construct UUID (required)
-        :param Uuid output_id: Output Node UUID (required)
+        :param Uuid output_uuid: Output Node UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ShotData
                  If the method is called asynchronously,
@@ -7902,31 +8100,31 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.set_construct_output_with_http_info(body, construct_uuid, output_id, **kwargs)  # noqa: E501
+            return self.set_construct_output_with_http_info(body, construct_uuid, output_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.set_construct_output_with_http_info(body, construct_uuid, output_id, **kwargs)  # noqa: E501
+            (data) = self.set_construct_output_with_http_info(body, construct_uuid, output_uuid, **kwargs)  # noqa: E501
             return data
 
-    def set_construct_output_with_http_info(self, body, construct_uuid, output_id, **kwargs):  # noqa: E501
+    def set_construct_output_with_http_info(self, body, construct_uuid, output_uuid, **kwargs):  # noqa: E501
         """Output Set Properties (CID)  # noqa: E501
 
         Update the properties of Output with UUID in the Constuct with UUID (CID).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_construct_output_with_http_info(body, construct_uuid, output_id, async_req=True)
+        >>> thread = api.set_construct_output_with_http_info(body, construct_uuid, output_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param ShotData body: json output node data (required)
         :param Uuid construct_uuid: Construct UUID (required)
-        :param Uuid output_id: Output Node UUID (required)
+        :param Uuid output_uuid: Output Node UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ShotData
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'construct_uuid', 'output_id', 'level']  # noqa: E501
+        all_params = ['body', 'construct_uuid', 'output_uuid', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -7949,18 +8147,18 @@ class ProjectsApi(object):
         if ('construct_uuid' not in params or
                 params['construct_uuid'] is None):
             raise ValueError("Missing the required parameter `construct_uuid` when calling `set_construct_output`")  # noqa: E501
-        # verify the required parameter 'output_id' is set
-        if ('output_id' not in params or
-                params['output_id'] is None):
-            raise ValueError("Missing the required parameter `output_id` when calling `set_construct_output`")  # noqa: E501
+        # verify the required parameter 'output_uuid' is set
+        if ('output_uuid' not in params or
+                params['output_uuid'] is None):
+            raise ValueError("Missing the required parameter `output_uuid` when calling `set_construct_output`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
-        if 'output_id' in params:
-            path_params['output_id'] = params['output_id']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
+        if 'output_uuid' in params:
+            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -7986,7 +8184,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/outputs/{output_id}', 'PUT',
+            '/constructs/{construct_uuid}/outputs/{output_uuid}', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -8077,9 +8275,9 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -8105,7 +8303,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/slots/{slot_IDX}', 'PUT',
+            '/constructs/{construct_uuid}/slots/{slot_idx}', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -8202,11 +8400,11 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
         if 'version_idx' in params:
-            path_params['version_IDX'] = params['version_idx']  # noqa: E501
+            path_params['version_idx'] = params['version_idx']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -8232,7 +8430,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/slots/{slot_IDX}/versions/{version_IDX}', 'PUT',
+            '/constructs/{construct_uuid}/slots/{slot_idx}/versions/{version_idx}', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -8517,7 +8715,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
 
         query_params = []
 
@@ -8541,7 +8739,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/constructs/{construct_UUID}/ref_shot', 'PUT',
+            '/constructs/{construct_uuid}/ref_shot', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -8626,7 +8824,7 @@ class ProjectsApi(object):
 
         path_params = {}
         if 'group_uuid' in params:
-            path_params['group_UUID'] = params['group_uuid']  # noqa: E501
+            path_params['group_uuid'] = params['group_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -8652,7 +8850,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/groups/{group_UUID}', 'PUT',
+            '/groups/{group_uuid}', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -8774,18 +8972,18 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def set_shot(self, body, shot_id, **kwargs):  # noqa: E501
+    def set_shot(self, body, shot_uuid, **kwargs):  # noqa: E501
         """Shot Set Properties  # noqa: E501
 
         Update the properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot(body, shot_id, async_req=True)
+        >>> thread = api.set_shot(body, shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param ShotData body: json with shot data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ShotData
                  If the method is called asynchronously,
@@ -8793,30 +8991,30 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.set_shot_with_http_info(body, shot_id, **kwargs)  # noqa: E501
+            return self.set_shot_with_http_info(body, shot_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.set_shot_with_http_info(body, shot_id, **kwargs)  # noqa: E501
+            (data) = self.set_shot_with_http_info(body, shot_uuid, **kwargs)  # noqa: E501
             return data
 
-    def set_shot_with_http_info(self, body, shot_id, **kwargs):  # noqa: E501
+    def set_shot_with_http_info(self, body, shot_uuid, **kwargs):  # noqa: E501
         """Shot Set Properties  # noqa: E501
 
         Update the properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_with_http_info(body, shot_id, async_req=True)
+        >>> thread = api.set_shot_with_http_info(body, shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param ShotData body: json with shot data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ShotData
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'shot_id', 'level']  # noqa: E501
+        all_params = ['body', 'shot_uuid', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -8835,16 +9033,16 @@ class ProjectsApi(object):
         if ('body' not in params or
                 params['body'] is None):
             raise ValueError("Missing the required parameter `body` when calling `set_shot`")  # noqa: E501
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `set_shot`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `set_shot`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -8870,7 +9068,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}', 'PUT',
+            '/shot/{shot_uuid}', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -8885,18 +9083,18 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def set_shot_color(self, body, shot_id, **kwargs):  # noqa: E501
+    def set_shot_color(self, body, shot_uuid, **kwargs):  # noqa: E501
         """Shot Set Color Properties  # noqa: E501
 
         Update the color properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_color(body, shot_id, async_req=True)
+        >>> thread = api.set_shot_color(body, shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param ColorgradeData body: json with shot data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ColorgradeData
                  If the method is called asynchronously,
@@ -8904,30 +9102,30 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.set_shot_color_with_http_info(body, shot_id, **kwargs)  # noqa: E501
+            return self.set_shot_color_with_http_info(body, shot_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.set_shot_color_with_http_info(body, shot_id, **kwargs)  # noqa: E501
+            (data) = self.set_shot_color_with_http_info(body, shot_uuid, **kwargs)  # noqa: E501
             return data
 
-    def set_shot_color_with_http_info(self, body, shot_id, **kwargs):  # noqa: E501
+    def set_shot_color_with_http_info(self, body, shot_uuid, **kwargs):  # noqa: E501
         """Shot Set Color Properties  # noqa: E501
 
         Update the color properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_color_with_http_info(body, shot_id, async_req=True)
+        >>> thread = api.set_shot_color_with_http_info(body, shot_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param ColorgradeData body: json with shot data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ColorgradeData
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'shot_id', 'level']  # noqa: E501
+        all_params = ['body', 'shot_uuid', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -8946,16 +9144,16 @@ class ProjectsApi(object):
         if ('body' not in params or
                 params['body'] is None):
             raise ValueError("Missing the required parameter `body` when calling `set_shot_color`")  # noqa: E501
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `set_shot_color`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `set_shot_color`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
 
         query_params = []
         if 'level' in params:
@@ -8981,7 +9179,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/color', 'PUT',
+            '/shot/{shot_uuid}/color', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -8996,17 +9194,129 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def set_shot_input(self, shot_id, input_idx, **kwargs):  # noqa: E501
+    def set_shot_controls(self, body, shot_uuid, **kwargs):  # noqa: E501
+        """Shot Set Controls Properties  # noqa: E501
+
+        Update the controls properties of the Shot with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.set_shot_controls(body, shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param ControlsData body: json with shot data (required)
+        :param Uuid shot_uuid: Shot UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: ControlsData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.set_shot_controls_with_http_info(body, shot_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.set_shot_controls_with_http_info(body, shot_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def set_shot_controls_with_http_info(self, body, shot_uuid, **kwargs):  # noqa: E501
+        """Shot Set Controls Properties  # noqa: E501
+
+        Update the controls properties of the Shot with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.set_shot_controls_with_http_info(body, shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param ControlsData body: json with shot data (required)
+        :param Uuid shot_uuid: Shot UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: ControlsData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body', 'shot_uuid', 'level']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method set_shot_controls" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `set_shot_controls`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `set_shot_controls`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
+
+        query_params = []
+        if 'level' in params:
+            query_params.append(('Level', params['level']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/shot/{shot_uuid}/controls', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ControlsData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def set_shot_input(self, body, shot_uuid, input_idx, **kwargs):  # noqa: E501
         """Input Set Properties  # noqa: E501
 
         Update the properties of the n-th Input of the Shot with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_input(shot_id, input_idx, async_req=True)
+        >>> thread = api.set_shot_input(body, shot_uuid, input_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param InputData body: json with input settings (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int input_idx: index of the nth input (required)
         :return: InputData
                  If the method is called asynchronously,
@@ -9014,29 +9324,30 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.set_shot_input_with_http_info(shot_id, input_idx, **kwargs)  # noqa: E501
+            return self.set_shot_input_with_http_info(body, shot_uuid, input_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.set_shot_input_with_http_info(shot_id, input_idx, **kwargs)  # noqa: E501
+            (data) = self.set_shot_input_with_http_info(body, shot_uuid, input_idx, **kwargs)  # noqa: E501
             return data
 
-    def set_shot_input_with_http_info(self, shot_id, input_idx, **kwargs):  # noqa: E501
+    def set_shot_input_with_http_info(self, body, shot_uuid, input_idx, **kwargs):  # noqa: E501
         """Input Set Properties  # noqa: E501
 
         Update the properties of the n-th Input of the Shot with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_input_with_http_info(shot_id, input_idx, async_req=True)
+        >>> thread = api.set_shot_input_with_http_info(body, shot_uuid, input_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid shot_id: Shot UUID (required)
+        :param InputData body: json with input settings (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int input_idx: index of the nth input (required)
         :return: InputData
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['shot_id', 'input_idx']  # noqa: E501
+        all_params = ['body', 'shot_uuid', 'input_idx']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -9051,10 +9362,14 @@ class ProjectsApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `set_shot_input`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `set_shot_input`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `set_shot_input`")  # noqa: E501
         # verify the required parameter 'input_idx' is set
         if ('input_idx' not in params or
                 params['input_idx'] is None):
@@ -9063,8 +9378,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'input_idx' in params:
             path_params['input_idx'] = params['input_idx']  # noqa: E501
 
@@ -9076,15 +9391,21 @@ class ProjectsApi(object):
         local_var_files = {}
 
         body_params = None
+        if 'body' in params:
+            body_params = params['body']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
             ['application/json'])  # noqa: E501
 
         # Authentication setting
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/inputs/{input_idx}', 'PUT',
+            '/shot/{shot_uuid}/inputs/{input_idx}', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -9099,18 +9420,18 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def set_shot_layer(self, body, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def set_shot_layer(self, body, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Set Layer Properties  # noqa: E501
 
         Update the properties of the layer at the specified index for the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_layer(body, shot_id, layer_idx, async_req=True)
+        >>> thread = api.set_shot_layer(body, shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param LayerData body: json with shot data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: LayerData
@@ -9119,23 +9440,23 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.set_shot_layer_with_http_info(body, shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.set_shot_layer_with_http_info(body, shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.set_shot_layer_with_http_info(body, shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.set_shot_layer_with_http_info(body, shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def set_shot_layer_with_http_info(self, body, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def set_shot_layer_with_http_info(self, body, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Set Layer Properties  # noqa: E501
 
         Update the properties of the layer at the specified index for the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_layer_with_http_info(body, shot_id, layer_idx, async_req=True)
+        >>> thread = api.set_shot_layer_with_http_info(body, shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param LayerData body: json with shot data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: LayerData
@@ -9143,7 +9464,7 @@ class ProjectsApi(object):
                  returns the request thread.
         """
 
-        all_params = ['body', 'shot_id', 'layer_idx', 'level']  # noqa: E501
+        all_params = ['body', 'shot_uuid', 'layer_idx', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -9162,10 +9483,10 @@ class ProjectsApi(object):
         if ('body' not in params or
                 params['body'] is None):
             raise ValueError("Missing the required parameter `body` when calling `set_shot_layer`")  # noqa: E501
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `set_shot_layer`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `set_shot_layer`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -9174,8 +9495,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -9203,7 +9524,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}', 'PUT',
+            '/shot/{shot_uuid}/layers/{layer_idx}', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -9218,18 +9539,18 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def set_shot_layer_canvas(self, body, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def set_shot_layer_canvas(self, body, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Set  Canvas Properties  # noqa: E501
 
         Update the canvas properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_layer_canvas(body, shot_id, layer_idx, async_req=True)
+        >>> thread = api.set_shot_layer_canvas(body, shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param CanvasData body: json with shot data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: CanvasData
@@ -9238,23 +9559,23 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.set_shot_layer_canvas_with_http_info(body, shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.set_shot_layer_canvas_with_http_info(body, shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.set_shot_layer_canvas_with_http_info(body, shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.set_shot_layer_canvas_with_http_info(body, shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def set_shot_layer_canvas_with_http_info(self, body, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def set_shot_layer_canvas_with_http_info(self, body, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Set  Canvas Properties  # noqa: E501
 
         Update the canvas properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_layer_canvas_with_http_info(body, shot_id, layer_idx, async_req=True)
+        >>> thread = api.set_shot_layer_canvas_with_http_info(body, shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param CanvasData body: json with shot data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: CanvasData
@@ -9262,7 +9583,7 @@ class ProjectsApi(object):
                  returns the request thread.
         """
 
-        all_params = ['body', 'shot_id', 'layer_idx', 'level']  # noqa: E501
+        all_params = ['body', 'shot_uuid', 'layer_idx', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -9281,10 +9602,10 @@ class ProjectsApi(object):
         if ('body' not in params or
                 params['body'] is None):
             raise ValueError("Missing the required parameter `body` when calling `set_shot_layer_canvas`")  # noqa: E501
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `set_shot_layer_canvas`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `set_shot_layer_canvas`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -9293,8 +9614,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -9322,7 +9643,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}/canvas', 'PUT',
+            '/shot/{shot_uuid}/layers/{layer_idx}/canvas', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -9337,18 +9658,18 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def set_shot_layer_color(self, body, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def set_shot_layer_color(self, body, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Set  Color Properties  # noqa: E501
 
         Update the color properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_layer_color(body, shot_id, layer_idx, async_req=True)
+        >>> thread = api.set_shot_layer_color(body, shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param ColorgradeData body: json with shot data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ColorgradeData
@@ -9357,23 +9678,23 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.set_shot_layer_color_with_http_info(body, shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.set_shot_layer_color_with_http_info(body, shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.set_shot_layer_color_with_http_info(body, shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.set_shot_layer_color_with_http_info(body, shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def set_shot_layer_color_with_http_info(self, body, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def set_shot_layer_color_with_http_info(self, body, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Set  Color Properties  # noqa: E501
 
         Update the color properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_layer_color_with_http_info(body, shot_id, layer_idx, async_req=True)
+        >>> thread = api.set_shot_layer_color_with_http_info(body, shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param ColorgradeData body: json with shot data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: ColorgradeData
@@ -9381,7 +9702,7 @@ class ProjectsApi(object):
                  returns the request thread.
         """
 
-        all_params = ['body', 'shot_id', 'layer_idx', 'level']  # noqa: E501
+        all_params = ['body', 'shot_uuid', 'layer_idx', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -9400,10 +9721,10 @@ class ProjectsApi(object):
         if ('body' not in params or
                 params['body'] is None):
             raise ValueError("Missing the required parameter `body` when calling `set_shot_layer_color`")  # noqa: E501
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `set_shot_layer_color`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `set_shot_layer_color`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -9412,8 +9733,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -9441,7 +9762,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}/color', 'PUT',
+            '/shot/{shot_uuid}/layers/{layer_idx}/color', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -9456,18 +9777,18 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def set_shot_layer_fill(self, body, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def set_shot_layer_fill(self, body, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Set  Fill Properties  # noqa: E501
 
         Update the fill properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_layer_fill(body, shot_id, layer_idx, async_req=True)
+        >>> thread = api.set_shot_layer_fill(body, shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param FillData body: json with Fill data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: FillData
@@ -9476,23 +9797,23 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.set_shot_layer_fill_with_http_info(body, shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.set_shot_layer_fill_with_http_info(body, shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.set_shot_layer_fill_with_http_info(body, shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.set_shot_layer_fill_with_http_info(body, shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def set_shot_layer_fill_with_http_info(self, body, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def set_shot_layer_fill_with_http_info(self, body, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Set  Fill Properties  # noqa: E501
 
         Update the fill properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_layer_fill_with_http_info(body, shot_id, layer_idx, async_req=True)
+        >>> thread = api.set_shot_layer_fill_with_http_info(body, shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param FillData body: json with Fill data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: FillData
@@ -9500,7 +9821,7 @@ class ProjectsApi(object):
                  returns the request thread.
         """
 
-        all_params = ['body', 'shot_id', 'layer_idx', 'level']  # noqa: E501
+        all_params = ['body', 'shot_uuid', 'layer_idx', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -9519,10 +9840,10 @@ class ProjectsApi(object):
         if ('body' not in params or
                 params['body'] is None):
             raise ValueError("Missing the required parameter `body` when calling `set_shot_layer_fill`")  # noqa: E501
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `set_shot_layer_fill`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `set_shot_layer_fill`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -9531,8 +9852,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -9560,7 +9881,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}/fill', 'PUT',
+            '/shot/{shot_uuid}/layers/{layer_idx}/fill', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -9575,18 +9896,18 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def set_shot_layer_matte(self, body, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def set_shot_layer_matte(self, body, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Set  Matte Properties  # noqa: E501
 
         Update the matte properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_layer_matte(body, shot_id, layer_idx, async_req=True)
+        >>> thread = api.set_shot_layer_matte(body, shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param MatteData body: json with Matte data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: MatteData
@@ -9595,23 +9916,23 @@ class ProjectsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.set_shot_layer_matte_with_http_info(body, shot_id, layer_idx, **kwargs)  # noqa: E501
+            return self.set_shot_layer_matte_with_http_info(body, shot_uuid, layer_idx, **kwargs)  # noqa: E501
         else:
-            (data) = self.set_shot_layer_matte_with_http_info(body, shot_id, layer_idx, **kwargs)  # noqa: E501
+            (data) = self.set_shot_layer_matte_with_http_info(body, shot_uuid, layer_idx, **kwargs)  # noqa: E501
             return data
 
-    def set_shot_layer_matte_with_http_info(self, body, shot_id, layer_idx, **kwargs):  # noqa: E501
+    def set_shot_layer_matte_with_http_info(self, body, shot_uuid, layer_idx, **kwargs):  # noqa: E501
         """Shot Layer Set  Matte Properties  # noqa: E501
 
         Update the matte properties of the Shot with UUID at the specified layer index.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.set_shot_layer_matte_with_http_info(body, shot_id, layer_idx, async_req=True)
+        >>> thread = api.set_shot_layer_matte_with_http_info(body, shot_uuid, layer_idx, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param MatteData body: json with Matte data (required)
-        :param Uuid shot_id: Shot UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
         :param int layer_idx: Layer Index (required)
         :param str level: Level of detail. If set to ALL the full data model is returned.
         :return: MatteData
@@ -9619,7 +9940,7 @@ class ProjectsApi(object):
                  returns the request thread.
         """
 
-        all_params = ['body', 'shot_id', 'layer_idx', 'level']  # noqa: E501
+        all_params = ['body', 'shot_uuid', 'layer_idx', 'level']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -9638,10 +9959,10 @@ class ProjectsApi(object):
         if ('body' not in params or
                 params['body'] is None):
             raise ValueError("Missing the required parameter `body` when calling `set_shot_layer_matte`")  # noqa: E501
-        # verify the required parameter 'shot_id' is set
-        if ('shot_id' not in params or
-                params['shot_id'] is None):
-            raise ValueError("Missing the required parameter `shot_id` when calling `set_shot_layer_matte`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `set_shot_layer_matte`")  # noqa: E501
         # verify the required parameter 'layer_idx' is set
         if ('layer_idx' not in params or
                 params['layer_idx'] is None):
@@ -9650,8 +9971,8 @@ class ProjectsApi(object):
         collection_formats = {}
 
         path_params = {}
-        if 'shot_id' in params:
-            path_params['shot_id'] = params['shot_id']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
         if 'layer_idx' in params:
             path_params['layer_idx'] = params['layer_idx']  # noqa: E501
 
@@ -9679,7 +10000,7 @@ class ProjectsApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/shot/{shot_id}/layers/{layer_idx}/matte', 'PUT',
+            '/shot/{shot_uuid}/layers/{layer_idx}/matte', 'PUT',
             path_params,
             query_params,
             header_params,

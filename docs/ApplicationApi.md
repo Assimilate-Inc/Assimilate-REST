@@ -4,29 +4,29 @@ All URIs are relative to *http://localhost:8080/APIV2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_application_render_queue_item**](ApplicationApi.md#add_application_render_queue_item) | **PUT** /application/render/{output_UUID} | Render Queue Item Add
-[**add_application_render_queue_item_start**](ApplicationApi.md#add_application_render_queue_item_start) | **POST** /application/render/{output_UUID} | Render Queue Item Add Start
-[**delete_application_render_queue_item**](ApplicationApi.md#delete_application_render_queue_item) | **DELETE** /application/render/{output_UUID} | Render Queue Item Delete
-[**do_application_player_enter_shot**](ApplicationApi.md#do_application_player_enter_shot) | **POST** /application/player/entershot/{shot_UUID} | Player Enter Shot
-[**do_application_player_enter_slot**](ApplicationApi.md#do_application_player_enter_slot) | **POST** /application/player/enterslot/{slot_IDX} | Player Enter Slot
-[**do_application_player_enter_timeline**](ApplicationApi.md#do_application_player_enter_timeline) | **POST** /application/player/entertimeline/{construct_UUID} | Player Enter Timeline (CID)
+[**add_application_render_queue_item**](ApplicationApi.md#add_application_render_queue_item) | **PUT** /application/render/{output_uuid} | Render Queue Item Add
+[**add_application_render_queue_item_start**](ApplicationApi.md#add_application_render_queue_item_start) | **POST** /application/render/{output_uuid} | Render Queue Item Add Start
+[**delete_application_render_queue_item**](ApplicationApi.md#delete_application_render_queue_item) | **DELETE** /application/render/{output_uuid} | Render Queue Item Delete
+[**do_application_player_enter_shot**](ApplicationApi.md#do_application_player_enter_shot) | **POST** /application/player/entershot/{shot_uuid} | Player Enter Shot
+[**do_application_player_enter_slot**](ApplicationApi.md#do_application_player_enter_slot) | **POST** /application/player/enterslot/{slot_idx} | Player Enter Slot
+[**do_application_player_enter_timeline**](ApplicationApi.md#do_application_player_enter_timeline) | **POST** /application/player/entertimeline/{construct_uuid} | Player Enter Timeline (CID)
 [**do_application_player_enter_timeline_current**](ApplicationApi.md#do_application_player_enter_timeline_current) | **POST** /application/player/entertimeline | Player Enter Timeline (CC)
 [**do_application_player_exit**](ApplicationApi.md#do_application_player_exit) | **POST** /application/player/exit | Player Exit
 [**do_application_project_enter**](ApplicationApi.md#do_application_project_enter) | **POST** /application/project/enter/{projectID} | Project Enter
 [**do_application_project_exit**](ApplicationApi.md#do_application_project_exit) | **POST** /application/project/exit | Project Exit
-[**do_application_render_delete_media_item**](ApplicationApi.md#do_application_render_delete_media_item) | **POST** /application/render/deletemedia/{output_UUID} | Render Queue Item Delete Media
+[**do_application_render_delete_media_item**](ApplicationApi.md#do_application_render_delete_media_item) | **POST** /application/render/deletemedia/{output_uuid} | Render Queue Item Delete Media
 [**do_application_render_lut**](ApplicationApi.md#do_application_render_lut) | **POST** /application/tools/lut | Get LUT of Shot at Frame
 [**do_application_render_snapshot**](ApplicationApi.md#do_application_render_snapshot) | **POST** /application/tools/image | Render Snapshot
 [**do_application_render_start**](ApplicationApi.md#do_application_render_start) | **POST** /application/render/start | Render Queue Start
 [**do_application_render_stop**](ApplicationApi.md#do_application_render_stop) | **POST** /application/render/stop | Render Queue Stop
-[**do_application_render_stop_item**](ApplicationApi.md#do_application_render_stop_item) | **POST** /application/render/stop/{output_UUID} | Render Queue Item Stop
+[**do_application_render_stop_item**](ApplicationApi.md#do_application_render_stop_item) | **POST** /application/render/stop/{output_uuid} | Render Queue Item Stop
 [**do_application_restart**](ApplicationApi.md#do_application_restart) | **POST** /application/restart | Application Restart
 [**do_application_shutdown**](ApplicationApi.md#do_application_shutdown) | **POST** /application/shutdown | Application Shutdown
 [**get_application_player_playmode**](ApplicationApi.md#get_application_player_playmode) | **GET** /application/player/playmode | Player Get Mode
 [**get_application_render_queue**](ApplicationApi.md#get_application_render_queue) | **GET** /application/render | Render Queue List
-[**get_application_render_queue_item**](ApplicationApi.md#get_application_render_queue_item) | **GET** /application/render/{output_UUID} | Render Queue Item Get
+[**get_application_render_queue_item**](ApplicationApi.md#get_application_render_queue_item) | **GET** /application/render/{output_uuid} | Render Queue Item Get
 [**get_application_state**](ApplicationApi.md#get_application_state) | **GET** /application | Application Status
-[**post_application_render_start_item**](ApplicationApi.md#post_application_render_start_item) | **POST** /application/render/start/{output_UUID} | Render Queue Item Start
+[**post_application_render_start_item**](ApplicationApi.md#post_application_render_start_item) | **POST** /application/render/start/{output_uuid} | Render Queue Item Start
 [**set_application_player_playmode**](ApplicationApi.md#set_application_player_playmode) | **PUT** /application/player/playmode | Player Set Mode
 
 # **add_application_render_queue_item**

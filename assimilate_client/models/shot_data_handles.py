@@ -28,80 +28,80 @@ class ShotDataHandles(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        '_in': 'int',
-        'out': 'int',
+        'frame_in': 'int',
+        'frame_out': 'int',
         'start': 'Timecode',
         'end': 'Timecode'
     }
 
     attribute_map = {
-        '_in': 'in',
-        'out': 'out',
+        'frame_in': 'frame_in',
+        'frame_out': 'frame_out',
         'start': 'start',
         'end': 'end'
     }
 
-    def __init__(self, _in=None, out=None, start=None, end=None):  # noqa: E501
+    def __init__(self, frame_in=None, frame_out=None, start=None, end=None):  # noqa: E501
         """ShotDataHandles - a model defined in Swagger"""  # noqa: E501
-        self.__in = None
-        self._out = None
+        self._frame_in = None
+        self._frame_out = None
         self._start = None
         self._end = None
         self.discriminator = None
-        if _in is not None:
-            self._in = _in
-        if out is not None:
-            self.out = out
+        if frame_in is not None:
+            self.frame_in = frame_in
+        if frame_out is not None:
+            self.frame_out = frame_out
         if start is not None:
             self.start = start
         if end is not None:
             self.end = end
 
     @property
-    def _in(self):
-        """Gets the _in of this ShotDataHandles.  # noqa: E501
+    def frame_in(self):
+        """Gets the frame_in of this ShotDataHandles.  # noqa: E501
 
         In-point of the Shot  # noqa: E501
 
-        :return: The _in of this ShotDataHandles.  # noqa: E501
+        :return: The frame_in of this ShotDataHandles.  # noqa: E501
         :rtype: int
         """
-        return self.__in
+        return self._frame_in
 
-    @_in.setter
-    def _in(self, _in):
-        """Sets the _in of this ShotDataHandles.
+    @frame_in.setter
+    def frame_in(self, frame_in):
+        """Sets the frame_in of this ShotDataHandles.
 
         In-point of the Shot  # noqa: E501
 
-        :param _in: The _in of this ShotDataHandles.  # noqa: E501
+        :param frame_in: The frame_in of this ShotDataHandles.  # noqa: E501
         :type: int
         """
 
-        self.__in = _in
+        self._frame_in = frame_in
 
     @property
-    def out(self):
-        """Gets the out of this ShotDataHandles.  # noqa: E501
+    def frame_out(self):
+        """Gets the frame_out of this ShotDataHandles.  # noqa: E501
 
         Out-point of the Shot  # noqa: E501
 
-        :return: The out of this ShotDataHandles.  # noqa: E501
+        :return: The frame_out of this ShotDataHandles.  # noqa: E501
         :rtype: int
         """
-        return self._out
+        return self._frame_out
 
-    @out.setter
-    def out(self, out):
-        """Sets the out of this ShotDataHandles.
+    @frame_out.setter
+    def frame_out(self, frame_out):
+        """Sets the frame_out of this ShotDataHandles.
 
         Out-point of the Shot  # noqa: E501
 
-        :param out: The out of this ShotDataHandles.  # noqa: E501
+        :param frame_out: The frame_out of this ShotDataHandles.  # noqa: E501
         :type: int
         """
 
-        self._out = out
+        self._frame_out = frame_out
 
     @property
     def start(self):

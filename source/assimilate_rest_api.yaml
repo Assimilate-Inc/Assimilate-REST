@@ -419,11 +419,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: do-application-player-enter-timeline-current
-  '/application/player/entertimeline/{construct_UUID}':
+  '/application/player/entertimeline/{construct_uuid}':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: construct_UUID
+        name: construct_uuid
         in: path
         required: true
         description: Construct UUID
@@ -442,11 +442,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: do-application-player-enter-timeline
-  '/application/player/entershot/{shot_UUID}':
+  '/application/player/entershot/{shot_uuid}':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: shot_UUID
+        name: shot_uuid
         in: path
         required: true
         description: Shot UUID
@@ -465,11 +465,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: do-application-player-enter-shot
-  '/application/player/enterslot/{slot_IDX}':
+  '/application/player/enterslot/{slot_idx}':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: slot_IDX
+        name: slot_idx
         in: path
         required: true
         description: Slot index
@@ -566,11 +566,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: get-application-render-queue
-  '/application/render/{output_UUID}':
+  '/application/render/{output_uuid}':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: output_UUID
+        name: output_uuid
         in: path
         required: true
         description: Output node UUID
@@ -674,11 +674,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: do-application-render-start
-  '/application/render/start/{output_UUID}':
+  '/application/render/start/{output_uuid}':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: output_UUID
+        name: output_uuid
         in: path
         required: true
         description: Output node UUID
@@ -719,11 +719,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: do-application-render-stop
-  '/application/render/stop/{output_UUID}':
+  '/application/render/stop/{output_uuid}':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: output_UUID
+        name: output_uuid
         in: path
         required: true
         description: Output node UUID
@@ -742,11 +742,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: do-application-render-stop-item
-  '/application/render/deletemedia/{output_UUID}':
+  '/application/render/deletemedia/{output_uuid}':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: output_UUID
+        name: output_uuid
         in: path
         required: true
         description: Output node UUID
@@ -909,11 +909,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: move-group-current
-  '/groups/{group_UUID}':
+  '/groups/{group_uuid}':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: group_UUID
+        name: group_uuid
         in: path
         required: true
         description: Group UUID
@@ -1177,11 +1177,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: move-constructs-current
-  '/constructs/{construct_UUID}':
+  '/constructs/{construct_uuid}':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: construct_UUID
+        name: construct_uuid
         in: path
         required: true
         description: Construct UUID
@@ -1344,9 +1344,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: get-construct-current-slots
-  '/constructs/current/slots/{slot_IDX}':
+  '/constructs/current/slots/{slot_idx}':
     parameters:
-      - name: slot_IDX
+      - name: slot_idx
         in: path
         required: true
         description: Slot Index
@@ -1430,9 +1430,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: delete-construct-current-slot
-  '/constructs/current/slots/new/{slot_IDX}':
+  '/constructs/current/slots/new/{slot_idx}':
     parameters:
-      - name: slot_IDX
+      - name: slot_idx
         in: path
         required: true
         description: Slot Index
@@ -1518,11 +1518,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: delete-constructs-current-reference
-  /constructs/{construct_UUID}/slots:
+  /constructs/{construct_uuid}/slots:
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: construct_UUID
+        name: construct_uuid
         in: path
         required: true
         description: Construct UUID
@@ -1551,15 +1551,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: get-construct-slots 
-  '/constructs/{construct_UUID}/slots/{slot_IDX}':
+  '/constructs/{construct_uuid}/slots/{slot_idx}':
     parameters:
-      - name: construct_UUID
+      - name: construct_uuid
         in: path
         required: true
         description: Construct UUID
         schema:
           type: string
-      - name: slot_IDX
+      - name: slot_idx
         in: path
         required: true
         description: Slot Index
@@ -1643,15 +1643,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: delete-construct-slot
-  '/constructs/{construct_UUID}/slots/new/{slot_IDX}':
+  '/constructs/{construct_uuid}/slots/new/{slot_idx}':
     parameters:
-      - name: construct_UUID
+      - name: construct_uuid
         in: path
         required: true
         description: Construct UUID
         schema:
           type: string
-      - name: slot_IDX
+      - name: slot_idx
         in: path
         required: true
         description: Slot Index
@@ -1676,9 +1676,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: add-construct-slot
-  /constructs/{construct_UUID}/ref_shot:
+  /constructs/{construct_uuid}/ref_shot:
     parameters:
-      - name: construct_UUID
+      - name: construct_uuid
         in: path
         required: true
         description: Construct UUID
@@ -1771,11 +1771,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: add-shot
-  /shot/{shot_id}:
+  /shot/{shot_uuid}:
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: shot_id
+        name: shot_uuid
         in: path
         required: true
         description: Shot UUID
@@ -1879,11 +1879,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: move-shot
-  /shot/{shot_id}/color:
+  /shot/{shot_uuid}/color:
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: shot_id
+        name: shot_uuid
         in: path
         required: true
         description: Shot UUID
@@ -1958,12 +1958,102 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error_message'
-      operationId: delete-shot-color 
-  /shot/{shot_id}/layers:
+      operationId: reset-shot-color 
+  /shot/{shot_uuid}/controls:
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: shot_id
+        name: shot_uuid
+        in: path
+        required: true
+        description: Shot UUID
+    get:
+      summary: Shot Get Controls Properties
+      description: Get the controls properties of the Shot with UUID
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/controls_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-shot-controls
+    put:
+      summary: Shot Set Controls Properties
+      description: Update the controls properties of the Shot with UUID
+      tags:
+        - Projects
+      requestBody:
+        description: json with shot data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/controls_data'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/controls_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: set-shot-controls
+    delete:
+      summary: Shot Reset Controls Properties
+      description: Reset the controls properties of the Shot with UUID
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/controls_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: reset-shot-controls
+  /shot/{shot_uuid}/layers:
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: shot_uuid
         in: path
         required: true
         description: Shot UUID
@@ -1992,11 +2082,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: get-shot-layers
-  /shot/{shot_id}/layers/new:
+  /shot/{shot_uuid}/layers/new:
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: shot_id
+        name: shot_uuid
         in: path
         required: true
         description: Shot UUID
@@ -2032,11 +2122,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: add-shot-layer
-  /shot/{shot_id}/layers/{layer_idx}:
+  /shot/{shot_uuid}/layers/{layer_idx}:
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: shot_id
+        name: shot_uuid
         in: path
         required: true
         description: Shot UUID
@@ -2140,11 +2230,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: move-layer
-  /shot/{shot_id}/layers/group:
+  /shot/{shot_uuid}/layers/group:
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: shot_id
+        name: shot_uuid
         in: path
         required: true
         description: Shot UUID
@@ -2176,11 +2266,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: add-shot-layer-group
-  /shot/{shot_id}/layers/{layer_idx}/color:
+  /shot/{shot_uuid}/layers/{layer_idx}/color:
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: shot_id
+        name: shot_uuid
         in: path
         required: true
         description: Shot UUID
@@ -2262,11 +2352,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: reset-shot-layer-color
-  /shot/{shot_id}/layers/{layer_idx}/canvas:
+  /shot/{shot_uuid}/layers/{layer_idx}/canvas:
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: shot_id
+        name: shot_uuid
         in: path
         required: true
         description: Shot UUID
@@ -2348,11 +2438,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: reset-shot-layer-canvas 
-  /shot/{shot_id}/layers/{layer_idx}/fill:
+  /shot/{shot_uuid}/layers/{layer_idx}/fill:
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: shot_id
+        name: shot_uuid
         in: path
         required: true
         description: Shot UUID
@@ -2434,11 +2524,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: reset-shot-layer-fill
-  /shot/{shot_id}/layers/{layer_idx}/matte:
+  /shot/{shot_uuid}/layers/{layer_idx}/matte:
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: shot_id
+        name: shot_uuid
         in: path
         required: true
         description: Shot UUID
@@ -2520,9 +2610,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: reset-shot-layer-matte
-  '/constructs/current/slots/{slot_IDX}/versions':
+  '/constructs/current/slots/{slot_idx}/versions':
     parameters:
-      - name: slot_IDX
+      - name: slot_idx
         in: path
         required: true
         description: Slot Index
@@ -2553,15 +2643,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: get-construct-current-slot-versions
-  '/constructs/current/slots/{slot_IDX}/versions/{version_IDX}':
+  '/constructs/current/slots/{slot_idx}/versions/{version_idx}':
     parameters:
-      - name: slot_IDX
+      - name: slot_idx
         in: path
         required: true
         description: Slot Index
         schema:
           type: integer
-      - name: version_IDX
+      - name: version_idx
         in: path
         required: true
         description: 'version Index, representing the nth version'
@@ -2687,15 +2777,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: get-construct-current-selected-shots
-  /constructs/{construct_UUID}/slots/{slot_IDX}/versions:
+  /constructs/{construct_uuid}/slots/{slot_idx}/versions:
     parameters:
-      - name: construct_UUID
+      - name: construct_uuid
         in: path
         required: true
         description: Construct UUID
         schema:
           type: string
-      - name: slot_IDX
+      - name: slot_idx
         in: path
         required: true
         description: Slot Index
@@ -2726,21 +2816,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: get-construct-slot-versions
-  /constructs/{construct_UUID}/slots/{slot_IDX}/versions/{version_IDX}:
+  /constructs/{construct_uuid}/slots/{slot_idx}/versions/{version_idx}:
     parameters:
-      - name: construct_UUID
+      - name: construct_uuid
         in: path
         required: true
         description: Construct UUID
         schema:
           type: string
-      - name: slot_IDX
+      - name: slot_idx
         in: path
         required: true
         description: Slot Index
         schema:
           type: integer
-      - name: version_IDX
+      - name: version_idx
         in: path
         required: true
         description: 'Version index, representing the nth version in a slot'
@@ -2866,9 +2956,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: get-construct-current-outputs
-  '/constructs/current/outputs/{output_id}':
+  '/constructs/current/outputs/{output_uuid}':
     parameters:
-      - name: output_id
+      - name: output_uuid
         in: path
         required: true
         description: Output Node UUID
@@ -2979,11 +3069,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: add-construct-current-output
-  /constructs/{construct_UUID}/outputs:
+  /constructs/{construct_uuid}/outputs:
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: construct_UUID
+        name: construct_uuid
         in: path
         required: true
         description: Construct UUID
@@ -3012,15 +3102,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: get-construct-outputs
-  '/constructs/{construct_UUID}/outputs/{output_id}':
+  '/constructs/{construct_uuid}/outputs/{output_uuid}':
     parameters:
-      - name: construct_UUID
+      - name: construct_uuid
         in: path
         required: true
         description: Construct UUID
         schema:
           $ref: '#/components/schemas/uuid'
-      - name: output_id
+      - name: output_uuid
         in: path
         required: true
         description: Output Node UUID
@@ -3098,11 +3188,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: delete-construct-output
-  '/constructs/{construct_UUID}/outputs/new':
+  '/constructs/{construct_uuid}/outputs/new':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: construct_UUID
+        name: construct_uuid
         in: path
         required: true
         description: Construct UUID
@@ -3138,11 +3228,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: add-construct-output
-  '/shot/{shot_id}/inputs':
+  '/shot/{shot_uuid}/inputs':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: shot_id
+        name: shot_uuid
         in: path
         required: true
         description: Shot UUID
@@ -3165,9 +3255,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: get-shot-inputs
-  '/shot/{shot_id}/inputs/{input_idx}':
+  '/shot/{shot_uuid}/inputs/{input_idx}':
     parameters:
-      - name: shot_id
+      - name: shot_uuid
         in: path
         required: true
         description: Shot UUID
@@ -3203,6 +3293,13 @@ paths:
       description: Update the properties of the n-th Input of the Shot with UUID.
       tags:
         - Projects
+      requestBody:
+        description: json with input settings
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/input_data'
       responses:
         '200':
           description: OK
@@ -3842,12 +3939,12 @@ components:
           x-stoplight:
             id: hopgqfptepxb0
           properties:
-            in:
+            frame_in:
               type: integer
               description: In-point of the Shot
               x-stoplight:
                 id: y8z6bzq1l119k
-            out:
+            frame_out:
               type: integer
               description: Out-point of the Shot
               x-stoplight:
@@ -4006,6 +4103,10 @@ components:
           $ref: '#/components/schemas/staging_data'
         inputs:
           $ref: '#/components/schemas/inputs_data'
+        controls:
+          type: array
+          items:
+            $ref: '#/components/schemas/control_data'
     constructs_data:
       type: object
       title: constructs_data
@@ -4110,7 +4211,7 @@ components:
         timecodec:
           description: Current timelinetimecode (readonly)
           type: string
-        slot_index:
+        slot_idx:
           description: Current Slot index being played in the timeline
           type: integer
         shot_uuid:
@@ -4121,7 +4222,7 @@ components:
         shot_timecode:
           description: Current record timecode of the Shot being played (readonly)
           type: string
-        version:
+        version_idx:
           description: Version index of the shot in the Player.
           type: integer
         session:
@@ -4262,9 +4363,9 @@ components:
           x-stoplight:
             id: 7h8y9n0m1l2k3
           properties:
-            uuid:
+            ref_uuid:
               $ref: '#/components/schemas/uuid'
-            slip:
+            ref_slip:
               type: number
               description: Slip in frames of the reference shot to the timeline
     metadata:
@@ -4399,6 +4500,80 @@ components:
               type: number
         animation:
           $ref: '#/components/schemas/animation_data' 
+    controls_data:
+      type: object
+      title: controls_data
+      description: List of controls of the Shot
+      properties:
+        controls:
+          type: array
+          title: controls
+          description: List of controls
+          items:
+            $ref: '#/components/schemas/control_data'
+    control_data:
+      type: object
+      title: control_data
+      description: Individual control data item
+      required:
+        - id
+        - value
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the control (readonly)
+          x-stoplight:
+            id: 8y7n6m5l4k3j2
+        name:
+          type: string
+          description: Name of the control
+          x-stoplight:
+            id: 7h8y9n0m1l2k3 
+        type:
+          type: string
+          description: Type of the control - 'Option', 'Text', 'Boolean', etc. (readonly)
+          enum:
+            - Option
+            - Text
+            - MText
+            - Boolean
+            - Numeric
+            - Color
+            - Menu
+          x-stoplight:
+            id: 9s5y1h2o7c4d8
+        value:
+          description: Value of the control (string representation for all types)
+          x-stoplight:
+            id: 9s5y1h2o7c4d8
+          oneOf:
+            - type: boolean
+            - type: string
+            - type: number
+            - type: object
+              properties:
+                r:
+                  type: number
+                  description: Red channel value
+                  x-stoplight:
+                    id: 9s5y1h2o7c4d8 
+                g:
+                  type: number
+                  description: Green channel value
+                  x-stoplight:
+                    id: 7h8y9n0m1l2k3
+                b:
+                  type: number
+                  description: Blue channel value
+                  x-stoplight:
+                    id: 9s5y1h2o7c4d8
+                a:
+                  type: number
+                  description: Alpha channel value
+                  x-stoplight:
+                    id: 7h8y9n0m1l2k3
+                  required: [r, g, b, a]
+                  additionalProperties: false
     colorgrade_data:
       type: object
       title: colorgrade
@@ -4858,6 +5033,11 @@ components:
             - Projected
             - On Canvas
             - Pinned
+        slip:
+          type: number
+          description: Slip in frames of the fill
+          x-stoplight:
+            id: uwkvnsf1yuul7f  
         orientation:
           type: object
           description: Fill orientation
@@ -4970,6 +5150,11 @@ components:
             - Projected
             - On Canvas
             - Pinned
+        slip:
+          type: number
+          description: Slip in frames of the matte
+          x-stoplight:
+            id: uwkvnsf1yuul7f
         orientation:
           type: object
           description: Matte orientation
@@ -5138,11 +5323,11 @@ components:
           description: Create a copy of the Shot
         construct_uuid:
           $ref: '#/components/schemas/uuid'
-        slot_id:
+        slot_idx:
           type: integer
           description: Move the Shot to a Slot with slot_id in the Construct
           x-stoplight:
-        version_id:
+        version_idx:
           type: integer
           description: Move the Shot to the version index in the Slot
           x-stoplight:  
@@ -5258,6 +5443,11 @@ components:
         grade:
           type: boolean
           description: render the grade of the Input Shot
+        create_copy:
+          type: boolean
+          description: Create a copy of the Shot or use a reference
+          x-stoplight:
+            id: or4x1j6q3p3t2
         input_uuid:
           $ref: '#/components/schemas/uuid'
         input:
@@ -5295,7 +5485,7 @@ components:
       properties:
         group_uuid:
           $ref: '#/components/schemas/uuid'
-        desk_uuid:
+        construct_uuid:
           $ref: '#/components/schemas/uuid'
         selection:
           type: array

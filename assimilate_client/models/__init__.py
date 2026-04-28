@@ -42,6 +42,8 @@ from assimilate_client.models.construct_data import ConstructData
 from assimilate_client.models.construct_data_audio import ConstructDataAudio
 from assimilate_client.models.construct_data_resolution import ConstructDataResolution
 from assimilate_client.models.constructs_data import ConstructsData
+from assimilate_client.models.control_data import ControlData
+from assimilate_client.models.controls_data import ControlsData
 from assimilate_client.models.delete_media_data import DeleteMediaData
 from assimilate_client.models.eotf import Eotf
 from assimilate_client.models.error_message import ErrorMessage
@@ -68,6 +70,7 @@ from assimilate_client.models.move_group_data import MoveGroupData
 from assimilate_client.models.move_layer_data import MoveLayerData
 from assimilate_client.models.move_shot_data import MoveShotData
 from assimilate_client.models.note_data import NoteData
+from assimilate_client.models.one_ofcontrol_data_value import OneOfcontrolDataValue
 from assimilate_client.models.playmode_data import PlaymodeData
 from assimilate_client.models.project_data import ProjectData
 from assimilate_client.models.project_data_color_management import ProjectDataColorManagement

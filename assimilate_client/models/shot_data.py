@@ -60,7 +60,8 @@ class ShotData(object):
         'metadata': 'Metadata',
         'notes': 'list[NoteData]',
         'staging': 'StagingData',
-        'inputs': 'InputsData'
+        'inputs': 'InputsData',
+        'controls': 'list[ControlData]'
     }
 
     attribute_map = {
@@ -96,10 +97,11 @@ class ShotData(object):
         'metadata': 'metadata',
         'notes': 'notes',
         'staging': 'staging',
-        'inputs': 'inputs'
+        'inputs': 'inputs',
+        'controls': 'controls'
     }
 
-    def __init__(self, uuid=None, type_uuid=None, file=None, name=None, node_preset_file=None, color_settings_file=None, reel_id=None, scene=None, take=None, circled=None, fps=None, fps_multiplier=None, fps_offset=None, fps_mode=None, frame_tc=None, timecode=None, length=None, handles=None, size=None, aspect=None, output=None, framing=None, view=None, orientation=None, color_format=None, colorgrade=None, camera=None, mos=None, audio=None, metadata=None, notes=None, staging=None, inputs=None):  # noqa: E501
+    def __init__(self, uuid=None, type_uuid=None, file=None, name=None, node_preset_file=None, color_settings_file=None, reel_id=None, scene=None, take=None, circled=None, fps=None, fps_multiplier=None, fps_offset=None, fps_mode=None, frame_tc=None, timecode=None, length=None, handles=None, size=None, aspect=None, output=None, framing=None, view=None, orientation=None, color_format=None, colorgrade=None, camera=None, mos=None, audio=None, metadata=None, notes=None, staging=None, inputs=None, controls=None):  # noqa: E501
         """ShotData - a model defined in Swagger"""  # noqa: E501
         self._uuid = None
         self._type_uuid = None
@@ -134,6 +136,7 @@ class ShotData(object):
         self._notes = None
         self._staging = None
         self._inputs = None
+        self._controls = None
         self.discriminator = None
         if uuid is not None:
             self.uuid = uuid
@@ -201,6 +204,8 @@ class ShotData(object):
             self.staging = staging
         if inputs is not None:
             self.inputs = inputs
+        if controls is not None:
+            self.controls = controls
 
     @property
     def uuid(self):
@@ -928,6 +933,27 @@ class ShotData(object):
         """
 
         self._inputs = inputs
+
+    @property
+    def controls(self):
+        """Gets the controls of this ShotData.  # noqa: E501
+
+
+        :return: The controls of this ShotData.  # noqa: E501
+        :rtype: list[ControlData]
+        """
+        return self._controls
+
+    @controls.setter
+    def controls(self, controls):
+        """Sets the controls of this ShotData.
+
+
+        :param controls: The controls of this ShotData.  # noqa: E501
+        :type: list[ControlData]
+        """
+
+        self._controls = controls
 
     def to_dict(self):
         """Returns the model properties as a dict"""

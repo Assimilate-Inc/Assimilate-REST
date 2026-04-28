@@ -29,26 +29,26 @@ class SelectedShotsData(object):
     """
     swagger_types = {
         'group_uuid': 'Uuid',
-        'desk_uuid': 'Uuid',
+        'construct_uuid': 'Uuid',
         'selection': 'list[SelectedShotsDataSelection]'
     }
 
     attribute_map = {
         'group_uuid': 'group_uuid',
-        'desk_uuid': 'desk_uuid',
+        'construct_uuid': 'construct_uuid',
         'selection': 'selection'
     }
 
-    def __init__(self, group_uuid=None, desk_uuid=None, selection=None):  # noqa: E501
+    def __init__(self, group_uuid=None, construct_uuid=None, selection=None):  # noqa: E501
         """SelectedShotsData - a model defined in Swagger"""  # noqa: E501
         self._group_uuid = None
-        self._desk_uuid = None
+        self._construct_uuid = None
         self._selection = None
         self.discriminator = None
         if group_uuid is not None:
             self.group_uuid = group_uuid
-        if desk_uuid is not None:
-            self.desk_uuid = desk_uuid
+        if construct_uuid is not None:
+            self.construct_uuid = construct_uuid
         if selection is not None:
             self.selection = selection
 
@@ -74,25 +74,25 @@ class SelectedShotsData(object):
         self._group_uuid = group_uuid
 
     @property
-    def desk_uuid(self):
-        """Gets the desk_uuid of this SelectedShotsData.  # noqa: E501
+    def construct_uuid(self):
+        """Gets the construct_uuid of this SelectedShotsData.  # noqa: E501
 
 
-        :return: The desk_uuid of this SelectedShotsData.  # noqa: E501
+        :return: The construct_uuid of this SelectedShotsData.  # noqa: E501
         :rtype: Uuid
         """
-        return self._desk_uuid
+        return self._construct_uuid
 
-    @desk_uuid.setter
-    def desk_uuid(self, desk_uuid):
-        """Sets the desk_uuid of this SelectedShotsData.
+    @construct_uuid.setter
+    def construct_uuid(self, construct_uuid):
+        """Sets the construct_uuid of this SelectedShotsData.
 
 
-        :param desk_uuid: The desk_uuid of this SelectedShotsData.  # noqa: E501
+        :param construct_uuid: The construct_uuid of this SelectedShotsData.  # noqa: E501
         :type: Uuid
         """
 
-        self._desk_uuid = desk_uuid
+        self._construct_uuid = construct_uuid
 
     @property
     def selection(self):

@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import json
 import pkg_resources
 
@@ -85,7 +87,7 @@ def process_shot(item, prev_item, cw, ch):
         version_idx=item.version_idx,
     )
 
-    shot.handles.out = slot.length - 1
+    shot.handles.src_out = slot.length - 1
 
     print(f"Shot size: {shot.size.width} {shot.size.height}")
 
@@ -118,7 +120,7 @@ def process_shot(item, prev_item, cw, ch):
         ),
     )
 
-    projects_api.set_shot(shot_id=item.uuid, body=shot)
+    projects_api.set_shot(shot_uuid=item.uuid, body=shot)
 
 try:
     server_version = system_api.get_system_properties().rest_version

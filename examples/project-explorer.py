@@ -70,7 +70,7 @@ class AssimilateProjectExplorer:
         
         projects = self.projects_api.get_projects().projects
         projects.sort(
-            key=lambda p: datetime.strptime(p.modified, "%d/%m/%Y %H:%M"),
+            key=lambda p: datetime.strptime(p.modified, "%Y-%m-%dT%H:%M:%S"),
             reverse=True
         )
         if projects:
@@ -183,7 +183,7 @@ class AssimilateProjectExplorer:
         """Retrieve the active timeline (construct)"""
         print("\n🎞️  Retrieving active timeline...")
         try:
-            construct = self.projects_api.get_constructs_current(level="ALL")
+            construct = self.projects_api.get_constructs_current()
             self.current_construct = construct
             
             resolution = construct.resolution

@@ -36,6 +36,7 @@ Name | Type | Description | Notes
 **notes** | [**list[NoteData]**](NoteData.md) | Notes of the Shot | [optional] 
 **staging** | [**StagingData**](StagingData.md) |  | [optional] 
 **inputs** | [**InputsData**](InputsData.md) |  | [optional] 
+**controls** | [**list[ControlData]**](ControlData.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

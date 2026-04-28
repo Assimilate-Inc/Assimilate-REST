@@ -6,98 +6,101 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_construct**](ProjectsApi.md#add_construct) | **POST** /constructs/new | Construct Add
 [**add_construct_current_output**](ProjectsApi.md#add_construct_current_output) | **POST** /constructs/current/outputs/new | Output Add (CC)
-[**add_construct_current_slot**](ProjectsApi.md#add_construct_current_slot) | **POST** /constructs/current/slots/new/{slot_IDX} | Slot Add (CC)
-[**add_construct_output**](ProjectsApi.md#add_construct_output) | **POST** /constructs/{construct_UUID}/outputs/new | Output Add (CID)
-[**add_construct_slot**](ProjectsApi.md#add_construct_slot) | **POST** /constructs/{construct_UUID}/slots/new/{slot_IDX} | Slot Add (CID)
+[**add_construct_current_slot**](ProjectsApi.md#add_construct_current_slot) | **POST** /constructs/current/slots/new/{slot_idx} | Slot Add (CC)
+[**add_construct_output**](ProjectsApi.md#add_construct_output) | **POST** /constructs/{construct_uuid}/outputs/new | Output Add (CID)
+[**add_construct_slot**](ProjectsApi.md#add_construct_slot) | **POST** /constructs/{construct_uuid}/slots/new/{slot_idx} | Slot Add (CID)
 [**add_group**](ProjectsApi.md#add_group) | **POST** /groups/new | Group Add
 [**add_project**](ProjectsApi.md#add_project) | **POST** /projects/new | Project Add
 [**add_shot**](ProjectsApi.md#add_shot) | **POST** /shot/new | Shot Add
-[**add_shot_layer**](ProjectsApi.md#add_shot_layer) | **POST** /shot/{shot_id}/layers/new | Shot Create Layer
-[**add_shot_layer_group**](ProjectsApi.md#add_shot_layer_group) | **POST** /shot/{shot_id}/layers/group | Shot Create Layer Group
-[**delete_construct**](ProjectsApi.md#delete_construct) | **DELETE** /constructs/{construct_UUID} | Construct Delete
-[**delete_construct_current_output**](ProjectsApi.md#delete_construct_current_output) | **DELETE** /constructs/current/outputs/{output_id} | Output Delete (CC)
-[**delete_construct_current_slot**](ProjectsApi.md#delete_construct_current_slot) | **DELETE** /constructs/current/slots/{slot_IDX} | Slot Delete (CC)
-[**delete_construct_current_slot_version**](ProjectsApi.md#delete_construct_current_slot_version) | **DELETE** /constructs/current/slots/{slot_IDX}/versions/{version_IDX} | Shot Delete (CC)
-[**delete_construct_output**](ProjectsApi.md#delete_construct_output) | **DELETE** /constructs/{construct_UUID}/outputs/{output_id} | Output Delete (CID)
-[**delete_construct_slot**](ProjectsApi.md#delete_construct_slot) | **DELETE** /constructs/{construct_UUID}/slots/{slot_IDX} | Slot Delete (CID)
-[**delete_construct_slot_version**](ProjectsApi.md#delete_construct_slot_version) | **DELETE** /constructs/{construct_UUID}/slots/{slot_IDX}/versions/{version_IDX} | Shot Delete (VRS)
+[**add_shot_layer**](ProjectsApi.md#add_shot_layer) | **POST** /shot/{shot_uuid}/layers/new | Shot Create Layer
+[**add_shot_layer_group**](ProjectsApi.md#add_shot_layer_group) | **POST** /shot/{shot_uuid}/layers/group | Shot Create Layer Group
+[**delete_construct**](ProjectsApi.md#delete_construct) | **DELETE** /constructs/{construct_uuid} | Construct Delete
+[**delete_construct_current_output**](ProjectsApi.md#delete_construct_current_output) | **DELETE** /constructs/current/outputs/{output_uuid} | Output Delete (CC)
+[**delete_construct_current_slot**](ProjectsApi.md#delete_construct_current_slot) | **DELETE** /constructs/current/slots/{slot_idx} | Slot Delete (CC)
+[**delete_construct_current_slot_version**](ProjectsApi.md#delete_construct_current_slot_version) | **DELETE** /constructs/current/slots/{slot_idx}/versions/{version_idx} | Shot Delete (CC)
+[**delete_construct_output**](ProjectsApi.md#delete_construct_output) | **DELETE** /constructs/{construct_uuid}/outputs/{output_uuid} | Output Delete (CID)
+[**delete_construct_slot**](ProjectsApi.md#delete_construct_slot) | **DELETE** /constructs/{construct_uuid}/slots/{slot_idx} | Slot Delete (CID)
+[**delete_construct_slot_version**](ProjectsApi.md#delete_construct_slot_version) | **DELETE** /constructs/{construct_uuid}/slots/{slot_idx}/versions/{version_idx} | Shot Delete (VRS)
 [**delete_constructs_current**](ProjectsApi.md#delete_constructs_current) | **DELETE** /constructs/current | Construct Current Delete
 [**delete_constructs_current_reference**](ProjectsApi.md#delete_constructs_current_reference) | **DELETE** /constructs/current/ref_shot | Construct Current Reference shot Delete
-[**delete_constructs_reference**](ProjectsApi.md#delete_constructs_reference) | **DELETE** /constructs/{construct_UUID}/ref_shot | Construct Current Reference shot Delete
-[**delete_group**](ProjectsApi.md#delete_group) | **DELETE** /groups/{group_UUID} | Group Delete
+[**delete_constructs_reference**](ProjectsApi.md#delete_constructs_reference) | **DELETE** /constructs/{construct_uuid}/ref_shot | Construct Current Reference shot Delete
+[**delete_group**](ProjectsApi.md#delete_group) | **DELETE** /groups/{group_uuid} | Group Delete
 [**delete_group_current**](ProjectsApi.md#delete_group_current) | **DELETE** /groups/current | Group Current Delete
-[**delete_shot**](ProjectsApi.md#delete_shot) | **DELETE** /shot/{shot_id} | Shot Delete
-[**delete_shot_color**](ProjectsApi.md#delete_shot_color) | **DELETE** /shot/{shot_id}/color | Shot Reset Color Properties
-[**delete_shot_input**](ProjectsApi.md#delete_shot_input) | **DELETE** /shot/{shot_id}/inputs/{input_idx} | Input Delete
-[**delete_shot_layer**](ProjectsApi.md#delete_shot_layer) | **DELETE** /shot/{shot_id}/layers/{layer_idx} | Shot Delete Layer
-[**get_construct**](ProjectsApi.md#get_construct) | **GET** /constructs/{construct_UUID} | Construct Get Properties
-[**get_construct_current_output**](ProjectsApi.md#get_construct_current_output) | **GET** /constructs/current/outputs/{output_id} | Output Get Properties (CC)
+[**delete_shot**](ProjectsApi.md#delete_shot) | **DELETE** /shot/{shot_uuid} | Shot Delete
+[**delete_shot_input**](ProjectsApi.md#delete_shot_input) | **DELETE** /shot/{shot_uuid}/inputs/{input_idx} | Input Delete
+[**delete_shot_layer**](ProjectsApi.md#delete_shot_layer) | **DELETE** /shot/{shot_uuid}/layers/{layer_idx} | Shot Delete Layer
+[**get_construct**](ProjectsApi.md#get_construct) | **GET** /constructs/{construct_uuid} | Construct Get Properties
+[**get_construct_current_output**](ProjectsApi.md#get_construct_current_output) | **GET** /constructs/current/outputs/{output_uuid} | Output Get Properties (CC)
 [**get_construct_current_outputs**](ProjectsApi.md#get_construct_current_outputs) | **GET** /constructs/current/outputs | Output List (CC)
 [**get_construct_current_selected_shots**](ProjectsApi.md#get_construct_current_selected_shots) | **GET** /constructs/current/sel_shots | Shot Selection (CC)
-[**get_construct_current_slot**](ProjectsApi.md#get_construct_current_slot) | **GET** /constructs/current/slots/{slot_IDX} | Slot Get Properties (CC)
-[**get_construct_current_slot_version**](ProjectsApi.md#get_construct_current_slot_version) | **GET** /constructs/current/slots/{slot_IDX}/versions/{version_IDX} | Shot Get Properties (CC)
-[**get_construct_current_slot_versions**](ProjectsApi.md#get_construct_current_slot_versions) | **GET** /constructs/current/slots/{slot_IDX}/versions | Shot List (CC)
+[**get_construct_current_slot**](ProjectsApi.md#get_construct_current_slot) | **GET** /constructs/current/slots/{slot_idx} | Slot Get Properties (CC)
+[**get_construct_current_slot_version**](ProjectsApi.md#get_construct_current_slot_version) | **GET** /constructs/current/slots/{slot_idx}/versions/{version_idx} | Shot Get Properties (CC)
+[**get_construct_current_slot_versions**](ProjectsApi.md#get_construct_current_slot_versions) | **GET** /constructs/current/slots/{slot_idx}/versions | Shot List (CC)
 [**get_construct_current_slots**](ProjectsApi.md#get_construct_current_slots) | **GET** /constructs/current/slots | Slot List (CC)
-[**get_construct_output**](ProjectsApi.md#get_construct_output) | **GET** /constructs/{construct_UUID}/outputs/{output_id} | Output Get Properties (CID)
-[**get_construct_outputs**](ProjectsApi.md#get_construct_outputs) | **GET** /constructs/{construct_UUID}/outputs | Output List (CID)
-[**get_construct_slot**](ProjectsApi.md#get_construct_slot) | **GET** /constructs/{construct_UUID}/slots/{slot_IDX} | Slot Get Properties (CID)
-[**get_construct_slot_version**](ProjectsApi.md#get_construct_slot_version) | **GET** /constructs/{construct_UUID}/slots/{slot_IDX}/versions/{version_IDX} | Shot Get Properties (VRS)
-[**get_construct_slot_versions**](ProjectsApi.md#get_construct_slot_versions) | **GET** /constructs/{construct_UUID}/slots/{slot_IDX}/versions | Shot List (VRS)
-[**get_construct_slots**](ProjectsApi.md#get_construct_slots) | **GET** /constructs/{construct_UUID}/slots | Slot List (CID)
+[**get_construct_output**](ProjectsApi.md#get_construct_output) | **GET** /constructs/{construct_uuid}/outputs/{output_uuid} | Output Get Properties (CID)
+[**get_construct_outputs**](ProjectsApi.md#get_construct_outputs) | **GET** /constructs/{construct_uuid}/outputs | Output List (CID)
+[**get_construct_slot**](ProjectsApi.md#get_construct_slot) | **GET** /constructs/{construct_uuid}/slots/{slot_idx} | Slot Get Properties (CID)
+[**get_construct_slot_version**](ProjectsApi.md#get_construct_slot_version) | **GET** /constructs/{construct_uuid}/slots/{slot_idx}/versions/{version_idx} | Shot Get Properties (VRS)
+[**get_construct_slot_versions**](ProjectsApi.md#get_construct_slot_versions) | **GET** /constructs/{construct_uuid}/slots/{slot_idx}/versions | Shot List (VRS)
+[**get_construct_slots**](ProjectsApi.md#get_construct_slots) | **GET** /constructs/{construct_uuid}/slots | Slot List (CID)
 [**get_constructs**](ProjectsApi.md#get_constructs) | **GET** /constructs | Construct List
 [**get_constructs_current**](ProjectsApi.md#get_constructs_current) | **GET** /constructs/current | Construct Current Get
 [**get_constructs_current_reference**](ProjectsApi.md#get_constructs_current_reference) | **GET** /constructs/current/ref_shot | Construct Current Get Reference shot
-[**get_constructs_reference**](ProjectsApi.md#get_constructs_reference) | **GET** /constructs/{construct_UUID}/ref_shot | Construct Get Reference shot
-[**get_group**](ProjectsApi.md#get_group) | **GET** /groups/{group_UUID} | Group Get Properties
+[**get_constructs_reference**](ProjectsApi.md#get_constructs_reference) | **GET** /constructs/{construct_uuid}/ref_shot | Construct Get Reference shot
+[**get_group**](ProjectsApi.md#get_group) | **GET** /groups/{group_uuid} | Group Get Properties
 [**get_group_current**](ProjectsApi.md#get_group_current) | **GET** /groups/current | Group Current Get
 [**get_groups**](ProjectsApi.md#get_groups) | **GET** /groups | Group List
 [**get_projects**](ProjectsApi.md#get_projects) | **GET** /projects | Project List
 [**get_projects_current**](ProjectsApi.md#get_projects_current) | **GET** /projects/current | Project Current
 [**get_projects_item**](ProjectsApi.md#get_projects_item) | **GET** /projects/item/{projectID} | Project Get Properties
-[**get_shot**](ProjectsApi.md#get_shot) | **GET** /shot/{shot_id} | Shot Get Properties
-[**get_shot_color**](ProjectsApi.md#get_shot_color) | **GET** /shot/{shot_id}/color | Shot Get Color Properties
-[**get_shot_input**](ProjectsApi.md#get_shot_input) | **GET** /shot/{shot_id}/inputs/{input_idx} | Input Get Properties
-[**get_shot_inputs**](ProjectsApi.md#get_shot_inputs) | **GET** /shot/{shot_id}/inputs | Inputs List
-[**get_shot_layer**](ProjectsApi.md#get_shot_layer) | **GET** /shot/{shot_id}/layers/{layer_idx} | Shot Get Layer Properties
-[**get_shot_layer_canvas**](ProjectsApi.md#get_shot_layer_canvas) | **GET** /shot/{shot_id}/layers/{layer_idx}/canvas | Shot Layer Get Canvas Properties
-[**get_shot_layer_color**](ProjectsApi.md#get_shot_layer_color) | **GET** /shot/{shot_id}/layers/{layer_idx}/color | Shot Layer Get Color Properties
-[**get_shot_layer_fill**](ProjectsApi.md#get_shot_layer_fill) | **GET** /shot/{shot_id}/layers/{layer_idx}/fill | Shot Layer Get Fill Properties
-[**get_shot_layer_matte**](ProjectsApi.md#get_shot_layer_matte) | **GET** /shot/{shot_id}/layers/{layer_idx}/matte | Shot Layer Get Matte Properties
-[**get_shot_layers**](ProjectsApi.md#get_shot_layers) | **GET** /shot/{shot_id}/layers | Shot Get Layers Properties
-[**move_construct**](ProjectsApi.md#move_construct) | **PATCH** /constructs/{construct_UUID} | Construct Move
-[**move_construct_current_slot_version**](ProjectsApi.md#move_construct_current_slot_version) | **PATCH** /constructs/current/slots/{slot_IDX}/versions/{version_IDX} | Shot Move (CC)
-[**move_construct_slot_version**](ProjectsApi.md#move_construct_slot_version) | **PATCH** /constructs/{construct_UUID}/slots/{slot_IDX}/versions/{version_IDX} | Shot Move (VRS)
+[**get_shot**](ProjectsApi.md#get_shot) | **GET** /shot/{shot_uuid} | Shot Get Properties
+[**get_shot_color**](ProjectsApi.md#get_shot_color) | **GET** /shot/{shot_uuid}/color | Shot Get Color Properties
+[**get_shot_controls**](ProjectsApi.md#get_shot_controls) | **GET** /shot/{shot_uuid}/controls | Shot Get Controls Properties
+[**get_shot_input**](ProjectsApi.md#get_shot_input) | **GET** /shot/{shot_uuid}/inputs/{input_idx} | Input Get Properties
+[**get_shot_inputs**](ProjectsApi.md#get_shot_inputs) | **GET** /shot/{shot_uuid}/inputs | Inputs List
+[**get_shot_layer**](ProjectsApi.md#get_shot_layer) | **GET** /shot/{shot_uuid}/layers/{layer_idx} | Shot Get Layer Properties
+[**get_shot_layer_canvas**](ProjectsApi.md#get_shot_layer_canvas) | **GET** /shot/{shot_uuid}/layers/{layer_idx}/canvas | Shot Layer Get Canvas Properties
+[**get_shot_layer_color**](ProjectsApi.md#get_shot_layer_color) | **GET** /shot/{shot_uuid}/layers/{layer_idx}/color | Shot Layer Get Color Properties
+[**get_shot_layer_fill**](ProjectsApi.md#get_shot_layer_fill) | **GET** /shot/{shot_uuid}/layers/{layer_idx}/fill | Shot Layer Get Fill Properties
+[**get_shot_layer_matte**](ProjectsApi.md#get_shot_layer_matte) | **GET** /shot/{shot_uuid}/layers/{layer_idx}/matte | Shot Layer Get Matte Properties
+[**get_shot_layers**](ProjectsApi.md#get_shot_layers) | **GET** /shot/{shot_uuid}/layers | Shot Get Layers Properties
+[**move_construct**](ProjectsApi.md#move_construct) | **PATCH** /constructs/{construct_uuid} | Construct Move
+[**move_construct_current_slot_version**](ProjectsApi.md#move_construct_current_slot_version) | **PATCH** /constructs/current/slots/{slot_idx}/versions/{version_idx} | Shot Move (CC)
+[**move_construct_slot_version**](ProjectsApi.md#move_construct_slot_version) | **PATCH** /constructs/{construct_uuid}/slots/{slot_idx}/versions/{version_idx} | Shot Move (VRS)
 [**move_constructs_current**](ProjectsApi.md#move_constructs_current) | **PATCH** /constructs/current | Construct Current Move
-[**move_group**](ProjectsApi.md#move_group) | **PATCH** /groups/{group_UUID} | Group Move
+[**move_group**](ProjectsApi.md#move_group) | **PATCH** /groups/{group_uuid} | Group Move
 [**move_group_current**](ProjectsApi.md#move_group_current) | **PATCH** /groups/current | Group Current Move
-[**move_layer**](ProjectsApi.md#move_layer) | **PATCH** /shot/{shot_id}/layers/{layer_idx} | Layer Move
-[**move_shot**](ProjectsApi.md#move_shot) | **PATCH** /shot/{shot_id} | Shot Move
-[**reset_shot_layer_canvas**](ProjectsApi.md#reset_shot_layer_canvas) | **DELETE** /shot/{shot_id}/layers/{layer_idx}/canvas | Shot Layer Reset Canvas Properties
-[**reset_shot_layer_color**](ProjectsApi.md#reset_shot_layer_color) | **DELETE** /shot/{shot_id}/layers/{layer_idx}/color | Shot Layer Reset Color Properties
-[**reset_shot_layer_fill**](ProjectsApi.md#reset_shot_layer_fill) | **DELETE** /shot/{shot_id}/layers/{layer_idx}/fill | Shot Layer Reset Fill Properties
-[**reset_shot_layer_matte**](ProjectsApi.md#reset_shot_layer_matte) | **DELETE** /shot/{shot_id}/layers/{layer_idx}/matte | Shot Layer Reset Matte Properties
-[**select_construct**](ProjectsApi.md#select_construct) | **POST** /constructs/{construct_UUID} | Construct Select
-[**select_group**](ProjectsApi.md#select_group) | **POST** /groups/{group_UUID} | Group Select
-[**set_construct**](ProjectsApi.md#set_construct) | **PUT** /constructs/{construct_UUID} | Construct Set Properties
-[**set_construct_current_output**](ProjectsApi.md#set_construct_current_output) | **PUT** /constructs/current/outputs/{output_id} | Output Set Properties (CC)
-[**set_construct_current_slot**](ProjectsApi.md#set_construct_current_slot) | **PUT** /constructs/current/slots/{slot_IDX} | Slot Set Properties (CC)
-[**set_construct_current_slot_version**](ProjectsApi.md#set_construct_current_slot_version) | **PUT** /constructs/current/slots/{slot_IDX}/versions/{version_IDX} | Shot Set Properties (CC)
-[**set_construct_output**](ProjectsApi.md#set_construct_output) | **PUT** /constructs/{construct_UUID}/outputs/{output_id} | Output Set Properties (CID)
-[**set_construct_slot**](ProjectsApi.md#set_construct_slot) | **PUT** /constructs/{construct_UUID}/slots/{slot_IDX} | Slot Set Properties (CID)
-[**set_construct_slot_version**](ProjectsApi.md#set_construct_slot_version) | **PUT** /constructs/{construct_UUID}/slots/{slot_IDX}/versions/{version_IDX} | Shot Set Properties (VRS)
+[**move_layer**](ProjectsApi.md#move_layer) | **PATCH** /shot/{shot_uuid}/layers/{layer_idx} | Layer Move
+[**move_shot**](ProjectsApi.md#move_shot) | **PATCH** /shot/{shot_uuid} | Shot Move
+[**reset_shot_color**](ProjectsApi.md#reset_shot_color) | **DELETE** /shot/{shot_uuid}/color | Shot Reset Color Properties
+[**reset_shot_controls**](ProjectsApi.md#reset_shot_controls) | **DELETE** /shot/{shot_uuid}/controls | Shot Reset Controls Properties
+[**reset_shot_layer_canvas**](ProjectsApi.md#reset_shot_layer_canvas) | **DELETE** /shot/{shot_uuid}/layers/{layer_idx}/canvas | Shot Layer Reset Canvas Properties
+[**reset_shot_layer_color**](ProjectsApi.md#reset_shot_layer_color) | **DELETE** /shot/{shot_uuid}/layers/{layer_idx}/color | Shot Layer Reset Color Properties
+[**reset_shot_layer_fill**](ProjectsApi.md#reset_shot_layer_fill) | **DELETE** /shot/{shot_uuid}/layers/{layer_idx}/fill | Shot Layer Reset Fill Properties
+[**reset_shot_layer_matte**](ProjectsApi.md#reset_shot_layer_matte) | **DELETE** /shot/{shot_uuid}/layers/{layer_idx}/matte | Shot Layer Reset Matte Properties
+[**select_construct**](ProjectsApi.md#select_construct) | **POST** /constructs/{construct_uuid} | Construct Select
+[**select_group**](ProjectsApi.md#select_group) | **POST** /groups/{group_uuid} | Group Select
+[**set_construct**](ProjectsApi.md#set_construct) | **PUT** /constructs/{construct_uuid} | Construct Set Properties
+[**set_construct_current_output**](ProjectsApi.md#set_construct_current_output) | **PUT** /constructs/current/outputs/{output_uuid} | Output Set Properties (CC)
+[**set_construct_current_slot**](ProjectsApi.md#set_construct_current_slot) | **PUT** /constructs/current/slots/{slot_idx} | Slot Set Properties (CC)
+[**set_construct_current_slot_version**](ProjectsApi.md#set_construct_current_slot_version) | **PUT** /constructs/current/slots/{slot_idx}/versions/{version_idx} | Shot Set Properties (CC)
+[**set_construct_output**](ProjectsApi.md#set_construct_output) | **PUT** /constructs/{construct_uuid}/outputs/{output_uuid} | Output Set Properties (CID)
+[**set_construct_slot**](ProjectsApi.md#set_construct_slot) | **PUT** /constructs/{construct_uuid}/slots/{slot_idx} | Slot Set Properties (CID)
+[**set_construct_slot_version**](ProjectsApi.md#set_construct_slot_version) | **PUT** /constructs/{construct_uuid}/slots/{slot_idx}/versions/{version_idx} | Shot Set Properties (VRS)
 [**set_constructs_current**](ProjectsApi.md#set_constructs_current) | **PUT** /constructs/current | Construct Current Set Properties
 [**set_constructs_current_reference**](ProjectsApi.md#set_constructs_current_reference) | **PUT** /constructs/current/ref_shot | Construct Current Set reference shot
-[**set_constructs_reference**](ProjectsApi.md#set_constructs_reference) | **PUT** /constructs/{construct_UUID}/ref_shot | Construct Current Set reference shot
-[**set_group**](ProjectsApi.md#set_group) | **PUT** /groups/{group_UUID} | Group Set Properties
+[**set_constructs_reference**](ProjectsApi.md#set_constructs_reference) | **PUT** /constructs/{construct_uuid}/ref_shot | Construct Current Set reference shot
+[**set_group**](ProjectsApi.md#set_group) | **PUT** /groups/{group_uuid} | Group Set Properties
 [**set_projects_item**](ProjectsApi.md#set_projects_item) | **PUT** /projects/item/{projectID} | Project Set Properties
-[**set_shot**](ProjectsApi.md#set_shot) | **PUT** /shot/{shot_id} | Shot Set Properties
-[**set_shot_color**](ProjectsApi.md#set_shot_color) | **PUT** /shot/{shot_id}/color | Shot Set Color Properties
-[**set_shot_input**](ProjectsApi.md#set_shot_input) | **PUT** /shot/{shot_id}/inputs/{input_idx} | Input Set Properties
-[**set_shot_layer**](ProjectsApi.md#set_shot_layer) | **PUT** /shot/{shot_id}/layers/{layer_idx} | Shot Set Layer Properties
-[**set_shot_layer_canvas**](ProjectsApi.md#set_shot_layer_canvas) | **PUT** /shot/{shot_id}/layers/{layer_idx}/canvas | Shot Layer Set  Canvas Properties
-[**set_shot_layer_color**](ProjectsApi.md#set_shot_layer_color) | **PUT** /shot/{shot_id}/layers/{layer_idx}/color | Shot Layer Set  Color Properties
-[**set_shot_layer_fill**](ProjectsApi.md#set_shot_layer_fill) | **PUT** /shot/{shot_id}/layers/{layer_idx}/fill | Shot Layer Set  Fill Properties
-[**set_shot_layer_matte**](ProjectsApi.md#set_shot_layer_matte) | **PUT** /shot/{shot_id}/layers/{layer_idx}/matte | Shot Layer Set  Matte Properties
+[**set_shot**](ProjectsApi.md#set_shot) | **PUT** /shot/{shot_uuid} | Shot Set Properties
+[**set_shot_color**](ProjectsApi.md#set_shot_color) | **PUT** /shot/{shot_uuid}/color | Shot Set Color Properties
+[**set_shot_controls**](ProjectsApi.md#set_shot_controls) | **PUT** /shot/{shot_uuid}/controls | Shot Set Controls Properties
+[**set_shot_input**](ProjectsApi.md#set_shot_input) | **PUT** /shot/{shot_uuid}/inputs/{input_idx} | Input Set Properties
+[**set_shot_layer**](ProjectsApi.md#set_shot_layer) | **PUT** /shot/{shot_uuid}/layers/{layer_idx} | Shot Set Layer Properties
+[**set_shot_layer_canvas**](ProjectsApi.md#set_shot_layer_canvas) | **PUT** /shot/{shot_uuid}/layers/{layer_idx}/canvas | Shot Layer Set  Canvas Properties
+[**set_shot_layer_color**](ProjectsApi.md#set_shot_layer_color) | **PUT** /shot/{shot_uuid}/layers/{layer_idx}/color | Shot Layer Set  Color Properties
+[**set_shot_layer_fill**](ProjectsApi.md#set_shot_layer_fill) | **PUT** /shot/{shot_uuid}/layers/{layer_idx}/fill | Shot Layer Set  Fill Properties
+[**set_shot_layer_matte**](ProjectsApi.md#set_shot_layer_matte) | **PUT** /shot/{shot_uuid}/layers/{layer_idx}/matte | Shot Layer Set  Matte Properties
 
 # **add_construct**
 > ConstructData add_construct()
@@ -484,7 +487,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_shot_layer**
-> LayerData add_shot_layer(body, shot_id, level=level)
+> LayerData add_shot_layer(body, shot_uuid, level=level)
 
 Shot Create Layer
 
@@ -501,12 +504,12 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
 body = assimilate_client.LayerData() # LayerData | json with shot data
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Create Layer
-    api_response = api_instance.add_shot_layer(body, shot_id, level=level)
+    api_response = api_instance.add_shot_layer(body, shot_uuid, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->add_shot_layer: %s\n" % e)
@@ -517,7 +520,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**LayerData**](LayerData.md)| json with shot data | 
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
 ### Return type
@@ -536,7 +539,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_shot_layer_group**
-> add_shot_layer_group(shot_id, body=body, level=level)
+> add_shot_layer_group(shot_uuid, body=body, level=level)
 
 Shot Create Layer Group
 
@@ -552,13 +555,13 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 body = assimilate_client.LayerData() # LayerData | json with shot data (optional)
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Create Layer Group
-    api_instance.add_shot_layer_group(shot_id, body=body, level=level)
+    api_instance.add_shot_layer_group(shot_uuid, body=body, level=level)
 except ApiException as e:
     print("Exception when calling ProjectsApi->add_shot_layer_group: %s\n" % e)
 ```
@@ -567,7 +570,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **body** | [**LayerData**](LayerData.md)| json with shot data | [optional] 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
@@ -634,7 +637,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_construct_current_output**
-> delete_construct_current_output(output_id)
+> delete_construct_current_output(output_uuid)
 
 Output Delete (CC)
 
@@ -650,11 +653,11 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-output_id = assimilate_client.Uuid() # Uuid | Output Node UUID
+output_uuid = assimilate_client.Uuid() # Uuid | Output Node UUID
 
 try:
     # Output Delete (CC)
-    api_instance.delete_construct_current_output(output_id)
+    api_instance.delete_construct_current_output(output_uuid)
 except ApiException as e:
     print("Exception when calling ProjectsApi->delete_construct_current_output: %s\n" % e)
 ```
@@ -663,7 +666,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **output_id** | [**Uuid**](.md)| Output Node UUID | 
+ **output_uuid** | [**Uuid**](.md)| Output Node UUID | 
 
 ### Return type
 
@@ -779,7 +782,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_construct_output**
-> delete_construct_output(construct_uuid, output_id)
+> delete_construct_output(construct_uuid, output_uuid)
 
 Output Delete (CID)
 
@@ -796,11 +799,11 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
 construct_uuid = assimilate_client.Uuid() # Uuid | Construct UUID
-output_id = assimilate_client.Uuid() # Uuid | Output Node UUID
+output_uuid = assimilate_client.Uuid() # Uuid | Output Node UUID
 
 try:
     # Output Delete (CID)
-    api_instance.delete_construct_output(construct_uuid, output_id)
+    api_instance.delete_construct_output(construct_uuid, output_uuid)
 except ApiException as e:
     print("Exception when calling ProjectsApi->delete_construct_output: %s\n" % e)
 ```
@@ -810,7 +813,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **construct_uuid** | [**Uuid**](.md)| Construct UUID | 
- **output_id** | [**Uuid**](.md)| Output Node UUID | 
+ **output_uuid** | [**Uuid**](.md)| Output Node UUID | 
 
 ### Return type
 
@@ -1153,7 +1156,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_shot**
-> delete_shot(shot_id)
+> delete_shot(shot_uuid)
 
 Shot Delete
 
@@ -1169,11 +1172,11 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 
 try:
     # Shot Delete
-    api_instance.delete_shot(shot_id)
+    api_instance.delete_shot(shot_uuid)
 except ApiException as e:
     print("Exception when calling ProjectsApi->delete_shot: %s\n" % e)
 ```
@@ -1182,54 +1185,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_shot_color**
-> delete_shot_color(shot_id)
-
-Shot Reset Color Properties
-
-Reset the color properties of the Shot with UUID.
-
-### Example
-```python
-from __future__ import print_function
-import time
-import assimilate_client
-from assimilate_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
-
-try:
-    # Shot Reset Color Properties
-    api_instance.delete_shot_color(shot_id)
-except ApiException as e:
-    print("Exception when calling ProjectsApi->delete_shot_color: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
 
 ### Return type
 
@@ -1247,7 +1203,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_shot_input**
-> delete_shot_input(shot_id, input_idx)
+> delete_shot_input(shot_uuid, input_idx)
 
 Input Delete
 
@@ -1263,12 +1219,12 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 input_idx = 56 # int | index of the nth input
 
 try:
     # Input Delete
-    api_instance.delete_shot_input(shot_id, input_idx)
+    api_instance.delete_shot_input(shot_uuid, input_idx)
 except ApiException as e:
     print("Exception when calling ProjectsApi->delete_shot_input: %s\n" % e)
 ```
@@ -1277,7 +1233,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **input_idx** | **int**| index of the nth input | 
 
 ### Return type
@@ -1296,7 +1252,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_shot_layer**
-> delete_shot_layer(shot_id, layer_idx)
+> delete_shot_layer(shot_uuid, layer_idx)
 
 Shot Delete Layer
 
@@ -1312,12 +1268,12 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 
 try:
     # Shot Delete Layer
-    api_instance.delete_shot_layer(shot_id, layer_idx)
+    api_instance.delete_shot_layer(shot_uuid, layer_idx)
 except ApiException as e:
     print("Exception when calling ProjectsApi->delete_shot_layer: %s\n" % e)
 ```
@@ -1326,7 +1282,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
 
 ### Return type
@@ -1395,7 +1351,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_construct_current_output**
-> ShotData get_construct_current_output(output_id, level=level)
+> ShotData get_construct_current_output(output_uuid, level=level)
 
 Output Get Properties (CC)
 
@@ -1411,12 +1367,12 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-output_id = assimilate_client.Uuid() # Uuid | Output Node UUID
+output_uuid = assimilate_client.Uuid() # Uuid | Output Node UUID
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Output Get Properties (CC)
-    api_response = api_instance.get_construct_current_output(output_id, level=level)
+    api_response = api_instance.get_construct_current_output(output_uuid, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->get_construct_current_output: %s\n" % e)
@@ -1426,7 +1382,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **output_id** | [**Uuid**](.md)| Output Node UUID | 
+ **output_uuid** | [**Uuid**](.md)| Output Node UUID | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
 ### Return type
@@ -1741,7 +1697,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_construct_output**
-> ShotData get_construct_output(construct_uuid, output_id, level=level)
+> ShotData get_construct_output(construct_uuid, output_uuid, level=level)
 
 Output Get Properties (CID)
 
@@ -1758,12 +1714,12 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
 construct_uuid = assimilate_client.Uuid() # Uuid | Construct UUID
-output_id = assimilate_client.Uuid() # Uuid | Output Node UUID
+output_uuid = assimilate_client.Uuid() # Uuid | Output Node UUID
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Output Get Properties (CID)
-    api_response = api_instance.get_construct_output(construct_uuid, output_id, level=level)
+    api_response = api_instance.get_construct_output(construct_uuid, output_uuid, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->get_construct_output: %s\n" % e)
@@ -1774,7 +1730,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **construct_uuid** | [**Uuid**](.md)| Construct UUID | 
- **output_id** | [**Uuid**](.md)| Output Node UUID | 
+ **output_uuid** | [**Uuid**](.md)| Output Node UUID | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
 ### Return type
@@ -2521,7 +2477,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_shot**
-> ShotData get_shot(shot_id, level=level)
+> ShotData get_shot(shot_uuid, level=level)
 
 Shot Get Properties
 
@@ -2537,12 +2493,12 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Get Properties
-    api_response = api_instance.get_shot(shot_id, level=level)
+    api_response = api_instance.get_shot(shot_uuid, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->get_shot: %s\n" % e)
@@ -2552,7 +2508,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
 ### Return type
@@ -2571,7 +2527,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_shot_color**
-> ColorgradeData get_shot_color(shot_id, level=level)
+> ColorgradeData get_shot_color(shot_uuid, level=level)
 
 Shot Get Color Properties
 
@@ -2587,12 +2543,12 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Get Color Properties
-    api_response = api_instance.get_shot_color(shot_id, level=level)
+    api_response = api_instance.get_shot_color(shot_uuid, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->get_shot_color: %s\n" % e)
@@ -2602,7 +2558,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
 ### Return type
@@ -2620,8 +2576,58 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_shot_controls**
+> ControlsData get_shot_controls(shot_uuid, level=level)
+
+Shot Get Controls Properties
+
+Get the controls properties of the Shot with UUID
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
+level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
+
+try:
+    # Shot Get Controls Properties
+    api_response = api_instance.get_shot_controls(shot_uuid, level=level)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->get_shot_controls: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
+ **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
+
+### Return type
+
+[**ControlsData**](ControlsData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_shot_input**
-> InputData get_shot_input(shot_id, input_idx)
+> InputData get_shot_input(shot_uuid, input_idx)
 
 Input Get Properties
 
@@ -2637,12 +2643,12 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 input_idx = 56 # int | index of the nth input
 
 try:
     # Input Get Properties
-    api_response = api_instance.get_shot_input(shot_id, input_idx)
+    api_response = api_instance.get_shot_input(shot_uuid, input_idx)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->get_shot_input: %s\n" % e)
@@ -2652,7 +2658,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **input_idx** | **int**| index of the nth input | 
 
 ### Return type
@@ -2671,7 +2677,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_shot_inputs**
-> InputsData get_shot_inputs(shot_id)
+> InputsData get_shot_inputs(shot_uuid)
 
 Inputs List
 
@@ -2687,11 +2693,11 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 
 try:
     # Inputs List
-    api_response = api_instance.get_shot_inputs(shot_id)
+    api_response = api_instance.get_shot_inputs(shot_uuid)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->get_shot_inputs: %s\n" % e)
@@ -2701,7 +2707,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
 
 ### Return type
 
@@ -2719,7 +2725,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_shot_layer**
-> LayerData get_shot_layer(shot_id, layer_idx, level=level)
+> LayerData get_shot_layer(shot_uuid, layer_idx, level=level)
 
 Shot Get Layer Properties
 
@@ -2735,13 +2741,13 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Get Layer Properties
-    api_response = api_instance.get_shot_layer(shot_id, layer_idx, level=level)
+    api_response = api_instance.get_shot_layer(shot_uuid, layer_idx, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->get_shot_layer: %s\n" % e)
@@ -2751,7 +2757,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
@@ -2771,7 +2777,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_shot_layer_canvas**
-> CanvasData get_shot_layer_canvas(shot_id, layer_idx, level=level)
+> CanvasData get_shot_layer_canvas(shot_uuid, layer_idx, level=level)
 
 Shot Layer Get Canvas Properties
 
@@ -2787,13 +2793,13 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Layer Get Canvas Properties
-    api_response = api_instance.get_shot_layer_canvas(shot_id, layer_idx, level=level)
+    api_response = api_instance.get_shot_layer_canvas(shot_uuid, layer_idx, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->get_shot_layer_canvas: %s\n" % e)
@@ -2803,7 +2809,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
@@ -2823,7 +2829,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_shot_layer_color**
-> ColorgradeData get_shot_layer_color(shot_id, layer_idx, level=level)
+> ColorgradeData get_shot_layer_color(shot_uuid, layer_idx, level=level)
 
 Shot Layer Get Color Properties
 
@@ -2839,13 +2845,13 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Layer Get Color Properties
-    api_response = api_instance.get_shot_layer_color(shot_id, layer_idx, level=level)
+    api_response = api_instance.get_shot_layer_color(shot_uuid, layer_idx, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->get_shot_layer_color: %s\n" % e)
@@ -2855,7 +2861,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
@@ -2875,7 +2881,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_shot_layer_fill**
-> FillData get_shot_layer_fill(shot_id, layer_idx, level=level)
+> FillData get_shot_layer_fill(shot_uuid, layer_idx, level=level)
 
 Shot Layer Get Fill Properties
 
@@ -2891,13 +2897,13 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Layer Get Fill Properties
-    api_response = api_instance.get_shot_layer_fill(shot_id, layer_idx, level=level)
+    api_response = api_instance.get_shot_layer_fill(shot_uuid, layer_idx, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->get_shot_layer_fill: %s\n" % e)
@@ -2907,7 +2913,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
@@ -2927,7 +2933,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_shot_layer_matte**
-> MatteData get_shot_layer_matte(shot_id, layer_idx, level=level)
+> MatteData get_shot_layer_matte(shot_uuid, layer_idx, level=level)
 
 Shot Layer Get Matte Properties
 
@@ -2943,13 +2949,13 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Layer Get Matte Properties
-    api_response = api_instance.get_shot_layer_matte(shot_id, layer_idx, level=level)
+    api_response = api_instance.get_shot_layer_matte(shot_uuid, layer_idx, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->get_shot_layer_matte: %s\n" % e)
@@ -2959,7 +2965,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
@@ -2979,7 +2985,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_shot_layers**
-> LayersData get_shot_layers(shot_id, level=level)
+> LayersData get_shot_layers(shot_uuid, level=level)
 
 Shot Get Layers Properties
 
@@ -2995,12 +3001,12 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Get Layers Properties
-    api_response = api_instance.get_shot_layers(shot_id, level=level)
+    api_response = api_instance.get_shot_layers(shot_uuid, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->get_shot_layers: %s\n" % e)
@@ -3010,7 +3016,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
 ### Return type
@@ -3325,7 +3331,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **move_layer**
-> move_layer(body, shot_id, layer_idx)
+> move_layer(body, shot_uuid, layer_idx)
 
 Layer Move
 
@@ -3342,12 +3348,12 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
 body = assimilate_client.MoveLayerData() # MoveLayerData | json with move data for the layer
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 
 try:
     # Layer Move
-    api_instance.move_layer(body, shot_id, layer_idx)
+    api_instance.move_layer(body, shot_uuid, layer_idx)
 except ApiException as e:
     print("Exception when calling ProjectsApi->move_layer: %s\n" % e)
 ```
@@ -3357,7 +3363,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**MoveLayerData**](MoveLayerData.md)| json with move data for the layer | 
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
 
 ### Return type
@@ -3376,7 +3382,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **move_shot**
-> move_shot(body, shot_id, level=level)
+> move_shot(body, shot_uuid, level=level)
 
 Shot Move
 
@@ -3393,12 +3399,12 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
 body = assimilate_client.MoveShotData() # MoveShotData | json with shot move data
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Move
-    api_instance.move_shot(body, shot_id, level=level)
+    api_instance.move_shot(body, shot_uuid, level=level)
 except ApiException as e:
     print("Exception when calling ProjectsApi->move_shot: %s\n" % e)
 ```
@@ -3408,7 +3414,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**MoveShotData**](MoveShotData.md)| json with shot move data | 
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
 ### Return type
@@ -3426,8 +3432,105 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **reset_shot_color**
+> reset_shot_color(shot_uuid)
+
+Shot Reset Color Properties
+
+Reset the color properties of the Shot with UUID.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
+
+try:
+    # Shot Reset Color Properties
+    api_instance.reset_shot_color(shot_uuid)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->reset_shot_color: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **reset_shot_controls**
+> ControlsData reset_shot_controls(shot_uuid, level=level)
+
+Shot Reset Controls Properties
+
+Reset the controls properties of the Shot with UUID
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
+level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
+
+try:
+    # Shot Reset Controls Properties
+    api_response = api_instance.reset_shot_controls(shot_uuid, level=level)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->reset_shot_controls: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
+ **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
+
+### Return type
+
+[**ControlsData**](ControlsData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **reset_shot_layer_canvas**
-> reset_shot_layer_canvas(shot_id, layer_idx)
+> reset_shot_layer_canvas(shot_uuid, layer_idx)
 
 Shot Layer Reset Canvas Properties
 
@@ -3443,12 +3546,12 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 
 try:
     # Shot Layer Reset Canvas Properties
-    api_instance.reset_shot_layer_canvas(shot_id, layer_idx)
+    api_instance.reset_shot_layer_canvas(shot_uuid, layer_idx)
 except ApiException as e:
     print("Exception when calling ProjectsApi->reset_shot_layer_canvas: %s\n" % e)
 ```
@@ -3457,7 +3560,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
 
 ### Return type
@@ -3476,7 +3579,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reset_shot_layer_color**
-> reset_shot_layer_color(shot_id, layer_idx)
+> reset_shot_layer_color(shot_uuid, layer_idx)
 
 Shot Layer Reset Color Properties
 
@@ -3492,12 +3595,12 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 
 try:
     # Shot Layer Reset Color Properties
-    api_instance.reset_shot_layer_color(shot_id, layer_idx)
+    api_instance.reset_shot_layer_color(shot_uuid, layer_idx)
 except ApiException as e:
     print("Exception when calling ProjectsApi->reset_shot_layer_color: %s\n" % e)
 ```
@@ -3506,7 +3609,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
 
 ### Return type
@@ -3525,7 +3628,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reset_shot_layer_fill**
-> reset_shot_layer_fill(shot_id, layer_idx)
+> reset_shot_layer_fill(shot_uuid, layer_idx)
 
 Shot Layer Reset Fill Properties
 
@@ -3541,12 +3644,12 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 
 try:
     # Shot Layer Reset Fill Properties
-    api_instance.reset_shot_layer_fill(shot_id, layer_idx)
+    api_instance.reset_shot_layer_fill(shot_uuid, layer_idx)
 except ApiException as e:
     print("Exception when calling ProjectsApi->reset_shot_layer_fill: %s\n" % e)
 ```
@@ -3555,7 +3658,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
 
 ### Return type
@@ -3574,7 +3677,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reset_shot_layer_matte**
-> reset_shot_layer_matte(shot_id, layer_idx)
+> reset_shot_layer_matte(shot_uuid, layer_idx)
 
 Shot Layer Reset Matte Properties
 
@@ -3590,12 +3693,12 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 
 try:
     # Shot Layer Reset Matte Properties
-    api_instance.reset_shot_layer_matte(shot_id, layer_idx)
+    api_instance.reset_shot_layer_matte(shot_uuid, layer_idx)
 except ApiException as e:
     print("Exception when calling ProjectsApi->reset_shot_layer_matte: %s\n" % e)
 ```
@@ -3604,7 +3707,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
 
 ### Return type
@@ -3773,7 +3876,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_construct_current_output**
-> ShotData set_construct_current_output(body, output_id, level=level)
+> ShotData set_construct_current_output(body, output_uuid, level=level)
 
 Output Set Properties (CC)
 
@@ -3790,12 +3893,12 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
 body = assimilate_client.ShotData() # ShotData | json output node data
-output_id = assimilate_client.Uuid() # Uuid | Output Node UUID
+output_uuid = assimilate_client.Uuid() # Uuid | Output Node UUID
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Output Set Properties (CC)
-    api_response = api_instance.set_construct_current_output(body, output_id, level=level)
+    api_response = api_instance.set_construct_current_output(body, output_uuid, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->set_construct_current_output: %s\n" % e)
@@ -3806,7 +3909,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**ShotData**](ShotData.md)| json output node data | 
- **output_id** | [**Uuid**](.md)| Output Node UUID | 
+ **output_uuid** | [**Uuid**](.md)| Output Node UUID | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
 ### Return type
@@ -3931,7 +4034,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_construct_output**
-> ShotData set_construct_output(body, construct_uuid, output_id, level=level)
+> ShotData set_construct_output(body, construct_uuid, output_uuid, level=level)
 
 Output Set Properties (CID)
 
@@ -3949,12 +4052,12 @@ from pprint import pprint
 api_instance = assimilate_client.ProjectsApi()
 body = assimilate_client.ShotData() # ShotData | json output node data
 construct_uuid = assimilate_client.Uuid() # Uuid | Construct UUID
-output_id = assimilate_client.Uuid() # Uuid | Output Node UUID
+output_uuid = assimilate_client.Uuid() # Uuid | Output Node UUID
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Output Set Properties (CID)
-    api_response = api_instance.set_construct_output(body, construct_uuid, output_id, level=level)
+    api_response = api_instance.set_construct_output(body, construct_uuid, output_uuid, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->set_construct_output: %s\n" % e)
@@ -3966,7 +4069,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**ShotData**](ShotData.md)| json output node data | 
  **construct_uuid** | [**Uuid**](.md)| Construct UUID | 
- **output_id** | [**Uuid**](.md)| Output Node UUID | 
+ **output_uuid** | [**Uuid**](.md)| Output Node UUID | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
 ### Return type
@@ -4344,7 +4447,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_shot**
-> ShotData set_shot(body, shot_id, level=level)
+> ShotData set_shot(body, shot_uuid, level=level)
 
 Shot Set Properties
 
@@ -4361,12 +4464,12 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
 body = assimilate_client.ShotData() # ShotData | json with shot data
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Set Properties
-    api_response = api_instance.set_shot(body, shot_id, level=level)
+    api_response = api_instance.set_shot(body, shot_uuid, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->set_shot: %s\n" % e)
@@ -4377,7 +4480,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**ShotData**](ShotData.md)| json with shot data | 
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
 ### Return type
@@ -4396,7 +4499,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_shot_color**
-> ColorgradeData set_shot_color(body, shot_id, level=level)
+> ColorgradeData set_shot_color(body, shot_uuid, level=level)
 
 Shot Set Color Properties
 
@@ -4413,12 +4516,12 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
 body = assimilate_client.ColorgradeData() # ColorgradeData | json with shot data
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Set Color Properties
-    api_response = api_instance.set_shot_color(body, shot_id, level=level)
+    api_response = api_instance.set_shot_color(body, shot_uuid, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->set_shot_color: %s\n" % e)
@@ -4429,7 +4532,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**ColorgradeData**](ColorgradeData.md)| json with shot data | 
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
 ### Return type
@@ -4447,8 +4550,60 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **set_shot_controls**
+> ControlsData set_shot_controls(body, shot_uuid, level=level)
+
+Shot Set Controls Properties
+
+Update the controls properties of the Shot with UUID
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+body = assimilate_client.ControlsData() # ControlsData | json with shot data
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
+level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
+
+try:
+    # Shot Set Controls Properties
+    api_response = api_instance.set_shot_controls(body, shot_uuid, level=level)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->set_shot_controls: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**ControlsData**](ControlsData.md)| json with shot data | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
+ **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
+
+### Return type
+
+[**ControlsData**](ControlsData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **set_shot_input**
-> InputData set_shot_input(shot_id, input_idx)
+> InputData set_shot_input(body, shot_uuid, input_idx)
 
 Input Set Properties
 
@@ -4464,12 +4619,13 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+body = assimilate_client.InputData() # InputData | json with input settings
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 input_idx = 56 # int | index of the nth input
 
 try:
     # Input Set Properties
-    api_response = api_instance.set_shot_input(shot_id, input_idx)
+    api_response = api_instance.set_shot_input(body, shot_uuid, input_idx)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->set_shot_input: %s\n" % e)
@@ -4479,7 +4635,8 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **body** | [**InputData**](InputData.md)| json with input settings | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **input_idx** | **int**| index of the nth input | 
 
 ### Return type
@@ -4492,13 +4649,13 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_shot_layer**
-> LayerData set_shot_layer(body, shot_id, layer_idx, level=level)
+> LayerData set_shot_layer(body, shot_uuid, layer_idx, level=level)
 
 Shot Set Layer Properties
 
@@ -4515,13 +4672,13 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
 body = assimilate_client.LayerData() # LayerData | json with shot data
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Set Layer Properties
-    api_response = api_instance.set_shot_layer(body, shot_id, layer_idx, level=level)
+    api_response = api_instance.set_shot_layer(body, shot_uuid, layer_idx, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->set_shot_layer: %s\n" % e)
@@ -4532,7 +4689,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**LayerData**](LayerData.md)| json with shot data | 
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
@@ -4552,7 +4709,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_shot_layer_canvas**
-> CanvasData set_shot_layer_canvas(body, shot_id, layer_idx, level=level)
+> CanvasData set_shot_layer_canvas(body, shot_uuid, layer_idx, level=level)
 
 Shot Layer Set  Canvas Properties
 
@@ -4569,13 +4726,13 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
 body = assimilate_client.CanvasData() # CanvasData | json with shot data
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Layer Set  Canvas Properties
-    api_response = api_instance.set_shot_layer_canvas(body, shot_id, layer_idx, level=level)
+    api_response = api_instance.set_shot_layer_canvas(body, shot_uuid, layer_idx, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->set_shot_layer_canvas: %s\n" % e)
@@ -4586,7 +4743,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**CanvasData**](CanvasData.md)| json with shot data | 
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
@@ -4606,7 +4763,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_shot_layer_color**
-> ColorgradeData set_shot_layer_color(body, shot_id, layer_idx, level=level)
+> ColorgradeData set_shot_layer_color(body, shot_uuid, layer_idx, level=level)
 
 Shot Layer Set  Color Properties
 
@@ -4623,13 +4780,13 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
 body = assimilate_client.ColorgradeData() # ColorgradeData | json with shot data
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Layer Set  Color Properties
-    api_response = api_instance.set_shot_layer_color(body, shot_id, layer_idx, level=level)
+    api_response = api_instance.set_shot_layer_color(body, shot_uuid, layer_idx, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->set_shot_layer_color: %s\n" % e)
@@ -4640,7 +4797,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**ColorgradeData**](ColorgradeData.md)| json with shot data | 
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
@@ -4660,7 +4817,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_shot_layer_fill**
-> FillData set_shot_layer_fill(body, shot_id, layer_idx, level=level)
+> FillData set_shot_layer_fill(body, shot_uuid, layer_idx, level=level)
 
 Shot Layer Set  Fill Properties
 
@@ -4677,13 +4834,13 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
 body = assimilate_client.FillData() # FillData | json with Fill data
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Layer Set  Fill Properties
-    api_response = api_instance.set_shot_layer_fill(body, shot_id, layer_idx, level=level)
+    api_response = api_instance.set_shot_layer_fill(body, shot_uuid, layer_idx, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->set_shot_layer_fill: %s\n" % e)
@@ -4694,7 +4851,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**FillData**](FillData.md)| json with Fill data | 
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 
@@ -4714,7 +4871,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_shot_layer_matte**
-> MatteData set_shot_layer_matte(body, shot_id, layer_idx, level=level)
+> MatteData set_shot_layer_matte(body, shot_uuid, layer_idx, level=level)
 
 Shot Layer Set  Matte Properties
 
@@ -4731,13 +4888,13 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
 body = assimilate_client.MatteData() # MatteData | json with Matte data
-shot_id = assimilate_client.Uuid() # Uuid | Shot UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
     # Shot Layer Set  Matte Properties
-    api_response = api_instance.set_shot_layer_matte(body, shot_id, layer_idx, level=level)
+    api_response = api_instance.set_shot_layer_matte(body, shot_uuid, layer_idx, level=level)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ProjectsApi->set_shot_layer_matte: %s\n" % e)
@@ -4748,7 +4905,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**MatteData**](MatteData.md)| json with Matte data | 
- **shot_id** | [**Uuid**](.md)| Shot UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
 

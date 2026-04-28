@@ -29,6 +29,7 @@ class InputData(object):
     """
     swagger_types = {
         'grade': 'bool',
+        'create_copy': 'bool',
         'input_uuid': 'Uuid',
         'input': 'ShotData',
         'length': 'int',
@@ -38,6 +39,7 @@ class InputData(object):
 
     attribute_map = {
         'grade': 'grade',
+        'create_copy': 'create_copy',
         'input_uuid': 'input_uuid',
         'input': 'input',
         'length': 'length',
@@ -45,9 +47,10 @@ class InputData(object):
         'slip': 'slip'
     }
 
-    def __init__(self, grade=None, input_uuid=None, input=None, length=None, loop_mode=None, slip=None):  # noqa: E501
+    def __init__(self, grade=None, create_copy=None, input_uuid=None, input=None, length=None, loop_mode=None, slip=None):  # noqa: E501
         """InputData - a model defined in Swagger"""  # noqa: E501
         self._grade = None
+        self._create_copy = None
         self._input_uuid = None
         self._input = None
         self._length = None
@@ -56,6 +59,8 @@ class InputData(object):
         self.discriminator = None
         if grade is not None:
             self.grade = grade
+        if create_copy is not None:
+            self.create_copy = create_copy
         if input_uuid is not None:
             self.input_uuid = input_uuid
         if input is not None:
@@ -89,6 +94,29 @@ class InputData(object):
         """
 
         self._grade = grade
+
+    @property
+    def create_copy(self):
+        """Gets the create_copy of this InputData.  # noqa: E501
+
+        Create a copy of the Shot or use a reference  # noqa: E501
+
+        :return: The create_copy of this InputData.  # noqa: E501
+        :rtype: bool
+        """
+        return self._create_copy
+
+    @create_copy.setter
+    def create_copy(self, create_copy):
+        """Sets the create_copy of this InputData.
+
+        Create a copy of the Shot or use a reference  # noqa: E501
+
+        :param create_copy: The create_copy of this InputData.  # noqa: E501
+        :type: bool
+        """
+
+        self._create_copy = create_copy
 
     @property
     def input_uuid(self):

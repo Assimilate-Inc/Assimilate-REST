@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **blur_dir_active** | **bool** | Whether the blur direction is active for the matte | [optional] 
 **channel_mask** | [**MatteDataChannelMask**](MatteDataChannelMask.md) |  | [optional] 
 **map** | **str** | Map file path for the matte | [optional] 
+**slip** | **float** | Slip in frames of the matte | [optional] 
 **orientation** | [**MatteDataOrientation**](MatteDataOrientation.md) |  | [optional] 
 **warp** | **str** | Warp type of the matte | [optional] 
 **warp_blur_filter** | **float** | Warp blur filter | [optional] 

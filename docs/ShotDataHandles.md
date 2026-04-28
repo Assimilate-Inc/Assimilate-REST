@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**_in** | **int** | In-point of the Shot | [optional] 
-**out** | **int** | Out-point of the Shot | [optional] 
+**frame_in** | **int** | In-point of the Shot | [optional] 
+**frame_out** | **int** | Out-point of the Shot | [optional] 
 **start** | [**Timecode**](Timecode.md) |  | [optional] 
 **end** | [**Timecode**](Timecode.md) |  | [optional] 
 

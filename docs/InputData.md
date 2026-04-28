@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **grade** | **bool** | render the grade of the Input Shot | [optional] 
+**create_copy** | **bool** | Create a copy of the Shot or use a reference | [optional] 
 **input_uuid** | [**Uuid**](Uuid.md) |  | [optional] 
 **input** | [**ShotData**](ShotData.md) |  | [optional] 
 **length** | **int** | Length of the Input Shot in frames | [optional] 

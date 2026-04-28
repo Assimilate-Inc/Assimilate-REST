@@ -35,6 +35,7 @@ class FillData(object):
         'blur_dir_active': 'bool',
         'channel_mask': 'FillDataChannelMask',
         'map': 'str',
+        'slip': 'float',
         'orientation': 'FillDataOrientation',
         'warp': 'str',
         'warp_blur_filter': 'float',
@@ -49,13 +50,14 @@ class FillData(object):
         'blur_dir_active': 'blur_dir_active',
         'channel_mask': 'channel_mask',
         'map': 'map',
+        'slip': 'slip',
         'orientation': 'orientation',
         'warp': 'warp',
         'warp_blur_filter': 'warp_blur_filter',
         'warp_equi_dist': 'warp_equi_dist'
     }
 
-    def __init__(self, shot_uuid=None, blend_mode=None, blur=None, blur_angle=None, blur_dir_active=None, channel_mask=None, map=None, orientation=None, warp=None, warp_blur_filter=None, warp_equi_dist=None):  # noqa: E501
+    def __init__(self, shot_uuid=None, blend_mode=None, blur=None, blur_angle=None, blur_dir_active=None, channel_mask=None, map=None, slip=None, orientation=None, warp=None, warp_blur_filter=None, warp_equi_dist=None):  # noqa: E501
         """FillData - a model defined in Swagger"""  # noqa: E501
         self._shot_uuid = None
         self._blend_mode = None
@@ -64,6 +66,7 @@ class FillData(object):
         self._blur_dir_active = None
         self._channel_mask = None
         self._map = None
+        self._slip = None
         self._orientation = None
         self._warp = None
         self._warp_blur_filter = None
@@ -83,6 +86,8 @@ class FillData(object):
             self.channel_mask = channel_mask
         if map is not None:
             self.map = map
+        if slip is not None:
+            self.slip = slip
         if orientation is not None:
             self.orientation = orientation
         if warp is not None:
@@ -260,6 +265,29 @@ class FillData(object):
             )
 
         self._map = map
+
+    @property
+    def slip(self):
+        """Gets the slip of this FillData.  # noqa: E501
+
+        Slip in frames of the fill  # noqa: E501
+
+        :return: The slip of this FillData.  # noqa: E501
+        :rtype: float
+        """
+        return self._slip
+
+    @slip.setter
+    def slip(self, slip):
+        """Sets the slip of this FillData.
+
+        Slip in frames of the fill  # noqa: E501
+
+        :param slip: The slip of this FillData.  # noqa: E501
+        :type: float
+        """
+
+        self._slip = slip
 
     @property
     def orientation(self):

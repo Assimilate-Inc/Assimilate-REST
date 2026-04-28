@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **blur_dir_active** | **bool** | Whether the blur direction is active for the fill | [optional] 
 **channel_mask** | [**FillDataChannelMask**](FillDataChannelMask.md) |  | [optional] 
 **map** | **str** | Map file path for the fill | [optional] 
+**slip** | **float** | Slip in frames of the fill | [optional] 
 **orientation** | [**FillDataOrientation**](FillDataOrientation.md) |  | [optional] 
 **warp** | **str** | Warp type of the fill | [optional] 
 **warp_blur_filter** | **float** | Warp blur filter | [optional] 

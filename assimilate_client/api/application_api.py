@@ -94,7 +94,7 @@ class ApplicationApi(object):
 
         path_params = {}
         if 'output_uuid' in params:
-            path_params['output_UUID'] = params['output_uuid']  # noqa: E501
+            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
 
         query_params = []
 
@@ -112,7 +112,7 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/render/{output_UUID}', 'PUT',
+            '/application/render/{output_uuid}', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -191,7 +191,7 @@ class ApplicationApi(object):
 
         path_params = {}
         if 'output_uuid' in params:
-            path_params['output_UUID'] = params['output_uuid']  # noqa: E501
+            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
 
         query_params = []
 
@@ -215,7 +215,7 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/render/{output_UUID}', 'POST',
+            '/application/render/{output_uuid}', 'POST',
             path_params,
             query_params,
             header_params,
@@ -292,7 +292,7 @@ class ApplicationApi(object):
 
         path_params = {}
         if 'output_uuid' in params:
-            path_params['output_UUID'] = params['output_uuid']  # noqa: E501
+            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
 
         query_params = []
 
@@ -310,7 +310,7 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/render/{output_UUID}', 'DELETE',
+            '/application/render/{output_uuid}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -387,7 +387,7 @@ class ApplicationApi(object):
 
         path_params = {}
         if 'shot_uuid' in params:
-            path_params['shot_UUID'] = params['shot_uuid']  # noqa: E501
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
 
         query_params = []
 
@@ -405,7 +405,7 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/player/entershot/{shot_UUID}', 'POST',
+            '/application/player/entershot/{shot_uuid}', 'POST',
             path_params,
             query_params,
             header_params,
@@ -482,7 +482,7 @@ class ApplicationApi(object):
 
         path_params = {}
         if 'slot_idx' in params:
-            path_params['slot_IDX'] = params['slot_idx']  # noqa: E501
+            path_params['slot_idx'] = params['slot_idx']  # noqa: E501
 
         query_params = []
 
@@ -500,7 +500,7 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/player/enterslot/{slot_IDX}', 'POST',
+            '/application/player/enterslot/{slot_idx}', 'POST',
             path_params,
             query_params,
             header_params,
@@ -577,7 +577,7 @@ class ApplicationApi(object):
 
         path_params = {}
         if 'construct_uuid' in params:
-            path_params['construct_UUID'] = params['construct_uuid']  # noqa: E501
+            path_params['construct_uuid'] = params['construct_uuid']  # noqa: E501
 
         query_params = []
 
@@ -595,7 +595,7 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/player/entertimeline/{construct_UUID}', 'POST',
+            '/application/player/entertimeline/{construct_uuid}', 'POST',
             path_params,
             query_params,
             header_params,
@@ -1028,7 +1028,7 @@ class ApplicationApi(object):
 
         path_params = {}
         if 'output_uuid' in params:
-            path_params['output_UUID'] = params['output_uuid']  # noqa: E501
+            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
 
         query_params = []
 
@@ -1046,7 +1046,7 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/render/deletemedia/{output_UUID}', 'POST',
+            '/application/render/deletemedia/{output_uuid}', 'POST',
             path_params,
             query_params,
             header_params,
@@ -1501,7 +1501,7 @@ class ApplicationApi(object):
 
         path_params = {}
         if 'output_uuid' in params:
-            path_params['output_UUID'] = params['output_uuid']  # noqa: E501
+            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
 
         query_params = []
 
@@ -1519,7 +1519,7 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/render/stop/{output_UUID}', 'POST',
+            '/application/render/stop/{output_uuid}', 'POST',
             path_params,
             query_params,
             header_params,
@@ -1936,7 +1936,7 @@ class ApplicationApi(object):
 
         path_params = {}
         if 'output_uuid' in params:
-            path_params['output_UUID'] = params['output_uuid']  # noqa: E501
+            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
 
         query_params = []
 
@@ -1954,7 +1954,7 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/render/{output_UUID}', 'GET',
+            '/application/render/{output_uuid}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -2120,7 +2120,7 @@ class ApplicationApi(object):
 
         path_params = {}
         if 'output_uuid' in params:
-            path_params['output_UUID'] = params['output_uuid']  # noqa: E501
+            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
 
         query_params = []
 
@@ -2144,7 +2144,7 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/render/start/{output_UUID}', 'POST',
+            '/application/render/start/{output_uuid}', 'POST',
             path_params,
             query_params,
             header_params,

@@ -30,8 +30,8 @@ class MoveShotData(object):
     swagger_types = {
         'create_copy': 'bool',
         'construct_uuid': 'Uuid',
-        'slot_id': 'int',
-        'version_id': 'int',
+        'slot_idx': 'int',
+        'version_idx': 'int',
         'tray_name': 'str',
         'tray_frame': 'int',
         'tray_slip': 'int',
@@ -41,20 +41,20 @@ class MoveShotData(object):
     attribute_map = {
         'create_copy': 'create_copy',
         'construct_uuid': 'construct_uuid',
-        'slot_id': 'slot_id',
-        'version_id': 'version_id',
+        'slot_idx': 'slot_idx',
+        'version_idx': 'version_idx',
         'tray_name': 'tray_name',
         'tray_frame': 'tray_frame',
         'tray_slip': 'tray_slip',
         'tray_position': 'tray_position'
     }
 
-    def __init__(self, create_copy=None, construct_uuid=None, slot_id=None, version_id=None, tray_name=None, tray_frame=None, tray_slip=None, tray_position=None):  # noqa: E501
+    def __init__(self, create_copy=None, construct_uuid=None, slot_idx=None, version_idx=None, tray_name=None, tray_frame=None, tray_slip=None, tray_position=None):  # noqa: E501
         """MoveShotData - a model defined in Swagger"""  # noqa: E501
         self._create_copy = None
         self._construct_uuid = None
-        self._slot_id = None
-        self._version_id = None
+        self._slot_idx = None
+        self._version_idx = None
         self._tray_name = None
         self._tray_frame = None
         self._tray_slip = None
@@ -64,10 +64,10 @@ class MoveShotData(object):
             self.create_copy = create_copy
         if construct_uuid is not None:
             self.construct_uuid = construct_uuid
-        if slot_id is not None:
-            self.slot_id = slot_id
-        if version_id is not None:
-            self.version_id = version_id
+        if slot_idx is not None:
+            self.slot_idx = slot_idx
+        if version_idx is not None:
+            self.version_idx = version_idx
         if tray_name is not None:
             self.tray_name = tray_name
         if tray_frame is not None:
@@ -122,50 +122,50 @@ class MoveShotData(object):
         self._construct_uuid = construct_uuid
 
     @property
-    def slot_id(self):
-        """Gets the slot_id of this MoveShotData.  # noqa: E501
+    def slot_idx(self):
+        """Gets the slot_idx of this MoveShotData.  # noqa: E501
 
         Move the Shot to a Slot with slot_id in the Construct  # noqa: E501
 
-        :return: The slot_id of this MoveShotData.  # noqa: E501
+        :return: The slot_idx of this MoveShotData.  # noqa: E501
         :rtype: int
         """
-        return self._slot_id
+        return self._slot_idx
 
-    @slot_id.setter
-    def slot_id(self, slot_id):
-        """Sets the slot_id of this MoveShotData.
+    @slot_idx.setter
+    def slot_idx(self, slot_idx):
+        """Sets the slot_idx of this MoveShotData.
 
         Move the Shot to a Slot with slot_id in the Construct  # noqa: E501
 
-        :param slot_id: The slot_id of this MoveShotData.  # noqa: E501
+        :param slot_idx: The slot_idx of this MoveShotData.  # noqa: E501
         :type: int
         """
 
-        self._slot_id = slot_id
+        self._slot_idx = slot_idx
 
     @property
-    def version_id(self):
-        """Gets the version_id of this MoveShotData.  # noqa: E501
+    def version_idx(self):
+        """Gets the version_idx of this MoveShotData.  # noqa: E501
 
         Move the Shot to the version index in the Slot  # noqa: E501
 
-        :return: The version_id of this MoveShotData.  # noqa: E501
+        :return: The version_idx of this MoveShotData.  # noqa: E501
         :rtype: int
         """
-        return self._version_id
+        return self._version_idx
 
-    @version_id.setter
-    def version_id(self, version_id):
-        """Sets the version_id of this MoveShotData.
+    @version_idx.setter
+    def version_idx(self, version_idx):
+        """Sets the version_idx of this MoveShotData.
 
         Move the Shot to the version index in the Slot  # noqa: E501
 
-        :param version_id: The version_id of this MoveShotData.  # noqa: E501
+        :param version_idx: The version_idx of this MoveShotData.  # noqa: E501
         :type: int
         """
 
-        self._version_id = version_id
+        self._version_idx = version_idx
 
     @property
     def tray_name(self):

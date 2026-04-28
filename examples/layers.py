@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import json
 
 from assimilate_client import Configuration, ApiClient
@@ -29,7 +31,7 @@ try:
     print (shot.uuid)
     
     # get the layers of a shot
-    layers = projects_api.get_shot_layers(shot_id = shot.uuid).layers
+    layers = projects_api.get_shot_layers(shot_uuid = shot.uuid).layers
     #print (layers)
     
     num_layers = len(layers)
@@ -39,20 +41,20 @@ try:
     for i in range(num_layers):
         layer = layers[i]
         print (f"get layer {i}")
-        projects_api.reset_shot_layer_canvas(shot_id = shot.uuid, layer_idx = i)
+        projects_api.reset_shot_layer_canvas(shot_uuid = shot.uuid, layer_idx = i)
         print (f"layer[{i}] reset canvas")
         if layer.group is False:
-            projects_api.reset_shot_layer_color(shot_id = shot.uuid, layer_idx = i)
+            projects_api.reset_shot_layer_color(shot_uuid = shot.uuid, layer_idx = i)
             print (f"layer[{i}] reset color")
-            projects_api.reset_shot_layer_fill(shot_id = shot.uuid, layer_idx = i)
+            projects_api.reset_shot_layer_fill(shot_uuid = shot.uuid, layer_idx = i)
             print (f"layer[{i}] reset fill")
-            projects_api.reset_shot_layer_matte(shot_id = shot.uuid, layer_idx = i)
+            projects_api.reset_shot_layer_matte(shot_uuid = shot.uuid, layer_idx = i)
             print (f"layer[{i}] reset matte")
             
     
     # delete all layers
     for i in reversed(range(num_layers)):
-        projects_api.delete_shot_layer(shot_id = shot.uuid, layer_idx = i)
+        projects_api.delete_shot_layer(shot_uuid = shot.uuid, layer_idx = i)
         print (f"delete layer[{i}]")
     
     # create the layers and groups
@@ -61,11 +63,11 @@ try:
         if layers[i].group:
             #create group
             groups_idx.append(i)  # Add the current group index to the list
-            projects_api.add_shot_layer_group(shot_id = shot.uuid, body = layers[i] )
+            projects_api.add_shot_layer_group(shot_uuid = shot.uuid, body = layers[i] )
             print (f"create group[{i}]")
         else:   
             #create layer
-            projects_api.add_shot_layer(shot_id = shot.uuid, body = layers[i])
+            projects_api.add_shot_layer(shot_uuid = shot.uuid, body = layers[i])
             print (f"create layer[{i}]")
         
         if layers[i].parent is not None:
@@ -73,7 +75,7 @@ try:
             # groups are numbered. The root group is numbered 0 and the first group is numbered 1 etc
             grp_nmbr = groups_idx.index(layers[i].parent) + 1 # Find the group number
             move_to = MoveLayerData(group_index = grp_nmbr)
-            projects_api.move_layer(shot_id = shot.uuid, layer_idx = i, body = move_to)
+            projects_api.move_layer(shot_uuid = shot.uuid, layer_idx = i, body = move_to)
             if layers[i].group: 
                 print (f"move group[{i}] to parent {layers[i].parent}")
             else:  

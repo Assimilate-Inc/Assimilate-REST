@@ -1,180 +1,390 @@
-**General**
+# Assimilate REST API
 
-The Assimilate REST API provides a programming interface to the data and
-functions of the Assimilate Product Suite software: manage projects,
-load and edit media clips, playback and render media, etc. *The REST API is currently only available with a special BETA build of the Assimilate Product Suite, which is not yet publically available*. 
+Official REST API for the **Assimilate Product Suite**
 
-The REST API is available through a http webserver within the Assimilate
-software, which is activated through the System Settings in the
-application. (Note that not all applications in the product suite
-provide REST access or provide a limited function-set (see overview at
-the end of this description).
+The Assimilate REST API provides programmatic access to data structures and core functionality of the Assimilate Product Suite, including project management, media loading, clip editing, playback control, rendering, and system automation.
 
-In the System Setting you specify to start the webserver by default,
-which port to use and (optionally) a specific key to use to restrict
-access.
+> Available from **Assimilate Product Suite v9.9 build 1205** and later.
+
+---
+
+# Table of Contents
+
+- Overview
+- Server Configuration
+- Security
+- Python Wrapper
+- OpenAPI Specification
+- API Modules
+- Project Data Model
+- Versioning & Compatibility
+- Custom Commands
+- Product / License Support
+- Other Interfaces
+- Support Resources
+
+---
+
+# Overview
+
+The REST API is hosted through the built-in HTTP web server available in supported Assimilate applications.
+
+The web server can be enabled from **System Settings**,
 
 ![system settings](./assets/images/GIT_MD_SS.png)
 
-When adding a security key, each http-call to the server has to contain 
-the key in the http header <*Authorization: key*>, otherwise the webserver 
-will respond with a 403 state.
+where you can configure:
 
-Once the webserver is activated, the REST API is available. You can open
-the default page for the system, which shows information of the
-installed setup and provides a link to the REST API documentation.
+- Network adapter / interface
+- Port number
+- Automatic startup when the application launches
+- Request logging (useful for debugging)
+- Optional access key authentication
+
+Once enabled, the API becomes available locally or across the network.
+
+Example:
+
+```text
+http://localhost:8080/
+http://127.0.0.1:8080/
+```
+
+The default landing page provides:
+
+- System information
+- REST API documentation
+- Links to this GitHub repository
 
 ![system settings](./assets/images/GIT_MD_WB.png)
+---
 
+# Security
 
-**Python**
+If an access key is configured, all HTTP requests must include:
 
-The core (REST) API works over http. To be easily used in a scripting
-language like Python a Pythion wrapper library was created. All examples
-for using the REST API provided in this Git, are in Python and are using
-the wrapper library.
+```http
+Authorization: your-key
+```
 
-The library can be installed directly from the command line using:
+Requests without a valid key will return:
 
+```http
+403 Forbidden
+```
+
+---
+
+# Python Wrapper
+
+The REST API supports standard HTTP methods:
+
+- GET
+- POST
+- PUT
+- PATCH
+- DELETE
+
+To simplify integration, an official Python wrapper library is available.
+
+Install directly from GitHub:
+
+```bash
 pip install git+https://github.com/Assimilate-Inc/Assimilate-REST.git
+```
 
-The documentation of the wrapper Python library is available from this
-Git, here: [Documentation](docs/README.md)
+Documentation:
 
-**OpenAPI**
+```text
+docs/README.md
+```
 
-The Assimilate REST has been designed according to the OpenAPI
-Specification (OAS), where the full specs of the API are contained in a
-YAML file, available on this Git. This file can be used to create API
-wrappers for other environments / languages, like e.g. C#, or to create
-alternative formatted documentation.
+---
 
-**API**
+# OpenAPI Specification
 
-The REST API is buildup of 3 modules:
+The Assimilate REST API follows the **OpenAPI Specification (OAS)**.
 
-- System – manage system settings of the local installation, e.g. system
-  name, version, local paths, etc.
-- Project – manage project (meta)data, e.g. create a project, load
-  media, manage a timeline or composite, etc.
-- Application – invoke application functions, e.g. start/stop playback,
-  start a render, etc.
+The repository includes a YAML definition file that can be used to:
 
-The Project module is the most extensive. To understand its usage, it is
-important to grasp the setup and hierarchy of projects in the Assimilate
-Product Suite software. The user guide on the support site
-([https://www.assimilatesupport.com](https://www.assimilatesupport.com)) provides detailed information.
-Below is a short overview of the object-hierarchy.
+- Generate SDKs for other languages
+- Build integrations
+- Import into Swagger / Postman
+- Create custom documentation
+- Generate strongly typed clients
 
-- Project. A Project is the highest level of media organization in the
-  software.
-- Group. Media organization. A Project contains one or more Groups,
-  where each Group contains one or more of Constructs/Timelines.
-- Constructs (/Timelines). The word Construct and Timeline are
-  equivalent in this context. It contains a series of (media)shots where
-  ‘Timeline’ reflects a logical way of playback and ‘Construct’ reflects
-  more just a grouping.
-- Slots. A Construct contains one or more Slots, where each slot has a
-  certain length and can contain no, one or multiple Shots. The first
-  Shot in a Construct represents the timeline shot with the other Shots
-  that might be stacked on top of it can be regarded as versions.
-- Shot. A shot can be a source image sequence (of a wide range of
-  image/camera formats), a live capture, an image effect (plug-in) that
-  takes a source image as input or an image generator. Most generic
-  properties of a Shot are exposed through the REST API but any Shot
-  might also have a series of custom properties which are not exposed
-  directly.
-- Grade. Any Shot can contain a (color)grade to adjust the look of the
-  shot. A grade is made up of a series of color effects. A Shot has a
-  primary grade and on top can contain Layers, each with their own grade
-  or input image to stack effects / images.
-- Layer. A Layer on a Shot has a Canvas that reflects its size and
-  position on the base Shot. A Layer can contain a Grade of its own and
-  can contain a fill or matte Shot to add an image to the source image
-  or apply a specific effect. Layers can be grouped to offset their size
-  and position together.
-- Input. A (effect) Shot can have one or more Input (Shots). This is an
-  alternative model than a Layer for compositing shots together. E.g. a
-  re-timer effects Shot might take in an ProRes source Shot to speed up
-  or create a slomo version of the shot.
-- Output. An Output is basically a Shot, which can render images to a
-  specific file format. Outputs are usually tied to a Construct/Timeline
-  and can optionally be chained together to create an output pipeline to
-  produce different versions of the same timeline.
-- Tray. Media organization. A Project can contain multiple Trays, which
-  in turn contain Shots. A Tray can be used to group Shots (or
-  references of Shots) and provide quick access with any
-  Construct/Timeline that is being worked on.
+---
 
-**Versioning**
+# API Modules
 
-Just like the Assimilate Product Suite software will continue to grow,
-the REST API for it will evolve with it. Currently not all properties
-and functions that you encounter through the user interface are (yet)
-exposed through the REST API. The aim is though that over time and
-depending on demand, more / all functions will be available through the
-REST API.
+The REST API is organized into three main modules.
 
-The REST API has its own version number, which is tied to a specific
-version and build-number of the Assimilate Product Suite. Although we
-try to maintain compatibility between versions, this is not fully
-guaranteed. Keep an eye out for new versions of the Product Suite, where
-any update of the REST API is mentioned. In the release history on this
-Git, the supported version and build-numbers of the product suite are
-mentioned.
+## 1. System
 
-**Custom Commands**
+Manage local system settings and installation data.
 
-Any script to interact with the REST API can be invoked externally from
-the software, and since the REST API works over http, even from another
-system. However, the software itself also provides a way for the user to
-invoke a script to customize the (inner workings of) the software:
-custom commands. Custom commands are defined in the System Settings of
-the software.
+Examples:
+
+- Name
+- Version
+- Local paths
+- Preferences
+
+## 2. Project
+
+Manage project data and media workflows.
+
+Examples:
+
+- Create projects
+- Load media
+- Manage groups
+- Edit timelines
+- Work with trays
+- Modify metadata
+
+## 3. Application
+
+Control runtime behavior.
+
+Examples:
+
+- Start / stop playback
+- Trigger renders
+- Invoke tools
+- Application automation
+
+---
+
+# Project Data Model
+
+The **Project** module is the most extensive part of the API. Understanding the internal hierarchy is recommended when building integrations.
+
+## Project
+
+Top-level container for media organization and workflow data.
+
+## Group
+
+A project contains one or more groups used to organize media and timelines.
+
+## Construct / Timeline
+
+In this context, **Construct** and **Timeline** are equivalent.
+
+A construct contains a sequence of media shots arranged for playback or grouped processing.
+
+## Slot
+
+A construct contains one or more slots.
+
+Each slot has a defined duration and may contain:
+
+- no shots
+- one shot
+- multiple shots
+
+The first shot typically represents the visible timeline shot, while additional shots can act as versions or stacked alternatives.
+
+## Shot
+
+A shot may represent:
+
+- Source media
+- Image sequence
+- Camera format media
+- Live capture
+- Effect / plugin node
+- Image generator
+
+Most generic shot properties are exposed through the REST API. Some specialized node types may contain custom parameters.
+
+## Grade
+
+A shot may contain color grading data.
+
+Grades may include:
+
+- Primary grade
+- Layer grades
+- Effect stacks
+
+## Controls
+
+Many shot types expose custom controls or parameters.
+
+Examples:
+
+- Numeric values
+- Text values
+- Boolean toggles
+- Dropdown selections
+
+Some parameter names originate from legacy interfaces and may be highly technical.
+
+## Layer
+
+Layers can be placed on top of any shot.
+
+A layer may contain:
+
+- Position / scale canvas
+- Independent grade
+- Fill source
+- Matte source
+- Effects
+
+Layers may also be grouped for linked transforms.
+
+## Input
+
+Effect shots use one or more **Inputs** .
+
+Example:
+
+- Retiming effects
+- Video wall or projection node
+- Slomo workflows
+
+## Output
+
+Outputs are rendering nodes used to generate files in specific formats.
+
+Outputs are commonly tied to timelines and may be chained together to create multi-delivery pipelines.
+
+## Tray
+
+Projects can contain multiple trays.
+
+Trays are used to organize reusable shots or references for quick access while editing.
+
+---
+
+# Versioning & Compatibility
+
+The REST API has its own version number, mapped to specific Assimilate Product Suite versions and build numbers.
+
+The current version can be queried through system settings endpoints.
+
+Although backward compatibility is a priority, it cannot always be guaranteed.
+
+| Assimilate Product Suite | REST API version |
+|---|---|
+| v9.9 1205 | 1.0.3 |
+| BETA | 1.0.0 |
+
+## Recommended Best Practices
+
+- Record the API version your integration targets
+- Log version mismatches at runtime
+- Test scripts after upgrading builds
+- Review release notes regularly
+
+---
+
+# Custom Commands
+
+The REST API can be used externally from local or remote systems for automation, rendering, monitoring, and media workflows.
+
+It can also be used internally through **Custom Commands** within the Assimilate Product Suite.
+
+Custom Commands extend the application with user-defined scripts and actions.
 
 ![Custom command](./assets/images/GIT_MD_CC.png)
 
-A Custom Command can be defined as a button, which will appear in the
-menus when inside a project in the software, or as a system event –
-where the script is invoked on e.g. start / stop the software, open /
-close a project or switching user profiles.
+A Custom Command can be defined as a button, which will appear in the menus inside the construct or player, or as a system event where the script is invoked on e.g. start / stop the software or open / close a project.
 
-With a Custom Command tyou can also define user-input fields. These are 
-presented to the User when invoking a Custom Command. A field can be
-text input, a dropdown option list, numeric input or a yes/no option. 
-All the user input is passed on to the underlying script in command line
-parameters.
+Individual Custom Commands can be saved and loaded as standalone .cc files, making it easy to distribute workflow tools and script installers. When loading a custom command file, script paths are automatically updated.
 
-**Support**
+## User Input Forms
 
-The Assimilate Product Suite is available for Windows and MacOS. The
-installer can be downloaded from the support site:
-[https://www.assimilatesupport.com/akb/Downloads.aspx](https://www.assimilatesupport.com/akb/Downloads.aspx)
+Custom Commands (buttons) can prompt the user for input such as:
 
-The user guide and additional specialized documentation is also
-available from that site:
-[https://www.assimilatesupport.com/akb/Knowledgebase.aspx](https://www.assimilatesupport.com/akb/Knowledgebase.aspx)
+- Text input
+- Dropdown list
+- Numeric input
+- Yes / No selection
 
-To run the software, you need a valid license. Trial licenses are
-available through the registration page from the main website:
-[https://www.assimilateinc.com/](https://www.assimilateinc.com/)
+All values are passed to the underlying script through command-line parameters.
 
-The best place for support on the Assimilate REST API is to join our
-Discord channel and open the specific REST API topic:
+This enables interactive workflow automation directly inside the application.
 
-If you have a valid support contract, then you can also contact us
-through the regular email support channel.
+---
 
-The availability and coverage of the REST API depends on the specific
-application within the Assimilate Product Suite that is used, as well as
-the active toolset and license that is used.
+# Product / License Support
 
-**Other Interfaces**
+Availability depends on product edition, active toolset, and license type.
 
-The Assimilate Product Suite provides multiple interfaces for different purposes.
-- REST-API. (http) Interface for accessing and controling Project (media)data, System settings and Application functions (Player, Rendering, etc.) 
-[https://github.com/Assimilate-Inc/Assimilate-REST](https://github.com/Assimilate-Inc/Assimilate-REST)
-- SPA. API for effects-, reader-, writer- and generator-plugins to be used in the render pipeline of the application.
-[https://github.com/Assimilate-Inc/Assimilate-SPA](https://github.com/Assimilate-Inc/Assimilate-SPA)
-- Video-IO. API for plugins to act as an output or capture device for the application.
-[https://github.com/Assimilate-Inc/Assimilate-Video-IO](https://github.com/Assimilate-Inc/Assimilate-Video-IO)
+| Product / License | REST API Support |
+|---|---|
+| Live FX / SCRATCH | Full support |
+| Play Pro Studio | No render options, limited grading support |
+| Live Assist / Looks | Currently no API support |
+| Trial Licenses | Same as above with request limits per session |
+
+---
+
+# Other Interfaces
+
+The Assimilate Product Suite includes multiple developer interfaces.
+
+## REST API
+
+HTTP interface for:
+
+- Projects
+- Media data
+- System settings
+- Playback
+- Rendering
+
+https://github.com/Assimilate-Inc/Assimilate-REST
+
+## SPA
+
+Proprietary plugin SDK for:
+
+- Effects
+- Readers
+- Writers
+- Generators
+
+https://github.com/Assimilate-Inc/Assimilate-SPA
+
+(Note that software also supports the [https://openeffects.org/](OpenFX) plugin standard.)
+
+## Video-IO
+
+Plugin API for output and capture devices.
+
+https://github.com/Assimilate-Inc/Assimilate-Video-IO
+
+---
+
+# Support Resources
+
+## Downloads
+
+https://www.assimilatesupport.com/akb/Downloads.aspx
+
+## Documentation
+
+https://www.assimilatesupport.com/akb/Knowledgebase.aspx
+
+## Licensing / Trials
+
+https://www.assimilateinc.com/
+
+## Community Support
+
+Join the Assimilate Discord community and use the REST API discussion channel.
+
+## Commercial Support
+
+Customers with active support contracts may also use the official email support channel.
+
+---
+
+# License
+
+Refer to repository licensing terms or official Assimilate licensing documentation.

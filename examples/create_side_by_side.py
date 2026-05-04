@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 
+"""
+Author: Assimilate BV
+Date: 30 April 2026
+Description: Assimilate Product Suite REST-API example that shows how to create a composition shot on the fly and add this as a version. The composition created is a videowall shot that shows the current shot and the current reference shot of the timeline (set in the Reference menu of the Editor), iin a side-by-side setup and with the correct frame-offsets.
+"""
+
 import json
 import sys
 

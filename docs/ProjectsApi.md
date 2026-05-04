@@ -22,8 +22,8 @@ Method | HTTP request | Description
 [**delete_construct_slot**](ProjectsApi.md#delete_construct_slot) | **DELETE** /constructs/{construct_uuid}/slots/{slot_idx} | Slot Delete (CID)
 [**delete_construct_slot_version**](ProjectsApi.md#delete_construct_slot_version) | **DELETE** /constructs/{construct_uuid}/slots/{slot_idx}/versions/{version_idx} | Shot Delete (VRS)
 [**delete_constructs_current**](ProjectsApi.md#delete_constructs_current) | **DELETE** /constructs/current | Construct Current Delete
-[**delete_constructs_current_reference**](ProjectsApi.md#delete_constructs_current_reference) | **DELETE** /constructs/current/ref_shot | Construct Current Reference shot Delete
-[**delete_constructs_reference**](ProjectsApi.md#delete_constructs_reference) | **DELETE** /constructs/{construct_uuid}/ref_shot | Construct Current Reference shot Delete
+[**delete_constructs_current_reference**](ProjectsApi.md#delete_constructs_current_reference) | **DELETE** /constructs/current/ref_shot | Construct Current Delete Reference Shot
+[**delete_constructs_reference**](ProjectsApi.md#delete_constructs_reference) | **DELETE** /constructs/{construct_uuid}/ref_shot | Construct Delete Reference Shot
 [**delete_group**](ProjectsApi.md#delete_group) | **DELETE** /groups/{group_uuid} | Group Delete
 [**delete_group_current**](ProjectsApi.md#delete_group_current) | **DELETE** /groups/current | Group Current Delete
 [**delete_shot**](ProjectsApi.md#delete_shot) | **DELETE** /shot/{shot_uuid} | Shot Delete
@@ -44,9 +44,9 @@ Method | HTTP request | Description
 [**get_construct_slot_versions**](ProjectsApi.md#get_construct_slot_versions) | **GET** /constructs/{construct_uuid}/slots/{slot_idx}/versions | Shot List (VRS)
 [**get_construct_slots**](ProjectsApi.md#get_construct_slots) | **GET** /constructs/{construct_uuid}/slots | Slot List (CID)
 [**get_constructs**](ProjectsApi.md#get_constructs) | **GET** /constructs | Construct List
-[**get_constructs_current**](ProjectsApi.md#get_constructs_current) | **GET** /constructs/current | Construct Current Get
-[**get_constructs_current_reference**](ProjectsApi.md#get_constructs_current_reference) | **GET** /constructs/current/ref_shot | Construct Current Get Reference shot
-[**get_constructs_reference**](ProjectsApi.md#get_constructs_reference) | **GET** /constructs/{construct_uuid}/ref_shot | Construct Get Reference shot
+[**get_constructs_current**](ProjectsApi.md#get_constructs_current) | **GET** /constructs/current | Construct Current Get Properties
+[**get_constructs_current_reference**](ProjectsApi.md#get_constructs_current_reference) | **GET** /constructs/current/ref_shot | Construct Current Get Reference Shot
+[**get_constructs_reference**](ProjectsApi.md#get_constructs_reference) | **GET** /constructs/{construct_uuid}/ref_shot | Construct Get Reference Shot
 [**get_group**](ProjectsApi.md#get_group) | **GET** /groups/{group_uuid} | Group Get Properties
 [**get_group_current**](ProjectsApi.md#get_group_current) | **GET** /groups/current | Group Current Get
 [**get_groups**](ProjectsApi.md#get_groups) | **GET** /groups | Group List
@@ -55,7 +55,7 @@ Method | HTTP request | Description
 [**get_projects_item**](ProjectsApi.md#get_projects_item) | **GET** /projects/item/{projectID} | Project Get Properties
 [**get_shot**](ProjectsApi.md#get_shot) | **GET** /shot/{shot_uuid} | Shot Get Properties
 [**get_shot_color**](ProjectsApi.md#get_shot_color) | **GET** /shot/{shot_uuid}/color | Shot Get Color Properties
-[**get_shot_controls**](ProjectsApi.md#get_shot_controls) | **GET** /shot/{shot_uuid}/controls | Shot Get Controls Properties
+[**get_shot_controls**](ProjectsApi.md#get_shot_controls) | **GET** /shot/{shot_uuid}/controls | Shot Get Node Control Properties
 [**get_shot_input**](ProjectsApi.md#get_shot_input) | **GET** /shot/{shot_uuid}/inputs/{input_idx} | Input Get Properties
 [**get_shot_inputs**](ProjectsApi.md#get_shot_inputs) | **GET** /shot/{shot_uuid}/inputs | Inputs List
 [**get_shot_layer**](ProjectsApi.md#get_shot_layer) | **GET** /shot/{shot_uuid}/layers/{layer_idx} | Shot Get Layer Properties
@@ -73,7 +73,7 @@ Method | HTTP request | Description
 [**move_layer**](ProjectsApi.md#move_layer) | **PATCH** /shot/{shot_uuid}/layers/{layer_idx} | Layer Move
 [**move_shot**](ProjectsApi.md#move_shot) | **PATCH** /shot/{shot_uuid} | Shot Move
 [**reset_shot_color**](ProjectsApi.md#reset_shot_color) | **DELETE** /shot/{shot_uuid}/color | Shot Reset Color Properties
-[**reset_shot_controls**](ProjectsApi.md#reset_shot_controls) | **DELETE** /shot/{shot_uuid}/controls | Shot Reset Controls Properties
+[**reset_shot_controls**](ProjectsApi.md#reset_shot_controls) | **DELETE** /shot/{shot_uuid}/controls | Shot Reset Node Control Properties
 [**reset_shot_layer_canvas**](ProjectsApi.md#reset_shot_layer_canvas) | **DELETE** /shot/{shot_uuid}/layers/{layer_idx}/canvas | Shot Layer Reset Canvas Properties
 [**reset_shot_layer_color**](ProjectsApi.md#reset_shot_layer_color) | **DELETE** /shot/{shot_uuid}/layers/{layer_idx}/color | Shot Layer Reset Color Properties
 [**reset_shot_layer_fill**](ProjectsApi.md#reset_shot_layer_fill) | **DELETE** /shot/{shot_uuid}/layers/{layer_idx}/fill | Shot Layer Reset Fill Properties
@@ -88,13 +88,13 @@ Method | HTTP request | Description
 [**set_construct_slot**](ProjectsApi.md#set_construct_slot) | **PUT** /constructs/{construct_uuid}/slots/{slot_idx} | Slot Set Properties (CID)
 [**set_construct_slot_version**](ProjectsApi.md#set_construct_slot_version) | **PUT** /constructs/{construct_uuid}/slots/{slot_idx}/versions/{version_idx} | Shot Set Properties (VRS)
 [**set_constructs_current**](ProjectsApi.md#set_constructs_current) | **PUT** /constructs/current | Construct Current Set Properties
-[**set_constructs_current_reference**](ProjectsApi.md#set_constructs_current_reference) | **PUT** /constructs/current/ref_shot | Construct Current Set reference shot
-[**set_constructs_reference**](ProjectsApi.md#set_constructs_reference) | **PUT** /constructs/{construct_uuid}/ref_shot | Construct Current Set reference shot
+[**set_constructs_current_reference**](ProjectsApi.md#set_constructs_current_reference) | **PUT** /constructs/current/ref_shot | Construct Current Set Reference Shot
+[**set_constructs_reference**](ProjectsApi.md#set_constructs_reference) | **PUT** /constructs/{construct_uuid}/ref_shot | Construct Set Reference Shot
 [**set_group**](ProjectsApi.md#set_group) | **PUT** /groups/{group_uuid} | Group Set Properties
 [**set_projects_item**](ProjectsApi.md#set_projects_item) | **PUT** /projects/item/{projectID} | Project Set Properties
 [**set_shot**](ProjectsApi.md#set_shot) | **PUT** /shot/{shot_uuid} | Shot Set Properties
 [**set_shot_color**](ProjectsApi.md#set_shot_color) | **PUT** /shot/{shot_uuid}/color | Shot Set Color Properties
-[**set_shot_controls**](ProjectsApi.md#set_shot_controls) | **PUT** /shot/{shot_uuid}/controls | Shot Set Controls Properties
+[**set_shot_controls**](ProjectsApi.md#set_shot_controls) | **PUT** /shot/{shot_uuid}/controls | Shot Set Node Control Properties
 [**set_shot_input**](ProjectsApi.md#set_shot_input) | **PUT** /shot/{shot_uuid}/inputs/{input_idx} | Input Set Properties
 [**set_shot_layer**](ProjectsApi.md#set_shot_layer) | **PUT** /shot/{shot_uuid}/layers/{layer_idx} | Shot Set Layer Properties
 [**set_shot_layer_canvas**](ProjectsApi.md#set_shot_layer_canvas) | **PUT** /shot/{shot_uuid}/layers/{layer_idx}/canvas | Shot Layer Set  Canvas Properties
@@ -978,9 +978,9 @@ No authorization required
 # **delete_constructs_current_reference**
 > delete_constructs_current_reference()
 
-Construct Current Reference shot Delete
+Construct Current Delete Reference Shot
 
-Delete the reference shot of the current Construct.
+Clear the reference Shot of the current Construct.
 
 ### Example
 ```python
@@ -994,7 +994,7 @@ from pprint import pprint
 api_instance = assimilate_client.ProjectsApi()
 
 try:
-    # Construct Current Reference shot Delete
+    # Construct Current Delete Reference Shot
     api_instance.delete_constructs_current_reference()
 except ApiException as e:
     print("Exception when calling ProjectsApi->delete_constructs_current_reference: %s\n" % e)
@@ -1021,9 +1021,9 @@ No authorization required
 # **delete_constructs_reference**
 > delete_constructs_reference(construct_uuid)
 
-Construct Current Reference shot Delete
+Construct Delete Reference Shot
 
-Delete the reference shot of a construct with the specified UUID.
+Clear the reference Shot of the Construct with UUID.
 
 ### Example
 ```python
@@ -1038,7 +1038,7 @@ api_instance = assimilate_client.ProjectsApi()
 construct_uuid = 'construct_uuid_example' # str | Construct UUID
 
 try:
-    # Construct Current Reference shot Delete
+    # Construct Delete Reference Shot
     api_instance.delete_constructs_reference(construct_uuid)
 except ApiException as e:
     print("Exception when calling ProjectsApi->delete_constructs_reference: %s\n" % e)
@@ -2057,9 +2057,9 @@ No authorization required
 # **get_constructs_current**
 > ConstructData get_constructs_current(level=level)
 
-Construct Current Get
+Construct Current Get Properties
 
-Get the active Construct in the active Group.
+Get the properties of the active Construct in the active Group.
 
 ### Example
 ```python
@@ -2074,7 +2074,7 @@ api_instance = assimilate_client.ProjectsApi()
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
-    # Construct Current Get
+    # Construct Current Get Properties
     api_response = api_instance.get_constructs_current(level=level)
     pprint(api_response)
 except ApiException as e:
@@ -2105,9 +2105,9 @@ No authorization required
 # **get_constructs_current_reference**
 > ReferenceShotData get_constructs_current_reference()
 
-Construct Current Get Reference shot
+Construct Current Get Reference Shot
 
-Get the reference shot of the current Construct.
+Get the reference Shot of the current Construct.
 
 ### Example
 ```python
@@ -2121,7 +2121,7 @@ from pprint import pprint
 api_instance = assimilate_client.ProjectsApi()
 
 try:
-    # Construct Current Get Reference shot
+    # Construct Current Get Reference Shot
     api_response = api_instance.get_constructs_current_reference()
     pprint(api_response)
 except ApiException as e:
@@ -2149,9 +2149,9 @@ No authorization required
 # **get_constructs_reference**
 > ReferenceShotData get_constructs_reference(construct_uuid)
 
-Construct Get Reference shot
+Construct Get Reference Shot
 
-Get the reference shot of a construct with the specified UUID.
+Get the reference Shot of the Construct with UUID.
 
 ### Example
 ```python
@@ -2166,7 +2166,7 @@ api_instance = assimilate_client.ProjectsApi()
 construct_uuid = 'construct_uuid_example' # str | Construct UUID
 
 try:
-    # Construct Get Reference shot
+    # Construct Get Reference Shot
     api_response = api_instance.get_constructs_reference(construct_uuid)
     pprint(api_response)
 except ApiException as e:
@@ -2579,9 +2579,9 @@ No authorization required
 # **get_shot_controls**
 > ControlsData get_shot_controls(shot_uuid, level=level)
 
-Shot Get Controls Properties
+Shot Get Node Control Properties
 
-Get the controls properties of the Shot with UUID
+Get the node type control properties of the Shot with UUID
 
 ### Example
 ```python
@@ -2597,7 +2597,7 @@ shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
-    # Shot Get Controls Properties
+    # Shot Get Node Control Properties
     api_response = api_instance.get_shot_controls(shot_uuid, level=level)
     pprint(api_response)
 except ApiException as e:
@@ -3482,9 +3482,9 @@ No authorization required
 # **reset_shot_controls**
 > ControlsData reset_shot_controls(shot_uuid, level=level)
 
-Shot Reset Controls Properties
+Shot Reset Node Control Properties
 
-Reset the controls properties of the Shot with UUID
+Reset the node type control properties of the Shot with UUID
 
 ### Example
 ```python
@@ -3500,7 +3500,7 @@ shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
-    # Shot Reset Controls Properties
+    # Shot Reset Node Control Properties
     api_response = api_instance.reset_shot_controls(shot_uuid, level=level)
     pprint(api_response)
 except ApiException as e:
@@ -4250,9 +4250,9 @@ No authorization required
 # **set_constructs_current_reference**
 > ReferenceShotData set_constructs_current_reference(body)
 
-Construct Current Set reference shot
+Construct Current Set Reference Shot
 
-Set the reference shot of the current Construct.
+Set the reference Shot of the current Construct.
 
 ### Example
 ```python
@@ -4267,7 +4267,7 @@ api_instance = assimilate_client.ProjectsApi()
 body = assimilate_client.ReferenceShotData() # ReferenceShotData | json with reference shot data
 
 try:
-    # Construct Current Set reference shot
+    # Construct Current Set Reference Shot
     api_response = api_instance.set_constructs_current_reference(body)
     pprint(api_response)
 except ApiException as e:
@@ -4298,9 +4298,9 @@ No authorization required
 # **set_constructs_reference**
 > ReferenceShotData set_constructs_reference(body, construct_uuid)
 
-Construct Current Set reference shot
+Construct Set Reference Shot
 
-Set the reference shot of a construct with the specified UUID.
+Set the reference Shot of the construct with UUID.
 
 ### Example
 ```python
@@ -4316,7 +4316,7 @@ body = assimilate_client.ReferenceShotData() # ReferenceShotData | json with ref
 construct_uuid = 'construct_uuid_example' # str | Construct UUID
 
 try:
-    # Construct Current Set reference shot
+    # Construct Set Reference Shot
     api_response = api_instance.set_constructs_reference(body, construct_uuid)
     pprint(api_response)
 except ApiException as e:
@@ -4553,9 +4553,9 @@ No authorization required
 # **set_shot_controls**
 > ControlsData set_shot_controls(body, shot_uuid, level=level)
 
-Shot Set Controls Properties
+Shot Set Node Control Properties
 
-Update the controls properties of the Shot with UUID
+Update the node type control properties of the Shot with UUID
 
 ### Example
 ```python
@@ -4572,7 +4572,7 @@ shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
 
 try:
-    # Shot Set Controls Properties
+    # Shot Set Node Control Properties
     api_response = api_instance.set_shot_controls(body, shot_uuid, level=level)
     pprint(api_response)
 except ApiException as e:

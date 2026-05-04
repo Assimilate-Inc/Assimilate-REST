@@ -72,7 +72,7 @@ class ReferenceShotData(object):
     def ref_slip(self):
         """Gets the ref_slip of this ReferenceShotData.  # noqa: E501
 
-        Slip in frames of the reference shot to the timeline  # noqa: E501
+        Slip, in frames, of the reference Shot with the timeline  # noqa: E501
 
         :return: The ref_slip of this ReferenceShotData.  # noqa: E501
         :rtype: float
@@ -83,7 +83,7 @@ class ReferenceShotData(object):
     def ref_slip(self, ref_slip):
         """Sets the ref_slip of this ReferenceShotData.
 
-        Slip in frames of the reference shot to the timeline  # noqa: E501
+        Slip, in frames, of the reference Shot with the timeline  # noqa: E501
 
         :param ref_slip: The ref_slip of this ReferenceShotData.  # noqa: E501
         :type: float

@@ -1,24 +1,13 @@
 #!/usr/bin/python3
 
-import json
-import pkg_resources
+"""
+Author: Assimilate BV
+Date: 30 April 2026
+Description: Assimilate Product Suite REST-API example.
 
-from assimilate_client import *
-from assimilate_client.api import *
-from assimilate_client.models import *
-from assimilate_client.rest import *
-
-config = Configuration()
-config.host = "http://127.0.0.1:8080/APIV2"  # your endpoint
-api_client = ApiClient(config)
-
-system_api = SystemApi(api_client)
-projects_api = ProjectsApi(api_client)
-app_api = ApplicationApi(api_client)
-
-'''
-This code processes the currently selected shots in a construct and applies transitions 
+This script processes the currently selected shots in a construct and applies transitions 
 and scaling animations to each shot.
+
 First, it retrieves the current construct and reads its resolution, which is used to
 calculate scaling so that each shot fills the construct frame.
 
@@ -38,6 +27,26 @@ with a small additional scale applied to create a subtle zoom effect.
 Finally, a scale animation is applied to the shot by creating keyframes for both the X and Y scale channels,
 starting at the initial scale and ending at the slightly increased scale over the duration of the slot.
 The updated shot data is then saved.
+
+"""
+
+import json
+import pkg_resources
+
+from assimilate_client import *
+from assimilate_client.api import *
+from assimilate_client.models import *
+from assimilate_client.rest import *
+
+config = Configuration()
+config.host = "http://127.0.0.1:8080/APIV2"  # your endpoint
+api_client = ApiClient(config)
+
+system_api = SystemApi(api_client)
+projects_api = ProjectsApi(api_client)
+app_api = ApplicationApi(api_client)
+
+'''
 
 '''
 

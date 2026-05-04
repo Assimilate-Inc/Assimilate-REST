@@ -1084,8 +1084,8 @@ paths:
           description: Level of detail. If set to ALL the full data model is returned.
   /constructs/current:
     get:
-      summary: Construct Current Get
-      description: Get the active Construct in the active Group.
+      summary: Construct Current Get Properties
+      description: Get the properties of the active Construct in the active Group.
       tags:
         - Projects
       parameters:
@@ -1457,67 +1457,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: add-construct-current-slot
-  /constructs/current/ref_shot:
-    get:
-      summary: Construct Current Get Reference shot
-      description: Get the reference shot of the current Construct.
-      tags:
-        - Projects
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/reference_shot_data'
-        4XX:
-          description: Client Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error_message'
-      operationId: get-constructs-current-reference
-    put:
-      summary: Construct Current Set reference shot
-      description: Set the reference shot of the current Construct.
-      tags:
-        - Projects
-      requestBody:
-        description: json with reference shot data
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/reference_shot_data'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/reference_shot_data'
-        4XX:
-          description: Client Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error_message'
-      operationId: set-constructs-current-reference
-    delete:
-      summary: Construct Current Reference shot Delete
-      description: Delete the reference shot of the current Construct.
-      tags:
-        - Projects
-      responses:
-        '200':
-          description: OK
-        4XX:
-          description: Client Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error_message'
-      operationId: delete-constructs-current-reference
   /constructs/{construct_uuid}/slots:
     parameters:
       - schema:
@@ -1676,74 +1615,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: add-construct-slot
-  /constructs/{construct_uuid}/ref_shot:
-    parameters:
-      - name: construct_uuid
-        in: path
-        required: true
-        description: Construct UUID
-        schema:
-          type: string
-    get:
-      summary: Construct Get Reference shot
-      description: Get the reference shot of a construct with the specified UUID.
-      tags:
-        - Projects
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/reference_shot_data'
-        4XX:
-          description: Client Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error_message'
-      operationId: get-constructs-reference
-    put:
-      summary: Construct Current Set reference shot
-      description: Set the reference shot of a construct with the specified UUID.
-      tags:
-        - Projects
-      requestBody:
-        description: json with reference shot data
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/reference_shot_data'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/reference_shot_data'
-        4XX:
-          description: Client Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error_message'
-      operationId: set-constructs-reference
-    delete:
-      summary: Construct Current Reference shot Delete
-      description: Delete the reference shot of a construct with the specified UUID.
-      tags:
-        - Projects
-      responses:
-        '200':
-          description: OK
-        4XX:
-          description: Client Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error_message'
-      operationId: delete-constructs-reference
   /shot/new:
     post:
       summary: Shot Add
@@ -1968,8 +1839,8 @@ paths:
         required: true
         description: Shot UUID
     get:
-      summary: Shot Get Controls Properties
-      description: Get the controls properties of the Shot with UUID
+      summary: Shot Get Node Control Properties
+      description: Get the node type control properties of the Shot with UUID
       tags:
         - Projects
       parameters:
@@ -1993,8 +1864,8 @@ paths:
                 $ref: '#/components/schemas/error_message'
       operationId: get-shot-controls
     put:
-      summary: Shot Set Controls Properties
-      description: Update the controls properties of the Shot with UUID
+      summary: Shot Set Node Control Properties
+      description: Update the node type control properties of the Shot with UUID
       tags:
         - Projects
       requestBody:
@@ -2025,8 +1896,8 @@ paths:
                 $ref: '#/components/schemas/error_message'
       operationId: set-shot-controls
     delete:
-      summary: Shot Reset Controls Properties
-      description: Reset the controls properties of the Shot with UUID
+      summary: Shot Reset Node Control Properties
+      description: Reset the node type control properties of the Shot with UUID
       tags:
         - Projects
       parameters:
@@ -3329,6 +3200,135 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: delete-shot-input
+  /constructs/{construct_uuid}/ref_shot:
+    parameters:
+      - name: construct_uuid
+        in: path
+        required: true
+        description: Construct UUID
+        schema:
+          type: string
+    get:
+      summary: Construct Get Reference Shot
+      description: Get the reference Shot of the Construct with UUID.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reference_shot_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-constructs-reference
+    put:
+      summary: Construct Set Reference Shot
+      description: Set the reference Shot of the construct with UUID.
+      tags:
+        - Projects
+      requestBody:
+        description: json with reference shot data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/reference_shot_data'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reference_shot_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: set-constructs-reference
+    delete:
+      summary: Construct Delete Reference Shot
+      description: Clear the reference Shot of the Construct with UUID.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: delete-constructs-reference
+  /constructs/current/ref_shot:
+    get:
+      summary: Construct Current Get Reference Shot
+      description: Get the reference Shot of the current Construct.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reference_shot_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-constructs-current-reference
+    put:
+      summary: Construct Current Set Reference Shot
+      description: Set the reference Shot of the current Construct.
+      tags:
+        - Projects
+      requestBody:
+        description: json with reference shot data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/reference_shot_data'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reference_shot_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: set-constructs-current-reference
+    delete:
+      summary: Construct Current Delete Reference Shot
+      description: Clear the reference Shot of the current Construct.
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: delete-constructs-current-reference
 externalDocs:
   description: Find out more about the Assimilate Product Suite
   url: 'https://www.assimilateinc.com'
@@ -4367,7 +4367,7 @@ components:
               $ref: '#/components/schemas/uuid'
             ref_slip:
               type: number
-              description: Slip in frames of the reference shot to the timeline
+              description: Slip, in frames, of the reference Shot with the timeline
     metadata:
       type: array
       title: Metadata
@@ -4503,7 +4503,7 @@ components:
     controls_data:
       type: object
       title: controls_data
-      description: List of controls of the Shot
+      description: List of node type controls of a Shot
       properties:
         controls:
           type: array

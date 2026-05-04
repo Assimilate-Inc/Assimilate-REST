@@ -1835,9 +1835,9 @@ class ProjectsApi(object):
             collection_formats=collection_formats)
 
     def delete_constructs_current_reference(self, **kwargs):  # noqa: E501
-        """Construct Current Reference shot Delete  # noqa: E501
+        """Construct Current Delete Reference Shot  # noqa: E501
 
-        Delete the reference shot of the current Construct.  # noqa: E501
+        Clear the reference Shot of the current Construct.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.delete_constructs_current_reference(async_req=True)
@@ -1856,9 +1856,9 @@ class ProjectsApi(object):
             return data
 
     def delete_constructs_current_reference_with_http_info(self, **kwargs):  # noqa: E501
-        """Construct Current Reference shot Delete  # noqa: E501
+        """Construct Current Delete Reference Shot  # noqa: E501
 
-        Delete the reference shot of the current Construct.  # noqa: E501
+        Clear the reference Shot of the current Construct.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.delete_constructs_current_reference_with_http_info(async_req=True)
@@ -1922,9 +1922,9 @@ class ProjectsApi(object):
             collection_formats=collection_formats)
 
     def delete_constructs_reference(self, construct_uuid, **kwargs):  # noqa: E501
-        """Construct Current Reference shot Delete  # noqa: E501
+        """Construct Delete Reference Shot  # noqa: E501
 
-        Delete the reference shot of a construct with the specified UUID.  # noqa: E501
+        Clear the reference Shot of the Construct with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.delete_constructs_reference(construct_uuid, async_req=True)
@@ -1944,9 +1944,9 @@ class ProjectsApi(object):
             return data
 
     def delete_constructs_reference_with_http_info(self, construct_uuid, **kwargs):  # noqa: E501
-        """Construct Current Reference shot Delete  # noqa: E501
+        """Construct Delete Reference Shot  # noqa: E501
 
-        Delete the reference shot of a construct with the specified UUID.  # noqa: E501
+        Clear the reference Shot of the Construct with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.delete_constructs_reference_with_http_info(construct_uuid, async_req=True)
@@ -4001,9 +4001,9 @@ class ProjectsApi(object):
             collection_formats=collection_formats)
 
     def get_constructs_current(self, **kwargs):  # noqa: E501
-        """Construct Current Get  # noqa: E501
+        """Construct Current Get Properties  # noqa: E501
 
-        Get the active Construct in the active Group.  # noqa: E501
+        Get the properties of the active Construct in the active Group.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.get_constructs_current(async_req=True)
@@ -4023,9 +4023,9 @@ class ProjectsApi(object):
             return data
 
     def get_constructs_current_with_http_info(self, **kwargs):  # noqa: E501
-        """Construct Current Get  # noqa: E501
+        """Construct Current Get Properties  # noqa: E501
 
-        Get the active Construct in the active Group.  # noqa: E501
+        Get the properties of the active Construct in the active Group.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.get_constructs_current_with_http_info(async_req=True)
@@ -4092,9 +4092,9 @@ class ProjectsApi(object):
             collection_formats=collection_formats)
 
     def get_constructs_current_reference(self, **kwargs):  # noqa: E501
-        """Construct Current Get Reference shot  # noqa: E501
+        """Construct Current Get Reference Shot  # noqa: E501
 
-        Get the reference shot of the current Construct.  # noqa: E501
+        Get the reference Shot of the current Construct.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.get_constructs_current_reference(async_req=True)
@@ -4113,9 +4113,9 @@ class ProjectsApi(object):
             return data
 
     def get_constructs_current_reference_with_http_info(self, **kwargs):  # noqa: E501
-        """Construct Current Get Reference shot  # noqa: E501
+        """Construct Current Get Reference Shot  # noqa: E501
 
-        Get the reference shot of the current Construct.  # noqa: E501
+        Get the reference Shot of the current Construct.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.get_constructs_current_reference_with_http_info(async_req=True)
@@ -4179,9 +4179,9 @@ class ProjectsApi(object):
             collection_formats=collection_formats)
 
     def get_constructs_reference(self, construct_uuid, **kwargs):  # noqa: E501
-        """Construct Get Reference shot  # noqa: E501
+        """Construct Get Reference Shot  # noqa: E501
 
-        Get the reference shot of a construct with the specified UUID.  # noqa: E501
+        Get the reference Shot of the Construct with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.get_constructs_reference(construct_uuid, async_req=True)
@@ -4201,9 +4201,9 @@ class ProjectsApi(object):
             return data
 
     def get_constructs_reference_with_http_info(self, construct_uuid, **kwargs):  # noqa: E501
-        """Construct Get Reference shot  # noqa: E501
+        """Construct Get Reference Shot  # noqa: E501
 
-        Get the reference shot of a construct with the specified UUID.  # noqa: E501
+        Get the reference Shot of the Construct with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.get_constructs_reference_with_http_info(construct_uuid, async_req=True)
@@ -5022,9 +5022,9 @@ class ProjectsApi(object):
             collection_formats=collection_formats)
 
     def get_shot_controls(self, shot_uuid, **kwargs):  # noqa: E501
-        """Shot Get Controls Properties  # noqa: E501
+        """Shot Get Node Control Properties  # noqa: E501
 
-        Get the controls properties of the Shot with UUID  # noqa: E501
+        Get the node type control properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.get_shot_controls(shot_uuid, async_req=True)
@@ -5045,9 +5045,9 @@ class ProjectsApi(object):
             return data
 
     def get_shot_controls_with_http_info(self, shot_uuid, **kwargs):  # noqa: E501
-        """Shot Get Controls Properties  # noqa: E501
+        """Shot Get Node Control Properties  # noqa: E501
 
-        Get the controls properties of the Shot with UUID  # noqa: E501
+        Get the node type control properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.get_shot_controls_with_http_info(shot_uuid, async_req=True)
@@ -6924,9 +6924,9 @@ class ProjectsApi(object):
             collection_formats=collection_formats)
 
     def reset_shot_controls(self, shot_uuid, **kwargs):  # noqa: E501
-        """Shot Reset Controls Properties  # noqa: E501
+        """Shot Reset Node Control Properties  # noqa: E501
 
-        Reset the controls properties of the Shot with UUID  # noqa: E501
+        Reset the node type control properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.reset_shot_controls(shot_uuid, async_req=True)
@@ -6947,9 +6947,9 @@ class ProjectsApi(object):
             return data
 
     def reset_shot_controls_with_http_info(self, shot_uuid, **kwargs):  # noqa: E501
-        """Shot Reset Controls Properties  # noqa: E501
+        """Shot Reset Node Control Properties  # noqa: E501
 
-        Reset the controls properties of the Shot with UUID  # noqa: E501
+        Reset the node type control properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.reset_shot_controls_with_http_info(shot_uuid, async_req=True)
@@ -8549,9 +8549,9 @@ class ProjectsApi(object):
             collection_formats=collection_formats)
 
     def set_constructs_current_reference(self, body, **kwargs):  # noqa: E501
-        """Construct Current Set reference shot  # noqa: E501
+        """Construct Current Set Reference Shot  # noqa: E501
 
-        Set the reference shot of the current Construct.  # noqa: E501
+        Set the reference Shot of the current Construct.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.set_constructs_current_reference(body, async_req=True)
@@ -8571,9 +8571,9 @@ class ProjectsApi(object):
             return data
 
     def set_constructs_current_reference_with_http_info(self, body, **kwargs):  # noqa: E501
-        """Construct Current Set reference shot  # noqa: E501
+        """Construct Current Set Reference Shot  # noqa: E501
 
-        Set the reference shot of the current Construct.  # noqa: E501
+        Set the reference Shot of the current Construct.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.set_constructs_current_reference_with_http_info(body, async_req=True)
@@ -8648,9 +8648,9 @@ class ProjectsApi(object):
             collection_formats=collection_formats)
 
     def set_constructs_reference(self, body, construct_uuid, **kwargs):  # noqa: E501
-        """Construct Current Set reference shot  # noqa: E501
+        """Construct Set Reference Shot  # noqa: E501
 
-        Set the reference shot of a construct with the specified UUID.  # noqa: E501
+        Set the reference Shot of the construct with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.set_constructs_reference(body, construct_uuid, async_req=True)
@@ -8671,9 +8671,9 @@ class ProjectsApi(object):
             return data
 
     def set_constructs_reference_with_http_info(self, body, construct_uuid, **kwargs):  # noqa: E501
-        """Construct Current Set reference shot  # noqa: E501
+        """Construct Set Reference Shot  # noqa: E501
 
-        Set the reference shot of a construct with the specified UUID.  # noqa: E501
+        Set the reference Shot of the construct with UUID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.set_constructs_reference_with_http_info(body, construct_uuid, async_req=True)
@@ -9195,9 +9195,9 @@ class ProjectsApi(object):
             collection_formats=collection_formats)
 
     def set_shot_controls(self, body, shot_uuid, **kwargs):  # noqa: E501
-        """Shot Set Controls Properties  # noqa: E501
+        """Shot Set Node Control Properties  # noqa: E501
 
-        Update the controls properties of the Shot with UUID  # noqa: E501
+        Update the node type control properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.set_shot_controls(body, shot_uuid, async_req=True)
@@ -9219,9 +9219,9 @@ class ProjectsApi(object):
             return data
 
     def set_shot_controls_with_http_info(self, body, shot_uuid, **kwargs):  # noqa: E501
-        """Shot Set Controls Properties  # noqa: E501
+        """Shot Set Node Control Properties  # noqa: E501
 
-        Update the controls properties of the Shot with UUID  # noqa: E501
+        Update the node type control properties of the Shot with UUID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.set_shot_controls_with_http_info(body, shot_uuid, async_req=True)

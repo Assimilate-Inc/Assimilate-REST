@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 
+"""
+Author: Assimilate BV
+Date: 30 April 2026
+Description: Assimilate Product Suite REST-API example that shows how to manage layers of a shot by removing all layers from a shot and subsequently rebuilding the layer structure.
+"""
+
 import json
 
 from assimilate_client import Configuration, ApiClient

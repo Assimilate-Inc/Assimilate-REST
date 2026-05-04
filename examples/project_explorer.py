@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 # coding: utf-8
+
 """
-Assimilate Example - Project Browser
+Author: Assimilate BV
+Date: 30 April 2026
+Description: Assimilate Product Suite REST-API example that shows how to open/close projects and loop through constructs, slots and shots.
 """
 
 from __future__ import absolute_import

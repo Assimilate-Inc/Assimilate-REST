@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: |
     REST API for the Assimilate Product Suite software.
-  version: 1.0.1
+  version: 1.0.3
   title: Assimilate REST API
   termsOfService: 'https://myassimilate.assimilateinc.com/TermsOfService.html'
   contact:

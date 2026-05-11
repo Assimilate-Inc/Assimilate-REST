@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: |
     REST API for the Assimilate Product Suite software.
-  version: 1.0.3
+  version: 1.0.4
   title: Assimilate REST API
   termsOfService: 'https://myassimilate.assimilateinc.com/TermsOfService.html'
   contact:
@@ -2038,7 +2038,7 @@ paths:
       tags:
         - Projects
       requestBody:
-        description: json with shot data
+        description: json with layer data
         required: true
         content:
           application/json:
@@ -4629,7 +4629,7 @@ components:
               description: Red channel pre gain
               x-stoplight:
                 id: 716xe27yvhtd3
-        color-a:
+        color_a:
           type: object
           description: Pre-Color
           x-stoplight:
@@ -4727,7 +4727,7 @@ components:
               description: Master gain
               x-stoplight:
                 id: eo2071xfjfk0g
-        color-b:
+        color_b:
           type: object
           description: Post-Color
           x-stoplight:

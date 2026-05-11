@@ -5,11 +5,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **offset** | [**ColorgradeDataOffset**](ColorgradeDataOffset.md) |  | [optional] 
 **pre_gain** | [**ColorgradeDataPreGain**](ColorgradeDataPreGain.md) |  | [optional] 
-**color_a** | [**ColorgradeDataColora**](ColorgradeDataColora.md) |  | [optional] 
+**color_a** | [**ColorgradeDataColorA**](ColorgradeDataColorA.md) |  | [optional] 
 **lift** | [**ColorgradeDataLift**](ColorgradeDataLift.md) |  | [optional] 
 **gamma** | [**ColorgradeDataGamma**](ColorgradeDataGamma.md) |  | [optional] 
 **gain** | [**ColorgradeDataGain**](ColorgradeDataGain.md) |  | [optional] 
-**color_b** | [**ColorgradeDataColorb**](ColorgradeDataColorb.md) |  | [optional] 
+**color_b** | [**ColorgradeDataColorB**](ColorgradeDataColorB.md) |  | [optional] 
 **tone** | [**ColorgradeDataTone**](ColorgradeDataTone.md) |  | [optional] 
 **temperature** | [**ColorgradeDataTemperature**](ColorgradeDataTemperature.md) |  | [optional] 
 **aperature** | [**Aperature**](Aperature.md) |  | [optional] 

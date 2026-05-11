@@ -4671,7 +4671,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ProjectsApi()
-body = assimilate_client.LayerData() # LayerData | json with shot data
+body = assimilate_client.LayerData() # LayerData | json with layer data
 shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
 layer_idx = 56 # int | Layer Index
 level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
@@ -4688,7 +4688,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**LayerData**](LayerData.md)| json with shot data | 
+ **body** | [**LayerData**](LayerData.md)| json with layer data | 
  **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
  **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 

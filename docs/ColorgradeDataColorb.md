@@ -1,4 +1,4 @@
-# ColorgradeDataColorb
+# ColorgradeDataColorB
 
 ## Properties
 Name | Type | Description | Notes

@@ -270,6 +270,7 @@ Although backward compatibility is a priority, it cannot always be guaranteed.
 
 | Assimilate Product Suite | REST API version |
 |---|---|
+| v9.9 1206 | 1.0.4 |
 | v9.9 1205 | 1.0.3 |
 | BETA | 1.0.0 |
 

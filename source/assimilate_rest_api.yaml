@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: |
     REST API for the Assimilate Product Suite software.
-  version: 1.0.4
+  version: 1.0.5
   title: Assimilate REST API
   termsOfService: 'https://myassimilate.assimilateinc.com/TermsOfService.html'
   contact:
@@ -3471,7 +3471,7 @@ components:
       title: application_data
       type: object
       properties:
-        mudule:
+        module:
           description: Current active module (Start, Construct, Player)
           type: string
           x-stoplight:

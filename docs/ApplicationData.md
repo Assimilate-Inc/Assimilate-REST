@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**mudule** | **str** | Current active module (Start, Construct, Player) | [optional] 
+**module** | **str** | Current active module (Start, Construct, Player) | [optional] 
 **project** | **str** | Current active project if any | [optional] 
 **position** | **str** | Current position in the player | [optional] 
 

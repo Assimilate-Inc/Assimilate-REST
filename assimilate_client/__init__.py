@@ -52,7 +52,6 @@ from assimilate_client.models.construct_data_resolution import ConstructDataReso
 from assimilate_client.models.constructs_data import ConstructsData
 from assimilate_client.models.control_data import ControlData
 from assimilate_client.models.controls_data import ControlsData
-from assimilate_client.models.delete_media_data import DeleteMediaData
 from assimilate_client.models.eotf import Eotf
 from assimilate_client.models.error_message import ErrorMessage
 from assimilate_client.models.error_message_error import ErrorMessageError
@@ -94,6 +93,9 @@ from assimilate_client.models.project_list_projects import ProjectListProjects
 from assimilate_client.models.reference_shot_data import ReferenceShotData
 from assimilate_client.models.render_queue_item import RenderQueueItem
 from assimilate_client.models.render_queue_list import RenderQueueList
+from assimilate_client.models.render_queue_settings import RenderQueueSettings
+from assimilate_client.models.render_results import RenderResults
+from assimilate_client.models.render_results_files import RenderResultsFiles
 from assimilate_client.models.selected_shots_data import SelectedShotsData
 from assimilate_client.models.selected_shots_data_selection import SelectedShotsDataSelection
 from assimilate_client.models.shot_data import ShotData

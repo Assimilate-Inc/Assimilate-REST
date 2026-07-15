@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Generator: Assimilate Product Suite-->
+<custom_commands version="10.0">
+	<command uuid="fe03547a-10f7-47bc-a39d-25622d00428f" type="app" blocking="Y" minimize_on_exe="N" player_menu="Y" shot_selection="Y">
+		<title>Render Selected Shot</title>
+		<cmdline>C:\Temp\script\RenderSelected.py</cmdline>
+		<inputs>
+			<input uuid="fe03547a-10f7-47bc-a39d-25622d00428f" type="3" store="2">
+				<label>Format</label>
+				<value>PNG,ProRes</value>
+			</input>
+			<input uuid="fe03547a-10f7-47bc-a39d-25622d00428f" type="0" store="1">
+				<label>Output Folder</label>
+				<value></value>
+			</input>
+			<input uuid="fe03547a-10f7-47bc-a39d-25622d00428f" type="0" store="1">
+				<label>Load in Tray </label>
+				<value></value>
+			</input>
+		</inputs>
+	</command>
+</custom_commands>

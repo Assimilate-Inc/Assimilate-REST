@@ -566,17 +566,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: get-application-render-queue
-  '/application/render/{output_uuid}':
+  '/application/render/{queue_uuid}':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: output_uuid
+        name: queue_uuid
         in: path
         required: true
-        description: Output node UUID
+        description: Render Queue Item UUID
     get:
       summary: Render Queue Item Get
-      description: Get the status of the Queue Item with UUID. Returns an error is the item is not present in the Render Queue.
+      description: Get the status of the Queue Item with UUID. Returns an error is the item is not found.
       tags:
         - Application
       responses:
@@ -594,36 +594,17 @@ paths:
                 $ref: '#/components/schemas/error_message'
       operationId: get-application-render-queue-item
     put:
-      summary: Render Queue Item Add
-      description: Add the Output with UUID as Item to the Render Queue. Returns an error is the item is not found or not a valid output node.
-      tags:
-        - Application
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/render_queue_item'
-        4XX:
-          description: Client Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error_message'
-      operationId: add-application-render-queue-item
-    post:
-      summary: Render Queue Item Add Start
-      description: Add the Output with UUID as Item to the Render Queue and start rendering it. Returns an error is the Output is not found or not a valid Output.
+      summary: Render Queue Item Update
+      description: Update the Queue Item with UUID. Returns an error if the item is not found.
       tags:
         - Application
       requestBody:
-        description: json with delete_existing_media boolean
-        required: false
+        description: Render settings to adjust the render range, validate the underlying media or clear the rendered media.
+        required: True
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/delete_media_data'
+              $ref: '#/components/schemas/render_queue_settings'
       responses:
         '200':
           description: OK
@@ -637,10 +618,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error_message'
-      operationId: add-application-render-queue-item-start   
+      operationId: update-application-render-queue-item
     delete:
       summary: Render Queue Item Delete
-      description: Remove the Item with UUID from the Render Queue. Returns an error is the item is not found in the queue.
+      description: Remove the Item with UUID from the Render Queue. Returns an error if the item is not found.
       tags:
         - Application
       responses:
@@ -653,6 +634,57 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: delete-application-render-queue-item
+  /application/render/new:
+    put:
+      summary: Add a new Render Queue Item
+      description: Add a new Render Queue Item from a Output with UUID and (optionally a frame range). Returns an error is the Output UUID is not found.
+      tags:
+        - Application
+      requestBody:
+        description: Output UUID, (optionally) frame range.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/render_queue_settings'        
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/render_queue_item'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: new-application-render-queue-item
+    post:
+      summary: Create a new Render Queue Item and start rendering
+      description: Add a new Render Queue Item from a Output with UUID and (optionally a frame range) and start rendering the item. Returns an error is the Output UUID is not found.
+      tags:
+        - Application
+      requestBody:
+        description: Output UUID, (optionally) frame range.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/render_queue_settings'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/render_queue_item'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: new-application-render-queue-item-start
   /application/render/start:
     post:
       summary: Render Queue Start
@@ -663,7 +695,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/delete_media_data'
+              $ref: '#/components/schemas/render_queue_settings'
       responses:
         '200':
           description: OK
@@ -674,14 +706,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: do-application-render-start
-  '/application/render/start/{output_uuid}':
+  '/application/render/start/{queue_uuid}':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: output_uuid
+        name: queue_uuid
         in: path
         required: true
-        description: Output node UUID
+        description: Queue item UUID
     post:
       summary: Render Queue Item Start
       description: Start processing the Queue Item with UUID. If delete_existing_media is true, existing media will be deleted before rendering. Returns an error if the UUID does not references a valid output node.
@@ -692,7 +724,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/delete_media_data'
+              $ref: '#/components/schemas/render_queue_settings'
       responses:
         '200':
           description: OK
@@ -702,7 +734,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error_message'
-      operationId: post-application-render-start-item
+      operationId: set-application-render-start-item
   /application/render/stop:
     post:
       summary: Render Queue Stop
@@ -719,14 +751,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: do-application-render-stop
-  '/application/render/stop/{output_uuid}':
+  '/application/render/stop/{queue_uuid}':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: output_uuid
+        name: queue_uuid
         in: path
         required: true
-        description: Output node UUID
+        description: Queue item UUID
     post:
       summary: Render Queue Item Stop
       description: Stop rendering the Queue Item with UUID. Returns an error when the node is not present in the Queue.
@@ -742,17 +774,44 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: do-application-render-stop-item
-  '/application/render/deletemedia/{output_uuid}':
+  '/application/render/results/{queue_uuid}':
     parameters:
       - schema:
           $ref: '#/components/schemas/uuid'
-        name: output_uuid
+        name: queue_uuid
         in: path
         required: true
-        description: Output node UUID
+        description: Render Queue Item UUID
+    get:
+      summary: Get the Render Queue Item results
+      description: Get the list of files rendered from the Render Queue item. If the Queue item has not been rendered, an error is returned.
+      tags:
+        - Application
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/render_results'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-application-render-queue-item-results
+  '/application/render/deletemedia/{queue_uuid}':
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: queue_uuid
+        in: path
+        required: true
+        description: Queue item UUID
     post:
-      summary: Render Queue Item Delete Media
-      description: Delete the media of the Queue Item with UUID. Returns an error when the node is not present in the Queue.
+      summary: Render Queue Item Delete Media (obsolete)
+      description: Delete the media of the Queue Item with UUID. Returns an error when the node is not present in the Queue. (obsolete. Use the PUT method on /application/render/{queue_uuid} with delete_existing_media set to true instead)
       tags:
         - Application
       responses:
@@ -5208,17 +5267,19 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/render_queue_item'
-      description: Render Queue
+      description: Render Queue Items
     render_queue_item:
       type: object
       title: render_queue_item
       properties:
+        uuid:
+          $ref: '#/components/schemas/uuid'      
         name:
           type: string
           description: Name of the render Queu Item
           x-stoplight:
             id: w1J7v1g9j3v8d
-        date:
+        cdate:
           type: string
           description:  Date the render Queu Item was created
           x-stoplight:
@@ -5227,7 +5288,17 @@ components:
           type: string
           x-stoplight:
             id: bpwn4tkvc4rl2
-        range:
+        range_in:
+          type: integer
+          description: Frame In
+          x-stoplight:
+            id: affjdaq7r6ahl
+        range_out:
+          type: integer
+          description: Frame Out
+          x-stoplight:
+            id: afrvsabbr3a3a
+        range_txt:
           type: string
           description: Frame range
           x-stoplight:
@@ -5282,16 +5353,53 @@ components:
           type: integer
           x-stoplight:
             id: vo3ble8y1ac18
-        uuid:
+        output_uuid:
           $ref: '#/components/schemas/uuid'
-    delete_media_data:
+    render_queue_settings:
       type: object
       properties:
+        output_uuid:
+          $ref: '#/components/schemas/uuid'      
+        range_in:
+          type: integer
+          description: Frame In. Read-write.
+          x-stoplight:
+            id: mkljda2ee6ahl
+        range_out:
+          type: integer
+          description: Frame Out. Read-write.
+          x-stoplight:
+            id: a9kisa3g53a3a
+        validate_media:
+          type: boolean
+          description: Check the precense of the underlying media and return an error if media is missing.
+          x-stoplight:
+            id: 9si78qq67sde7
         delete_existing_media:
           type: boolean
-          description: Delete any previously rendered media (before rendering new media)
+          description: Delete previously rendered media.
           x-stoplight:
             id: 9sijj2drvvre7
+    render_results:
+      type: object
+      description: Results of a render queue item
+      properties:
+        files:
+          type: array
+          description: List of rendered files
+          items:
+            type: object
+            properties:
+              frame:
+                type: integer
+                description: Frame number in the rendered sequence of the first frame in the rendered file
+                x-stoplight:
+                  id: sicmnegysbnsd
+              file:
+                type: string
+                description: Full path of the rendered file
+                x-stoplight:
+                  id: 77dkeoc9mmdts
     move_group_data:
       type: object
       properties:
@@ -5352,6 +5460,11 @@ components:
           description: Position index in the tray
           x-stoplight:
             id: kbseuhub1egc0
+        tray_create:
+          type: boolean
+          description: Create a new tray if tray-name it does not exist
+          x-stoplight:
+            id: 3sbgsgrejdi8x
     move_layer_data:
       type: object
       description: Move the Layer to a different location in the layer stack

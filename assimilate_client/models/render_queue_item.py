@@ -28,10 +28,13 @@ class RenderQueueItem(object):
                             and the value is json key in definition.
     """
     swagger_types = {
+        'uuid': 'Uuid',
         'name': 'str',
-        '_date': 'str',
+        'cdate': 'str',
         'format': 'str',
-        'range': 'str',
+        'range_in': 'int',
+        'range_out': 'int',
+        'range_txt': 'str',
         'path': 'str',
         'group': 'str',
         'status': 'str',
@@ -41,14 +44,17 @@ class RenderQueueItem(object):
         'frames_done': 'int',
         'frames_left': 'int',
         'frames_total': 'int',
-        'uuid': 'Uuid'
+        'output_uuid': 'Uuid'
     }
 
     attribute_map = {
+        'uuid': 'uuid',
         'name': 'name',
-        '_date': 'date',
+        'cdate': 'cdate',
         'format': 'format',
-        'range': 'range',
+        'range_in': 'range_in',
+        'range_out': 'range_out',
+        'range_txt': 'range_txt',
         'path': 'path',
         'group': 'group',
         'status': 'status',
@@ -58,15 +64,18 @@ class RenderQueueItem(object):
         'frames_done': 'frames_done',
         'frames_left': 'frames_left',
         'frames_total': 'frames_total',
-        'uuid': 'uuid'
+        'output_uuid': 'output_uuid'
     }
 
-    def __init__(self, name=None, _date=None, format=None, range=None, path=None, group=None, status=None, time_processed=None, time_left=None, time_total=None, frames_done=None, frames_left=None, frames_total=None, uuid=None):  # noqa: E501
+    def __init__(self, uuid=None, name=None, cdate=None, format=None, range_in=None, range_out=None, range_txt=None, path=None, group=None, status=None, time_processed=None, time_left=None, time_total=None, frames_done=None, frames_left=None, frames_total=None, output_uuid=None):  # noqa: E501
         """RenderQueueItem - a model defined in Swagger"""  # noqa: E501
+        self._uuid = None
         self._name = None
-        self.__date = None
+        self._cdate = None
         self._format = None
-        self._range = None
+        self._range_in = None
+        self._range_out = None
+        self._range_txt = None
         self._path = None
         self._group = None
         self._status = None
@@ -76,16 +85,22 @@ class RenderQueueItem(object):
         self._frames_done = None
         self._frames_left = None
         self._frames_total = None
-        self._uuid = None
+        self._output_uuid = None
         self.discriminator = None
+        if uuid is not None:
+            self.uuid = uuid
         if name is not None:
             self.name = name
-        if _date is not None:
-            self._date = _date
+        if cdate is not None:
+            self.cdate = cdate
         if format is not None:
             self.format = format
-        if range is not None:
-            self.range = range
+        if range_in is not None:
+            self.range_in = range_in
+        if range_out is not None:
+            self.range_out = range_out
+        if range_txt is not None:
+            self.range_txt = range_txt
         if path is not None:
             self.path = path
         if group is not None:
@@ -104,8 +119,29 @@ class RenderQueueItem(object):
             self.frames_left = frames_left
         if frames_total is not None:
             self.frames_total = frames_total
-        if uuid is not None:
-            self.uuid = uuid
+        if output_uuid is not None:
+            self.output_uuid = output_uuid
+
+    @property
+    def uuid(self):
+        """Gets the uuid of this RenderQueueItem.  # noqa: E501
+
+
+        :return: The uuid of this RenderQueueItem.  # noqa: E501
+        :rtype: Uuid
+        """
+        return self._uuid
+
+    @uuid.setter
+    def uuid(self, uuid):
+        """Sets the uuid of this RenderQueueItem.
+
+
+        :param uuid: The uuid of this RenderQueueItem.  # noqa: E501
+        :type: Uuid
+        """
+
+        self._uuid = uuid
 
     @property
     def name(self):
@@ -131,27 +167,27 @@ class RenderQueueItem(object):
         self._name = name
 
     @property
-    def _date(self):
-        """Gets the _date of this RenderQueueItem.  # noqa: E501
+    def cdate(self):
+        """Gets the cdate of this RenderQueueItem.  # noqa: E501
 
         Date the render Queu Item was created  # noqa: E501
 
-        :return: The _date of this RenderQueueItem.  # noqa: E501
+        :return: The cdate of this RenderQueueItem.  # noqa: E501
         :rtype: str
         """
-        return self.__date
+        return self._cdate
 
-    @_date.setter
-    def _date(self, _date):
-        """Sets the _date of this RenderQueueItem.
+    @cdate.setter
+    def cdate(self, cdate):
+        """Sets the cdate of this RenderQueueItem.
 
         Date the render Queu Item was created  # noqa: E501
 
-        :param _date: The _date of this RenderQueueItem.  # noqa: E501
+        :param cdate: The cdate of this RenderQueueItem.  # noqa: E501
         :type: str
         """
 
-        self.__date = _date
+        self._cdate = cdate
 
     @property
     def format(self):
@@ -175,27 +211,73 @@ class RenderQueueItem(object):
         self._format = format
 
     @property
-    def range(self):
-        """Gets the range of this RenderQueueItem.  # noqa: E501
+    def range_in(self):
+        """Gets the range_in of this RenderQueueItem.  # noqa: E501
+
+        Frame In  # noqa: E501
+
+        :return: The range_in of this RenderQueueItem.  # noqa: E501
+        :rtype: int
+        """
+        return self._range_in
+
+    @range_in.setter
+    def range_in(self, range_in):
+        """Sets the range_in of this RenderQueueItem.
+
+        Frame In  # noqa: E501
+
+        :param range_in: The range_in of this RenderQueueItem.  # noqa: E501
+        :type: int
+        """
+
+        self._range_in = range_in
+
+    @property
+    def range_out(self):
+        """Gets the range_out of this RenderQueueItem.  # noqa: E501
+
+        Frame Out  # noqa: E501
+
+        :return: The range_out of this RenderQueueItem.  # noqa: E501
+        :rtype: int
+        """
+        return self._range_out
+
+    @range_out.setter
+    def range_out(self, range_out):
+        """Sets the range_out of this RenderQueueItem.
+
+        Frame Out  # noqa: E501
+
+        :param range_out: The range_out of this RenderQueueItem.  # noqa: E501
+        :type: int
+        """
+
+        self._range_out = range_out
+
+    @property
+    def range_txt(self):
+        """Gets the range_txt of this RenderQueueItem.  # noqa: E501
 
         Frame range  # noqa: E501
 
-        :return: The range of this RenderQueueItem.  # noqa: E501
+        :return: The range_txt of this RenderQueueItem.  # noqa: E501
         :rtype: str
         """
-        return self._range
+        return self._range_txt
 
-    @range.setter
-    def range(self, range):
-        """Sets the range of this RenderQueueItem.
+    @range_txt.setter
+    def range_txt(self, range_txt):
+        """Sets the range_txt of this RenderQueueItem.
 
         Frame range  # noqa: E501
 
-        :param range: The range of this RenderQueueItem.  # noqa: E501
+        :param range_txt: The range_txt of this RenderQueueItem.  # noqa: E501
         :type: str
         """
 
-        self._range = range
+        self._range_txt = range_txt
 
     @property
     def path(self):
@@ -405,25 +487,25 @@ class RenderQueueItem(object):
         self._frames_total = frames_total
 
     @property
-    def uuid(self):
-        """Gets the uuid of this RenderQueueItem.  # noqa: E501
+    def output_uuid(self):
+        """Gets the output_uuid of this RenderQueueItem.  # noqa: E501
 
 
-        :return: The uuid of this RenderQueueItem.  # noqa: E501
+        :return: The output_uuid of this RenderQueueItem.  # noqa: E501
         :rtype: Uuid
         """
-        return self._uuid
+        return self._output_uuid
 
-    @uuid.setter
-    def uuid(self, uuid):
-        """Sets the uuid of this RenderQueueItem.
+    @output_uuid.setter
+    def output_uuid(self, output_uuid):
+        """Sets the output_uuid of this RenderQueueItem.
 
 
-        :param uuid: The uuid of this RenderQueueItem.  # noqa: E501
+        :param output_uuid: The output_uuid of this RenderQueueItem.  # noqa: E501
         :type: Uuid
         """
 
-        self._uuid = uuid
+        self._output_uuid = output_uuid
 
     def to_dict(self):
         """Returns the model properties as a dict"""

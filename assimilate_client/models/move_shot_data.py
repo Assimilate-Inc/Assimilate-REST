@@ -35,7 +35,8 @@ class MoveShotData(object):
         'tray_name': 'str',
         'tray_frame': 'int',
         'tray_slip': 'int',
-        'tray_position': 'int'
+        'tray_position': 'int',
+        'tray_create': 'bool'
     }
 
     attribute_map = {
@@ -46,10 +47,11 @@ class MoveShotData(object):
         'tray_name': 'tray_name',
         'tray_frame': 'tray_frame',
         'tray_slip': 'tray_slip',
-        'tray_position': 'tray_position'
+        'tray_position': 'tray_position',
+        'tray_create': 'tray_create'
     }
 
-    def __init__(self, create_copy=None, construct_uuid=None, slot_idx=None, version_idx=None, tray_name=None, tray_frame=None, tray_slip=None, tray_position=None):  # noqa: E501
+    def __init__(self, create_copy=None, construct_uuid=None, slot_idx=None, version_idx=None, tray_name=None, tray_frame=None, tray_slip=None, tray_position=None, tray_create=None):  # noqa: E501
         """MoveShotData - a model defined in Swagger"""  # noqa: E501
         self._create_copy = None
         self._construct_uuid = None
@@ -59,6 +61,7 @@ class MoveShotData(object):
         self._tray_frame = None
         self._tray_slip = None
         self._tray_position = None
+        self._tray_create = None
         self.discriminator = None
         if create_copy is not None:
             self.create_copy = create_copy
@@ -76,6 +79,8 @@ class MoveShotData(object):
             self.tray_slip = tray_slip
         if tray_position is not None:
             self.tray_position = tray_position
+        if tray_create is not None:
+            self.tray_create = tray_create
 
     @property
     def create_copy(self):
@@ -258,6 +263,29 @@ class MoveShotData(object):
         """
 
         self._tray_position = tray_position
+
+    @property
+    def tray_create(self):
+        """Gets the tray_create of this MoveShotData.  # noqa: E501
+
+        Create a new tray if tray-name it does not exist  # noqa: E501
+
+        :return: The tray_create of this MoveShotData.  # noqa: E501
+        :rtype: bool
+        """
+        return self._tray_create
+
+    @tray_create.setter
+    def tray_create(self, tray_create):
+        """Sets the tray_create of this MoveShotData.
+
+        Create a new tray if tray-name it does not exist  # noqa: E501
+
+        :param tray_create: The tray_create of this MoveShotData.  # noqa: E501
+        :type: bool
+        """
+
+        self._tray_create = tray_create
 
     def to_dict(self):
         """Returns the model properties as a dict"""

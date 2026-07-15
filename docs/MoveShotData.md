@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **tray_frame** | **int** | The frame to use for the proxy image | [optional] 
 **tray_slip** | **int** | The frame slip to use when playing in split view | [optional] 
 **tray_position** | **int** | Position index in the tray | [optional] 
+**tray_create** | **bool** | Create a new tray if tray-name it does not exist | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

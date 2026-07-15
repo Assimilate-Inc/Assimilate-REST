@@ -4,9 +4,7 @@ All URIs are relative to *http://localhost:8080/APIV2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_application_render_queue_item**](ApplicationApi.md#add_application_render_queue_item) | **PUT** /application/render/{output_uuid} | Render Queue Item Add
-[**add_application_render_queue_item_start**](ApplicationApi.md#add_application_render_queue_item_start) | **POST** /application/render/{output_uuid} | Render Queue Item Add Start
-[**delete_application_render_queue_item**](ApplicationApi.md#delete_application_render_queue_item) | **DELETE** /application/render/{output_uuid} | Render Queue Item Delete
+[**delete_application_render_queue_item**](ApplicationApi.md#delete_application_render_queue_item) | **DELETE** /application/render/{queue_uuid} | Render Queue Item Delete
 [**do_application_player_enter_shot**](ApplicationApi.md#do_application_player_enter_shot) | **POST** /application/player/entershot/{shot_uuid} | Player Enter Shot
 [**do_application_player_enter_slot**](ApplicationApi.md#do_application_player_enter_slot) | **POST** /application/player/enterslot/{slot_idx} | Player Enter Slot
 [**do_application_player_enter_timeline**](ApplicationApi.md#do_application_player_enter_timeline) | **POST** /application/player/entertimeline/{construct_uuid} | Player Enter Timeline (CID)
@@ -14,125 +12,31 @@ Method | HTTP request | Description
 [**do_application_player_exit**](ApplicationApi.md#do_application_player_exit) | **POST** /application/player/exit | Player Exit
 [**do_application_project_enter**](ApplicationApi.md#do_application_project_enter) | **POST** /application/project/enter/{projectID} | Project Enter
 [**do_application_project_exit**](ApplicationApi.md#do_application_project_exit) | **POST** /application/project/exit | Project Exit
-[**do_application_render_delete_media_item**](ApplicationApi.md#do_application_render_delete_media_item) | **POST** /application/render/deletemedia/{output_uuid} | Render Queue Item Delete Media
+[**do_application_render_delete_media_item**](ApplicationApi.md#do_application_render_delete_media_item) | **POST** /application/render/deletemedia/{queue_uuid} | Render Queue Item Delete Media (obsolete)
 [**do_application_render_lut**](ApplicationApi.md#do_application_render_lut) | **POST** /application/tools/lut | Get LUT of Shot at Frame
 [**do_application_render_snapshot**](ApplicationApi.md#do_application_render_snapshot) | **POST** /application/tools/image | Render Snapshot
 [**do_application_render_start**](ApplicationApi.md#do_application_render_start) | **POST** /application/render/start | Render Queue Start
 [**do_application_render_stop**](ApplicationApi.md#do_application_render_stop) | **POST** /application/render/stop | Render Queue Stop
-[**do_application_render_stop_item**](ApplicationApi.md#do_application_render_stop_item) | **POST** /application/render/stop/{output_uuid} | Render Queue Item Stop
+[**do_application_render_stop_item**](ApplicationApi.md#do_application_render_stop_item) | **POST** /application/render/stop/{queue_uuid} | Render Queue Item Stop
 [**do_application_restart**](ApplicationApi.md#do_application_restart) | **POST** /application/restart | Application Restart
 [**do_application_shutdown**](ApplicationApi.md#do_application_shutdown) | **POST** /application/shutdown | Application Shutdown
 [**get_application_player_playmode**](ApplicationApi.md#get_application_player_playmode) | **GET** /application/player/playmode | Player Get Mode
 [**get_application_render_queue**](ApplicationApi.md#get_application_render_queue) | **GET** /application/render | Render Queue List
-[**get_application_render_queue_item**](ApplicationApi.md#get_application_render_queue_item) | **GET** /application/render/{output_uuid} | Render Queue Item Get
+[**get_application_render_queue_item**](ApplicationApi.md#get_application_render_queue_item) | **GET** /application/render/{queue_uuid} | Render Queue Item Get
+[**get_application_render_queue_item_results**](ApplicationApi.md#get_application_render_queue_item_results) | **GET** /application/render/results/{queue_uuid} | Get the Render Queue Item results
 [**get_application_state**](ApplicationApi.md#get_application_state) | **GET** /application | Application Status
-[**post_application_render_start_item**](ApplicationApi.md#post_application_render_start_item) | **POST** /application/render/start/{output_uuid} | Render Queue Item Start
+[**new_application_render_queue_item**](ApplicationApi.md#new_application_render_queue_item) | **PUT** /application/render/new | Add a new Render Queue Item
+[**new_application_render_queue_item_start**](ApplicationApi.md#new_application_render_queue_item_start) | **POST** /application/render/new | Create a new Render Queue Item and start rendering
 [**set_application_player_playmode**](ApplicationApi.md#set_application_player_playmode) | **PUT** /application/player/playmode | Player Set Mode
-
-# **add_application_render_queue_item**
-> RenderQueueItem add_application_render_queue_item(output_uuid)
-
-Render Queue Item Add
-
-Add the Output with UUID as Item to the Render Queue. Returns an error is the item is not found or not a valid output node.
-
-### Example
-```python
-from __future__ import print_function
-import time
-import assimilate_client
-from assimilate_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = assimilate_client.ApplicationApi()
-output_uuid = assimilate_client.Uuid() # Uuid | Output node UUID
-
-try:
-    # Render Queue Item Add
-    api_response = api_instance.add_application_render_queue_item(output_uuid)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ApplicationApi->add_application_render_queue_item: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **output_uuid** | [**Uuid**](.md)| Output node UUID | 
-
-### Return type
-
-[**RenderQueueItem**](RenderQueueItem.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **add_application_render_queue_item_start**
-> RenderQueueItem add_application_render_queue_item_start(output_uuid, body=body)
-
-Render Queue Item Add Start
-
-Add the Output with UUID as Item to the Render Queue and start rendering it. Returns an error is the Output is not found or not a valid Output.
-
-### Example
-```python
-from __future__ import print_function
-import time
-import assimilate_client
-from assimilate_client.rest import ApiException
-from pprint import pprint
-
-# create an instance of the API class
-api_instance = assimilate_client.ApplicationApi()
-output_uuid = assimilate_client.Uuid() # Uuid | Output node UUID
-body = assimilate_client.DeleteMediaData() # DeleteMediaData | json with delete_existing_media boolean (optional)
-
-try:
-    # Render Queue Item Add Start
-    api_response = api_instance.add_application_render_queue_item_start(output_uuid, body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling ApplicationApi->add_application_render_queue_item_start: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **output_uuid** | [**Uuid**](.md)| Output node UUID | 
- **body** | [**DeleteMediaData**](DeleteMediaData.md)| json with delete_existing_media boolean | [optional] 
-
-### Return type
-
-[**RenderQueueItem**](RenderQueueItem.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[**set_application_render_start_item**](ApplicationApi.md#set_application_render_start_item) | **POST** /application/render/start/{queue_uuid} | Render Queue Item Start
+[**update_application_render_queue_item**](ApplicationApi.md#update_application_render_queue_item) | **PUT** /application/render/{queue_uuid} | Render Queue Item Update
 
 # **delete_application_render_queue_item**
-> delete_application_render_queue_item(output_uuid)
+> delete_application_render_queue_item(queue_uuid)
 
 Render Queue Item Delete
 
-Remove the Item with UUID from the Render Queue. Returns an error is the item is not found in the queue.
+Remove the Item with UUID from the Render Queue. Returns an error if the item is not found.
 
 ### Example
 ```python
@@ -144,11 +48,11 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ApplicationApi()
-output_uuid = assimilate_client.Uuid() # Uuid | Output node UUID
+queue_uuid = assimilate_client.Uuid() # Uuid | Render Queue Item UUID
 
 try:
     # Render Queue Item Delete
-    api_instance.delete_application_render_queue_item(output_uuid)
+    api_instance.delete_application_render_queue_item(queue_uuid)
 except ApiException as e:
     print("Exception when calling ApplicationApi->delete_application_render_queue_item: %s\n" % e)
 ```
@@ -157,7 +61,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **output_uuid** | [**Uuid**](.md)| Output node UUID | 
+ **queue_uuid** | [**Uuid**](.md)| Render Queue Item UUID | 
 
 ### Return type
 
@@ -492,11 +396,11 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **do_application_render_delete_media_item**
-> do_application_render_delete_media_item(output_uuid)
+> do_application_render_delete_media_item(queue_uuid)
 
-Render Queue Item Delete Media
+Render Queue Item Delete Media (obsolete)
 
-Delete the media of the Queue Item with UUID. Returns an error when the node is not present in the Queue.
+Delete the media of the Queue Item with UUID. Returns an error when the node is not present in the Queue. (obsolete. Use the PUT method on /application/render/{queue_uuid} with delete_existing_media set to true instead)
 
 ### Example
 ```python
@@ -508,11 +412,11 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ApplicationApi()
-output_uuid = assimilate_client.Uuid() # Uuid | Output node UUID
+queue_uuid = assimilate_client.Uuid() # Uuid | Queue item UUID
 
 try:
-    # Render Queue Item Delete Media
-    api_instance.do_application_render_delete_media_item(output_uuid)
+    # Render Queue Item Delete Media (obsolete)
+    api_instance.do_application_render_delete_media_item(queue_uuid)
 except ApiException as e:
     print("Exception when calling ApplicationApi->do_application_render_delete_media_item: %s\n" % e)
 ```
@@ -521,7 +425,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **output_uuid** | [**Uuid**](.md)| Output node UUID | 
+ **queue_uuid** | [**Uuid**](.md)| Queue item UUID | 
 
 ### Return type
 
@@ -649,7 +553,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ApplicationApi()
-body = assimilate_client.DeleteMediaData() # DeleteMediaData | Start processing the render queue. If delete_existing_media is true, existing media will be deleted before rendering. (optional)
+body = assimilate_client.RenderQueueSettings() # RenderQueueSettings | Start processing the render queue. If delete_existing_media is true, existing media will be deleted before rendering. (optional)
 
 try:
     # Render Queue Start
@@ -662,7 +566,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**DeleteMediaData**](DeleteMediaData.md)| Start processing the render queue. If delete_existing_media is true, existing media will be deleted before rendering. | [optional] 
+ **body** | [**RenderQueueSettings**](RenderQueueSettings.md)| Start processing the render queue. If delete_existing_media is true, existing media will be deleted before rendering. | [optional] 
 
 ### Return type
 
@@ -723,7 +627,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **do_application_render_stop_item**
-> do_application_render_stop_item(output_uuid)
+> do_application_render_stop_item(queue_uuid)
 
 Render Queue Item Stop
 
@@ -739,11 +643,11 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ApplicationApi()
-output_uuid = assimilate_client.Uuid() # Uuid | Output node UUID
+queue_uuid = assimilate_client.Uuid() # Uuid | Queue item UUID
 
 try:
     # Render Queue Item Stop
-    api_instance.do_application_render_stop_item(output_uuid)
+    api_instance.do_application_render_stop_item(queue_uuid)
 except ApiException as e:
     print("Exception when calling ApplicationApi->do_application_render_stop_item: %s\n" % e)
 ```
@@ -752,7 +656,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **output_uuid** | [**Uuid**](.md)| Output node UUID | 
+ **queue_uuid** | [**Uuid**](.md)| Queue item UUID | 
 
 ### Return type
 
@@ -944,11 +848,11 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_application_render_queue_item**
-> RenderQueueItem get_application_render_queue_item(output_uuid)
+> RenderQueueItem get_application_render_queue_item(queue_uuid)
 
 Render Queue Item Get
 
-Get the status of the Queue Item with UUID. Returns an error is the item is not present in the Render Queue.
+Get the status of the Queue Item with UUID. Returns an error is the item is not found.
 
 ### Example
 ```python
@@ -960,11 +864,11 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ApplicationApi()
-output_uuid = assimilate_client.Uuid() # Uuid | Output node UUID
+queue_uuid = assimilate_client.Uuid() # Uuid | Render Queue Item UUID
 
 try:
     # Render Queue Item Get
-    api_response = api_instance.get_application_render_queue_item(output_uuid)
+    api_response = api_instance.get_application_render_queue_item(queue_uuid)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ApplicationApi->get_application_render_queue_item: %s\n" % e)
@@ -974,11 +878,59 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **output_uuid** | [**Uuid**](.md)| Output node UUID | 
+ **queue_uuid** | [**Uuid**](.md)| Render Queue Item UUID | 
 
 ### Return type
 
 [**RenderQueueItem**](RenderQueueItem.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_application_render_queue_item_results**
+> RenderResults get_application_render_queue_item_results(queue_uuid)
+
+Get the Render Queue Item results
+
+Get the list of files rendered from the Render Queue item. If the Queue item has not been rendered, an error is returned.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ApplicationApi()
+queue_uuid = assimilate_client.Uuid() # Uuid | Render Queue Item UUID
+
+try:
+    # Get the Render Queue Item results
+    api_response = api_instance.get_application_render_queue_item_results(queue_uuid)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ApplicationApi->get_application_render_queue_item_results: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **queue_uuid** | [**Uuid**](.md)| Render Queue Item UUID | 
+
+### Return type
+
+[**RenderResults**](RenderResults.md)
 
 ### Authorization
 
@@ -1035,12 +987,12 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **post_application_render_start_item**
-> post_application_render_start_item(output_uuid, body=body)
+# **new_application_render_queue_item**
+> RenderQueueItem new_application_render_queue_item(body=body)
 
-Render Queue Item Start
+Add a new Render Queue Item
 
-Start processing the Queue Item with UUID. If delete_existing_media is true, existing media will be deleted before rendering. Returns an error if the UUID does not references a valid output node.
+Add a new Render Queue Item from a Output with UUID and (optionally a frame range). Returns an error is the Output UUID is not found.
 
 ### Example
 ```python
@@ -1052,26 +1004,73 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = assimilate_client.ApplicationApi()
-output_uuid = assimilate_client.Uuid() # Uuid | Output node UUID
-body = assimilate_client.DeleteMediaData() # DeleteMediaData | json with delete_existing_media boolean (optional)
+body = assimilate_client.RenderQueueSettings() # RenderQueueSettings | Output UUID, (optionally) frame range. (optional)
 
 try:
-    # Render Queue Item Start
-    api_instance.post_application_render_start_item(output_uuid, body=body)
+    # Add a new Render Queue Item
+    api_response = api_instance.new_application_render_queue_item(body=body)
+    pprint(api_response)
 except ApiException as e:
-    print("Exception when calling ApplicationApi->post_application_render_start_item: %s\n" % e)
+    print("Exception when calling ApplicationApi->new_application_render_queue_item: %s\n" % e)
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **output_uuid** | [**Uuid**](.md)| Output node UUID | 
- **body** | [**DeleteMediaData**](DeleteMediaData.md)| json with delete_existing_media boolean | [optional] 
+ **body** | [**RenderQueueSettings**](RenderQueueSettings.md)| Output UUID, (optionally) frame range. | [optional] 
 
 ### Return type
 
-void (empty response body)
+[**RenderQueueItem**](RenderQueueItem.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **new_application_render_queue_item_start**
+> RenderQueueItem new_application_render_queue_item_start(body=body)
+
+Create a new Render Queue Item and start rendering
+
+Add a new Render Queue Item from a Output with UUID and (optionally a frame range) and start rendering the item. Returns an error is the Output UUID is not found.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ApplicationApi()
+body = assimilate_client.RenderQueueSettings() # RenderQueueSettings | Output UUID, (optionally) frame range. (optional)
+
+try:
+    # Create a new Render Queue Item and start rendering
+    api_response = api_instance.new_application_render_queue_item_start(body=body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ApplicationApi->new_application_render_queue_item_start: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**RenderQueueSettings**](RenderQueueSettings.md)| Output UUID, (optionally) frame range. | [optional] 
+
+### Return type
+
+[**RenderQueueItem**](RenderQueueItem.md)
 
 ### Authorization
 
@@ -1119,6 +1118,105 @@ Name | Type | Description  | Notes
 ### Return type
 
 void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_application_render_start_item**
+> set_application_render_start_item(queue_uuid, body=body)
+
+Render Queue Item Start
+
+Start processing the Queue Item with UUID. If delete_existing_media is true, existing media will be deleted before rendering. Returns an error if the UUID does not references a valid output node.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ApplicationApi()
+queue_uuid = assimilate_client.Uuid() # Uuid | Queue item UUID
+body = assimilate_client.RenderQueueSettings() # RenderQueueSettings | json with delete_existing_media boolean (optional)
+
+try:
+    # Render Queue Item Start
+    api_instance.set_application_render_start_item(queue_uuid, body=body)
+except ApiException as e:
+    print("Exception when calling ApplicationApi->set_application_render_start_item: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **queue_uuid** | [**Uuid**](.md)| Queue item UUID | 
+ **body** | [**RenderQueueSettings**](RenderQueueSettings.md)| json with delete_existing_media boolean | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_application_render_queue_item**
+> RenderQueueItem update_application_render_queue_item(body, queue_uuid)
+
+Render Queue Item Update
+
+Update the Queue Item with UUID. Returns an error if the item is not found.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ApplicationApi()
+body = assimilate_client.RenderQueueSettings() # RenderQueueSettings | Render settings to adjust the render range, validate the underlying media or clear the rendered media.
+queue_uuid = assimilate_client.Uuid() # Uuid | Render Queue Item UUID
+
+try:
+    # Render Queue Item Update
+    api_response = api_instance.update_application_render_queue_item(body, queue_uuid)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ApplicationApi->update_application_render_queue_item: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**RenderQueueSettings**](RenderQueueSettings.md)| Render settings to adjust the render range, validate the underlying media or clear the rendered media. | 
+ **queue_uuid** | [**Uuid**](.md)| Render Queue Item UUID | 
+
+### Return type
+
+[**RenderQueueItem**](RenderQueueItem.md)
 
 ### Authorization
 

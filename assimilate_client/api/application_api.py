@@ -32,243 +32,45 @@ class ApplicationApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def add_application_render_queue_item(self, output_uuid, **kwargs):  # noqa: E501
-        """Render Queue Item Add  # noqa: E501
-
-        Add the Output with UUID as Item to the Render Queue. Returns an error is the item is not found or not a valid output node.  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.add_application_render_queue_item(output_uuid, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool
-        :param Uuid output_uuid: Output node UUID (required)
-        :return: RenderQueueItem
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('async_req'):
-            return self.add_application_render_queue_item_with_http_info(output_uuid, **kwargs)  # noqa: E501
-        else:
-            (data) = self.add_application_render_queue_item_with_http_info(output_uuid, **kwargs)  # noqa: E501
-            return data
-
-    def add_application_render_queue_item_with_http_info(self, output_uuid, **kwargs):  # noqa: E501
-        """Render Queue Item Add  # noqa: E501
-
-        Add the Output with UUID as Item to the Render Queue. Returns an error is the item is not found or not a valid output node.  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.add_application_render_queue_item_with_http_info(output_uuid, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool
-        :param Uuid output_uuid: Output node UUID (required)
-        :return: RenderQueueItem
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['output_uuid']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in six.iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method add_application_render_queue_item" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'output_uuid' is set
-        if ('output_uuid' not in params or
-                params['output_uuid'] is None):
-            raise ValueError("Missing the required parameter `output_uuid` when calling `add_application_render_queue_item`")  # noqa: E501
-
-        collection_formats = {}
-
-        path_params = {}
-        if 'output_uuid' in params:
-            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
-
-        query_params = []
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = []  # noqa: E501
-
-        return self.api_client.call_api(
-            '/application/render/{output_uuid}', 'PUT',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='RenderQueueItem',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=params.get('async_req'),
-            _return_http_data_only=params.get('_return_http_data_only'),
-            _preload_content=params.get('_preload_content', True),
-            _request_timeout=params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def add_application_render_queue_item_start(self, output_uuid, **kwargs):  # noqa: E501
-        """Render Queue Item Add Start  # noqa: E501
-
-        Add the Output with UUID as Item to the Render Queue and start rendering it. Returns an error is the Output is not found or not a valid Output.  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.add_application_render_queue_item_start(output_uuid, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool
-        :param Uuid output_uuid: Output node UUID (required)
-        :param DeleteMediaData body: json with delete_existing_media boolean
-        :return: RenderQueueItem
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('async_req'):
-            return self.add_application_render_queue_item_start_with_http_info(output_uuid, **kwargs)  # noqa: E501
-        else:
-            (data) = self.add_application_render_queue_item_start_with_http_info(output_uuid, **kwargs)  # noqa: E501
-            return data
-
-    def add_application_render_queue_item_start_with_http_info(self, output_uuid, **kwargs):  # noqa: E501
-        """Render Queue Item Add Start  # noqa: E501
-
-        Add the Output with UUID as Item to the Render Queue and start rendering it. Returns an error is the Output is not found or not a valid Output.  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.add_application_render_queue_item_start_with_http_info(output_uuid, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool
-        :param Uuid output_uuid: Output node UUID (required)
-        :param DeleteMediaData body: json with delete_existing_media boolean
-        :return: RenderQueueItem
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['output_uuid', 'body']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in six.iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method add_application_render_queue_item_start" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'output_uuid' is set
-        if ('output_uuid' not in params or
-                params['output_uuid'] is None):
-            raise ValueError("Missing the required parameter `output_uuid` when calling `add_application_render_queue_item_start`")  # noqa: E501
-
-        collection_formats = {}
-
-        path_params = {}
-        if 'output_uuid' in params:
-            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
-
-        query_params = []
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        if 'body' in params:
-            body_params = params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = []  # noqa: E501
-
-        return self.api_client.call_api(
-            '/application/render/{output_uuid}', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='RenderQueueItem',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=params.get('async_req'),
-            _return_http_data_only=params.get('_return_http_data_only'),
-            _preload_content=params.get('_preload_content', True),
-            _request_timeout=params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def delete_application_render_queue_item(self, output_uuid, **kwargs):  # noqa: E501
+    def delete_application_render_queue_item(self, queue_uuid, **kwargs):  # noqa: E501
         """Render Queue Item Delete  # noqa: E501
 
-        Remove the Item with UUID from the Render Queue. Returns an error is the item is not found in the queue.  # noqa: E501
+        Remove the Item with UUID from the Render Queue. Returns an error if the item is not found.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_application_render_queue_item(output_uuid, async_req=True)
+        >>> thread = api.delete_application_render_queue_item(queue_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid output_uuid: Output node UUID (required)
+        :param Uuid queue_uuid: Render Queue Item UUID (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.delete_application_render_queue_item_with_http_info(output_uuid, **kwargs)  # noqa: E501
+            return self.delete_application_render_queue_item_with_http_info(queue_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.delete_application_render_queue_item_with_http_info(output_uuid, **kwargs)  # noqa: E501
+            (data) = self.delete_application_render_queue_item_with_http_info(queue_uuid, **kwargs)  # noqa: E501
             return data
 
-    def delete_application_render_queue_item_with_http_info(self, output_uuid, **kwargs):  # noqa: E501
+    def delete_application_render_queue_item_with_http_info(self, queue_uuid, **kwargs):  # noqa: E501
         """Render Queue Item Delete  # noqa: E501
 
-        Remove the Item with UUID from the Render Queue. Returns an error is the item is not found in the queue.  # noqa: E501
+        Remove the Item with UUID from the Render Queue. Returns an error if the item is not found.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_application_render_queue_item_with_http_info(output_uuid, async_req=True)
+        >>> thread = api.delete_application_render_queue_item_with_http_info(queue_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid output_uuid: Output node UUID (required)
+        :param Uuid queue_uuid: Render Queue Item UUID (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['output_uuid']  # noqa: E501
+        all_params = ['queue_uuid']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -283,16 +85,16 @@ class ApplicationApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'output_uuid' is set
-        if ('output_uuid' not in params or
-                params['output_uuid'] is None):
-            raise ValueError("Missing the required parameter `output_uuid` when calling `delete_application_render_queue_item`")  # noqa: E501
+        # verify the required parameter 'queue_uuid' is set
+        if ('queue_uuid' not in params or
+                params['queue_uuid'] is None):
+            raise ValueError("Missing the required parameter `queue_uuid` when calling `delete_application_render_queue_item`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'output_uuid' in params:
-            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
+        if 'queue_uuid' in params:
+            path_params['queue_uuid'] = params['queue_uuid']  # noqa: E501
 
         query_params = []
 
@@ -310,7 +112,7 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/render/{output_uuid}', 'DELETE',
+            '/application/render/{queue_uuid}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -966,45 +768,45 @@ class ApplicationApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def do_application_render_delete_media_item(self, output_uuid, **kwargs):  # noqa: E501
-        """Render Queue Item Delete Media  # noqa: E501
+    def do_application_render_delete_media_item(self, queue_uuid, **kwargs):  # noqa: E501
+        """Render Queue Item Delete Media (obsolete)  # noqa: E501
 
-        Delete the media of the Queue Item with UUID. Returns an error when the node is not present in the Queue.  # noqa: E501
+        Delete the media of the Queue Item with UUID. Returns an error when the node is not present in the Queue. (obsolete. Use the PUT method on /application/render/{queue_uuid} with delete_existing_media set to true instead)  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.do_application_render_delete_media_item(output_uuid, async_req=True)
+        >>> thread = api.do_application_render_delete_media_item(queue_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid output_uuid: Output node UUID (required)
+        :param Uuid queue_uuid: Queue item UUID (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.do_application_render_delete_media_item_with_http_info(output_uuid, **kwargs)  # noqa: E501
+            return self.do_application_render_delete_media_item_with_http_info(queue_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.do_application_render_delete_media_item_with_http_info(output_uuid, **kwargs)  # noqa: E501
+            (data) = self.do_application_render_delete_media_item_with_http_info(queue_uuid, **kwargs)  # noqa: E501
             return data
 
-    def do_application_render_delete_media_item_with_http_info(self, output_uuid, **kwargs):  # noqa: E501
-        """Render Queue Item Delete Media  # noqa: E501
+    def do_application_render_delete_media_item_with_http_info(self, queue_uuid, **kwargs):  # noqa: E501
+        """Render Queue Item Delete Media (obsolete)  # noqa: E501
 
-        Delete the media of the Queue Item with UUID. Returns an error when the node is not present in the Queue.  # noqa: E501
+        Delete the media of the Queue Item with UUID. Returns an error when the node is not present in the Queue. (obsolete. Use the PUT method on /application/render/{queue_uuid} with delete_existing_media set to true instead)  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.do_application_render_delete_media_item_with_http_info(output_uuid, async_req=True)
+        >>> thread = api.do_application_render_delete_media_item_with_http_info(queue_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid output_uuid: Output node UUID (required)
+        :param Uuid queue_uuid: Queue item UUID (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['output_uuid']  # noqa: E501
+        all_params = ['queue_uuid']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1019,16 +821,16 @@ class ApplicationApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'output_uuid' is set
-        if ('output_uuid' not in params or
-                params['output_uuid'] is None):
-            raise ValueError("Missing the required parameter `output_uuid` when calling `do_application_render_delete_media_item`")  # noqa: E501
+        # verify the required parameter 'queue_uuid' is set
+        if ('queue_uuid' not in params or
+                params['queue_uuid'] is None):
+            raise ValueError("Missing the required parameter `queue_uuid` when calling `do_application_render_delete_media_item`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'output_uuid' in params:
-            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
+        if 'queue_uuid' in params:
+            path_params['queue_uuid'] = params['queue_uuid']  # noqa: E501
 
         query_params = []
 
@@ -1046,7 +848,7 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/render/deletemedia/{output_uuid}', 'POST',
+            '/application/render/deletemedia/{queue_uuid}', 'POST',
             path_params,
             query_params,
             header_params,
@@ -1268,7 +1070,7 @@ class ApplicationApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param DeleteMediaData body: Start processing the render queue. If delete_existing_media is true, existing media will be deleted before rendering.
+        :param RenderQueueSettings body: Start processing the render queue. If delete_existing_media is true, existing media will be deleted before rendering.
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1289,7 +1091,7 @@ class ApplicationApi(object):
         >>> result = thread.get()
 
         :param async_req bool
-        :param DeleteMediaData body: Start processing the render queue. If delete_existing_media is true, existing media will be deleted before rendering.
+        :param RenderQueueSettings body: Start processing the render queue. If delete_existing_media is true, existing media will be deleted before rendering.
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1439,45 +1241,45 @@ class ApplicationApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def do_application_render_stop_item(self, output_uuid, **kwargs):  # noqa: E501
+    def do_application_render_stop_item(self, queue_uuid, **kwargs):  # noqa: E501
         """Render Queue Item Stop  # noqa: E501
 
         Stop rendering the Queue Item with UUID. Returns an error when the node is not present in the Queue.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.do_application_render_stop_item(output_uuid, async_req=True)
+        >>> thread = api.do_application_render_stop_item(queue_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid output_uuid: Output node UUID (required)
+        :param Uuid queue_uuid: Queue item UUID (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.do_application_render_stop_item_with_http_info(output_uuid, **kwargs)  # noqa: E501
+            return self.do_application_render_stop_item_with_http_info(queue_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.do_application_render_stop_item_with_http_info(output_uuid, **kwargs)  # noqa: E501
+            (data) = self.do_application_render_stop_item_with_http_info(queue_uuid, **kwargs)  # noqa: E501
             return data
 
-    def do_application_render_stop_item_with_http_info(self, output_uuid, **kwargs):  # noqa: E501
+    def do_application_render_stop_item_with_http_info(self, queue_uuid, **kwargs):  # noqa: E501
         """Render Queue Item Stop  # noqa: E501
 
         Stop rendering the Queue Item with UUID. Returns an error when the node is not present in the Queue.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.do_application_render_stop_item_with_http_info(output_uuid, async_req=True)
+        >>> thread = api.do_application_render_stop_item_with_http_info(queue_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid output_uuid: Output node UUID (required)
+        :param Uuid queue_uuid: Queue item UUID (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['output_uuid']  # noqa: E501
+        all_params = ['queue_uuid']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1492,16 +1294,16 @@ class ApplicationApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'output_uuid' is set
-        if ('output_uuid' not in params or
-                params['output_uuid'] is None):
-            raise ValueError("Missing the required parameter `output_uuid` when calling `do_application_render_stop_item`")  # noqa: E501
+        # verify the required parameter 'queue_uuid' is set
+        if ('queue_uuid' not in params or
+                params['queue_uuid'] is None):
+            raise ValueError("Missing the required parameter `queue_uuid` when calling `do_application_render_stop_item`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'output_uuid' in params:
-            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
+        if 'queue_uuid' in params:
+            path_params['queue_uuid'] = params['queue_uuid']  # noqa: E501
 
         query_params = []
 
@@ -1519,7 +1321,7 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/render/stop/{output_uuid}', 'POST',
+            '/application/render/stop/{queue_uuid}', 'POST',
             path_params,
             query_params,
             header_params,
@@ -1874,45 +1676,45 @@ class ApplicationApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_application_render_queue_item(self, output_uuid, **kwargs):  # noqa: E501
+    def get_application_render_queue_item(self, queue_uuid, **kwargs):  # noqa: E501
         """Render Queue Item Get  # noqa: E501
 
-        Get the status of the Queue Item with UUID. Returns an error is the item is not present in the Render Queue.  # noqa: E501
+        Get the status of the Queue Item with UUID. Returns an error is the item is not found.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_application_render_queue_item(output_uuid, async_req=True)
+        >>> thread = api.get_application_render_queue_item(queue_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid output_uuid: Output node UUID (required)
+        :param Uuid queue_uuid: Render Queue Item UUID (required)
         :return: RenderQueueItem
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_application_render_queue_item_with_http_info(output_uuid, **kwargs)  # noqa: E501
+            return self.get_application_render_queue_item_with_http_info(queue_uuid, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_application_render_queue_item_with_http_info(output_uuid, **kwargs)  # noqa: E501
+            (data) = self.get_application_render_queue_item_with_http_info(queue_uuid, **kwargs)  # noqa: E501
             return data
 
-    def get_application_render_queue_item_with_http_info(self, output_uuid, **kwargs):  # noqa: E501
+    def get_application_render_queue_item_with_http_info(self, queue_uuid, **kwargs):  # noqa: E501
         """Render Queue Item Get  # noqa: E501
 
-        Get the status of the Queue Item with UUID. Returns an error is the item is not present in the Render Queue.  # noqa: E501
+        Get the status of the Queue Item with UUID. Returns an error is the item is not found.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_application_render_queue_item_with_http_info(output_uuid, async_req=True)
+        >>> thread = api.get_application_render_queue_item_with_http_info(queue_uuid, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid output_uuid: Output node UUID (required)
+        :param Uuid queue_uuid: Render Queue Item UUID (required)
         :return: RenderQueueItem
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['output_uuid']  # noqa: E501
+        all_params = ['queue_uuid']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1927,16 +1729,16 @@ class ApplicationApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'output_uuid' is set
-        if ('output_uuid' not in params or
-                params['output_uuid'] is None):
-            raise ValueError("Missing the required parameter `output_uuid` when calling `get_application_render_queue_item`")  # noqa: E501
+        # verify the required parameter 'queue_uuid' is set
+        if ('queue_uuid' not in params or
+                params['queue_uuid'] is None):
+            raise ValueError("Missing the required parameter `queue_uuid` when calling `get_application_render_queue_item`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'output_uuid' in params:
-            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
+        if 'queue_uuid' in params:
+            path_params['queue_uuid'] = params['queue_uuid']  # noqa: E501
 
         query_params = []
 
@@ -1954,7 +1756,7 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/render/{output_uuid}', 'GET',
+            '/application/render/{queue_uuid}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -1962,6 +1764,101 @@ class ApplicationApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='RenderQueueItem',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_application_render_queue_item_results(self, queue_uuid, **kwargs):  # noqa: E501
+        """Get the Render Queue Item results  # noqa: E501
+
+        Get the list of files rendered from the Render Queue item. If the Queue item has not been rendered, an error is returned.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_application_render_queue_item_results(queue_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid queue_uuid: Render Queue Item UUID (required)
+        :return: RenderResults
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_application_render_queue_item_results_with_http_info(queue_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.get_application_render_queue_item_results_with_http_info(queue_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def get_application_render_queue_item_results_with_http_info(self, queue_uuid, **kwargs):  # noqa: E501
+        """Get the Render Queue Item results  # noqa: E501
+
+        Get the list of files rendered from the Render Queue item. If the Queue item has not been rendered, an error is returned.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_application_render_queue_item_results_with_http_info(queue_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid queue_uuid: Render Queue Item UUID (required)
+        :return: RenderResults
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['queue_uuid']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_application_render_queue_item_results" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'queue_uuid' is set
+        if ('queue_uuid' not in params or
+                params['queue_uuid'] is None):
+            raise ValueError("Missing the required parameter `queue_uuid` when calling `get_application_render_queue_item_results`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'queue_uuid' in params:
+            path_params['queue_uuid'] = params['queue_uuid']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/application/render/results/{queue_uuid}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='RenderResults',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -2056,47 +1953,45 @@ class ApplicationApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def post_application_render_start_item(self, output_uuid, **kwargs):  # noqa: E501
-        """Render Queue Item Start  # noqa: E501
+    def new_application_render_queue_item(self, **kwargs):  # noqa: E501
+        """Add a new Render Queue Item  # noqa: E501
 
-        Start processing the Queue Item with UUID. If delete_existing_media is true, existing media will be deleted before rendering. Returns an error if the UUID does not references a valid output node.  # noqa: E501
+        Add a new Render Queue Item from a Output with UUID and (optionally a frame range). Returns an error is the Output UUID is not found.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_application_render_start_item(output_uuid, async_req=True)
+        >>> thread = api.new_application_render_queue_item(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid output_uuid: Output node UUID (required)
-        :param DeleteMediaData body: json with delete_existing_media boolean
-        :return: None
+        :param RenderQueueSettings body: Output UUID, (optionally) frame range.
+        :return: RenderQueueItem
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.post_application_render_start_item_with_http_info(output_uuid, **kwargs)  # noqa: E501
+            return self.new_application_render_queue_item_with_http_info(**kwargs)  # noqa: E501
         else:
-            (data) = self.post_application_render_start_item_with_http_info(output_uuid, **kwargs)  # noqa: E501
+            (data) = self.new_application_render_queue_item_with_http_info(**kwargs)  # noqa: E501
             return data
 
-    def post_application_render_start_item_with_http_info(self, output_uuid, **kwargs):  # noqa: E501
-        """Render Queue Item Start  # noqa: E501
+    def new_application_render_queue_item_with_http_info(self, **kwargs):  # noqa: E501
+        """Add a new Render Queue Item  # noqa: E501
 
-        Start processing the Queue Item with UUID. If delete_existing_media is true, existing media will be deleted before rendering. Returns an error if the UUID does not references a valid output node.  # noqa: E501
+        Add a new Render Queue Item from a Output with UUID and (optionally a frame range). Returns an error is the Output UUID is not found.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post_application_render_start_item_with_http_info(output_uuid, async_req=True)
+        >>> thread = api.new_application_render_queue_item_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Uuid output_uuid: Output node UUID (required)
-        :param DeleteMediaData body: json with delete_existing_media boolean
-        :return: None
+        :param RenderQueueSettings body: Output UUID, (optionally) frame range.
+        :return: RenderQueueItem
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['output_uuid', 'body']  # noqa: E501
+        all_params = ['body']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2107,20 +2002,14 @@ class ApplicationApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method post_application_render_start_item" % key
+                    " to method new_application_render_queue_item" % key
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'output_uuid' is set
-        if ('output_uuid' not in params or
-                params['output_uuid'] is None):
-            raise ValueError("Missing the required parameter `output_uuid` when calling `post_application_render_start_item`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
-        if 'output_uuid' in params:
-            path_params['output_uuid'] = params['output_uuid']  # noqa: E501
 
         query_params = []
 
@@ -2144,14 +2033,109 @@ class ApplicationApi(object):
         auth_settings = []  # noqa: E501
 
         return self.api_client.call_api(
-            '/application/render/start/{output_uuid}', 'POST',
+            '/application/render/new', 'PUT',
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type=None,  # noqa: E501
+            response_type='RenderQueueItem',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def new_application_render_queue_item_start(self, **kwargs):  # noqa: E501
+        """Create a new Render Queue Item and start rendering  # noqa: E501
+
+        Add a new Render Queue Item from a Output with UUID and (optionally a frame range) and start rendering the item. Returns an error is the Output UUID is not found.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.new_application_render_queue_item_start(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param RenderQueueSettings body: Output UUID, (optionally) frame range.
+        :return: RenderQueueItem
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.new_application_render_queue_item_start_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.new_application_render_queue_item_start_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def new_application_render_queue_item_start_with_http_info(self, **kwargs):  # noqa: E501
+        """Create a new Render Queue Item and start rendering  # noqa: E501
+
+        Add a new Render Queue Item from a Output with UUID and (optionally a frame range) and start rendering the item. Returns an error is the Output UUID is not found.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.new_application_render_queue_item_start_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param RenderQueueSettings body: Output UUID, (optionally) frame range.
+        :return: RenderQueueItem
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method new_application_render_queue_item_start" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/application/render/new', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='RenderQueueItem',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -2251,6 +2235,216 @@ class ApplicationApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def set_application_render_start_item(self, queue_uuid, **kwargs):  # noqa: E501
+        """Render Queue Item Start  # noqa: E501
+
+        Start processing the Queue Item with UUID. If delete_existing_media is true, existing media will be deleted before rendering. Returns an error if the UUID does not references a valid output node.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.set_application_render_start_item(queue_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid queue_uuid: Queue item UUID (required)
+        :param RenderQueueSettings body: json with delete_existing_media boolean
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.set_application_render_start_item_with_http_info(queue_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.set_application_render_start_item_with_http_info(queue_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def set_application_render_start_item_with_http_info(self, queue_uuid, **kwargs):  # noqa: E501
+        """Render Queue Item Start  # noqa: E501
+
+        Start processing the Queue Item with UUID. If delete_existing_media is true, existing media will be deleted before rendering. Returns an error if the UUID does not references a valid output node.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.set_application_render_start_item_with_http_info(queue_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid queue_uuid: Queue item UUID (required)
+        :param RenderQueueSettings body: json with delete_existing_media boolean
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['queue_uuid', 'body']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method set_application_render_start_item" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'queue_uuid' is set
+        if ('queue_uuid' not in params or
+                params['queue_uuid'] is None):
+            raise ValueError("Missing the required parameter `queue_uuid` when calling `set_application_render_start_item`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'queue_uuid' in params:
+            path_params['queue_uuid'] = params['queue_uuid']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/application/render/start/{queue_uuid}', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def update_application_render_queue_item(self, body, queue_uuid, **kwargs):  # noqa: E501
+        """Render Queue Item Update  # noqa: E501
+
+        Update the Queue Item with UUID. Returns an error if the item is not found.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.update_application_render_queue_item(body, queue_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param RenderQueueSettings body: Render settings to adjust the render range, validate the underlying media or clear the rendered media. (required)
+        :param Uuid queue_uuid: Render Queue Item UUID (required)
+        :return: RenderQueueItem
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.update_application_render_queue_item_with_http_info(body, queue_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.update_application_render_queue_item_with_http_info(body, queue_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def update_application_render_queue_item_with_http_info(self, body, queue_uuid, **kwargs):  # noqa: E501
+        """Render Queue Item Update  # noqa: E501
+
+        Update the Queue Item with UUID. Returns an error if the item is not found.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.update_application_render_queue_item_with_http_info(body, queue_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param RenderQueueSettings body: Render settings to adjust the render range, validate the underlying media or clear the rendered media. (required)
+        :param Uuid queue_uuid: Render Queue Item UUID (required)
+        :return: RenderQueueItem
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body', 'queue_uuid']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_application_render_queue_item" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_application_render_queue_item`")  # noqa: E501
+        # verify the required parameter 'queue_uuid' is set
+        if ('queue_uuid' not in params or
+                params['queue_uuid'] is None):
+            raise ValueError("Missing the required parameter `queue_uuid` when calling `update_application_render_queue_item`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'queue_uuid' in params:
+            path_params['queue_uuid'] = params['queue_uuid']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/application/render/{queue_uuid}', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='RenderQueueItem',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),

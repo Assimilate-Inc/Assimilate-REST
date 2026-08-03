@@ -122,7 +122,7 @@ class ProjectsApi(object):
     def add_construct_current_output(self, body, **kwargs):  # noqa: E501
         """Output Add (CC)  # noqa: E501
 
-        Create a new Output in the Current Construct (CC).  # noqa: E501
+        Create a new Output in the Current Construct (CC). Set the input uuid of the output to set the level in the output tree or leave blank to attach it to the main output.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.add_construct_current_output(body, async_req=True)
@@ -145,7 +145,7 @@ class ProjectsApi(object):
     def add_construct_current_output_with_http_info(self, body, **kwargs):  # noqa: E501
         """Output Add (CC)  # noqa: E501
 
-        Create a new Output in the Current Construct (CC).  # noqa: E501
+        Create a new Output in the Current Construct (CC). Set the input uuid of the output to set the level in the output tree or leave blank to attach it to the main output.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.add_construct_current_output_with_http_info(body, async_req=True)
@@ -1027,6 +1027,212 @@ class ProjectsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def add_tray(self, body, **kwargs):  # noqa: E501
+        """Tray Add  # noqa: E501
+
+        Create a new Tray in the Project.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.add_tray(body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param TrayData body: json with tray data (required)
+        :return: TrayData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.add_tray_with_http_info(body, **kwargs)  # noqa: E501
+        else:
+            (data) = self.add_tray_with_http_info(body, **kwargs)  # noqa: E501
+            return data
+
+    def add_tray_with_http_info(self, body, **kwargs):  # noqa: E501
+        """Tray Add  # noqa: E501
+
+        Create a new Tray in the Project.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.add_tray_with_http_info(body, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param TrayData body: json with tray data (required)
+        :return: TrayData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method add_tray" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `add_tray`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/trays/new', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='TrayData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def add_tray_shot(self, body, tray_uuid, **kwargs):  # noqa: E501
+        """Tray Shot Add  # noqa: E501
+
+        Add a Shot to the Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.add_tray_shot(body, tray_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param TrayShotData body: json with tray item data (required)
+        :param Uuid tray_uuid: Tray UUID (required)
+        :return: TrayShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.add_tray_shot_with_http_info(body, tray_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.add_tray_shot_with_http_info(body, tray_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def add_tray_shot_with_http_info(self, body, tray_uuid, **kwargs):  # noqa: E501
+        """Tray Shot Add  # noqa: E501
+
+        Add a Shot to the Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.add_tray_shot_with_http_info(body, tray_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param TrayShotData body: json with tray item data (required)
+        :param Uuid tray_uuid: Tray UUID (required)
+        :return: TrayShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body', 'tray_uuid']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method add_tray_shot" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `add_tray_shot`")  # noqa: E501
+        # verify the required parameter 'tray_uuid' is set
+        if ('tray_uuid' not in params or
+                params['tray_uuid'] is None):
+            raise ValueError("Missing the required parameter `tray_uuid` when calling `add_tray_shot`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'tray_uuid' in params:
+            path_params['tray_uuid'] = params['tray_uuid']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/trays/{tray_uuid}/shots/new', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='TrayShotData',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -2485,6 +2691,204 @@ class ProjectsApi(object):
 
         return self.api_client.call_api(
             '/shot/{shot_uuid}/layers/{layer_idx}', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def delete_tray(self, tray_uuid, **kwargs):  # noqa: E501
+        """Tray Delete  # noqa: E501
+
+        Delete the Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_tray(tray_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid tray_uuid: Tray UUID (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.delete_tray_with_http_info(tray_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.delete_tray_with_http_info(tray_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def delete_tray_with_http_info(self, tray_uuid, **kwargs):  # noqa: E501
+        """Tray Delete  # noqa: E501
+
+        Delete the Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_tray_with_http_info(tray_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid tray_uuid: Tray UUID (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['tray_uuid']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_tray" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'tray_uuid' is set
+        if ('tray_uuid' not in params or
+                params['tray_uuid'] is None):
+            raise ValueError("Missing the required parameter `tray_uuid` when calling `delete_tray`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'tray_uuid' in params:
+            path_params['tray_uuid'] = params['tray_uuid']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/trays/{tray_uuid}', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def delete_tray_shot(self, tray_uuid, shot_uuid, **kwargs):  # noqa: E501
+        """Tray Shot Delete  # noqa: E501
+
+        Delete the Tray Shot with UUID from the Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_tray_shot(tray_uuid, shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.delete_tray_shot_with_http_info(tray_uuid, shot_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.delete_tray_shot_with_http_info(tray_uuid, shot_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def delete_tray_shot_with_http_info(self, tray_uuid, shot_uuid, **kwargs):  # noqa: E501
+        """Tray Shot Delete  # noqa: E501
+
+        Delete the Tray Shot with UUID from the Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.delete_tray_shot_with_http_info(tray_uuid, shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['tray_uuid', 'shot_uuid']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_tray_shot" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'tray_uuid' is set
+        if ('tray_uuid' not in params or
+                params['tray_uuid'] is None):
+            raise ValueError("Missing the required parameter `tray_uuid` when calling `delete_tray_shot`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `delete_tray_shot`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'tray_uuid' in params:
+            path_params['tray_uuid'] = params['tray_uuid']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/trays/{tray_uuid}/shots/{shot_uuid}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -5952,6 +6356,398 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def get_tray(self, tray_uuid, **kwargs):  # noqa: E501
+        """Tray Get Properties  # noqa: E501
+
+        Get the properties of Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_tray(tray_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: TrayData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_tray_with_http_info(tray_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.get_tray_with_http_info(tray_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def get_tray_with_http_info(self, tray_uuid, **kwargs):  # noqa: E501
+        """Tray Get Properties  # noqa: E501
+
+        Get the properties of Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_tray_with_http_info(tray_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: TrayData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['tray_uuid', 'level']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_tray" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'tray_uuid' is set
+        if ('tray_uuid' not in params or
+                params['tray_uuid'] is None):
+            raise ValueError("Missing the required parameter `tray_uuid` when calling `get_tray`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'tray_uuid' in params:
+            path_params['tray_uuid'] = params['tray_uuid']  # noqa: E501
+
+        query_params = []
+        if 'level' in params:
+            query_params.append(('Level', params['level']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/trays/{tray_uuid}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='TrayData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_tray_shot(self, tray_uuid, shot_uuid, **kwargs):  # noqa: E501
+        """Tray Shot Get Properties  # noqa: E501
+
+        Get the properties of Tray Shot with UUID in the Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_tray_shot(tray_uuid, shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: TrayShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_tray_shot_with_http_info(tray_uuid, shot_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.get_tray_shot_with_http_info(tray_uuid, shot_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def get_tray_shot_with_http_info(self, tray_uuid, shot_uuid, **kwargs):  # noqa: E501
+        """Tray Shot Get Properties  # noqa: E501
+
+        Get the properties of Tray Shot with UUID in the Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_tray_shot_with_http_info(tray_uuid, shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: TrayShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['tray_uuid', 'shot_uuid', 'level']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_tray_shot" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'tray_uuid' is set
+        if ('tray_uuid' not in params or
+                params['tray_uuid'] is None):
+            raise ValueError("Missing the required parameter `tray_uuid` when calling `get_tray_shot`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `get_tray_shot`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'tray_uuid' in params:
+            path_params['tray_uuid'] = params['tray_uuid']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
+
+        query_params = []
+        if 'level' in params:
+            query_params.append(('Level', params['level']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/trays/{tray_uuid}/shots/{shot_uuid}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='TrayShotData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_tray_shots(self, tray_uuid, **kwargs):  # noqa: E501
+        """Tray Shot List  # noqa: E501
+
+        Get the list of Shots in the Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_tray_shots(tray_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid tray_uuid: Tray UUID (required)
+        :return: TrayShotsData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_tray_shots_with_http_info(tray_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.get_tray_shots_with_http_info(tray_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def get_tray_shots_with_http_info(self, tray_uuid, **kwargs):  # noqa: E501
+        """Tray Shot List  # noqa: E501
+
+        Get the list of Shots in the Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_tray_shots_with_http_info(tray_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid tray_uuid: Tray UUID (required)
+        :return: TrayShotsData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['tray_uuid']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_tray_shots" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'tray_uuid' is set
+        if ('tray_uuid' not in params or
+                params['tray_uuid'] is None):
+            raise ValueError("Missing the required parameter `tray_uuid` when calling `get_tray_shots`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'tray_uuid' in params:
+            path_params['tray_uuid'] = params['tray_uuid']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/trays/{tray_uuid}/shots', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='TrayShotsData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_trays(self, **kwargs):  # noqa: E501
+        """Tray List  # noqa: E501
+
+        Get list of Trays in the current project  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_trays(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: TraysData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_trays_with_http_info(**kwargs)  # noqa: E501
+        else:
+            (data) = self.get_trays_with_http_info(**kwargs)  # noqa: E501
+            return data
+
+    def get_trays_with_http_info(self, **kwargs):  # noqa: E501
+        """Tray List  # noqa: E501
+
+        Get list of Trays in the current project  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_trays_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: TraysData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['level']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_trays" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+        if 'level' in params:
+            query_params.append(('Level', params['level']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/trays', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='TraysData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def move_construct(self, body, construct_uuid, **kwargs):  # noqa: E501
         """Construct Move  # noqa: E501
 
@@ -6828,6 +7624,228 @@ class ProjectsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def move_tray(self, body, tray_uuid, **kwargs):  # noqa: E501
+        """Tray Move  # noqa: E501
+
+        Move the Tray with UUID to a different position in the tray list.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.move_tray(body, tray_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param MoveTrayData body: json with move data (required)
+        :param Uuid tray_uuid: Tray UUID (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.move_tray_with_http_info(body, tray_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.move_tray_with_http_info(body, tray_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def move_tray_with_http_info(self, body, tray_uuid, **kwargs):  # noqa: E501
+        """Tray Move  # noqa: E501
+
+        Move the Tray with UUID to a different position in the tray list.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.move_tray_with_http_info(body, tray_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param MoveTrayData body: json with move data (required)
+        :param Uuid tray_uuid: Tray UUID (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body', 'tray_uuid']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method move_tray" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `move_tray`")  # noqa: E501
+        # verify the required parameter 'tray_uuid' is set
+        if ('tray_uuid' not in params or
+                params['tray_uuid'] is None):
+            raise ValueError("Missing the required parameter `tray_uuid` when calling `move_tray`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'tray_uuid' in params:
+            path_params['tray_uuid'] = params['tray_uuid']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/trays/{tray_uuid}', 'PATCH',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def move_tray_shot(self, body, tray_uuid, shot_uuid, **kwargs):  # noqa: E501
+        """Tray Shot Move  # noqa: E501
+
+        Move the Tray Shot with UUID to a different position in the Tray with UUID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.move_tray_shot(body, tray_uuid, shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param MoveTrayData body: json with move data (required)
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.move_tray_shot_with_http_info(body, tray_uuid, shot_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.move_tray_shot_with_http_info(body, tray_uuid, shot_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def move_tray_shot_with_http_info(self, body, tray_uuid, shot_uuid, **kwargs):  # noqa: E501
+        """Tray Shot Move  # noqa: E501
+
+        Move the Tray Shot with UUID to a different position in the Tray with UUID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.move_tray_shot_with_http_info(body, tray_uuid, shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param MoveTrayData body: json with move data (required)
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body', 'tray_uuid', 'shot_uuid']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method move_tray_shot" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `move_tray_shot`")  # noqa: E501
+        # verify the required parameter 'tray_uuid' is set
+        if ('tray_uuid' not in params or
+                params['tray_uuid'] is None):
+            raise ValueError("Missing the required parameter `tray_uuid` when calling `move_tray_shot`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `move_tray_shot`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'tray_uuid' in params:
+            path_params['tray_uuid'] = params['tray_uuid']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/trays/{tray_uuid}/shots/{shot_uuid}', 'PATCH',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def reset_shot_color(self, shot_uuid, **kwargs):  # noqa: E501
         """Shot Reset Color Properties  # noqa: E501
 
@@ -7621,6 +8639,212 @@ class ProjectsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='GroupData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def select_tray(self, tray_uuid, **kwargs):  # noqa: E501
+        """Tray Select  # noqa: E501
+
+        Make Tray with UUID the active tray  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.select_tray(tray_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: TrayData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.select_tray_with_http_info(tray_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.select_tray_with_http_info(tray_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def select_tray_with_http_info(self, tray_uuid, **kwargs):  # noqa: E501
+        """Tray Select  # noqa: E501
+
+        Make Tray with UUID the active tray  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.select_tray_with_http_info(tray_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: TrayData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['tray_uuid', 'level']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method select_tray" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'tray_uuid' is set
+        if ('tray_uuid' not in params or
+                params['tray_uuid'] is None):
+            raise ValueError("Missing the required parameter `tray_uuid` when calling `select_tray`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'tray_uuid' in params:
+            path_params['tray_uuid'] = params['tray_uuid']  # noqa: E501
+
+        query_params = []
+        if 'level' in params:
+            query_params.append(('Level', params['level']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/trays/{tray_uuid}', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='TrayData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def select_tray_shot(self, tray_uuid, shot_uuid, **kwargs):  # noqa: E501
+        """Tray Shot Select  # noqa: E501
+
+        Select the Tray Shot with UUID in the Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.select_tray_shot(tray_uuid, shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: TrayShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.select_tray_shot_with_http_info(tray_uuid, shot_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.select_tray_shot_with_http_info(tray_uuid, shot_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def select_tray_shot_with_http_info(self, tray_uuid, shot_uuid, **kwargs):  # noqa: E501
+        """Tray Shot Select  # noqa: E501
+
+        Select the Tray Shot with UUID in the Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.select_tray_shot_with_http_info(tray_uuid, shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: TrayShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['tray_uuid', 'shot_uuid', 'level']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method select_tray_shot" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'tray_uuid' is set
+        if ('tray_uuid' not in params or
+                params['tray_uuid'] is None):
+            raise ValueError("Missing the required parameter `tray_uuid` when calling `select_tray_shot`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `select_tray_shot`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'tray_uuid' in params:
+            path_params['tray_uuid'] = params['tray_uuid']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
+
+        query_params = []
+        if 'level' in params:
+            query_params.append(('Level', params['level']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/trays/{tray_uuid}/shots/{shot_uuid}', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='TrayShotData',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -10008,6 +11232,236 @@ class ProjectsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='MatteData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def set_tray(self, body, tray_uuid, **kwargs):  # noqa: E501
+        """Tray Set Properties  # noqa: E501
+
+        Set the properties of Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.set_tray(body, tray_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param TrayData body: json with tray data (required)
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: TrayData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.set_tray_with_http_info(body, tray_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.set_tray_with_http_info(body, tray_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def set_tray_with_http_info(self, body, tray_uuid, **kwargs):  # noqa: E501
+        """Tray Set Properties  # noqa: E501
+
+        Set the properties of Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.set_tray_with_http_info(body, tray_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param TrayData body: json with tray data (required)
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: TrayData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body', 'tray_uuid', 'level']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method set_tray" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `set_tray`")  # noqa: E501
+        # verify the required parameter 'tray_uuid' is set
+        if ('tray_uuid' not in params or
+                params['tray_uuid'] is None):
+            raise ValueError("Missing the required parameter `tray_uuid` when calling `set_tray`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'tray_uuid' in params:
+            path_params['tray_uuid'] = params['tray_uuid']  # noqa: E501
+
+        query_params = []
+        if 'level' in params:
+            query_params.append(('Level', params['level']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/trays/{tray_uuid}', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='TrayData',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def set_tray_shot(self, body, tray_uuid, shot_uuid, **kwargs):  # noqa: E501
+        """Tray Shot Set Properties  # noqa: E501
+
+        Set the properties of Tray Shot with UUID in the Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.set_tray_shot(body, tray_uuid, shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param TrayShotData body: json with tray item data (required)
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: TrayShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.set_tray_shot_with_http_info(body, tray_uuid, shot_uuid, **kwargs)  # noqa: E501
+        else:
+            (data) = self.set_tray_shot_with_http_info(body, tray_uuid, shot_uuid, **kwargs)  # noqa: E501
+            return data
+
+    def set_tray_shot_with_http_info(self, body, tray_uuid, shot_uuid, **kwargs):  # noqa: E501
+        """Tray Shot Set Properties  # noqa: E501
+
+        Set the properties of Tray Shot with UUID in the Tray with UUID  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.set_tray_shot_with_http_info(body, tray_uuid, shot_uuid, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param TrayShotData body: json with tray item data (required)
+        :param Uuid tray_uuid: Tray UUID (required)
+        :param Uuid shot_uuid: Shot UUID (required)
+        :param str level: Level of detail. If set to ALL the full data model is returned.
+        :return: TrayShotData
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body', 'tray_uuid', 'shot_uuid', 'level']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method set_tray_shot" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `set_tray_shot`")  # noqa: E501
+        # verify the required parameter 'tray_uuid' is set
+        if ('tray_uuid' not in params or
+                params['tray_uuid'] is None):
+            raise ValueError("Missing the required parameter `tray_uuid` when calling `set_tray_shot`")  # noqa: E501
+        # verify the required parameter 'shot_uuid' is set
+        if ('shot_uuid' not in params or
+                params['shot_uuid'] is None):
+            raise ValueError("Missing the required parameter `shot_uuid` when calling `set_tray_shot`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'tray_uuid' in params:
+            path_params['tray_uuid'] = params['tray_uuid']  # noqa: E501
+        if 'shot_uuid' in params:
+            path_params['shot_uuid'] = params['shot_uuid']  # noqa: E501
+
+        query_params = []
+        if 'level' in params:
+            query_params.append(('Level', params['level']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = []  # noqa: E501
+
+        return self.api_client.call_api(
+            '/trays/{tray_uuid}/shots/{shot_uuid}', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='TrayShotData',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),

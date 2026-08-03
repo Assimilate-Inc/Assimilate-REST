@@ -76,6 +76,7 @@ from assimilate_client.models.move_construct_data import MoveConstructData
 from assimilate_client.models.move_group_data import MoveGroupData
 from assimilate_client.models.move_layer_data import MoveLayerData
 from assimilate_client.models.move_shot_data import MoveShotData
+from assimilate_client.models.move_tray_data import MoveTrayData
 from assimilate_client.models.note_data import NoteData
 from assimilate_client.models.one_ofcontrol_data_value import OneOfcontrolDataValue
 from assimilate_client.models.playmode_data import PlaymodeData
@@ -116,6 +117,10 @@ from assimilate_client.models.staging_data import StagingData
 from assimilate_client.models.staging_data_inner import StagingDataInner
 from assimilate_client.models.system_data import SystemData
 from assimilate_client.models.timecode import Timecode
+from assimilate_client.models.tray_data import TrayData
+from assimilate_client.models.tray_shot_data import TrayShotData
+from assimilate_client.models.tray_shots_data import TrayShotsData
+from assimilate_client.models.trays_data import TraysData
 from assimilate_client.models.user_data import UserData
 from assimilate_client.models.user_data_gearing import UserDataGearing
 from assimilate_client.models.user_data_list import UserDataList

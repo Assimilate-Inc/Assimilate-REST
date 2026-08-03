@@ -2969,7 +2969,7 @@ paths:
   /constructs/current/outputs/new:
     post:
       summary: Output Add (CC)
-      description: Create a new Output in the Current Construct (CC).
+      description: Create a new Output in the Current Construct (CC). Set the input uuid of the output to set the level in the output tree or leave blank to attach it to the main output.
       tags:
         - Projects
       requestBody:
@@ -3388,6 +3388,380 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: delete-constructs-current-reference
+  /trays:
+    get:
+      summary: Tray List
+      description: Get list of Trays in the current project
+      tags:
+        - Projects
+      parameters:
+          - schema:
+              type: string
+            in: query
+            name: Level
+            description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/trays_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-trays
+  /trays/new:
+    post:
+      summary: Tray Add
+      description: Create a new Tray in the Project.
+      tags:
+        - Projects
+      requestBody:
+        description: json with tray data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tray_data'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tray_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: add-tray
+  '/trays/{tray_uuid}':
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: tray_uuid
+        in: path
+        required: true
+        description: Tray UUID
+    get:
+      summary: Tray Get Properties
+      description: Get the properties of Tray with UUID
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tray_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-tray
+    put:
+      summary: Tray Set Properties
+      description: Set the properties of Tray with UUID
+      requestBody:
+        description: json with tray data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tray_data'
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tray_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: set-tray
+    post:
+      summary: Tray Select
+      description: Make Tray with UUID the active tray
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tray_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: select-tray
+    delete:
+      summary: Tray Delete
+      description: Delete the Tray with UUID
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: delete-tray
+    patch:
+      summary: Tray Move
+      description: Move the Tray with UUID to a different position in the tray list.
+      requestBody:
+        description: json with move data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/move_tray_data'
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: move-tray
+  '/trays/{tray_uuid}/shots':
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: tray_uuid
+        in: path
+        required: true
+        description: Tray UUID
+    get:
+      summary: Tray Shot List
+      description: Get the list of Shots in the Tray with UUID
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tray_shots_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-tray-shots
+  '/trays/{tray_uuid}/shots/new':
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: tray_uuid
+        in: path
+        required: true
+        description: Tray UUID
+    post:
+      summary: Tray Shot Add
+      description: Add a Shot to the Tray with UUID
+      tags:
+        - Projects
+      requestBody:
+        description: json with tray item data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tray_shot_data'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tray_shot_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: add-tray-shot
+  '/trays/{tray_uuid}/shots/{shot_uuid}':
+    parameters:
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: tray_uuid
+        in: path
+        required: true
+        description: Tray UUID
+      - schema:
+          $ref: '#/components/schemas/uuid'
+        name: shot_uuid
+        in: path
+        required: true
+        description: Shot UUID
+    get:
+      summary: Tray Shot Get Properties
+      description: Get the properties of Tray Shot with UUID in the Tray with UUID
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tray_shot_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: get-tray-shot
+    put:
+      summary: Tray Shot Set Properties
+      description: Set the properties of Tray Shot with UUID in the Tray with UUID
+      requestBody:
+        description: json with tray item data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tray_shot_data'
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tray_shot_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: set-tray-shot
+    post:
+      summary: Tray Shot Select
+      description: Select the Tray Shot with UUID in the Tray with UUID
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tray_shot_data'
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: select-tray-shot
+    delete:
+      summary: Tray Shot Delete 
+      description: Delete the Tray Shot with UUID from the Tray with UUID
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: delete-tray-shot
+    patch:
+      summary: Tray Shot Move
+      description: Move the Tray Shot with UUID to a different position in the Tray with UUID.
+      requestBody:
+        description: json with move data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/move_tray_data'
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: move-tray-shot
 externalDocs:
   description: Find out more about the Assimilate Product Suite
   url: 'https://www.assimilateinc.com'
@@ -5479,6 +5853,11 @@ components:
           description: Move the current layer to position_index at the specified group level.
           x-stoplight:
             id: kbseuhub1egc2
+    move_tray_data:
+      type: object
+      properties:
+        position_index:
+          type: integer            
     animation_data:
       type: object
       properties:
@@ -5592,6 +5971,78 @@ components:
             $ref: '#/components/schemas/uuid'
           shot:
             $ref: '#/components/schemas/shot_data'
+    trays_data:
+      type: object
+      title: trays_data
+      description: List of Trays in the Project
+      properties:
+        trays:
+          type: array
+          items:
+            $ref: '#/components/schemas/tray_data'
+    tray_data:
+      type: object
+      title: tray_data
+      description: A Tray is a project level container that holds shots (references).
+      required:
+        - name
+      properties:
+        name:
+          description: Name of the Tray
+          type: string
+          x-stoplight:
+            id: 3efdkcid857dj
+        uuid:
+          $ref: '#/components/schemas/uuid'
+        selected:
+          type: boolean
+          description: Whether the tray the selected tray in the project
+          x-stoplight:
+            id: ioskdjcus73jd
+        tray_shots:
+          type: array
+          items:
+            $ref: '#/components/schemas/tray_shot_data'
+    tray_shots_data:
+      type: object
+      title: tray_shots_data
+      description: List of Shots in a Tray
+      properties:
+        tray_shots:
+          type: array
+          items:
+            $ref: '#/components/schemas/tray_shot_data'
+    tray_shot_data:
+      type: object
+      title: tray_shot_data
+      description: A Tray shot is an entry in a Tray that holds a reference to a Shot.
+      required:
+        - uuid
+      properties:
+        shot_uuid:
+          $ref: '#/components/schemas/uuid'
+        position:
+          type: integer
+          description: Index position of the tray item in the tray
+          x-stoplight:
+            id: 7jeufbnfkdlls
+        selected:
+          type: boolean
+          description: Whether the tray item in the tray is selected
+          x-stoplight:
+            id: 34jduplpamms
+        slip:
+          type: integer
+          description: Slip in frames for split view playback
+          x-stoplight:
+            id: 7jeufbnfkdlls
+        ref_frame:
+          type: integer
+          description: Reference frame for proxy view in the tray
+          x-stoplight:
+            id: txxvasgajssdn
+        shot:
+          $ref: '#/components/schemas/shot_data'
     selected_shots_data:
       type: object
       description: List of selected Shots in the active Construct or selected Output in the render tree.

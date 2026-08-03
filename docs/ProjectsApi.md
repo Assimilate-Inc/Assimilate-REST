@@ -14,6 +14,8 @@ Method | HTTP request | Description
 [**add_shot**](ProjectsApi.md#add_shot) | **POST** /shot/new | Shot Add
 [**add_shot_layer**](ProjectsApi.md#add_shot_layer) | **POST** /shot/{shot_uuid}/layers/new | Shot Create Layer
 [**add_shot_layer_group**](ProjectsApi.md#add_shot_layer_group) | **POST** /shot/{shot_uuid}/layers/group | Shot Create Layer Group
+[**add_tray**](ProjectsApi.md#add_tray) | **POST** /trays/new | Tray Add
+[**add_tray_shot**](ProjectsApi.md#add_tray_shot) | **POST** /trays/{tray_uuid}/shots/new | Tray Shot Add
 [**delete_construct**](ProjectsApi.md#delete_construct) | **DELETE** /constructs/{construct_uuid} | Construct Delete
 [**delete_construct_current_output**](ProjectsApi.md#delete_construct_current_output) | **DELETE** /constructs/current/outputs/{output_uuid} | Output Delete (CC)
 [**delete_construct_current_slot**](ProjectsApi.md#delete_construct_current_slot) | **DELETE** /constructs/current/slots/{slot_idx} | Slot Delete (CC)
@@ -29,6 +31,8 @@ Method | HTTP request | Description
 [**delete_shot**](ProjectsApi.md#delete_shot) | **DELETE** /shot/{shot_uuid} | Shot Delete
 [**delete_shot_input**](ProjectsApi.md#delete_shot_input) | **DELETE** /shot/{shot_uuid}/inputs/{input_idx} | Input Delete
 [**delete_shot_layer**](ProjectsApi.md#delete_shot_layer) | **DELETE** /shot/{shot_uuid}/layers/{layer_idx} | Shot Delete Layer
+[**delete_tray**](ProjectsApi.md#delete_tray) | **DELETE** /trays/{tray_uuid} | Tray Delete
+[**delete_tray_shot**](ProjectsApi.md#delete_tray_shot) | **DELETE** /trays/{tray_uuid}/shots/{shot_uuid} | Tray Shot Delete
 [**get_construct**](ProjectsApi.md#get_construct) | **GET** /constructs/{construct_uuid} | Construct Get Properties
 [**get_construct_current_output**](ProjectsApi.md#get_construct_current_output) | **GET** /constructs/current/outputs/{output_uuid} | Output Get Properties (CC)
 [**get_construct_current_outputs**](ProjectsApi.md#get_construct_current_outputs) | **GET** /constructs/current/outputs | Output List (CC)
@@ -64,6 +68,10 @@ Method | HTTP request | Description
 [**get_shot_layer_fill**](ProjectsApi.md#get_shot_layer_fill) | **GET** /shot/{shot_uuid}/layers/{layer_idx}/fill | Shot Layer Get Fill Properties
 [**get_shot_layer_matte**](ProjectsApi.md#get_shot_layer_matte) | **GET** /shot/{shot_uuid}/layers/{layer_idx}/matte | Shot Layer Get Matte Properties
 [**get_shot_layers**](ProjectsApi.md#get_shot_layers) | **GET** /shot/{shot_uuid}/layers | Shot Get Layers Properties
+[**get_tray**](ProjectsApi.md#get_tray) | **GET** /trays/{tray_uuid} | Tray Get Properties
+[**get_tray_shot**](ProjectsApi.md#get_tray_shot) | **GET** /trays/{tray_uuid}/shots/{shot_uuid} | Tray Shot Get Properties
+[**get_tray_shots**](ProjectsApi.md#get_tray_shots) | **GET** /trays/{tray_uuid}/shots | Tray Shot List
+[**get_trays**](ProjectsApi.md#get_trays) | **GET** /trays | Tray List
 [**move_construct**](ProjectsApi.md#move_construct) | **PATCH** /constructs/{construct_uuid} | Construct Move
 [**move_construct_current_slot_version**](ProjectsApi.md#move_construct_current_slot_version) | **PATCH** /constructs/current/slots/{slot_idx}/versions/{version_idx} | Shot Move (CC)
 [**move_construct_slot_version**](ProjectsApi.md#move_construct_slot_version) | **PATCH** /constructs/{construct_uuid}/slots/{slot_idx}/versions/{version_idx} | Shot Move (VRS)
@@ -72,6 +80,8 @@ Method | HTTP request | Description
 [**move_group_current**](ProjectsApi.md#move_group_current) | **PATCH** /groups/current | Group Current Move
 [**move_layer**](ProjectsApi.md#move_layer) | **PATCH** /shot/{shot_uuid}/layers/{layer_idx} | Layer Move
 [**move_shot**](ProjectsApi.md#move_shot) | **PATCH** /shot/{shot_uuid} | Shot Move
+[**move_tray**](ProjectsApi.md#move_tray) | **PATCH** /trays/{tray_uuid} | Tray Move
+[**move_tray_shot**](ProjectsApi.md#move_tray_shot) | **PATCH** /trays/{tray_uuid}/shots/{shot_uuid} | Tray Shot Move
 [**reset_shot_color**](ProjectsApi.md#reset_shot_color) | **DELETE** /shot/{shot_uuid}/color | Shot Reset Color Properties
 [**reset_shot_controls**](ProjectsApi.md#reset_shot_controls) | **DELETE** /shot/{shot_uuid}/controls | Shot Reset Node Control Properties
 [**reset_shot_layer_canvas**](ProjectsApi.md#reset_shot_layer_canvas) | **DELETE** /shot/{shot_uuid}/layers/{layer_idx}/canvas | Shot Layer Reset Canvas Properties
@@ -80,6 +90,8 @@ Method | HTTP request | Description
 [**reset_shot_layer_matte**](ProjectsApi.md#reset_shot_layer_matte) | **DELETE** /shot/{shot_uuid}/layers/{layer_idx}/matte | Shot Layer Reset Matte Properties
 [**select_construct**](ProjectsApi.md#select_construct) | **POST** /constructs/{construct_uuid} | Construct Select
 [**select_group**](ProjectsApi.md#select_group) | **POST** /groups/{group_uuid} | Group Select
+[**select_tray**](ProjectsApi.md#select_tray) | **POST** /trays/{tray_uuid} | Tray Select
+[**select_tray_shot**](ProjectsApi.md#select_tray_shot) | **POST** /trays/{tray_uuid}/shots/{shot_uuid} | Tray Shot Select
 [**set_construct**](ProjectsApi.md#set_construct) | **PUT** /constructs/{construct_uuid} | Construct Set Properties
 [**set_construct_current_output**](ProjectsApi.md#set_construct_current_output) | **PUT** /constructs/current/outputs/{output_uuid} | Output Set Properties (CC)
 [**set_construct_current_slot**](ProjectsApi.md#set_construct_current_slot) | **PUT** /constructs/current/slots/{slot_idx} | Slot Set Properties (CC)
@@ -101,6 +113,8 @@ Method | HTTP request | Description
 [**set_shot_layer_color**](ProjectsApi.md#set_shot_layer_color) | **PUT** /shot/{shot_uuid}/layers/{layer_idx}/color | Shot Layer Set  Color Properties
 [**set_shot_layer_fill**](ProjectsApi.md#set_shot_layer_fill) | **PUT** /shot/{shot_uuid}/layers/{layer_idx}/fill | Shot Layer Set  Fill Properties
 [**set_shot_layer_matte**](ProjectsApi.md#set_shot_layer_matte) | **PUT** /shot/{shot_uuid}/layers/{layer_idx}/matte | Shot Layer Set  Matte Properties
+[**set_tray**](ProjectsApi.md#set_tray) | **PUT** /trays/{tray_uuid} | Tray Set Properties
+[**set_tray_shot**](ProjectsApi.md#set_tray_shot) | **PUT** /trays/{tray_uuid}/shots/{shot_uuid} | Tray Shot Set Properties
 
 # **add_construct**
 > ConstructData add_construct()
@@ -151,7 +165,7 @@ No authorization required
 
 Output Add (CC)
 
-Create a new Output in the Current Construct (CC).
+Create a new Output in the Current Construct (CC). Set the input uuid of the output to set the level in the output tree or leave blank to attach it to the main output.
 
 ### Example
 ```python
@@ -577,6 +591,104 @@ Name | Type | Description  | Notes
 ### Return type
 
 void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **add_tray**
+> TrayData add_tray(body)
+
+Tray Add
+
+Create a new Tray in the Project.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+body = assimilate_client.TrayData() # TrayData | json with tray data
+
+try:
+    # Tray Add
+    api_response = api_instance.add_tray(body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->add_tray: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**TrayData**](TrayData.md)| json with tray data | 
+
+### Return type
+
+[**TrayData**](TrayData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **add_tray_shot**
+> TrayShotData add_tray_shot(body, tray_uuid)
+
+Tray Shot Add
+
+Add a Shot to the Tray with UUID
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+body = assimilate_client.TrayShotData() # TrayShotData | json with tray item data
+tray_uuid = assimilate_client.Uuid() # Uuid | Tray UUID
+
+try:
+    # Tray Shot Add
+    api_response = api_instance.add_tray_shot(body, tray_uuid)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->add_tray_shot: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**TrayShotData**](TrayShotData.md)| json with tray item data | 
+ **tray_uuid** | [**Uuid**](.md)| Tray UUID | 
+
+### Return type
+
+[**TrayShotData**](TrayShotData.md)
 
 ### Authorization
 
@@ -1284,6 +1396,102 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
  **layer_idx** | **int**| Layer Index | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_tray**
+> delete_tray(tray_uuid)
+
+Tray Delete
+
+Delete the Tray with UUID
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+tray_uuid = assimilate_client.Uuid() # Uuid | Tray UUID
+
+try:
+    # Tray Delete
+    api_instance.delete_tray(tray_uuid)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->delete_tray: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tray_uuid** | [**Uuid**](.md)| Tray UUID | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_tray_shot**
+> delete_tray_shot(tray_uuid, shot_uuid)
+
+Tray Shot Delete
+
+Delete the Tray Shot with UUID from the Tray with UUID
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+tray_uuid = assimilate_client.Uuid() # Uuid | Tray UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
+
+try:
+    # Tray Shot Delete
+    api_instance.delete_tray_shot(tray_uuid, shot_uuid)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->delete_tray_shot: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tray_uuid** | [**Uuid**](.md)| Tray UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
 
 ### Return type
 
@@ -3034,6 +3242,204 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_tray**
+> TrayData get_tray(tray_uuid, level=level)
+
+Tray Get Properties
+
+Get the properties of Tray with UUID
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+tray_uuid = assimilate_client.Uuid() # Uuid | Tray UUID
+level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
+
+try:
+    # Tray Get Properties
+    api_response = api_instance.get_tray(tray_uuid, level=level)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->get_tray: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tray_uuid** | [**Uuid**](.md)| Tray UUID | 
+ **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
+
+### Return type
+
+[**TrayData**](TrayData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_tray_shot**
+> TrayShotData get_tray_shot(tray_uuid, shot_uuid, level=level)
+
+Tray Shot Get Properties
+
+Get the properties of Tray Shot with UUID in the Tray with UUID
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+tray_uuid = assimilate_client.Uuid() # Uuid | Tray UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
+level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
+
+try:
+    # Tray Shot Get Properties
+    api_response = api_instance.get_tray_shot(tray_uuid, shot_uuid, level=level)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->get_tray_shot: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tray_uuid** | [**Uuid**](.md)| Tray UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
+ **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
+
+### Return type
+
+[**TrayShotData**](TrayShotData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_tray_shots**
+> TrayShotsData get_tray_shots(tray_uuid)
+
+Tray Shot List
+
+Get the list of Shots in the Tray with UUID
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+tray_uuid = assimilate_client.Uuid() # Uuid | Tray UUID
+
+try:
+    # Tray Shot List
+    api_response = api_instance.get_tray_shots(tray_uuid)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->get_tray_shots: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tray_uuid** | [**Uuid**](.md)| Tray UUID | 
+
+### Return type
+
+[**TrayShotsData**](TrayShotsData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_trays**
+> TraysData get_trays(level=level)
+
+Tray List
+
+Get list of Trays in the current project
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
+
+try:
+    # Tray List
+    api_response = api_instance.get_trays(level=level)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->get_trays: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
+
+### Return type
+
+[**TraysData**](TraysData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **move_construct**
 > move_construct(body, construct_uuid)
 
@@ -3432,6 +3838,106 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **move_tray**
+> move_tray(body, tray_uuid)
+
+Tray Move
+
+Move the Tray with UUID to a different position in the tray list.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+body = assimilate_client.MoveTrayData() # MoveTrayData | json with move data
+tray_uuid = assimilate_client.Uuid() # Uuid | Tray UUID
+
+try:
+    # Tray Move
+    api_instance.move_tray(body, tray_uuid)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->move_tray: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**MoveTrayData**](MoveTrayData.md)| json with move data | 
+ **tray_uuid** | [**Uuid**](.md)| Tray UUID | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **move_tray_shot**
+> move_tray_shot(body, tray_uuid, shot_uuid)
+
+Tray Shot Move
+
+Move the Tray Shot with UUID to a different position in the Tray with UUID.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+body = assimilate_client.MoveTrayData() # MoveTrayData | json with move data
+tray_uuid = assimilate_client.Uuid() # Uuid | Tray UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
+
+try:
+    # Tray Shot Move
+    api_instance.move_tray_shot(body, tray_uuid, shot_uuid)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->move_tray_shot: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**MoveTrayData**](MoveTrayData.md)| json with move data | 
+ **tray_uuid** | [**Uuid**](.md)| Tray UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **reset_shot_color**
 > reset_shot_color(shot_uuid)
 
@@ -3811,6 +4317,108 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GroupData**](GroupData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **select_tray**
+> TrayData select_tray(tray_uuid, level=level)
+
+Tray Select
+
+Make Tray with UUID the active tray
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+tray_uuid = assimilate_client.Uuid() # Uuid | Tray UUID
+level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
+
+try:
+    # Tray Select
+    api_response = api_instance.select_tray(tray_uuid, level=level)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->select_tray: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tray_uuid** | [**Uuid**](.md)| Tray UUID | 
+ **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
+
+### Return type
+
+[**TrayData**](TrayData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **select_tray_shot**
+> TrayShotData select_tray_shot(tray_uuid, shot_uuid, level=level)
+
+Tray Shot Select
+
+Select the Tray Shot with UUID in the Tray with UUID
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+tray_uuid = assimilate_client.Uuid() # Uuid | Tray UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
+level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
+
+try:
+    # Tray Shot Select
+    api_response = api_instance.select_tray_shot(tray_uuid, shot_uuid, level=level)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->select_tray_shot: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tray_uuid** | [**Uuid**](.md)| Tray UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
+ **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
+
+### Return type
+
+[**TrayShotData**](TrayShotData.md)
 
 ### Authorization
 
@@ -4912,6 +5520,112 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**MatteData**](MatteData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_tray**
+> TrayData set_tray(body, tray_uuid, level=level)
+
+Tray Set Properties
+
+Set the properties of Tray with UUID
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+body = assimilate_client.TrayData() # TrayData | json with tray data
+tray_uuid = assimilate_client.Uuid() # Uuid | Tray UUID
+level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
+
+try:
+    # Tray Set Properties
+    api_response = api_instance.set_tray(body, tray_uuid, level=level)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->set_tray: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**TrayData**](TrayData.md)| json with tray data | 
+ **tray_uuid** | [**Uuid**](.md)| Tray UUID | 
+ **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
+
+### Return type
+
+[**TrayData**](TrayData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_tray_shot**
+> TrayShotData set_tray_shot(body, tray_uuid, shot_uuid, level=level)
+
+Tray Shot Set Properties
+
+Set the properties of Tray Shot with UUID in the Tray with UUID
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+body = assimilate_client.TrayShotData() # TrayShotData | json with tray item data
+tray_uuid = assimilate_client.Uuid() # Uuid | Tray UUID
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
+level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
+
+try:
+    # Tray Shot Set Properties
+    api_response = api_instance.set_tray_shot(body, tray_uuid, shot_uuid, level=level)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->set_tray_shot: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**TrayShotData**](TrayShotData.md)| json with tray item data | 
+ **tray_uuid** | [**Uuid**](.md)| Tray UUID | 
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
+ **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
+
+### Return type
+
+[**TrayShotData**](TrayShotData.md)
 
 ### Authorization
 

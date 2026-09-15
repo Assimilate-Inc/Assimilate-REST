@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**index** | **int** | Index of the Input Shot in the parent Shot | [optional] 
 **grade** | **bool** | render the grade of the Input Shot | [optional] 
 **create_copy** | **bool** | Create a copy of the Shot or use a reference | [optional] 
 **input_uuid** | [**Uuid**](Uuid.md) |  | [optional] 

@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | Name of the layer | [optional] 
 **active** | **bool** | Is the layer active | [optional] 
+**selected** | **bool** | Whether the layer is selected | [optional] 
 **recursive** | **bool** | Whether the layer settings are applied recursively to all layers below in the stack | [optional] 
 **group** | **bool** | Whether the layer is a group layer containing sub-layers | [optional] 
 **parent** | **int** | Index of the parent layer. | [optional] 

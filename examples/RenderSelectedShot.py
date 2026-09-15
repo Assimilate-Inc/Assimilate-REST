@@ -47,10 +47,10 @@ try:
 
             render_node = None
             if render_type == 0:
-                # create PNG render node
+                # create (16 bit RGBA) TIFF render node
                 sd = ShotData(type_uuid="00000000-0000-0000-0000-000000000004", 
-                            name="CC Render Tiff", 
-                            output=ShotDataOutput(components=4, extention="tif", filespec=render_folder + "\\#sname.#frame[6].#ext", format=0),
+                            name="CC Render TIFF", 
+                            output=ShotDataOutput(components=4, extention="tif", filespec=render_folder + "\\#sname.#frame[6].#ext", format=2),
                             color_format=ShotDataColorFormat(colorspace="Rec709", eotf="Gamma 2.4"))
                 render_node = projects_api.add_shot(sd)
 
@@ -63,7 +63,7 @@ try:
                 print("start")
                 sd = ShotData(type_uuid="4327bcc5-91af-4955-92ce-455522eb84b3", 
                             name=select.selection[0].shot.name, 
-                            output=ShotDataOutput(components=4, outputpath="$RENDER$\\"+render_folder, filespec="#name.#ext", extention="mov", format=16777483),
+                            output=ShotDataOutput(components=3, outputpath="$RENDER$\\"+render_folder, filespec="#name.#ext", extention="mov", format=2),
                             color_format=ShotDataColorFormat(colorspace="Rec709", eotf="Gamma 2.4"),
                             controls=ctrl_list)
                 render_node = projects_api.add_shot(sd)

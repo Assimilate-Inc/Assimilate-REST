@@ -90,6 +90,7 @@ Method | HTTP request | Description
 [**reset_shot_layer_matte**](ProjectsApi.md#reset_shot_layer_matte) | **DELETE** /shot/{shot_uuid}/layers/{layer_idx}/matte | Shot Layer Reset Matte Properties
 [**select_construct**](ProjectsApi.md#select_construct) | **POST** /constructs/{construct_uuid} | Construct Select
 [**select_group**](ProjectsApi.md#select_group) | **POST** /groups/{group_uuid} | Group Select
+[**select_shot_layer**](ProjectsApi.md#select_shot_layer) | **POST** /shot/{shot_uuid}/layers/{layer_idx} | Layer Select
 [**select_tray**](ProjectsApi.md#select_tray) | **POST** /trays/{tray_uuid} | Tray Select
 [**select_tray_shot**](ProjectsApi.md#select_tray_shot) | **POST** /trays/{tray_uuid}/shots/{shot_uuid} | Tray Shot Select
 [**set_construct**](ProjectsApi.md#set_construct) | **PUT** /constructs/{construct_uuid} | Construct Set Properties
@@ -4317,6 +4318,57 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GroupData**](GroupData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **select_shot_layer**
+> select_shot_layer(shot_uuid, layer_idx, level=level)
+
+Layer Select
+
+Select the Layer with the specified index in the Shot with UUID (use index -1 to deselect all layers).
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ProjectsApi()
+shot_uuid = assimilate_client.Uuid() # Uuid | Shot UUID
+layer_idx = 56 # int | Layer Index
+level = 'level_example' # str | Level of detail. If set to ALL the full data model is returned. (optional)
+
+try:
+    # Layer Select
+    api_instance.select_shot_layer(shot_uuid, layer_idx, level=level)
+except ApiException as e:
+    print("Exception when calling ProjectsApi->select_shot_layer: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **shot_uuid** | [**Uuid**](.md)| Shot UUID | 
+ **layer_idx** | **int**| Layer Index | 
+ **level** | **str**| Level of detail. If set to ALL the full data model is returned. | [optional] 
+
+### Return type
+
+void (empty response body)
 
 ### Authorization
 

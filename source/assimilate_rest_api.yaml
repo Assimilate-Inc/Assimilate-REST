@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: |
     REST API for the Assimilate Product Suite software.
-  version: 1.0.5
+  version: 1.1.1
   title: Assimilate REST API
   termsOfService: 'https://myassimilate.assimilateinc.com/TermsOfService.html'
   contact:
@@ -2123,6 +2123,27 @@ paths:
               schema:
                 $ref: '#/components/schemas/error_message'
       operationId: set-shot-layer
+    post:
+      summary: Layer Select
+      description: Select the Layer with the specified index in the Shot with UUID (use index -1 to deselect all layers).
+      tags:
+        - Projects
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: Level
+          description: Level of detail. If set to ALL the full data model is returned.
+      responses:
+        '200':
+          description: OK
+        4XX:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_message'
+      operationId: select-shot-layer
     delete:
       summary: Shot Delete Layer 
       description: Delete the layer at the specified index for the Shot with UUID.
@@ -4412,13 +4433,13 @@ components:
               description: Output folder for the render
             filespec:
               type: string
-              description: File specification / mask for the render
+              description: File specification / mask for the render. Include mask codes to dynamically create the output filename. See the documentation for details.
             format:
               type: integer
-              description: Format mask
+              description: Format mask is a combination of bit depth and component type. 0 (8bit), 1 (10bit), 2 (16bit int), 3 (16bit float), 4 (32bit float). Note that most media formats only allow for specific combinations of bit depth and type. Not all combinations are valid. Check the sotware UI for valid combinations.
             components:
               type: integer
-              description: Channel count (RGB / RGBA)
+              description: Channel count (3 for RGB, 4 for RGBA)
             extention:
               enum:
                 - tif
@@ -4487,6 +4508,9 @@ components:
               $ref: '#/components/schemas/colorspace'
             eotf:
               $ref: '#/components/schemas/eotf'
+            apply:
+              type: boolean
+              description: Apply an automatic transformation on the node input if the color space or transfer function differs (only available with Transformer nodes)
             lut:
               type: string
               description: LUT applied to the shot
@@ -4535,7 +4559,9 @@ components:
         staging:
           $ref: '#/components/schemas/staging_data'
         inputs:
-          $ref: '#/components/schemas/inputs_data'
+          type: array
+          items:          
+            $ref: '#/components/schemas/input_data'
         controls:
           type: array
           items:
@@ -5339,6 +5365,11 @@ components:
           description: Is the layer active
           x-stoplight:
             id: uwkvnsf1yuul0
+        selected:
+          type: boolean
+          description: Whether the layer is selected
+          x-stoplight:
+            id: 34jdue38hjss
         recursive:
           type: boolean
           description: Whether the layer settings are applied recursively to all layers below in the stack
@@ -5924,7 +5955,7 @@ components:
         - kv
     inputs_data:
       type: array
-      description: List of Input of a Shot
+      description: List of Inputs of a Shot
       items:
         $ref: '#/components/schemas/input_data'
     input_data:
@@ -5932,6 +5963,9 @@ components:
       title: input_data
       description: Input Shot of a (parent) Shot
       properties:
+        index:
+          type: integer
+          description: Index of the Input Shot in the parent Shot
         grade:
           type: boolean
           description: render the grade of the Input Shot

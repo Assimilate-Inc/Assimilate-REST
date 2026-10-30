@@ -153,7 +153,7 @@ class MoveShotData(object):
     def version_idx(self):
         """Gets the version_idx of this MoveShotData.  # noqa: E501
 
-        Move the Shot to the version index in the Slot  # noqa: E501
+        Move the Shot to the version index in the Slot, by default 0 is used which puts the shot at the bottom of the slot  # noqa: E501
 
         :return: The version_idx of this MoveShotData.  # noqa: E501
         :rtype: int
@@ -164,7 +164,7 @@ class MoveShotData(object):
     def version_idx(self, version_idx):
         """Sets the version_idx of this MoveShotData.
 
-        Move the Shot to the version index in the Slot  # noqa: E501
+        Move the Shot to the version index in the Slot, by default 0 is used which puts the shot at the bottom of the slot  # noqa: E501
 
         :param version_idx: The version_idx of this MoveShotData.  # noqa: E501
         :type: int

@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost:8080/APIV2*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_application_render_queue_item**](ApplicationApi.md#delete_application_render_queue_item) | **DELETE** /application/render/{queue_uuid} | Render Queue Item Delete
+[**do_application_copy_grade**](ApplicationApi.md#do_application_copy_grade) | **POST** /application/tools/copygrade | Copy Grade
 [**do_application_player_enter_shot**](ApplicationApi.md#do_application_player_enter_shot) | **POST** /application/player/entershot/{shot_uuid} | Player Enter Shot
 [**do_application_player_enter_slot**](ApplicationApi.md#do_application_player_enter_slot) | **POST** /application/player/enterslot/{slot_idx} | Player Enter Slot
 [**do_application_player_enter_timeline**](ApplicationApi.md#do_application_player_enter_timeline) | **POST** /application/player/entertimeline/{construct_uuid} | Player Enter Timeline (CID)
@@ -21,6 +22,7 @@ Method | HTTP request | Description
 [**do_application_restart**](ApplicationApi.md#do_application_restart) | **POST** /application/restart | Application Restart
 [**do_application_shutdown**](ApplicationApi.md#do_application_shutdown) | **POST** /application/shutdown | Application Shutdown
 [**get_application_player_playmode**](ApplicationApi.md#get_application_player_playmode) | **GET** /application/player/playmode | Player Get Mode
+[**get_application_player_viewport**](ApplicationApi.md#get_application_player_viewport) | **GET** /application/player/viewport | Player Get Viewport
 [**get_application_render_queue**](ApplicationApi.md#get_application_render_queue) | **GET** /application/render | Render Queue List
 [**get_application_render_queue_item**](ApplicationApi.md#get_application_render_queue_item) | **GET** /application/render/{queue_uuid} | Render Queue Item Get
 [**get_application_render_queue_item_results**](ApplicationApi.md#get_application_render_queue_item_results) | **GET** /application/render/results/{queue_uuid} | Get the Render Queue Item results
@@ -28,6 +30,7 @@ Method | HTTP request | Description
 [**new_application_render_queue_item**](ApplicationApi.md#new_application_render_queue_item) | **PUT** /application/render/new | Add a new Render Queue Item
 [**new_application_render_queue_item_start**](ApplicationApi.md#new_application_render_queue_item_start) | **POST** /application/render/new | Create a new Render Queue Item and start rendering
 [**set_application_player_playmode**](ApplicationApi.md#set_application_player_playmode) | **PUT** /application/player/playmode | Player Set Mode
+[**set_application_player_viewport**](ApplicationApi.md#set_application_player_viewport) | **PUT** /application/player/viewport | Player Set Viewport
 [**set_application_render_start_item**](ApplicationApi.md#set_application_render_start_item) | **POST** /application/render/start/{queue_uuid} | Render Queue Item Start
 [**update_application_render_queue_item**](ApplicationApi.md#update_application_render_queue_item) | **PUT** /application/render/{queue_uuid} | Render Queue Item Update
 
@@ -74,6 +77,53 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **do_application_copy_grade**
+> do_application_copy_grade(body)
+
+Copy Grade
+
+Copy the grade / custom settings from the Shot with source UUID to the Shot with destination UUID. Optionally, include a source / destination layer indices to copy a grade to / from a specific layer. Use paste_options to control which aspects of the source are copied. When no paste_options are given (or none enabled), the current user selected paste-options are used (as shown in the Paste Options panel in the player).
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ApplicationApi()
+body = assimilate_client.CopyGradeData() # CopyGradeData | json with the source and destination Shot UUIDs, optional layer indeces and paste options
+
+try:
+    # Copy Grade
+    api_instance.do_application_copy_grade(body)
+except ApiException as e:
+    print("Exception when calling ApplicationApi->do_application_copy_grade: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**CopyGradeData**](CopyGradeData.md)| json with the source and destination Shot UUIDs, optional layer indeces and paste options | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -803,6 +853,50 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_application_player_viewport**
+> ViewportData get_application_player_viewport()
+
+Player Get Viewport
+
+Get the current Player viewport settings (view mode, view options and pan/zoom state). Returns an error when not in the Player.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ApplicationApi()
+
+try:
+    # Player Get Viewport
+    api_response = api_instance.get_application_player_viewport()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ApplicationApi->get_application_player_viewport: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ViewportData**](ViewportData.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_application_render_queue**
 > RenderQueueList get_application_render_queue()
 
@@ -1114,6 +1208,53 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**PlaymodeData**](PlaymodeData.md)| json with playmode data | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_application_player_viewport**
+> set_application_player_viewport(body)
+
+Player Set Viewport
+
+Set the Player viewport settings (view mode, view options and pan/zoom state). Returns an error when not in the Player.
+
+### Example
+```python
+from __future__ import print_function
+import time
+import assimilate_client
+from assimilate_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = assimilate_client.ApplicationApi()
+body = assimilate_client.ViewportData() # ViewportData | json with viewport data
+
+try:
+    # Player Set Viewport
+    api_instance.set_application_player_viewport(body)
+except ApiException as e:
+    print("Exception when calling ApplicationApi->set_application_player_viewport: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**ViewportData**](ViewportData.md)| json with viewport data | 
 
 ### Return type
 

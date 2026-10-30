@@ -44,6 +44,8 @@ from assimilate_client.models.construct_data_resolution import ConstructDataReso
 from assimilate_client.models.constructs_data import ConstructsData
 from assimilate_client.models.control_data import ControlData
 from assimilate_client.models.controls_data import ControlsData
+from assimilate_client.models.copy_grade_data import CopyGradeData
+from assimilate_client.models.copy_grade_data_paste_options import CopyGradeDataPasteOptions
 from assimilate_client.models.eotf import Eotf
 from assimilate_client.models.error_message import ErrorMessage
 from assimilate_client.models.error_message_error import ErrorMessageError
@@ -71,6 +73,7 @@ from assimilate_client.models.move_shot_data import MoveShotData
 from assimilate_client.models.move_tray_data import MoveTrayData
 from assimilate_client.models.note_data import NoteData
 from assimilate_client.models.one_ofcontrol_data_value import OneOfcontrolDataValue
+from assimilate_client.models.over_mode_data import OverModeData
 from assimilate_client.models.playmode_data import PlaymodeData
 from assimilate_client.models.project_data import ProjectData
 from assimilate_client.models.project_data_color_management import ProjectDataColorManagement
@@ -119,3 +122,8 @@ from assimilate_client.models.user_data_list import UserDataList
 from assimilate_client.models.uuid import Uuid
 from assimilate_client.models.vector2 import Vector2
 from assimilate_client.models.vector3 import Vector3
+from assimilate_client.models.view_options_b_data import ViewOptionsBData
+from assimilate_client.models.view_options_data import ViewOptionsData
+from assimilate_client.models.viewport_data import ViewportData
+from assimilate_client.models.viewport_layout_data import ViewportLayoutData
+from assimilate_client.models.viewport_layout_data_center import ViewportLayoutDataCenter
